@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, } from 'react';
+import NavBar from './components/NavBar';
+import Login from './components/Login';
+import { Switch, Route, } from 'react-router-dom';
+import { Container, } from "semantic-ui-react";
+import FetchAdmin from './components/FetchAdmin';
+import AdminPanel from './components/AdminPanel';
+import ProtectedRoute from './components/ProtectedRoute'
+import Home from './components/home'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () => (
+  <Fragment>
+    <NavBar />
+    <FetchAdmin>
+      <Container>
+        <Switch>
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
+          <Route exact path="/login" component={Login} />
+        </Switch>
+      </Container>
+    </FetchAdmin>
+  </Fragment>
+);
 
 export default App;
