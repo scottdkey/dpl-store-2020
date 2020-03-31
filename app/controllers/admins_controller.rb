@@ -2,11 +2,11 @@
 
 class AdminsController < ApplicationController
   def index
-    render json: User.all
+    render json: Admin.all
   end
 
   def show
-    render json: User.find(params[:id])
+    render json: Admin.find(params[:id])
   end
 
   def new; end
