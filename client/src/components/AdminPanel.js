@@ -1,0 +1,126 @@
+import React, { Component } from 'react'
+import {Header, Table} from 'semantic-ui-react'
+
+export default class AdminPanel extends Component{
+  state = {}
+
+  category(category, products){ 
+    return (
+      <>
+        <Table celled striped>
+          <Table.Header>
+            <Table.HeaderCell colSpan="3">{category}</Table.HeaderCell>
+          </Table.Header>
+          <Table.Body>
+            {products.map(product => {
+              return (
+                <>
+              <Table.Row>
+                <Table.Cell collapsing>
+                  {product.name}
+                </Table.Cell>
+                <Table.Cell>
+                  {product.description}
+                </Table.Cell>
+                <Table.Cell collapsing textAlign="right">
+                  ${product.price}
+                </Table.Cell>
+              </Table.Row>
+              </>
+              )
+            })}
+         </Table.Body>
+        </Table>
+      </>
+    );
+  
+  }
+
+
+  render(){
+    return (
+      <>
+        <Header as="h1" textAlign="center">
+          admin panel
+        </Header>
+        {this.category(categories[0], tshirts)}
+        {this.category(categories[1], hats)}
+        {this.category(categories[2], blankets)}
+        {this.category(categories[3], stickers)}
+      </>
+    );
+  }
+}
+
+
+
+const tshirts = [
+  {
+    name: "t-shirt",
+    description: "cool things",
+    price: 20,
+  },
+  {
+    name: "t-shirt 2",
+    description: "cool things",
+    price: 25,
+  },
+  {
+    name: "t-shirt 3",
+    description: "more cool things",
+    price: 15,
+  }
+];
+const hats = [
+  {
+    name: "blue hat",
+    description: "cool things",
+    price: 20
+  },
+  {
+    name: "orange hat",
+    description: "cool things",
+    price: 25
+  },
+  {
+    name: "purple hat",
+    description: "more cool things",
+    price: 15
+  }
+];
+const blankets = [
+  {
+    name: "wool blanket",
+    description: "cool things",
+    price: 20
+  },
+  {
+    name: "flanel blanket",
+    description: "cool things",
+    price: 25
+  },
+  {
+    name: "pink blanket",
+    description: "more cool things",
+    price: 15
+  }
+];
+const stickers = [
+  {
+    name: "moon",
+    description: "cool things",
+    price: 20
+  },
+  {
+    name: "sun",
+    description: "cool things",
+    price: 25
+  },
+  {
+    name: "flask",
+    description: "more cool things",
+    price: 15
+  }
+]
+
+const categories = ["t-shirts", 'hats', 'blankets', 'stickers']
