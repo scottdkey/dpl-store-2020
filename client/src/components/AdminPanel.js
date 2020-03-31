@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
-import {Header, Table} from 'semantic-ui-react'
+import {Header, Table, Button, Icon} from 'semantic-ui-react'
+import axios from 'axios'
 
 export default class AdminPanel extends Component{
   state = {}
+
+  deleteProduct = (id) => {
+    // axios.delete(`/api/auth/products/${id}`)
+    //      .then(res => console.log(res.data))
+    //      .catch(error => console.log(error))
+    console.log('delete clicked')
+  }
+
+  deleteCategory = (category) => {
+    //sql query then axios call i think
+    console.log('category delete picked')
+  }
 
   category(category, products){ 
     return (
@@ -25,6 +38,9 @@ export default class AdminPanel extends Component{
                 <Table.Cell collapsing textAlign="right">
                   ${product.price}
                 </Table.Cell>
+                <Button onClick={()=> this.deleteProduct(product.name)}>
+                  <Icon name='trash alternate'/>
+                </Button>
               </Table.Row>
               </>
               )
