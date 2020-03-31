@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <Header as="h1" textAlign="center">
-        <AdminPanelForm />
+        Home
       </Header>
     </>
   );
