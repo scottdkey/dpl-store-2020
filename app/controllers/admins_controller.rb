@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# AdminsController for connection to Devise
 class AdminsController < ApplicationController
   def index
     render json: Admin.all
