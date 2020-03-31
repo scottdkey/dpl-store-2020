@@ -7,4 +7,8 @@ namespace :api do
   resources :products
 end
 
+namespace :api do
+  resources :purchase_records
+end
+
 end
