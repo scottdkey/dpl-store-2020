@@ -1,6 +1,6 @@
 import React from "react";
-import { Header, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Header } from "semantic-ui-react";
+
 
 const Home = () => {
   return (

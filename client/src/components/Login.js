@@ -1,7 +1,7 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Button, Form, Segment, Header, } from 'semantic-ui-react';
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 class Login extends React.Component {
   state = { email: '', password: '' }
