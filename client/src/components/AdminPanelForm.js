@@ -21,6 +21,14 @@ export default class AdminPanelForm extends Component{
   handleChange = (e, {name, value})=>this.setState({[name]: value})
   hasSizeChange = (e, {name}) =>this.setState({[name]: !this.state.has_size})
 
+  sizeSheet = () => {
+    return(
+      <>
+      test
+      </>
+    )
+  }
+
   render(){
     const {title, description, price, category, mainImage, has_size} = this.state
     return (
@@ -55,6 +63,7 @@ export default class AdminPanelForm extends Component{
               checked={has_size === true}
               onClick={this.hasSizeChange}
             />
+            {has_size ? this.sizeSheet() : null}
             <Form.Input
               label="category"
               name="category"
