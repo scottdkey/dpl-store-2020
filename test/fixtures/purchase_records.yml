@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_total: 1.5
+  email_address: MyString
+  first_name: MyString
+  last_name: MyString
+  address_one: MyString
+  address_two: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  fufilled: false
+
+two:
+  order_total: 1.5
+  email_address: MyString
+  first_name: MyString
+  last_name: MyString
+  address_one: MyString
+  address_two: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  fufilled: false

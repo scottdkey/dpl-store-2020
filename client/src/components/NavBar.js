@@ -16,7 +16,7 @@ class Navbar extends React.Component {
             <Menu.Item
               id="home"
               name="home"
-              active={location.pathname === "/"}
+              active={location.pathname === "/git "}
             />
           </Link>
           <Link to="/adminpanel">
