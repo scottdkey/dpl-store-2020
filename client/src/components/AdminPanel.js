@@ -1,8 +1,22 @@
 import React, { Component } from 'react'
-import {Header, Table} from 'semantic-ui-react'
+import {Header, Table, Button, Icon} from 'semantic-ui-react'
+import axios from 'axios'
+import AdminPanelForm from './AdminPanelForm'
 
 export default class AdminPanel extends Component{
   state = {}
+
+  deleteProduct = (id) => {
+    // axios.delete(`/api/auth/products/${id}`)
+    //      .then(res => console.log(res.data))
+    //      .catch(error => console.log(error))
+    console.log('delete clicked')
+  }
+
+  deleteCategory = (category) => {
+    //sql query then axios call i think
+    console.log('category delete picked')
+  }
 
   category(category, products){ 
     return (
@@ -15,21 +29,20 @@ export default class AdminPanel extends Component{
             {products.map(product => {
               return (
                 <>
-              <Table.Row>
-                <Table.Cell collapsing>
-                  {product.name}
-                </Table.Cell>
-                <Table.Cell>
-                  {product.description}
-                </Table.Cell>
-                <Table.Cell collapsing textAlign="right">
-                  ${product.price}
-                </Table.Cell>
-              </Table.Row>
-              </>
-              )
+                  <Table.Row>
+                    <Table.Cell collapsing>{product.name}</Table.Cell>
+                    <Table.Cell>{product.description}</Table.Cell>
+                    <Table.Cell collapsing textAlign="right">
+                      ${product.price}
+                    </Table.Cell>
+                    <Button onClick={() => this.deleteProduct(product.name)}>
+                      <Icon name="trash alternate" />
+                    </Button>
+                  </Table.Row>
+                </>
+              );
             })}
-         </Table.Body>
+          </Table.Body>
         </Table>
       </>
     );
@@ -43,6 +56,7 @@ export default class AdminPanel extends Component{
         <Header as="h1" textAlign="center">
           admin panel
         </Header>
+        <AdminPanelForm />
         {this.category(categories[0], tshirts)}
         {this.category(categories[1], hats)}
         {this.category(categories[2], blankets)}

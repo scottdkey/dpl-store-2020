@@ -16,7 +16,7 @@ class Navbar extends React.Component {
             <Menu.Item
               id="home"
               name="home"
-              active={location.pathname === "/"}
+              active={location.pathname === "/git "}
             />
           </Link>
           <Link to="/adminpanel">
@@ -56,7 +56,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <div>
-        <Menu pointing secondary>
+        <Menu pointing secondary style={{backgroundColor:'#6E54A3'}}>
             { this.rightNavItems() }
         </Menu>
       </div>
