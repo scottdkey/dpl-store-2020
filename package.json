@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/devpointlabs/dpl-store-2020/issues"
   },
-  "homepage": "https://github.com/devpointlabs/dpl-store-2020#readme"
+  "homepage": "https://github.com/devpointlabs/dpl-store-2020#readme",
+  "dependencies": {
+    "form-serialize": "^0.7.2"
+  }
 }
