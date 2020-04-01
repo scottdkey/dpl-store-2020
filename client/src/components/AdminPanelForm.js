@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import {Form, Checkbox} from 'semantic-ui-react'
+import axios from 'axios'
 
 export default class AdminPanelForm extends Component{
   state = {
     title: '',
     description: '',
     price: 0.00,
-    has_size: false,
+    has_size: {},
     sizes: {},
     category: '',
     mainImage: '',
@@ -16,15 +17,33 @@ export default class AdminPanelForm extends Component{
   handleSubmit = () =>{
     console.log('handle submit')
     console.log(this.state)
+    
+    
   }
 
   handleChange = (e, {name, value})=>this.setState({[name]: value})
   hasSizeChange = (e, {name}) =>this.setState({[name]: !this.state.has_size})
 
-  sizeSheet = () => {
+  sizeSheetForm = () => {
     return(
       <>
-      test
+      <p>size Sheet Form</p>
+      </>
+    )
+  }
+
+  altImageForm = () => {
+    return(
+      <>
+      <p>alt image form</p>
+      </>
+    )
+  }
+
+  noSizeForm = () => {
+    return(
+      <>
+      <p>no Size Form</p>
       </>
     )
   }
@@ -56,14 +75,14 @@ export default class AdminPanelForm extends Component{
               value={price}
               onChange={this.handleChange}
             />
-            <Form.Field 
+            <Form.Field
               control={Checkbox}
-              label={{ children: "Does this come in multiple sizes?"}}
-              name='has_size'
+              label={{ children: "Does this come in multiple sizes?" }}
+              name="has_size"
               checked={has_size === true}
               onClick={this.hasSizeChange}
             />
-            {has_size ? this.sizeSheet() : null}
+            {has_size ? this.sizeSheetForm() : this.noSizeForm()}
             <Form.Input
               label="category"
               name="category"
@@ -78,6 +97,7 @@ export default class AdminPanelForm extends Component{
               value={mainImage}
               onChange={this.handleChange}
             />
+            {this.altImageForm()}
 
             <Form.Button>Submit</Form.Button>
           </Form.Group>
