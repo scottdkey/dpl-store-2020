@@ -14,7 +14,7 @@
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
     sizes: {small:1,medium:1,large:1},
-    category: 'T-Shirt'
+    category: 'T-Shirts'
   )
 end
 5.times do
@@ -24,7 +24,7 @@ end
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
     sizes: {small:1,medium:1,large:1},
-    category: 'Hoodie'
+    category: 'Hoodies'
   )
 end
 5.times do

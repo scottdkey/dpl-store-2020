@@ -25,8 +25,8 @@ export default class AdminPanel extends Component {
     const hats = []
     const stickers = []
     this.state.products.map(product => {
-      if(product.category === 'T-Shirt') {tShirts.push(product)}
-      else if (product.category === 'Hoodie') {hoodies.push(product)}
+      if(product.category === 'T-Shirts') {tShirts.push(product)}
+      else if (product.category === 'Hoodies') {hoodies.push(product)}
       else if (product.category === 'Hats') {hats.push(product)}
       else {stickers.push(product)}
     })
