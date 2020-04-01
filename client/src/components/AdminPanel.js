@@ -1,31 +1,47 @@
 import React, { Component } from "react";
 import { Header, Table, Button, Icon } from "semantic-ui-react";
-// import axios from 'axios'
+import axios from 'axios'
 import AdminPanelForm from "./AdminPanelForm";
 
 export default class AdminPanel extends Component {
-  state = {};
+  state = {products: [], categories: []}
 
-  componentDidMount() {
-    //axios call here
+  getProducts() {
+    axios.get('/api/products').then(res => {
+      this.setState({ products: res.data })
+      this.putProductsInCategories()
+    }).catch(e => console.log(e))
   }
 
-  deleteProduct = id => {
-    // axios.delete(`/api/auth/products/${id}`)
-    //      .then(res => console.log(res.data))
-    //      .catch(error => console.log(error))
-    console.log("delete product clicked");
-    console.log(id)
-  };
+  deleteProduct = (id) => {
+    axios.delete(`/api/products/${id}`)
+      .then(res => this.getProducts())
+      .catch(error => console.log(error))
+  }
 
-  deleteCategory = id => {
-    //sql query then axios call i think
-    console.log("category delete picked");
-    console.log(id)
-  };
+  putProductsInCategories = () => {
+    const tShirts = []
+    const hoodies = []
+    const hats = []
+    const stickers = []
+    this.state.products.map(product => {
+      if(product.category === 'T-Shirts') {tShirts.push(product)}
+      else if (product.category === 'Hoodies') {hoodies.push(product)}
+      else if (product.category === 'Hats') {hats.push(product)}
+      else {stickers.push(product)}
+    })
+    this.setState({
+      categories: [
+        { name: 'T-Shirts', products: tShirts },
+        { name: 'Hoodies', products: hoodies },
+        { name: 'Hats', products: hats },
+        { name: 'Stickers', products: stickers },
+      ]
+    })
+  }
 
   renderCategories = () =>
-    productCategories.map(c => {
+    this.state.categories.map(c => {
       const category = c.name;
       const products = c.products;
       return (
@@ -48,10 +64,7 @@ export default class AdminPanel extends Component {
                     <Table.Cell collapsing textAlign="right">
                       ${product.price}
                     </Table.Cell>
-                    <Button
-                      as="td"
-                      onClick={() => this.deleteProduct(product.name)}
-                    >
+                    <Button onClick={() => this.deleteProduct(product.id)}>
                       <Icon name="trash alternate" />
                     </Button>
                   </Table.Row>
@@ -64,10 +77,13 @@ export default class AdminPanel extends Component {
     });
 
   render() {
+    if(this.state.products.length === 0 ){
+      this.getProducts()
+    }
     return (
       <>
         <Header as="h1" textAlign="center">
-          admin panel
+          Admin panel
         </Header>
         <AdminPanelForm />
         {this.renderCategories()}
@@ -76,78 +92,3 @@ export default class AdminPanel extends Component {
   }
 }
 
-const tshirts = [
-  {
-    name: "t-shirt",
-    description: "cool things",
-    price: 20
-  },
-  {
-    name: "t-shirt 2",
-    description: "cool things",
-    price: 25
-  },
-  {
-    name: "t-shirt 3",
-    description: "more cool things",
-    price: 15
-  }
-];
-const hats = [
-  {
-    name: "blue hat",
-    description: "cool things",
-    price: 20
-  },
-  {
-    name: "orange hat",
-    description: "cool things",
-    price: 25
-  },
-  {
-    name: "purple hat",
-    description: "more cool things",
-    price: 15
-  }
-];
-const blankets = [
-  {
-    name: "wool blanket",
-    description: "cool things",
-    price: 20
-  },
-  {
-    name: "flanel blanket",
-    description: "cool things",
-    price: 25
-  },
-  {
-    name: "pink blanket",
-    description: "more cool things",
-    price: 15
-  }
-];
-const stickers = [
-  {
-    name: "moon",
-    description: "cool things",
-    price: 20
-  },
-  {
-    name: "sun",
-    description: "cool things",
-    price: 25
-  },
-  {
-    name: "flask",
-    description: "more cool things",
-    price: 15
-  }
-];
-
-const productCategories = [
-  { name: "t-shirts", products: tshirts },
-  { name: "hats", products: hats },
-  { name: "blankets", products: blankets },
-  { name: "stickers", products: stickers }
-];
