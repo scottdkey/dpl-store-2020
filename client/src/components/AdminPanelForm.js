@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Form, Checkbox, Select} from 'semantic-ui-react'
 // import axios from 'axios'
 
-export default class AdminPanelForm extends Component{
+export default class AdminPanelForm extends Component {
   state = {
     title: '',
     description: '',
@@ -14,15 +14,15 @@ export default class AdminPanelForm extends Component{
     altImage: {}
   }
 
-  handleSubmit = () =>{
+  handleSubmit = () => {
     console.log('handle submit')
     console.log(this.state)
     
     
   }
 
-  handleChange = (e, {name, value})=>this.setState({[name]: value})
-  hasSizeChange = (e, {name}) =>this.setState({[name]: !this.state.has_size})
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  hasSizeChange = (e, { name }) => this.setState({ [name]: !this.state.has_size })
 
   sizeSheetForm = () => {
     const {size, sizes}= this.state
@@ -96,13 +96,15 @@ export default class AdminPanelForm extends Component{
               onClick={this.hasSizeChange}
             />
             {has_size ? this.sizeSheetForm() : this.noSizeForm()}
-            <Form.Input
+            <Form.Select
               label="category"
               name="category"
               placeholder="category"
+              options={options}
               value={category}
               onChange={this.handleChange}
             />
+
             <Form.Input
               label="mainImage"
               name="mainImage"
@@ -125,3 +127,10 @@ const sizeOptions = [
   { key: "medium", value: "medium", text: "Medium" },
   { key: "large", value: "large", text: "Large" },
 ];
+const options = [
+  {key:'t', text:'T-Shirts', value:'T-Shirts'},
+  {key:'ho', text:'Hoodies', value:'Hoodies'},
+  {key:'ha', text:'Hats', value:'Hats'},
+  {key:'s', text:'Stickers', value:'Stickers'},
+
+]
