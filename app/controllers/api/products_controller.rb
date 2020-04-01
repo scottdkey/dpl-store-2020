@@ -33,7 +33,7 @@ class Api::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :has_size, :sizes, :category, :main_image, :alt_image)
+    params.require(:product).permit(:title, :description, :price, sizes:,[:xs, :sm, :no_size] :category, :main_image, :alt_image)
   end
 
   def set_product
