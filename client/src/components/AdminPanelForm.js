@@ -21,8 +21,16 @@ export default class AdminPanelForm extends Component {
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
   hasSizeChange = (e, { name }) => this.setState({ [name]: !this.state.has_size })
 
-  render() {
-    const { title, description, price, category, mainImage, has_size } = this.state
+  sizeSheet = () => {
+    return(
+      <>
+      test
+      </>
+    )
+  }
+
+  render(){
+    const {title, description, price, category, mainImage, has_size} = this.state
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
@@ -55,10 +63,12 @@ export default class AdminPanelForm extends Component {
               checked={has_size === true}
               onClick={this.hasSizeChange}
             />
-            <Form.Input
+            {has_size ? this.sizeSheet() : null}
+            <Form.Select
               label="category"
               name="category"
               placeholder="category"
+              options={options}
               value={category}
               onChange={this.handleChange}
             />
@@ -78,3 +88,10 @@ export default class AdminPanelForm extends Component {
     );
   }
 }
+const options = [
+  {key:'t', text:'T-Shirts', value:'T-Shirts'},
+  {key:'ho', text:'Hoodies', value:'Hoodies'},
+  {key:'ha', text:'Hats', value:'Hats'},
+  {key:'s', text:'Stickers', value:'Stickers'},
+
+]

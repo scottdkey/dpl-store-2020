@@ -15,7 +15,7 @@ const App = () => (
     <FetchAdmin>
       <Container>
         <Switch>
-          <ProtectedRoute exact path="/" component={Home} />
+          <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
           <Route exact path="/login" component={Login} />
         </Switch>
