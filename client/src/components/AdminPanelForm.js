@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {Form, Checkbox} from 'semantic-ui-react'
-import axios from 'axios'
+import {Form, Checkbox, Select} from 'semantic-ui-react'
+// import axios from 'axios'
 
 export default class AdminPanelForm extends Component {
   state = {
@@ -25,9 +25,16 @@ export default class AdminPanelForm extends Component {
   hasSizeChange = (e, { name }) => this.setState({ [name]: !this.state.has_size })
 
   sizeSheetForm = () => {
+    const {size, sizes}= this.state
     return(
       <>
-      <p>size Sheet Form</p>
+      <Select placeholder='Select a Size' value={this.state.sizes} options={sizeOptions} />
+      <Form.Input
+      name={ `${size} quanity`}
+      placeholder='how many in stock?'
+      // value={`${size} quantity`}
+      onChange={this.handleChange}
+      />
       </>
     )
   }
@@ -41,9 +48,15 @@ export default class AdminPanelForm extends Component {
   }
 
   noSizeForm = () => {
+    const {size, sizes}= this.state
     return(
       <>
-      <p>no Size Form</p>
+      <Form.Input
+      name={ `${size} quanity`}
+      placeholder='how many in stock?'
+      // value={`${size} quantity`}
+      onChange={this.handleChange}
+      />
       </>
     )
   }
@@ -108,6 +121,12 @@ export default class AdminPanelForm extends Component {
     );
   }
 }
+
+const sizeOptions = [
+  { key: "small", value: "small", text: "Small" },
+  { key: "medium", value: "medium", text: "Medium" },
+  { key: "large", value: "large", text: "Large" },
+];
 const options = [
   {key:'t', text:'T-Shirts', value:'T-Shirts'},
   {key:'ho', text:'Hoodies', value:'Hoodies'},
