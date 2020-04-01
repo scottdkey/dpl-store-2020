@@ -7,10 +7,18 @@ import AdminPanelForm from "./AdminPanelForm";
 const Home = () => {
   return (
     <>
-      <Header as="h1" textAlign="center">
-        DevPoint Labs Store
-        <Products />
-      </Header>
+    {/* <Navbar /> */}
+      <Header as="h2" textAlign="center">Categories</Header>
+      <p>
+      // link to t-shirts category
+      // link to hoodies category
+      // link to hats category
+      // link to stickers category
+      </p>
+      <Header as="h2" textAlign="center">Featured</Header>
+      // featured items
+      {/* <Footer /> */}
+      //Link_to viewProduct Page, same link as viewing a product  
     </>
   );
 };
