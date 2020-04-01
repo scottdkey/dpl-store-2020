@@ -4,13 +4,23 @@ import axios from 'axios'
 import AdminPanelForm from './AdminPanelForm'
 
 export default class AdminPanel extends Component{
-  state = {}
+  state = {
+    products:[],
+    tShirts:[],
+    hoodies:[],
+    hats:[],
+    stickers:[]
+  }
+
+  componentDidMount(){
+    axios.get('/api/products').then(res=>
+      console.log(res.data))
+  }
 
   deleteProduct = (id) => {
-    // axios.delete(`/api/auth/products/${id}`)
-    //      .then(res => console.log(res.data))
-    //      .catch(error => console.log(error))
-    console.log('delete clicked')
+    axios.delete(`/api/products/${id}`)
+         .then(res => console.log("deleted"))
+         .catch(error => console.log(error))
   }
 
   category(category, products){ 
