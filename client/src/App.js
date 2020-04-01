@@ -6,12 +6,13 @@ import { Container, } from "semantic-ui-react";
 import FetchAdmin from './components/FetchAdmin';
 import AdminPanel from './components/AdminPanel';
 import ProtectedRoute from './components/ProtectedRoute'
-import Home from './components/home'
+import Home from './components/home';
+import Footer from './components/Footer';
 
 
 const App = () => (
-  <Fragment>
-    <NavBar />
+  // <Fragment>
+  //   <NavBar />
     <FetchAdmin>
       <Container>
         <Switch>
@@ -20,8 +21,9 @@ const App = () => (
           <Route exact path="/login" component={Login} />
         </Switch>
       </Container>
+      {/* <Footer /> */}
     </FetchAdmin>
-  </Fragment>
+  // </Fragment>
 );
 
 export default App;
