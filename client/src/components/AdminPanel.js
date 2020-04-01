@@ -48,7 +48,12 @@ export default class AdminPanel extends Component {
         <>
           <Table key={category} celled striped>
             <Table.Header>
-              <Table.HeaderCell colSpan="3">{category}</Table.HeaderCell>
+              <Table.HeaderCell colSpan="3">
+                {category}
+              </Table.HeaderCell>
+                <Button onClick={() => this.deleteCategory(category)}>
+                  <Icon name="trash alternate" />
+                </Button>
             </Table.Header>
             <Table.Body>
               {products.map(product => {
