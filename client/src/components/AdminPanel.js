@@ -12,11 +12,6 @@ export default class AdminPanel extends Component{
     console.log('delete clicked')
   }
 
-  deleteCategory = (category) => {
-    //sql query then axios call i think
-    console.log('category delete picked')
-  }
-
   category(category, products){ 
     return (
       <>

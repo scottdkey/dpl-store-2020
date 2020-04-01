@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Form, Checkbox} from 'semantic-ui-react'
+import { Form, Checkbox} from 'semantic-ui-react'
 
-export default class AdminPanelForm extends Component{
+export default class AdminPanelForm extends Component {
   state = {
     title: '',
     description: '',
@@ -13,16 +13,16 @@ export default class AdminPanelForm extends Component{
     altImage: {}
   }
 
-  handleSubmit = () =>{
+  handleSubmit = () => {
     console.log('handle submit')
     console.log(this.state)
   }
 
-  handleChange = (e, {name, value})=>this.setState({[name]: value})
-  hasSizeChange = (e, {name}) =>this.setState({[name]: !this.state.has_size})
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  hasSizeChange = (e, { name }) => this.setState({ [name]: !this.state.has_size })
 
-  render(){
-    const {title, description, price, category, mainImage, has_size} = this.state
+  render() {
+    const { title, description, price, category, mainImage, has_size } = this.state
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
@@ -48,9 +48,9 @@ export default class AdminPanelForm extends Component{
               value={price}
               onChange={this.handleChange}
             />
-            <Form.Field 
+            <Form.Field
               control={Checkbox}
-              label={{ children: "Does this come in multiple sizes?"}}
+              label={{ children: "Does this come in multiple sizes?" }}
               name='has_size'
               checked={has_size === true}
               onClick={this.hasSizeChange}
@@ -62,6 +62,7 @@ export default class AdminPanelForm extends Component{
               value={category}
               onChange={this.handleChange}
             />
+
             <Form.Input
               label="mainImage"
               name="mainImage"
