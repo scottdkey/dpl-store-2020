@@ -1,35 +1,41 @@
-import React, { Component } from 'react'
-import {Header, Table, Button, Icon} from 'semantic-ui-react'
-import axios from 'axios'
-import AdminPanelForm from './AdminPanelForm'
+import React, { Component } from "react";
+import { Header, Table, Button, Icon } from "semantic-ui-react";
+// import axios from 'axios'
+import AdminPanelForm from "./AdminPanelForm";
 
-export default class AdminPanel extends Component{
-  state = {}
+export default class AdminPanel extends Component {
+  state = {};
 
-  deleteProduct = (id) => {
+  componentDidMount() {
+    //axios call here
+  }
+
+  deleteProduct = id => {
     // axios.delete(`/api/auth/products/${id}`)
     //      .then(res => console.log(res.data))
     //      .catch(error => console.log(error))
-    console.log('delete clicked')
-  }
+    console.log("delete clicked");
+  };
 
-  deleteCategory = (category) => {
+  deleteCategory = category => {
     //sql query then axios call i think
-    console.log('category delete picked')
-  }
+    console.log("category delete picked");
+  };
 
-  category(category, products){ 
-    return (
-      <>
-        <Table celled striped>
-          <Table.Header>
-            <Table.HeaderCell colSpan="3">{category}</Table.HeaderCell>
-          </Table.Header>
-          <Table.Body>
-            {products.map(product => {
-              return (
-                <>
-                  <Table.Row>
+  renderCategories = () =>
+    productCategories.map(c => {
+      const category = c.name;
+      const products = c.products;
+      return (
+        <>
+          <Table key={category} celled striped>
+            <Table.Header>
+              <Table.HeaderCell colSpan="3">{category}</Table.HeaderCell>
+            </Table.Header>
+            <Table.Body>
+              {products.map(product => {
+                return (
+                  <Table.Row key={product.name}>
                     <Table.Cell collapsing>{product.name}</Table.Cell>
                     <Table.Cell>{product.description}</Table.Cell>
                     <Table.Cell collapsing textAlign="right">
@@ -39,50 +45,42 @@ export default class AdminPanel extends Component{
                       <Icon name="trash alternate" />
                     </Button>
                   </Table.Row>
-                </>
-              );
-            })}
-          </Table.Body>
-        </Table>
-      </>
-    );
-  
-  }
+                );
+              })}
+            </Table.Body>
+          </Table>
+        </>
+      );
+    });
 
-
-  render(){
+  render() {
     return (
       <>
         <Header as="h1" textAlign="center">
           admin panel
         </Header>
         <AdminPanelForm />
-        {this.category(categories[0], tshirts)}
-        {this.category(categories[1], hats)}
-        {this.category(categories[2], blankets)}
-        {this.category(categories[3], stickers)}
+        {this.renderCategories()}
       </>
     );
   }
 }
 
-
-
 const tshirts = [
   {
     name: "t-shirt",
     description: "cool things",
-    price: 20,
+    price: 20
   },
   {
     name: "t-shirt 2",
     description: "cool things",
-    price: 25,
+    price: 25
   },
   {
     name: "t-shirt 3",
     description: "more cool things",
-    price: 15,
+    price: 15
   }
 ];
 const hats = [
@@ -135,6 +133,11 @@ const stickers = [
     description: "more cool things",
     price: 15
   }
-]
+];
 
-const categories = ["t-shirts", 'hats', 'blankets', 'stickers']
+const productCategories = [
+  { name: "t-shirts", products: tshirts },
+  { name: "hats", products: hats },
+  { name: "blankets", products: blankets },
+  { name: "stickers", products: stickers }
+];
