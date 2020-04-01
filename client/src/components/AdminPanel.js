@@ -14,12 +14,14 @@ export default class AdminPanel extends Component {
     // axios.delete(`/api/auth/products/${id}`)
     //      .then(res => console.log(res.data))
     //      .catch(error => console.log(error))
-    console.log("delete clicked");
+    console.log("delete product clicked");
+    console.log(id)
   };
 
-  deleteCategory = category => {
+  deleteCategory = id => {
     //sql query then axios call i think
     console.log("category delete picked");
+    console.log(id)
   };
 
   renderCategories = () =>
@@ -30,7 +32,12 @@ export default class AdminPanel extends Component {
         <>
           <Table key={category} celled striped>
             <Table.Header>
-              <Table.HeaderCell colSpan="3">{category}</Table.HeaderCell>
+              <Table.HeaderCell colSpan="3">
+                {category}
+              </Table.HeaderCell>
+                <Button onClick={() => this.deleteCategory(category)}>
+                  <Icon name="trash alternate" />
+                </Button>
             </Table.Header>
             <Table.Body>
               {products.map(product => {
@@ -41,7 +48,10 @@ export default class AdminPanel extends Component {
                     <Table.Cell collapsing textAlign="right">
                       ${product.price}
                     </Table.Cell>
-                    <Button onClick={() => this.deleteProduct(product.name)}>
+                    <Button
+                      as="td"
+                      onClick={() => this.deleteProduct(product.name)}
+                    >
                       <Icon name="trash alternate" />
                     </Button>
                   </Table.Row>
