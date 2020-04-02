@@ -10,10 +10,10 @@ export default class AdminPanel extends Component {
     axios
       .get("/api/products")
       .then(res => {
-        if(res.data.length === 0 ){this.setState({products: ["No Products "]})}
-        else{
-        this.setState({ products: res.data });
-        this.putProductsInCategories();
+        if (res.data.length === 0) { this.setState({ products: ["No Products "] }) }
+        else {
+          this.setState({ products: res.data });
+          this.putProductsInCategories();
         }
       })
       .catch(e => console.log(e));
@@ -38,7 +38,7 @@ export default class AdminPanel extends Component {
         hoodies.push(product);
       } else if (product.category === "Hats") {
         hats.push(product);
-      } else{
+      } else {
         stickers.push(product);
       }
     });
@@ -51,7 +51,7 @@ export default class AdminPanel extends Component {
       ]
     });
   };
-  deleteCategory() {}
+  deleteCategory() { }
 
   renderCategories = () =>
     this.state.categories.map(c => {
@@ -59,16 +59,18 @@ export default class AdminPanel extends Component {
       const products = c.products;
       return (
         <div key={category}>
-          <Table  celled striped>
+          <Table celled striped>
             <Table.Header>
-              <Table.HeaderCell colSpan="4">
-                {category}
-                {/* I dont think we need this, since categories wont be dynamic */}
-                <Icon
-                  name="trash alternate"
-                  onClick={() => this.deleteCategory(category)}
-                />
-              </Table.HeaderCell>
+              <Table.Row>
+                <Table.HeaderCell colSpan="4">
+                  {category}
+                  {/* I dont think we need this, since categories wont be dynamic */}
+                  <Icon
+                    name="trash alternate"
+                    onClick={() => this.deleteCategory(category)}
+                  />
+                </Table.HeaderCell>
+              </Table.Row>
             </Table.Header>
             <Table.Body>
               {products.map(product => {
@@ -98,7 +100,7 @@ export default class AdminPanel extends Component {
   render() {
     if (this.state.products.length === 0) {
       this.getProducts();
-    } else if(this.state.products[0]=== "No Products Found"){
+    } else if (this.state.products[0] === "No Products Found") {
       console.log("No Products Found");
     }
     const { showForm } = this.state;
@@ -110,7 +112,7 @@ export default class AdminPanel extends Component {
         <Button onClick={() => this.toggleForm()}>
           {showForm ? "hide" : "new product"}
         </Button>
-        {showForm ? <AdminPanelForm toggleForm={this.toggleForm} getProducts={this.getProducts}/> : null}
+        {showForm ? <AdminPanelForm toggleForm={this.toggleForm} getProducts={this.getProducts} /> : null}
 
         {this.renderCategories()}
       </>
