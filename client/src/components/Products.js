@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Table, Header, Card, Tab, Image  } from 'semantic-ui-react';
+import Navbar from './Menu';
+import Footer from './Footer';
 
 export default class Products extends Component {
   state = { products: [], categories: [] }
@@ -77,10 +79,13 @@ export default class Products extends Component {
     }
     return (
           <>
+            <Navbar/>
             <Header as="h1" textAlign="center">
               All Merchandise
         </Header>
             {this.renderCategories()}
+            <br/> 
+            <Footer/>
           </>
     );
   }

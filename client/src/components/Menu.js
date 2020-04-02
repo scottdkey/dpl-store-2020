@@ -1,28 +1,25 @@
-<Segment 
-inverted 
-textAlign='center'
-style={{ minHeight: 700, padding: '1em 0em' }}
-vertical
->
-<Menu 
-  fixed={fixed ? 'top' : null}
-  inverted={!fixed}
-  pointing={!fixed}
-  secondary={!fixed}
-  size='large'
->
-  <Container >
-    <Menu.Item as='a' active>
-      .SHOP
-    </Menu.Item>
-    <Menu.Item position='right'>
-    <Menu.Item as='a'>All Products</Menu.Item>
-    <Menu.Item as='a'>T-Shirts</Menu.Item>
-    <Menu.Item as='a'>Hoodies </Menu.Item>
-    <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
-    <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
-    </Menu.Item>
-  </Container>
-</Menu>
-<HomepageHeading />
-</Segment>
+import React from 'react';
+import { Menu, Icon, Dropdown, } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
+
+const Navbar = () => (
+
+  <Menu borderless >
+    <Link to="/" ><Menu.Item active>.SHOP</Menu.Item></Link>
+    <Menu.Item position='right'></Menu.Item>
+    <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
+    <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
+    <Link to="/hats" ><Menu.Item as='a'>Hats</Menu.Item></Link>
+    <Dropdown text='More' pointing className='link item'>
+      <Dropdown.Menu>
+        <Dropdown.Item as='a' href='/tshirts'>Tshirts</Dropdown.Item>
+        <Dropdown.Item as='a' href='/stickers'>Stickers</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+    <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>      
+      </Menu >
+  
+)
+
+export default Navbar; 

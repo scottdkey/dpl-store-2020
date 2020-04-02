@@ -1,13 +1,14 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
+import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, Dropdown, } from 'semantic-ui-react';
 import TShirts from '../images/T-Shirts.jpg';
 import Hoodies from '../images/Hoodies.jpg';
 import Hats from '../images/Hat.jpg';
 import Stickers from '../images/Stickers.jpg';
 import Featured from '../images/blank.png';
 import { Link } from "react-router-dom";
+import styled, { keyframes } from 'styled-components';
 
 
 const getWidth = () => {
@@ -30,7 +31,7 @@ const HomepageHeading = ({ mobile }) => (
         textAlign: 'left'
       }}
     />
-    <Header 
+    <Header
       as='h4'
       content='Find something you love.'
       inverted
@@ -41,7 +42,7 @@ const HomepageHeading = ({ mobile }) => (
         textAlign: 'left'
       }}
     />
-    
+
   </Container>
 )
 
@@ -66,13 +67,13 @@ class DesktopContainer extends Component {
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
         >
-          <Segment 
-            inverted 
+          <Segment
+            inverted
             textAlign='center'
             style={{ minHeight: 700, padding: '1em 0em' }}
             vertical
           >
-            <Menu 
+            <Menu
               fixed={fixed ? 'top' : null}
               inverted={!fixed}
               pointing={!fixed}
@@ -80,15 +81,18 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container >
-                <Menu.Item as='a' active>
-                  .SHOP
-                </Menu.Item>
+                <Link to="/" ><Menu.Item active>.SHOP</Menu.Item></Link>
                 <Menu.Item position='right'>
-                <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-                <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
-                <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
-                <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
-                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                  <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
+                  <Link to="/hoodies" ><Menu.Item>Hoodies</Menu.Item></Link>
+                  <Link to="/hats" ><Menu.Item as='a'>Hats </Menu.Item></Link>
+                  <Dropdown text='More' pointing className='link item'>
+                    <Dropdown.Menu>
+                    <Dropdown.Item as='a' href='/tshirts'>Tshirts</Dropdown.Item>
+                      <Dropdown.Item as='a' href='/stickers'>Stickers</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -118,12 +122,12 @@ class MobileContainer extends Component {
     const { sidebarOpened } = this.state
 
     return (
-      <Responsive 
+      <Responsive
         as={Sidebar.Pushable}
         getWidth={getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}
       >
-        <Sidebar 
+        <Sidebar
           as={Menu}
           animation='push'
           inverted
@@ -131,13 +135,16 @@ class MobileContainer extends Component {
           vertical
           visible={sidebarOpened}
         >
-          <Menu.Item as='a' active>
-            .Shop
-          </Menu.Item>
+           <Link to="/" ><Menu.Item active>.SHOP</Menu.Item></Link>
           <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-          <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
           <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
-          <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
+          <Link to="/hats" ><Menu.Item as='a'>Hats</Menu.Item></Link>
+          <Dropdown text='More' pointing className='link item'>
+                    <Dropdown.Menu>
+                    <Dropdown.Item as='a' href='/tshirts'>Tshirts</Dropdown.Item>
+                      <Dropdown.Item as='a' href='/stickers'>Stickers</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened} >
@@ -153,7 +160,7 @@ class MobileContainer extends Component {
                   <Icon name='sidebar' />
                 </Menu.Item>
                 <Menu.Item position='right'>
-                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                  <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
                 </Menu.Item>
               </Menu>
             </Container>
@@ -185,62 +192,94 @@ ResponsiveContainer.propTypes = {
 const HomepageLayout = () => (
   <ResponsiveContainer >
     <Segment style={{ padding: '8em 0em', }} vertical>
-    <Grid >
-    <Header as ='h3'>Categories</Header>
-    <Grid.Row columns={4}>
-      <Grid.Column>
-        <Link to="/tshirts" ><Image size="medium" src={TShirts} /></Link>
-      </Grid.Column>
-      <Grid.Column>
-        <Link to="/hoodies" ><Image size="medium" src={Hoodies} /></Link>
-      </Grid.Column>
-      <Grid.Column>
-        <Link to="/hats" > <Image size="medium" src={Hats} /></Link>
-      </Grid.Column>
-      <Grid.Column>
-        <Link to="/stickers" ><Image size="medium" src={Stickers} /></Link>
-      </Grid.Column>
-    </Grid.Row>
-  
-<br/>
-    <Header as="h3">Featured Products</Header>
-    <Grid.Row centered columns={2} >
-      <Grid.Column>
-        <Image src={Featured} />
-      </Grid.Column>
-      <Grid.Column>
-        <Image src={Featured}  />
-      </Grid.Column>
-      </Grid.Row>
-      <Grid.Row centered columns={2}>
-      <Grid.Column>
-        <Image src={Featured}  />
-      </Grid.Column>
-      <Grid.Column>
-        <Image src={Featured} />
-      </Grid.Column>
-    </Grid.Row>
-  </Grid>
-    </Segment>
+      <Grid >
+        <Header as='h3'>Categories</Header>
+        <Grid.Row columns={4}>
+          <Grid.Column>
+            <Link to="/tshirts" ><Image size="medium" rounded src={TShirts} /></Link>
+          </Grid.Column>
+          <Grid.Column>
+            <Link to="/hoodies" ><Image size="medium" rounded src={Hoodies} /></Link>
+          </Grid.Column>
+          <Grid.Column>
+            <Link to="/hats" > <Image size="medium" rounded src={Hats} /></Link>
+          </Grid.Column>
+          <Grid.Column>
+            <Link to="/stickers" ><Image size="medium" rounded src={Stickers} /></Link>
+          </Grid.Column>
+        </Grid.Row>
 
+        <br />
+        <Header as="h3">Featured Products</Header>
+        <Grid.Row centered columns={2} >
+          <Grid.Column>
+            <Image size='large' src={Featured} rounded/>
+          </Grid.Column>
+          <Grid.Column>
+            <Image size='large' src={Featured} rounded/>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row centered columns={2}>
+          <Grid.Column>
+            <Image size='large' src={Featured} rounded/>
+          </Grid.Column>
+          <Grid.Column>
+            <Image size='large' src={Featured} rounded/>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Segment>
+   
+    <StyledFooter as={Segment} inverted >
+      <Grid>
+        <Grid.Column textAlign='center' width={9}>
+        <h1 textAlign="center">Any Questions?
+              <br/> We're here to help.</h1>
+        </Grid.Column>
+        <Grid.Column floated='right' width={5}>
+        <Segment floated='right' color='white'><Icon name="mail"/>contact@devpointlabs.com</Segment>
+            <Segment floated='right' color='white'>370 South 300 East
+            <br/>Salt Lake City, Utah
+            <br/>84111</Segment>
+            <Segment floated='right' color='white'><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
+        </Grid.Column>
+      </Grid>  
+    </StyledFooter>
     <Segment inverted vertical >
-      <Container>
-        <Grid inverted >
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as='h3' textAlign="center" content='DevPoint Labs' />
-            </Grid.Column>
-            <Grid.Column width={10}>
-              <p inverted textalign="centered">370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <p textAlign="left">DevPoint Labs</p>
     </Segment>
-    <Segment inverted vertical textAlign="right" padding="15px">
-    <p textAlign="right">2020 DevPoint Labs Terms Policy</p>
-    </Segment>
+   
   </ResponsiveContainer>
 );
+
+const StyledFooter= styled.div` {
+  position: relative;
+  z-index: 1;
+  
+  &:before,
+  &:after {
+    background: inherit;
+    content: '';
+    display: block;
+    height: 75%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+  }
+
+  &:before {
+    top: 0;
+    transform: skewY(-1deg);
+    transform-origin: 0% 0;
+  }
+  
+  &:after {
+    bottom: 0;
+    transform: skewY(0deg);
+    transform-origin: 100%;
+  }
+}
+`;
 
 export default HomepageLayout;
