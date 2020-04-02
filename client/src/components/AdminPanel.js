@@ -10,8 +10,11 @@ export default class AdminPanel extends Component {
     axios
       .get("/api/products")
       .then(res => {
+        if(res.data.length === 0 ){this.setState({products: ["No Products "]})}
+        else{
         this.setState({ products: res.data });
         this.putProductsInCategories();
+        }
       })
       .catch(e => console.log(e));
   }
@@ -60,6 +63,7 @@ export default class AdminPanel extends Component {
             <Table.Header>
               <Table.HeaderCell colSpan="4">
                 {category}
+                {/* I dont think we need this, since categories wont be dynamic */}
                 <Icon
                   name="trash alternate"
                   onClick={() => this.deleteCategory(category)}
@@ -94,7 +98,7 @@ export default class AdminPanel extends Component {
   render() {
     if (this.state.products.length === 0) {
       this.getProducts();
-    } else {
+    } else if(this.state.products[0]=== "No Products Found"){
       console.log("no products found");
     }
     const { showForm } = this.state;
