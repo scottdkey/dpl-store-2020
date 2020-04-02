@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Card } from 'semantic-ui-react';
 import axios from 'axios';
-import { Table, Header } from 'semantic-ui-react';
+import { Table, Header, Card, Tab, Image  } from 'semantic-ui-react';
 
 export default class Products extends Component {
   state = { products: [], categories: [] }
@@ -10,10 +9,10 @@ export default class Products extends Component {
     axios
       .get("/api/products")
       .then(res => {
-        if(res.data.length === 0 ){this.setState({products: ["No Products "]})}
-        else{
-        this.setState({ products: res.data });
-        this.putProductsInCategories();
+        if (res.data.length === 0) { this.setState({ products: ["No Products "] }) }
+        else {
+          this.setState({ products: res.data });
+          this.putProductsInCategories();
         }
       })
       .catch(e => console.log(e));
@@ -31,7 +30,7 @@ export default class Products extends Component {
         hoodies.push(product);
       } else if (product.category === "Hats") {
         hats.push(product);
-      } else{
+      } else {
         stickers.push(product);
       }
     });
@@ -51,43 +50,35 @@ export default class Products extends Component {
       const products = c.products;
       return (
         <>
-          <Table key={category} celled striped>
-            <Table.Header>
-              <Table.HeaderCell colSpan="4">
-                {category}
-              </Table.HeaderCell>
-            </Table.Header>
-            <Table.Body>
-              {products.map(product => {
-                return (
-                  <Table.Row key={product.id}>
-                    {/* <Table.Cell collapsing>{product.mainImage}</Table.Cell> need to render an image here */}
-                    <Table.Cell>{product.title}</Table.Cell>
-                    <Table.Cell collapsing textAlign="right">
-                      ${product.price}
-                    </Table.Cell>
-                  </Table.Row>
+          <Header>{category}</Header>
+          <Card.Group itemsPerRow={4}>
+            {products.map(product => {
+              return (
+                <Card>
+                  <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
+                  <Card.Header>{product.title}</Card.Header>
+                  <Card.Meta>${product.price}</Card.Meta>
+                 </Card>
                 );
               })}
-            </Table.Body>
-          </Table>
+          </Card.Group>
         </>
       );
     });
 
   render() {
     if (this.state.products.length === 0) {
-      this.getProducts();
+            this.getProducts();
     } else if(this.state.products[0]=== "No Products Found"){
-      console.log("no products found");
+            console.log("no products found");
     }
     return (
-      <>
-        <Header as="h1" textAlign="center">
-          All Merchandise
+          <>
+            <Header as="h1" textAlign="center">
+              All Merchandise
         </Header>
-        {this.renderCategories()}
-      </>
+            {this.renderCategories()}
+          </>
     );
   }
 }
