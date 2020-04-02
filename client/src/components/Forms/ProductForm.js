@@ -5,7 +5,7 @@ import Axios from "axios";
 import AltImageForm from "./Product_AltImage_Form";
 // import axios from 'axios'
 
-export default class AdminPanelForm extends Component {
+export default class AdminProduct extends Component {
   state = {
     title: "",
     description: "",
@@ -16,6 +16,14 @@ export default class AdminPanelForm extends Component {
     sizes: []
     // numAltImages: [],
   };
+
+  componentDidMount(){
+    if(this.props.id != undefined){
+      console.log(this.props.id)
+    } else {
+      console.log("normal")
+    }
+  }
 
   handleSubmit = () => {
     
