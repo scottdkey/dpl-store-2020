@@ -6,7 +6,7 @@ import { Container, } from "semantic-ui-react";
 import FetchAdmin from './components/FetchAdmin';
 import AdminPanel from './components/AdminPanel';
 import ProtectedRoute from './components/ProtectedRoute';
-import Home from './components/Home';
+import Home from './components/HomePage';
 import Tshirts from './components/Tshirts';
 import Hoodies from './components/Hoodies';
 import Hats from './components/Hats';

@@ -2,11 +2,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
-import TShirts from './T-Shirts.jpg';
-import Hoodies from './Hoodies.jpg';
-import Hats from './Hat.jpg';
-import Stickers from './Stickers.jpg';
-import Featured from './blank.png';
+import TShirts from '../images/T-Shirts.jpg';
+import Hoodies from '../images/Hoodies.jpg';
+import Hats from '../images/Hat.jpg';
+import Stickers from '../images/Stickers.jpg';
+import Featured from '../images/blank.png';
 import { Link } from "react-router-dom";
 
 
