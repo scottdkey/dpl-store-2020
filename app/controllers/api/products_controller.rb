@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :update, :destroy]
+  before_action :set_product, only: %i[show update destroy]
 
   def index
     render json: Product.all
@@ -33,11 +35,18 @@ class Api::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, sizes:,[:xs, :sm, :no_size] :category, :main_image, :alt_image)
+    params.require(:product).permit(
+      :title,
+      :description,
+      :price,
+      :category,
+      :main_image,
+      :alt_image,
+      :sizes
+    )
   end
 
   def set_product
     @product = Product.find(params[:id])
   end
-
 end
