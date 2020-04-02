@@ -1,140 +1,119 @@
-import React, { Component } from 'react'
-import {Header, Table, Button, Icon} from 'semantic-ui-react'
-import axios from 'axios'
-import AdminPanelForm from './AdminPanelForm'
+import React, { Component } from "react";
+import { Header, Table, Button, Icon } from "semantic-ui-react";
+import axios from "axios";
+import AdminPanelForm from "./Forms/AdminPanelForm";
 
-export default class AdminPanel extends Component{
-  state = {}
+export default class AdminPanel extends Component {
+  state = { products: [], categories: [], showForm: false };
 
-  deleteProduct = (id) => {
-    // axios.delete(`/api/auth/products/${id}`)
-    //      .then(res => console.log(res.data))
-    //      .catch(error => console.log(error))
-    console.log('delete clicked')
+  getProducts() {
+    axios
+      .get("/api/products")
+      .then(res => {
+        if(res.data.length === 0 ){this.setState({products: ["No Products "]})}
+        else{
+        this.setState({ products: res.data });
+        this.putProductsInCategories();
+        }
+      })
+      .catch(e => console.log(e));
   }
 
-  deleteCategory = (category) => {
-    //sql query then axios call i think
-    console.log('category delete picked')
-  }
+  deleteProduct = id => {
+    axios
+      .delete(`/api/products/${id}`)
+      .then(res => this.getProducts())
+      .catch(error => console.log(error));
+  };
 
-  category(category, products){ 
-    return (
-      <>
-        <Table celled striped>
-          <Table.Header>
-            <Table.HeaderCell colSpan="3">{category}</Table.HeaderCell>
-          </Table.Header>
-          <Table.Body>
-            {products.map(product => {
-              return (
-                <>
-                  <Table.Row>
-                    <Table.Cell collapsing>{product.name}</Table.Cell>
+  putProductsInCategories = () => {
+    const tShirts = [];
+    const hoodies = [];
+    const hats = [];
+    const stickers = [];
+    this.state.products.map(product => {
+      if (product.category === "T-Shirts") {
+        tShirts.push(product);
+      } else if (product.category === "Hoodies") {
+        hoodies.push(product);
+      } else if (product.category === "Hats") {
+        hats.push(product);
+      } else{
+        stickers.push(product);
+      }
+    });
+    this.setState({
+      categories: [
+        { name: "T-Shirts", products: tShirts },
+        { name: "Hoodies", products: hoodies },
+        { name: "Hats", products: hats },
+        { name: "Stickers", products: stickers }
+      ]
+    });
+  };
+  deleteCategory() {}
+
+  renderCategories = () =>
+    this.state.categories.map(c => {
+      const category = c.name;
+      const products = c.products;
+      return (
+        <>
+          <Table key={category} celled striped>
+            <Table.Header>
+              <Table.HeaderCell colSpan="4">
+                {category}
+                {/* I dont think we need this, since categories wont be dynamic */}
+                <Icon
+                  name="trash alternate"
+                  onClick={() => this.deleteCategory(category)}
+                />
+              </Table.HeaderCell>
+            </Table.Header>
+            <Table.Body>
+              {products.map(product => {
+                return (
+                  <Table.Row key={product.id}>
+                    <Table.Cell collapsing>{product.title}</Table.Cell>
                     <Table.Cell>{product.description}</Table.Cell>
                     <Table.Cell collapsing textAlign="right">
                       ${product.price}
                     </Table.Cell>
-                    <Button onClick={() => this.deleteProduct(product.name)}>
+                    <Table.Cell onClick={() => this.deleteProduct(product.id)}>
                       <Icon name="trash alternate" />
-                    </Button>
+                    </Table.Cell>
                   </Table.Row>
-                </>
-              );
-            })}
-          </Table.Body>
-        </Table>
-      </>
-    );
-  
-  }
+                );
+              })}
+            </Table.Body>
+          </Table>
+        </>
+      );
+    });
+  toggleForm = () => {
+    this.setState({ showForm: !this.state.showForm });
+  };
 
 
-  render(){
+  render() {
+    if (this.state.products.length === 0) {
+      this.getProducts();
+    } else if(this.state.products[0]=== "No Products Found"){
+      console.log("no products found");
+    }
+    const { showForm } = this.state;
     return (
       <>
         <Header as="h1" textAlign="center">
-          admin panel
+          Admin panel
         </Header>
-        <AdminPanelForm />
-        {this.category(categories[0], tshirts)}
-        {this.category(categories[1], hats)}
-        {this.category(categories[2], blankets)}
-        {this.category(categories[3], stickers)}
+        <Button onClick={() => this.toggleForm()}>
+          {showForm ? "hide" : "new product"}
+        </Button>
+        {showForm ? <AdminPanelForm toggleForm={this.toggleForm} getProducts={this.getProducts}/> : null}
+
+        {this.renderCategories()}
       </>
     );
   }
 }
-
-
-
-const tshirts = [
-  {
-    name: "t-shirt",
-    description: "cool things",
-    price: 20,
-  },
-  {
-    name: "t-shirt 2",
-    description: "cool things",
-    price: 25,
-  },
-  {
-    name: "t-shirt 3",
-    description: "more cool things",
-    price: 15,
-  }
-];
-const hats = [
-  {
-    name: "blue hat",
-    description: "cool things",
-    price: 20
-  },
-  {
-    name: "orange hat",
-    description: "cool things",
-    price: 25
-  },
-  {
-    name: "purple hat",
-    description: "more cool things",
-    price: 15
-  }
-];
-const blankets = [
-  {
-    name: "wool blanket",
-    description: "cool things",
-    price: 20
-  },
-  {
-    name: "flanel blanket",
-    description: "cool things",
-    price: 25
-  },
-  {
-    name: "pink blanket",
-    description: "more cool things",
-    price: 15
-  }
-];
-const stickers = [
-  {
-    name: "moon",
-    description: "cool things",
-    price: 20
-  },
-  {
-    name: "sun",
-    description: "cool things",
-    price: 25
-  },
-  {
-    name: "flask",
-    description: "more cool things",
-    price: 15
-  }
-]
-
-const categories = ["t-shirts", 'hats', 'blankets', 'stickers']

@@ -8,16 +8,48 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do
-  Product.Create(
+  Product.create(
     title: Faker::Appliance.equipment,
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
     sizes: {small:1,medium:1,large:1},
-    category: Faker::Company.industry,
-    main_image: '',
-    alt_image: '',
+    category: 'T-Shirts',
+    main_image: Faker::Avatar.image,
+  )
+end
+5.times do
+  Product.create(
+    title: Faker::Appliance.equipment,
+    description: Faker::Movies::HarryPotter.quote,
+    price: Faker::Number.decimal(l_digits: 2),
+    has_size: true,
+    sizes: {small:1,medium:1,large:1},
+    category: 'Hoodies',
+    main_image: Faker::Avatar.image,
+  )
+end
+5.times do
+  Product.create(
+    title: Faker::Appliance.equipment,
+    description: Faker::Movies::HarryPotter.quote,
+    price: Faker::Number.decimal(l_digits: 2),
+    has_size: true,
+    sizes: {small:1,medium:1,large:1},
+    category: 'Hats',
+    main_image: Faker::Avatar.image,
+  )
+end
+5.times do
+  Product.create(
+    title: Faker::Appliance.equipment,
+    description: Faker::Movies::HarryPotter.quote,
+    price: Faker::Number.decimal(l_digits: 2),
+    has_size: true,
+    sizes: {small:1,medium:1,large:1},
+    category: 'Stickers',
+    main_image: Faker::Avatar.image,
   )
 end
 
-puts "5 Products Seeded"
+puts "Products Seeded"
