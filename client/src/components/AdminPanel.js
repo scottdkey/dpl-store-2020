@@ -35,7 +35,7 @@ export default class AdminPanel extends Component {
         hoodies.push(product);
       } else if (product.category === "Hats") {
         hats.push(product);
-      } else {
+      } else{
         stickers.push(product);
       }
     });
