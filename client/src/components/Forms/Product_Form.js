@@ -1,44 +1,46 @@
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
-import SizeForm from './sizeForm'
+import SizeForm from "./Product_size_form";
 import Axios from "axios";
+import AltImageForm from "./Product_AltImage_Form";
 // import axios from 'axios'
 
 export default class AdminPanelForm extends Component {
   state = {
-      title: "",
-      description: "",
-      price: 0.0,
-      category: "",
-      mainImage: "",
-      altImage: {},
-      sizes: [],
+    title: "",
+    description: "",
+    price: 0.0,
+    category: "",
+    mainImage: "",
+    altImage: {},
+    sizes: []
     // numAltImages: [],
   };
 
   handleSubmit = () => {
-    console.log("handle submit");
-    console.log(this.state);
-    Axios.post(`/api/products`, (this.state)).then( res =>{
-      this.props.toggleForm();
-      this.props.getProducts()
-    }).catch( err => {
-      console.log(err)
-    })
+    
+    const { id } = this.props;
+    console.log(id);
+    if (id === undefined) {
+      Axios.post(`/api/products`, this.state)
+        .then(res => {
+          this.props.toggleForm();
+          this.props.getProducts();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      console.log("in the else");
+    }
   };
 
-  setSizes = (sizesArray) =>{this.setState({ sizes: sizesArray})}
+  setSizes = sizesArray => {
+    this.setState({ sizes: sizesArray });
+  };
 
   handleChange = (e, { name, value }) => {
-   this.setState({ ...this.state, [name]: value});
-  };
-
-  altImageForm = () => {
-    return (
-      <>
-        <p>alt image form</p>
-      </>
-    );
+    this.setState({ ...this.state, [name]: value });
   };
 
   render() {
@@ -51,16 +53,19 @@ export default class AdminPanelForm extends Component {
       sizes
     } = this.state;
     return (
-      <> 
-    
+      <>
         <Form onSubmit={this.handleSubmit}>
-          <Form.Group width="equal" style={{display: "flex", flexDirection: "column"}}>
+          <Form.Group
+            width="equal"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
             <Form.Input
               label="title"
               name="title"
               placeholder="Product Title"
               value={title}
               onChange={this.handleChange}
+              required
             />
             <Form.TextArea
               label="description"
@@ -68,6 +73,7 @@ export default class AdminPanelForm extends Component {
               placeholder="Product description"
               value={description}
               onChange={this.handleChange}
+              required
             />
             <Form.Input
               label="price"
@@ -75,8 +81,9 @@ export default class AdminPanelForm extends Component {
               placeholder="price"
               value={price}
               onChange={this.handleChange}
+              required
             />
-            <SizeForm sizes={sizes} setSizes={this.setSizes}/>
+            <SizeForm sizes={sizes} setSizes={this.setSizes} />
             <Form.Select
               label="category"
               name="category"
@@ -84,6 +91,7 @@ export default class AdminPanelForm extends Component {
               options={options}
               value={category}
               onChange={this.handleChange}
+              required
             />
 
             <Form.Input
@@ -92,11 +100,11 @@ export default class AdminPanelForm extends Component {
               placeholder="mainImage"
               value={mainImage}
               onChange={this.handleChange}
+              required
             />
-            {this.altImageForm()}
-
-            <Form.Button>Submit</Form.Button>
+            <AltImageForm />
           </Form.Group>
+          <Form.Button type="submit">Submit</Form.Button>
         </Form>
       </>
     );

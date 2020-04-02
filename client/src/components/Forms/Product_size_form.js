@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Select } from "semantic-ui-react";
+import { Form, Select, Button } from "semantic-ui-react";
 
 export default class SizeForm extends Component {
   state = {
@@ -54,7 +54,7 @@ export default class SizeForm extends Component {
 
     return (
       <>
-        <Form.Button as="div" onClick={this.addSize}>Add New Size</Form.Button>
+        <Button as='div' onClick={this.addSize}>Add New Size</Button>
         {this.renderSizes()}
       </>
     );

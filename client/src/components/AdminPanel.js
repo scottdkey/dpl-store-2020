@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Header, Table, Button, Icon } from "semantic-ui-react";
 import axios from "axios";
-import AdminPanelForm from "./Forms/AdminPanelForm";
+import Product_Form from "./Forms/Product_Form";
 
 export default class AdminPanel extends Component {
   state = { products: [], categories: [], showForm: false };
@@ -50,6 +50,16 @@ export default class AdminPanel extends Component {
   };
   deleteCategory() {}
 
+  updateProduct= (id) =>{
+    return(
+      <Product_Form id={id}/>
+    )
+
+  }
+  editForm = (id) =>{
+    console.log(id)
+  }
+
   renderCategories = () =>
     this.state.categories.map(c => {
       const category = c.name;
@@ -74,6 +84,9 @@ export default class AdminPanel extends Component {
                     <Table.Cell>{product.description}</Table.Cell>
                     <Table.Cell collapsing textAlign="right">
                       ${product.price}
+                    </Table.Cell>
+                    <Table.Cell onClick={() => this.editForm(product.id)}>
+                      <Icon name="edit outline" />
                     </Table.Cell>
                     <Table.Cell onClick={() => this.deleteProduct(product.id)}>
                       <Icon name="trash alternate" />
@@ -106,7 +119,7 @@ export default class AdminPanel extends Component {
         <Button onClick={() => this.toggleForm()}>
           {showForm ? "hide" : "new product"}
         </Button>
-        {showForm ? <AdminPanelForm toggleForm={this.toggleForm} getProducts={this.getProducts}/> : null}
+        {showForm ? <Product_Form toggleForm={this.toggleForm} getProducts={this.getProducts}/> : null}
 
         {this.renderCategories()}
       </>
