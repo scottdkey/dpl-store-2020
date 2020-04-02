@@ -4,17 +4,17 @@ import Products from './Products';
 
 const Tshirts = () => {
   // we have a const called tshirts which is all products with category = tshirts
-  const products = [Product.All]
-  const tshirts = []
+  // const products = [Product.All]
+  // const tshirts = []
 
-  def findTshirts = () => {
-    return products.map( product () => (
-      newShirt = product
-      if product.category == "tshirts"
-        tshirts << newShirt
-      end
-    )
-  }
+  // def findTshirts = () => {
+  //   return products.map( product () => (
+  //     newShirt = product
+  //     if product.category == "tshirts"
+  //       tshirts << newShirt
+  //     end
+  //   )
+  // }
 
   // componentDidMount() {
   //   // TODO: Make GET request with axios
@@ -31,8 +31,8 @@ const Tshirts = () => {
       <Card>
       <Card.Content>
         {/* <Card.Header>{ insert image of tshirt.mainImage }</Card.Header> */}
-        <Card.Content>{ tshirt.title }</Card.Content>
-        <Card.Meta>{ tshirt.price }</Card.Meta>
+        <Card.Content></Card.Content>
+        <Card.Meta></Card.Meta>
       </Card.Content>
     </Card>
     </>

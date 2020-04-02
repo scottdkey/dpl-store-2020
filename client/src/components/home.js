@@ -18,6 +18,7 @@ const Home = () => {
       <Link to="/api/products/hats">Hats</Link>
       {/* link to stickers category */}
       <Link to="/api/products/stickers">Stickers</Link>
+      <Link to='/allmerchandise'>All Merchandise</Link>
       </p>
       <Header as="h2" textAlign="center">Featured</Header>
       // featured items
