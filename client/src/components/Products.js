@@ -53,12 +53,13 @@ export default class Products extends Component {
           <Header>{category}</Header>
           <Card.Group itemsPerRow={4}>
             {products.map(product => {
+              const price = "$" + product.price
               return (
                 <Card>
                   <Card
                     image={product.main_image}
                     header={product.title}
-                    meta={product.price}
+                    meta={price}
                   />
                  </Card>
                 );
