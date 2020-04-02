@@ -6,6 +6,7 @@ export default class SizeForm extends Component {
     sizes: this.props.sizes
   };
   addSize = () => {
+    // preventSubmit()
     const sizes = [...this.state.sizes, { size: "NoSize", quantity: 0 }];
     this.setState({ sizes });
   };
@@ -53,7 +54,7 @@ export default class SizeForm extends Component {
 
     return (
       <>
-        <button onClick={this.addSize}>Add New Size</button>
+        <Form.Button as="div" onClick={this.addSize}>Add New Size</Form.Button>
         {this.renderSizes()}
       </>
     );
