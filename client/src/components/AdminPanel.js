@@ -31,7 +31,7 @@ export default class AdminPanel extends Component {
     const hoodies = [];
     const hats = [];
     const stickers = [];
-    this.state.products.map(product => {
+    this.state.products.forEach(product => {
       if (product.category === "T-Shirts") {
         tShirts.push(product);
       } else if (product.category === "Hoodies") {
@@ -58,8 +58,8 @@ export default class AdminPanel extends Component {
       const category = c.name;
       const products = c.products;
       return (
-        <>
-          <Table key={category} celled striped>
+        <div key={category}>
+          <Table  celled striped>
             <Table.Header>
               <Table.HeaderCell colSpan="4">
                 {category}
@@ -87,7 +87,7 @@ export default class AdminPanel extends Component {
               })}
             </Table.Body>
           </Table>
-        </>
+        </div>
       );
     });
   toggleForm = () => {
@@ -99,7 +99,7 @@ export default class AdminPanel extends Component {
     if (this.state.products.length === 0) {
       this.getProducts();
     } else if(this.state.products[0]=== "No Products Found"){
-      console.log("no products found");
+      console.log("No Products Found");
     }
     const { showForm } = this.state;
     return (
