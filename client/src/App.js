@@ -11,6 +11,7 @@ import Tshirts from './components/Tshirts';
 import Hoodies from './components/Hoodies';
 import Hats from './components/Hats';
 import Stickers from './components/Stickers';
+import Products from './components/Products';
 
 const App = () => (
   // <Fragment>
@@ -21,10 +22,11 @@ const App = () => (
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/api/products/tshirts" component={Tshirts} />
-          <Route exact path="/api/products/hoodies" component={Hoodies} />
-          <Route exact path="/api/products/hats" component={Hats} />
-          <Route exact path="/api/products/stickers" component={Stickers} />
+          <Route exact path="/tshirts" component={Tshirts} />
+          <Route exact path="/hoodies" component={Hoodies} />
+          <Route exact path="/hats" component={Hats} />
+          <Route exact path="/stickers" component={Stickers} />
+          <Route exact path="/allmerchandise" component={Products} />
         </Switch>
       </Container>
       {/* <Footer /> */}

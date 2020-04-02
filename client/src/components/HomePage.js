@@ -84,9 +84,9 @@ class DesktopContainer extends Component {
                   .SHOP
                 </Menu.Item>
                 <Menu.Item position='right'>
-                <Menu.Item as='a'>All Products</Menu.Item>
-                <Menu.Item as='a'>T-Shirts</Menu.Item>
-                <Menu.Item as='a'>Hoodies </Menu.Item>
+                <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
+                <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
+                <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
                 <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
                 <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
                 </Menu.Item>
@@ -134,9 +134,9 @@ class MobileContainer extends Component {
           <Menu.Item as='a' active>
             .Shop
           </Menu.Item>
-          <Menu.Item as='a'>All Products</Menu.Item>
-          <Menu.Item as='a'>T-Shirts</Menu.Item>
-          <Menu.Item as='a'>Hoodies</Menu.Item>
+          <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
+          <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
+          <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
           <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
         </Sidebar>
 
@@ -189,16 +189,16 @@ const HomepageLayout = () => (
     <Header as ='h3'>Categories</Header>
     <Grid.Row columns={4}>
       <Grid.Column>
-        <Link to="/api/products/tshirts" ><Image size="medium" src={TShirts} /></Link>
+        <Link to="/tshirts" ><Image size="medium" src={TShirts} /></Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/api/products/hoodies" ><Image size="medium" src={Hoodies} /></Link>
+        <Link to="/hoodies" ><Image size="medium" src={Hoodies} /></Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/api/products/hats" > <Image size="medium" src={Hats} /></Link>
+        <Link to="/hats" > <Image size="medium" src={Hats} /></Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/api/products/stickers" ><Image size="medium" src={Stickers} /></Link>
+        <Link to="/stickers" ><Image size="medium" src={Stickers} /></Link>
       </Grid.Column>
     </Grid.Row>
   
