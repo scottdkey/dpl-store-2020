@@ -55,9 +55,11 @@ export default class Products extends Component {
             {products.map(product => {
               return (
                 <Card>
-                  <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
-                  <Card.Header>{product.title}</Card.Header>
-                  <Card.Meta>${product.price}</Card.Meta>
+                  <Card
+                    image={product.main_image}
+                    header={product.title}
+                    meta={product.price}
+                  />
                  </Card>
                 );
               })}
