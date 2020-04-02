@@ -11,7 +11,7 @@ import Tshirts from './components/Tshirts';
 import Hoodies from './components/Hoodies';
 import Hats from './components/Hats';
 import Stickers from './components/Stickers';
-import PurchaseRecordFrom from './components/Forms/PurchaseRecordForm'
+import PurchaseRecord from './components/PurchaseRecord'
 
 const App = () => (
   <Fragment>
@@ -26,7 +26,7 @@ const App = () => (
           <Route exact path="/api/products/hoodies" component={Hoodies} />
           <Route exact path="/api/products/hats" component={Hats} />
           <Route exact path="/api/products/stickers" component={Stickers} />
-          <Route exact path='/purchase-record-form' component={PurchaseRecordFrom} />
+          <Route exact path='/purchase-record' component={PurchaseRecord} />
         </Switch>
       </Container>
     </FetchAdmin>
