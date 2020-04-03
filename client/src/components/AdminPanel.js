@@ -75,7 +75,13 @@ export default class AdminPanel extends Component {
             </Table.Header>
             <Table.Body>
               {products.map(product => (
-                <RenderProduct toggleForm={this.toggleForm} getProducts={this.getProducts} product={product} />
+                <Table.Row key={product.id}>
+                  <RenderProduct
+                    toggleForm={this.toggleForm}
+                    getProducts={this.getProducts}
+                    product={product}
+                  />
+                </Table.Row>
               ))}
             </Table.Body>
           </Table>

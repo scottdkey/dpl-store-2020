@@ -13,7 +13,6 @@ class RenderProduct extends Component {
     const { product } = this.props;
     return (
       <>
-        <Table.Row key={product.id}>
           <Table.Cell collapsing>{product.title}</Table.Cell>
           <Table.Cell>{product.description}</Table.Cell>
           <Table.Cell collapsing textAlign="right">
@@ -28,7 +27,6 @@ class RenderProduct extends Component {
           <Table.Cell>
             {editing ? <ProductForm {...this.props} toggleEdit={this.toggleEdit} /> : null}
           </Table.Cell>
-        </Table.Row>
       </>
     );
   }
