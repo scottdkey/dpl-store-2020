@@ -14,7 +14,9 @@
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
     sizes: {small:1,medium:1,large:1},
-    category: 'T-Shirts'
+    category: 'T-Shirts',
+    main_image: Faker::Avatar.image,
+
   )
 end
 5.times do
@@ -24,7 +26,8 @@ end
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
     sizes: {small:1,medium:1,large:1},
-    category: 'Hoodies'
+    category: 'Hoodies',
+    main_image: Faker::Avatar.image,
   )
 end
 5.times do
@@ -34,7 +37,8 @@ end
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
     sizes: {small:1,medium:1,large:1},
-    category: 'Hats'
+    category: 'Hats',
+    main_image: Faker::Avatar.image,
   )
 end
 5.times do
@@ -44,7 +48,8 @@ end
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
     sizes: {small:1,medium:1,large:1},
-    category: 'Stickers'
+    category: 'Stickers',
+    main_image: Faker::Avatar.image,
   )
 end
 
