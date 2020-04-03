@@ -73,3 +73,4 @@ class PurchaseRecordForm extends React.Component {
 }
 
 export default PurchaseRecordForm
+

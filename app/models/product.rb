@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Product < ApplicationRecord
   serialize :sizes, Hash
   serialize :alt_image, Array
