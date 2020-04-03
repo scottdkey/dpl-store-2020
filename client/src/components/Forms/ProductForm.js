@@ -11,31 +11,29 @@ export default class AdminProduct extends Component {
     description: "",
     price: 0.0,
     category: "",
-    mainImage: "",
-    altImage: {},
+    main_image: "",
+    alt_image: {},
     sizes: []
     // numAltImages: [],
   };
 
   componentDidMount() {
-    const { product } = this.props;
-    if (product === undefined) {
-      console.log("normal");
+    if (this.props.product === undefined) {
+      console.log("creating");
     } else {
       this.setState({
         title: product.title,
         description: product.description,
         price: product.price,
         category: product.category,
-        mainImage: product.mainImage,
-        altImage: product.altImage,
+        main_image: product.mainImage,
+        alt_image: product.altImage,
         sizes: product.sizes
       });
     }
   }
 
   handleSubmit = () => {
-    const { id } = this.props.product;
     if (this.props.product === undefined) {
       axios
         .post(`/api/products`, this.state)
@@ -47,9 +45,10 @@ export default class AdminProduct extends Component {
           console.log(err);
         });
     } else {
+      console.log("editing submitted")
       axios
         .put(
-          `/api/products/${id}`,
+          `/api/products/${this.props.product.id}`,
           this.state)
         .then(res => {
             this.props.toggleEdit();
@@ -75,7 +74,7 @@ export default class AdminProduct extends Component {
       description,
       price,
       category,
-      mainImage,
+      main_image,
       sizes
     } = this.state;
     return (
@@ -121,10 +120,10 @@ export default class AdminProduct extends Component {
             />
 
             <Form.Input
-              label="mainImage"
-              name="mainImage"
-              placeholder="mainImage"
-              value={mainImage}
+              label="Main Image"
+              name="main_image"
+              placeholder="Main Image"
+              value={main_image}
               onChange={this.handleChange}
               required
             />
