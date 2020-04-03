@@ -14,8 +14,9 @@
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: { small: 1, medium: 1, large: 1 },
-    category: 'T-Shirts'
+    sizes: {small:1,medium:1,large:1},
+    category: 'T-Shirts',
+    main_image: Faker::Avatar.image,
   )
 end
 5.times do
@@ -24,8 +25,9 @@ end
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: { small: 1, medium: 1, large: 1 },
-    category: 'Hoodies'
+    sizes: {small:1,medium:1,large:1},
+    category: 'Hoodies',
+    main_image: Faker::Avatar.image,
   )
 end
 5.times do
@@ -34,8 +36,9 @@ end
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: { small: 1, medium: 1, large: 1 },
-    category: 'Hats'
+    sizes: {small:1,medium:1,large:1},
+    category: 'Hats',
+    main_image: Faker::Avatar.image,
   )
 end
 5.times do
@@ -44,8 +47,9 @@ end
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: { small: 1, medium: 1, large: 1 },
-    category: 'Stickers'
+    sizes: {small:1,medium:1,large:1},
+    category: 'Stickers',
+    main_image: Faker::Avatar.image,
   )
 end
 
