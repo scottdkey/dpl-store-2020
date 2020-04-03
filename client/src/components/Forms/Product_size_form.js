@@ -25,6 +25,7 @@ export default class SizeForm extends Component {
   
 
   sizeDropDownFormat = ({ size, index }) => {
+
     return (
       <>
         <Select
@@ -36,7 +37,6 @@ export default class SizeForm extends Component {
           onChange={(e, data) => this.sizeChange(data.name, data.value, index)}
         />
         <Form.Input
-          name={size.quantity}
           placeholder="how many in stock?"
           value={size.quantity}
           name="quantity"

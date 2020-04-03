@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -13,7 +14,7 @@
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: {small:1,medium:1,large:1},
+    sizes: { small: 1, medium: 1, large: 1 },
     category: 'T-Shirts'
   )
 end
@@ -23,7 +24,7 @@ end
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: {small:1,medium:1,large:1},
+    sizes: { small: 1, medium: 1, large: 1 },
     category: 'Hoodies'
   )
 end
@@ -33,7 +34,7 @@ end
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: {small:1,medium:1,large:1},
+    sizes: { small: 1, medium: 1, large: 1 },
     category: 'Hats'
   )
 end
@@ -43,9 +44,9 @@ end
     description: Faker::Movies::HarryPotter.quote,
     price: Faker::Number.decimal(l_digits: 2),
     has_size: true,
-    sizes: {small:1,medium:1,large:1},
+    sizes: { small: 1, medium: 1, large: 1 },
     category: 'Stickers'
   )
 end
 
-puts "Products Seeded"
+puts 'Products Seeded'

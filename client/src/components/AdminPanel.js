@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Table, Button, Icon } from "semantic-ui-react";
+import { Header, Table, Button } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderProduct from './RenderProduct'
