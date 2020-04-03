@@ -26,7 +26,7 @@ class RenderProduct extends Component {
             <Icon name="trash alternate" />
           </Table.Cell>
           <Table.Cell>
-            {editing ? <ProductForm id={product.id} /> : null}
+            {editing ? <ProductForm {...this.props} toggleEdit={this.toggleEdit} /> : null}
           </Table.Cell>
         </Table.Row>
       </>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
-import Axios from "axios";
+import axios from "axios";
 import AltImageForm from "./Product_AltImage_Form";
 // import axios from 'axios'
 
@@ -17,20 +17,28 @@ export default class AdminProduct extends Component {
     // numAltImages: [],
   };
 
-  componentDidMount(){
-    if(this.props.id != undefined){
-      console.log(this.props.id)
+  componentDidMount() {
+    const { product } = this.props;
+    if (product === undefined) {
+      console.log("normal");
     } else {
-      console.log("normal")
+      this.setState({
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        category: product.category,
+        mainImage: product.mainImage,
+        altImage: product.altImage,
+        sizes: product.sizes
+      });
     }
   }
 
   handleSubmit = () => {
-    
-    const { id } = this.props;
-    console.log(id);
-    if (id === undefined) {
-      Axios.post(`/api/products`, this.state)
+    const { id } = this.props.product;
+    if (this.props.product === undefined) {
+      axios
+        .post(`/api/products`, this.state)
         .then(res => {
           this.props.toggleForm();
           this.props.getProducts();
@@ -39,9 +47,19 @@ export default class AdminProduct extends Component {
           console.log(err);
         });
     } else {
-      console.log("in the else");
-    }
-  };
+      axios
+        .put(
+          `/api/products/${id}`,
+          this.state)
+        .then(res => {
+            this.props.toggleEdit();
+            this.props.getProducts();
+          })
+          .catch(e => {
+          console.log(e);
+        }
+          )
+  }}
 
   setSizes = sizesArray => {
     this.setState({ sizes: sizesArray });
