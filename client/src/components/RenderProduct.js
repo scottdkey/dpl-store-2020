@@ -8,6 +8,8 @@ class RenderProduct extends Component {
   toggleEdit = () => {this.setState({editing: !this.state.editing });
   };
 
+  
+
   render() {
     const {editing} = this.state
     const { product } = this.props;
@@ -21,7 +23,7 @@ class RenderProduct extends Component {
           <Table.Cell onClick={() => this.toggleEdit()}>
             <Icon name="edit outline" />
           </Table.Cell>
-          <Table.Cell onClick={() => this.deleteProduct(product.id)}>
+          <Table.Cell onClick={() => this.props.deleteProduct(product.id)}>
             <Icon name="trash alternate" />
           </Table.Cell>
           <Table.Cell>

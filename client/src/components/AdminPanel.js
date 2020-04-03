@@ -2,29 +2,30 @@ import React, { Component } from "react";
 import { Header, Table, Button } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
-import RenderProduct from './RenderProduct'
+import RenderProduct from "./RenderProduct";
 
 export default class AdminPanel extends Component {
-  state = { products: [], categories: [], showForm: false};
+  state = { products: [], categories: [], showForm: false };
 
   getProducts() {
     axios
       .get("/api/products")
-      .then(res => {
-        if (res.data.length === 0) { this.setState({ products: ["No Products "] }) }
-        else {
+      .then((res) => {
+        if (res.data.length === 0) {
+          this.setState({ products: ["No Products "] });
+        } else {
           this.setState({ products: res.data });
           this.putProductsInCategories();
         }
       })
-      .catch(e => console.log(e));
+      .catch((e) => console.log(e));
   }
 
-  deleteProduct = id => {
+  deleteProduct = (id) => {
     axios
       .delete(`/api/products/${id}`)
-      .then(res => this.getProducts())
-      .catch(error => console.log(error));
+      .then((res) => this.getProducts())
+      .catch((error) => console.log(error));
   };
 
   putProductsInCategories = () => {
@@ -32,7 +33,7 @@ export default class AdminPanel extends Component {
     const hoodies = [];
     const hats = [];
     const stickers = [];
-    this.state.products.forEach(product => {
+    this.state.products.forEach((product) => {
       if (product.category === "T-Shirts") {
         tShirts.push(product);
       } else if (product.category === "Hoodies") {
@@ -48,14 +49,14 @@ export default class AdminPanel extends Component {
         { name: "T-Shirts", products: tShirts },
         { name: "Hoodies", products: hoodies },
         { name: "Hats", products: hats },
-        { name: "Stickers", products: stickers }
-      ]
+        { name: "Stickers", products: stickers },
+      ],
     });
   };
-  deleteCategory() { }
+  deleteCategory() {}
 
   renderCategories = () =>
-    this.state.categories.map(c => {
+    this.state.categories.map((c) => {
       const category = c.name;
       const products = c.products;
       return (
@@ -74,11 +75,12 @@ export default class AdminPanel extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {products.map(product => (
+              {products.map((product) => (
                 <Table.Row key={product.id}>
                   <RenderProduct
                     toggleForm={this.toggleForm}
                     getProducts={this.getProducts}
+                    deleteProduct={this.deleteProduct}
                     product={product}
                   />
                 </Table.Row>
@@ -91,7 +93,6 @@ export default class AdminPanel extends Component {
   toggleForm = () => {
     this.setState({ showForm: !this.state.showForm });
   };
-
 
   render() {
     if (this.state.products.length === 0) {
@@ -108,7 +109,12 @@ export default class AdminPanel extends Component {
         <Button onClick={() => this.toggleForm()}>
           {showForm ? "hide" : "new product"}
         </Button>
-        {showForm ? <ProductForm toggleForm={this.toggleForm} getProducts={this.getProducts} /> : null}
+        {showForm ? (
+          <ProductForm
+            toggleForm={this.toggleForm}
+            getProducts={this.getProducts}
+          />
+        ) : null}
 
         {this.renderCategories()}
       </>
