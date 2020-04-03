@@ -16,6 +16,7 @@
     sizes: {small:1,medium:1,large:1},
     category: 'T-Shirts',
     main_image: Faker::Avatar.image,
+
   )
 end
 5.times do
