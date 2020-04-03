@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, } from 'semantic-ui-react';
 import Products from './Products';
+import Navbar from './Menu';
+import Footer from './Footer'; 
 
 const Tshirts = () => {
   // we have a const called tshirts which is all products with category = tshirts
@@ -26,7 +28,9 @@ const Tshirts = () => {
   // };
 
   return (
-    <><h1>T-Shirts</h1>
+    <>
+    <Navbar/>
+    <h1>T-Shirts</h1>
     tshirts.map( tshirt => (
       <Card>
       <Card.Content>
@@ -35,6 +39,7 @@ const Tshirts = () => {
         <Card.Meta></Card.Meta>
       </Card.Content>
     </Card>
+    <Footer/>
     </>
   )
 }

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Segment, Header, Grid, Container, Responsive } from "semantic-ui-react";
-
+import styled from 'styled-components';
 
 const Footer = () => (
-  // <ResponsiveContainer>
+  
   <>
-  <Segment inverted vertical fluid>
-      <Container>
+  <StickyFooter as={Segment} inverted >
         <Grid inverted >
           <Grid.Row>
             <Grid.Column width={3}>
@@ -17,14 +16,21 @@ const Footer = () => (
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Container>
-    </Segment>
-    <Segment inverted vertical textAlign="right" padding="15px">
-    <p textAlign="right">2020 DevPoint Labs Terms Policy</p>
-    </Segment>
+    <Segment inverted textAlign="right">
+    <p textAlign="right">2020 DevPoint Labs Terms Policy</p></Segment>
+    </StickyFooter>
     </>
-  /* // </ResponsiveContainer> */
+);
 
-)
+const StickyFooter = styled.div `{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+`;
 
-export default Footer
+export default Footer;

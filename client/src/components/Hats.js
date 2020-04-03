@@ -1,9 +1,15 @@
 import React from 'react';
+import Navbar from './Menu';
+import Footer from './Footer';
 
 const Hats = () => {
     return(
     //render hats here
-    <>hats</>
+    <>
+    <Navbar/>
+    hats
+    <Footer/>
+    </>
     )
 }
 

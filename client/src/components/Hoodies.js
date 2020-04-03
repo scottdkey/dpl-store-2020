@@ -1,9 +1,13 @@
 import React from 'react';
 import { Card, } from 'semantic-ui-react';
+import Navbar from './Menu';
+import Footer from './Footer';
 
 const Hoodies = () => {
     return(
-      <><h1>Hoodies</h1>
+      <>
+      <Navbar/>
+      <h1>Hoodies</h1>
       <Card>
     <Card.Content>
       <Card.Header>
@@ -11,6 +15,7 @@ const Hoodies = () => {
       </Card.Header>
     </Card.Content>
   </Card>
+  <Footer/> 
   </>
     )
     }
