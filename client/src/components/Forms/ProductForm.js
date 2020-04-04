@@ -20,22 +20,22 @@ export default class AdminProduct extends Component {
   componentDidMount() {
     const product = this.props.product
     if (product === undefined) {
+      console.log('mounted')
     } else {
-      const {product} = this.props
       this.setState({
         title: product.title,
         description: product.description,
         price: product.price,
         category: product.category,
         main_image: product.main_image,
+        sizes: product.sizes,
         // alt_image: product.alt_image,
-        sizes: product.sizes
       });
     }
+    
   }
 
   handleSubmit = () => {
-    console.log(this.state.sizes)
     if (this.props.product === undefined) {
       axios
         .post(`/api/products`, this.state)
@@ -54,7 +54,7 @@ export default class AdminProduct extends Component {
           this.state)
         .then(res => {
           this.props.getProducts();
-            this.props.toggleEdit();
+          this.props.toggleEdit();
             
           })
           .catch(e => {
@@ -63,7 +63,11 @@ export default class AdminProduct extends Component {
           )
   }}
 
-  setSizes = sizes => {
+
+  setSizes = array => {
+    const sizes = array.reduce((obj, item) => 
+    Object.assign(obj, { [item.size]: parseInt(item.quantity) }), {}
+    )
     this.setState({ sizes });
   };
 
@@ -78,7 +82,6 @@ export default class AdminProduct extends Component {
       price,
       category,
       main_image,
-      sizes
     } = this.state;
     return (
       <>
@@ -111,7 +114,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-            <SizeForm sizes={sizes} setSizes={this.setSizes} />
+            <SizeForm sizes={this.props.product.sizes} setSizes={this.setSizes} />
             <Form.Select
               label="category"
               name="category"

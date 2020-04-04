@@ -42,7 +42,7 @@ class Api::ProductsController < ApplicationController
       :category,
       :main_image,
       :alt_image,
-      sizes: %i[size quantity]
+      sizes: %i[sm md lg ns]
     )
   end
 

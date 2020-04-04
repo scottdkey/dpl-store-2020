@@ -7,6 +7,14 @@ import RenderProduct from "./RenderProduct";
 export default class AdminPanel extends Component {
   state = { products: [], categories: [], showForm: false };
 
+  componentDidMount() {
+    if (this.state.products.length === 0) {
+      this.getProducts();
+    } else if (this.state.products[0] === "No Products Found") {
+      console.log("No Products Found");
+    }
+  }
+
   getProducts() {
     axios
       .get("/api/products")
@@ -95,11 +103,6 @@ export default class AdminPanel extends Component {
   };
 
   render() {
-    if (this.state.products.length === 0) {
-      this.getProducts();
-    } else if (this.state.products[0] === "No Products Found") {
-      console.log("No Products Found");
-    }
     const { showForm } = this.state;
     return (
       <>
