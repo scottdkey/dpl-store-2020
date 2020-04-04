@@ -10,7 +10,7 @@ export default class SizeForm extends Component {
     const originalSizes = Object.entries(this.props.sizes)
     console.log(originalSizes);
     const sizes = originalSizes.map(size =>{
-      return ({size :size[0], quantity: size [1]})
+      return({size :size[0], quantity: size [1]})
     })
     console.log(sizes)
     this.setState({
@@ -19,7 +19,7 @@ export default class SizeForm extends Component {
     
   }
   addSize = () => {
-    const sizes = [...this.state.sizes, { size: "ns", quantity: 0 }];
+    const sizes = [...this.state.sizes, { size: "noSize", quantity: 0 }];
     this.setState({ sizes });
   };
   
@@ -74,9 +74,9 @@ export default class SizeForm extends Component {
 }
 
 const sizeOptions = [
-  { key: "noSize", value: "ns", text: "No Size" },
-  { key: "small", value: "sm", text: "Small" },
-  { key: "medium", value: "md", text: "Medium" },
-  { key: "large", value: "lg", text: "Large" },
+  { key: "noSize", value: "noSize", text: "No Size" },
+  { key: "small", value: "small", text: "Small" },
+  { key: "medium", value: "medium", text: "Medium" },
+  { key: "large", value: "large", text: "Large" },
   
 ];
