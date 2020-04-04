@@ -6,7 +6,6 @@ export default class SizeForm extends Component {
     sizes: this.props.sizes
   };
   addSize = () => {
-    // preventSubmit()
     const sizes = [...this.state.sizes, { size: "NoSize", quantity: 0 }];
     this.setState({ sizes });
   };

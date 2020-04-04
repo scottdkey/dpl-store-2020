@@ -12,47 +12,50 @@ export default class AdminProduct extends Component {
     price: 0.0,
     category: "",
     main_image: "",
-    alt_image: {},
-    sizes: []
+    // alt_image: {},
+    sizes: {}
     // numAltImages: [],
   };
 
   componentDidMount() {
-    if (this.props.product === undefined) {
-      console.log("creating");
+    const product = this.props.product
+    if (product === undefined) {
     } else {
+      const {product} = this.props
       this.setState({
         title: product.title,
         description: product.description,
         price: product.price,
         category: product.category,
-        main_image: product.mainImage,
-        alt_image: product.altImage,
+        main_image: product.main_image,
+        // alt_image: product.alt_image,
         sizes: product.sizes
       });
     }
   }
 
   handleSubmit = () => {
+    console.log(this.state.sizes)
     if (this.props.product === undefined) {
       axios
         .post(`/api/products`, this.state)
         .then(res => {
-          this.props.toggleForm();
           this.props.getProducts();
+          this.props.toggleForm();
+          
         })
         .catch(err => {
           console.log(err);
         });
     } else {
-      console.log("editing submitted")
       axios
         .put(
           `/api/products/${this.props.product.id}`,
           this.state)
         .then(res => {
+          this.props.getProducts();
             this.props.toggleEdit();
-            this.props.getProducts();
+            
           })
           .catch(e => {
           console.log(e);
@@ -60,8 +63,8 @@ export default class AdminProduct extends Component {
           )
   }}
 
-  setSizes = sizesArray => {
-    this.setState({ sizes: sizesArray });
+  setSizes = sizes => {
+    this.setState({ sizes });
   };
 
   handleChange = (e, { name, value }) => {
