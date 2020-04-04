@@ -3,11 +3,23 @@ import { Form, Select, Button } from "semantic-ui-react";
 
 export default class SizeForm extends Component {
   state = {
-    sizes: this.props.sizes
+    sizes: []
   };
+
+  componentDidMount(){
+    const originalSizes = Object.entries(this.props.sizes)
+    console.log(originalSizes);
+    const sizes = originalSizes.map(size =>{
+      return({size :size[0], quantity: size [1]})
+    })
+    console.log(sizes)
+    this.setState({
+      sizes
+    })
+    
+  }
   addSize = () => {
-    // preventSubmit()
-    const sizes = [...this.state.sizes, { size: "NoSize", quantity: 0 }];
+    const sizes = [...this.state.sizes, { size: "noSize", quantity: 0 }];
     this.setState({ sizes });
   };
   

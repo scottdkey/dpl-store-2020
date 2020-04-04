@@ -12,25 +12,27 @@ export default class AdminProduct extends Component {
     price: 0.0,
     category: "",
     main_image: "",
-    alt_image: {},
-    sizes: []
+    // alt_image: {},
+    sizes: {}
     // numAltImages: [],
   };
 
   componentDidMount() {
-    if (this.props.product === undefined) {
-      console.log("creating");
+    const product = this.props.product
+    if (product === undefined) {
+      console.log('mounted')
     } else {
       this.setState({
         title: product.title,
         description: product.description,
         price: product.price,
         category: product.category,
-        main_image: product.mainImage,
-        alt_image: product.altImage,
-        sizes: product.sizes
+        main_image: product.main_image,
+        sizes: product.sizes,
+        // alt_image: product.alt_image,
       });
     }
+    
   }
 
   handleSubmit = () => {
@@ -38,21 +40,22 @@ export default class AdminProduct extends Component {
       axios
         .post(`/api/products`, this.state)
         .then(res => {
-          this.props.toggleForm();
           this.props.getProducts();
+          this.props.toggleForm();
+          
         })
         .catch(err => {
           console.log(err);
         });
     } else {
-      console.log("editing submitted")
       axios
         .put(
           `/api/products/${this.props.product.id}`,
           this.state)
         .then(res => {
-            this.props.toggleEdit();
-            this.props.getProducts();
+          this.props.getProducts();
+          this.props.toggleEdit();
+            
           })
           .catch(e => {
           console.log(e);
@@ -60,8 +63,12 @@ export default class AdminProduct extends Component {
           )
   }}
 
-  setSizes = sizesArray => {
-    this.setState({ sizes: sizesArray });
+
+  setSizes = array => {
+    const sizes = array.reduce((obj, item) => 
+    Object.assign(obj, { [item.size]: parseInt(item.quantity) }), {}
+    )
+    this.setState({ sizes });
   };
 
   handleChange = (e, { name, value }) => {
@@ -75,7 +82,6 @@ export default class AdminProduct extends Component {
       price,
       category,
       main_image,
-      sizes
     } = this.state;
     return (
       <>
@@ -108,7 +114,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-            <SizeForm sizes={sizes} setSizes={this.setSizes} />
+            <SizeForm sizes={this.props.product.sizes} setSizes={this.setSizes} />
             <Form.Select
               label="category"
               name="category"
