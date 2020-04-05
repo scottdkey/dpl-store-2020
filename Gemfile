@@ -30,11 +30,11 @@ gem 'devise_token_auth'
 group :development, :test do
   gem 'faker'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'pry-rails'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'meta_request'
+  gem 'pry-rails'
 end
 
 group :development do
