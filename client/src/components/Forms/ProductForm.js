@@ -13,15 +13,17 @@ export default class AdminProduct extends Component {
     category: "",
     main_image: "",
     // alt_image: {},
-    sizes: {}
+    sizes: ''
     // numAltImages: [],
   };
 
-  componentDidMount() {
+  componentWillMount() {
     const product = this.props.product
     if (product === undefined) {
-      console.log('mounted')
+      // console.log('mounted')
     } else {
+      console.log('else')
+      console.log(product)
       this.setState({
         title: product.title,
         description: product.description,
@@ -114,7 +116,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-            <SizeForm sizes={this.props.product.sizes} setSizes={this.setSizes} />
+            <SizeForm sizes={this.state.sizes} setSizes={this.setSizes} />
             <Form.Select
               label="category"
               name="category"

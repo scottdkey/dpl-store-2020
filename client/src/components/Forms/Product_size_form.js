@@ -8,11 +8,9 @@ export default class SizeForm extends Component {
 
   componentDidMount(){
     const originalSizes = Object.entries(this.props.sizes)
-    console.log(originalSizes);
     const sizes = originalSizes.map(size =>{
       return({size :size[0], quantity: size [1]})
     })
-    console.log(sizes)
     this.setState({
       sizes
     })
