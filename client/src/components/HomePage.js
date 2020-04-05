@@ -191,26 +191,31 @@ ResponsiveContainer.propTypes = {
 
 const HomepageLayout = () => (
   <ResponsiveContainer >
-    <Segment style={{ padding: '8em 0em', }} vertical>
+   <br/>
+   <br/>
       <Grid >
-        <Header as='h3'>Categories</Header>
+        <Header as='h3'>CATEGORIES</Header>
         <Grid.Row columns={4}>
           <Grid.Column>
-            <Link to="/tshirts" ><Image size="medium" rounded src={TShirts} /></Link>
+            <Link to="/tshirts" ><Image size="medium" rounded src={TShirts} fluid /></Link>
+            <h4 align="center">T Shirts</h4>
           </Grid.Column>
           <Grid.Column>
             <Link to="/hoodies" ><Image size="medium" rounded src={Hoodies} /></Link>
+            <h4 align="center">Jackets & Hoodies </h4>
           </Grid.Column>
           <Grid.Column>
             <Link to="/hats" > <Image size="medium" rounded src={Hats} /></Link>
+            <h4 align="center">Hats</h4>
           </Grid.Column>
           <Grid.Column>
             <Link to="/stickers" ><Image size="medium" rounded src={Stickers} /></Link>
+            <h4 align="center">Stickers</h4>
           </Grid.Column>
         </Grid.Row>
 
         <br />
-        <Header as="h3">Featured Products</Header>
+        <Header as="h3">FEATURED PRODUCTS</Header>
         <Grid.Row centered columns={2} >
           <Grid.Column>
             <Image size='large' src={Featured} rounded/>
@@ -228,8 +233,8 @@ const HomepageLayout = () => (
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Segment>
-   
+      <br/>
+  
     <StyledFooter as={Segment} inverted >
       <Grid>
         <Grid.Column textAlign='center' width={9}>
@@ -248,7 +253,7 @@ const HomepageLayout = () => (
     <Segment inverted vertical >
       <p textAlign="left">DevPoint Labs</p>
     </Segment>
-   
+    
   </ResponsiveContainer>
 );
 
