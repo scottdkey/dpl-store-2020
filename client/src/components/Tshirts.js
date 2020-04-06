@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, SearchCategory, } from 'semantic-ui-react';
+import { Card, SearchCategory, Container, } from 'semantic-ui-react';
 import Products from './Products';
 
 const Tshirts = ({ categories }) => {
@@ -10,23 +10,24 @@ const Tshirts = ({ categories }) => {
       if (categories.key == "tshirt") {
         tshirts.push(product);
       }
-    }), []
-  };
+    }), []};
 
-  const renderTshirts = () => (
-    tshirts.map(tshirt => {
-      <>
-        <Card>
-          <Card.Header>{tshirt.main_image}</Card.Header>
-        </Card></>
-    })
-  );
+  const renderTshirts = () => {
+    return(
+    tshirts.map( product => {
+    const price = "$" + product.price
+    return(
+      <Card
+      image={product.main_image}
+      header={product.title}
+      meta={price}
+      />
+        );
+      })
+    )};
 
   return (
-    <>
-      <h1>T-Shirts</h1>
-      {renderTshirts()}
-    </>
+    {renderTshirts()}
   )
 }
 
@@ -34,8 +35,8 @@ export default Tshirts;
 
 
 // renderCategories = () =>
-{/* //   this.categories.map(c => { */ }
-{/* //     const category = c.name;
+// {/* //   this.categories.map(c => { */ }
+// {/* //     const category = c.name;
 //     const products = c.products;
 //     return (
 //       <>
