@@ -37,8 +37,9 @@ export default class AdminProduct extends Component {
       axios
         .post(`/api/products`, this.state)
         .then((res) => {
+                this.props.toggleForm();
           this.props.getProducts();
-          this.props.toggleForm();
+    
         })
         .catch((err) => {
           console.log(err);
@@ -47,8 +48,9 @@ export default class AdminProduct extends Component {
       axios
         .put(`/api/products/${this.props.product.id}`, this.state)
         .then((res) => {
-          this.props.getProducts();
           this.props.toggleEdit();
+          this.props.getProducts();
+
         })
         .catch((e) => {
           console.log(e);
@@ -81,62 +83,61 @@ export default class AdminProduct extends Component {
   render() {
     const { title, description, price, category, main_image } = this.state;
     return (
-      <Modal trigger={this.trigger()}>
-        <Modal.Content>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group
-              width="equal"
-              style={{ display: "flex", flexDirection: "column" }}
-            >
-              <Form.Input
-                label="title"
-                name="title"
-                placeholder="Product Title"
-                value={title}
-                onChange={this.handleChange}
-                required
-              />
-              <Form.TextArea
-                label="description"
-                name="description"
-                placeholder="Product description"
-                value={description}
-                onChange={this.handleChange}
-                required
-              />
-              <Form.Input
-                label="price"
-                name="price"
-                placeholder="price"
-                value={price}
-                onChange={this.handleChange}
-                required
-              />
-              <SizeForm sizes={this.state.sizes} setSizes={this.setSizes} />
-              <Form.Select
-                label="category"
-                name="category"
-                placeholder="category"
-                options={options}
-                value={category}
-                onChange={this.handleChange}
-                required
-              />
+      <Modal.Content>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group
+            width="equal"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <Form.Input
+              label="title"
+              name="title"
+              placeholder="Product Title"
+              value={title}
+              onChange={this.handleChange}
+              required
+            />
+            <Form.TextArea
+              label="description"
+              name="description"
+              placeholder="Product description"
+              value={description}
+              onChange={this.handleChange}
+              required
+            />
+            <Form.Input
+              label="price"
+              name="price"
+              placeholder="price"
+              value={price}
+              onChange={this.handleChange}
+              required
+            />
+            <SizeForm sizes={this.state.sizes} setSizes={this.setSizes} />
+            <Form.Select
+              label="category"
+              name="category"
+              placeholder="category"
+              options={options}
+              value={category}
+              onChange={this.handleChange}
+              required
+            />
 
-              <Form.Input
-                label="Main Image"
-                name="main_image"
-                placeholder="Main Image"
-                value={main_image}
-                onChange={this.handleChange}
-                required
-              />
-              <AltImageForm />
-            </Form.Group>
-            <Form.Button type="submit">Submit</Form.Button>
-          </Form>
-        </Modal.Content>
-      </Modal>
+            <Form.Input
+              label="Main Image"
+              name="main_image"
+              placeholder="Main Image"
+              value={main_image}
+              onChange={this.handleChange}
+              required
+            />
+            <AltImageForm />
+          </Form.Group>
+          <Form.Button type="submit">Submit</Form.Button>
+          <Form.Button color='red'  onClick={this.props.toggleForm}>Cancel</Form.Button>
+        </Form>
+      </Modal.Content>
     );
   }
 }
