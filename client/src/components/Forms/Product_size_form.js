@@ -18,7 +18,11 @@ export default class SizeForm extends Component {
   }
   addSize = () => {
     const sizes = [...this.state.sizes, { size: "noSize", quantity: 0 }];
+    if(sizes.length <= 4){
     this.setState({ sizes });
+    } else{
+      alert('maximum sizes reached')
+    }
   };
   
 
