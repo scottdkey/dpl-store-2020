@@ -23,7 +23,7 @@ const Tshirts = () => {
  }, []);
  
  const renderTshirts = () =>
-   stickers.map( product => (
+   tshirts.map( product => (
      <Card
        key={product.id}
        image={product.main_image}
@@ -36,7 +36,7 @@ const Tshirts = () => {
    <>
    <h1>T-Shirts<hr /></h1>
    <Card.Group itemsPerRow={4}>
-     {renderTshirtss()}
+     {renderTshirts()}
    </Card.Group>
    </>
  )
