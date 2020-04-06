@@ -1,35 +1,34 @@
 import React, { Component } from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Modal, Button, Icon } from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
 import AltImageForm from "./Product_AltImage_Form";
 // import axios from 'axios'
 
 export default class AdminProduct extends Component {
-  state = {
-    title: "",
-    description: "",
-    price: 0.0,
-    category: "",
-    main_image: "",
-    alt_image: {},
-    sizes: []
-    // numAltImages: [],
-  };
-
-  componentDidMount() {
-    if (this.state === undefined) {
-      console.log("creating");
+  constructor(props) {
+    super(props);
+    const product = this.props.product;
+    if (product === undefined) {
+      this.state = {
+        title: "",
+        description: "",
+        price: 0.0,
+        category: "",
+        main_image: "",
+        // alt_image: {},
+        sizes: "",
+        // numAltImages: [],
+      };
     } else {
-      this.setState({
-        title: this.state.title,
-        description: this.state.description,
-        price: this.state.price,
-        category: this.state.category,
-        main_image: this.state.mainImage,
-        alt_image: this.state.altImage,
-        sizes: this.state.sizes
-      });
+      this.state = {
+        title: props.product.title,
+        description: props.product.description,
+        price: props.product.price,
+        category: props.product.category,
+        main_image: props.product.main_image,
+        sizes: props.product.sizes,
+      };
     }
   }
 
@@ -37,48 +36,54 @@ export default class AdminProduct extends Component {
     if (this.props.product === undefined) {
       axios
         .post(`/api/products`, this.state)
-        .then(res => {
-          this.props.toggleForm();
+        .then((res) => {
+                this.props.toggleForm();
           this.props.getProducts();
+    
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     } else {
-      console.log("editing submitted")
       axios
-        .put(
-          `/api/products/${this.props.product.id}`,
-          this.state)
-        .then(res => {
-            this.props.toggleEdit();
-            this.props.getProducts();
-          })
-          .catch(e => {
-          console.log(e);
-        }
-          )
-  }}
+        .put(`/api/products/${this.props.product.id}`, this.state)
+        .then((res) => {
+          this.props.toggleEdit();
+          this.props.getProducts();
 
-  setSizes = sizesArray => {
-    this.setState({ sizes: sizesArray });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
+  setSizes = (array) => {
+    const sizes = array.reduce(
+      (obj, item) =>
+        Object.assign(obj, { [item.size]: parseInt(item.quantity) }),
+      {}
+    );
+    this.setState({ sizes });
   };
 
   handleChange = (e, { name, value }) => {
     this.setState({ ...this.state, [name]: value });
   };
+  trigger(){
+    if(this.props.product === undefined){
+      return(<Button>New</Button>)
+    }else {
+      return(
+        <Icon name="edit" />
+      )
+    }
+  }
 
   render() {
-    const {
-      title,
-      description,
-      price,
-      category,
-      main_image,
-      sizes
-    } = this.state;
+    const { title, description, price, category, main_image } = this.state;
     return (
-      <>
+      <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group
             width="equal"
@@ -108,7 +113,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-            <SizeForm sizes={sizes} setSizes={this.setSizes} />
+            <SizeForm sizes={this.state.sizes} setSizes={this.setSizes} />
             <Form.Select
               label="category"
               name="category"
@@ -130,8 +135,9 @@ export default class AdminProduct extends Component {
             <AltImageForm />
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
+          <Form.Button color='red'  onClick={this.props.toggleForm}>Cancel</Form.Button>
         </Form>
-      </>
+      </Modal.Content>
     );
   }
 }
@@ -140,5 +146,5 @@ const options = [
   { key: "t", text: "T-Shirts", value: "T-Shirts" },
   { key: "ho", text: "Hoodies", value: "Hoodies" },
   { key: "ha", text: "Hats", value: "Hats" },
-  { key: "s", text: "Stickers", value: "Stickers" }
+  { key: "s", text: "Stickers", value: "Stickers" },
 ];

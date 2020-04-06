@@ -1,11 +1,19 @@
 import React, { Component } from "react";
-import { Header, Table, Button } from "semantic-ui-react";
+import { Header, Table, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderProduct from "./RenderProduct";
 
 export default class AdminPanel extends Component {
-  state = { products: [], categories: [], showForm: false };
+  state = { products: [], categories: [], openForm: false };
+
+  componentDidMount() {
+    if (this.state.products.length === 0) {
+      this.getProducts();
+    } else if (this.state.products[0] === "No Products Found") {
+      console.log("No Products Found");
+    }
+  }
 
   getProducts() {
     axios
@@ -91,30 +99,23 @@ export default class AdminPanel extends Component {
       );
     });
   toggleForm = () => {
-    this.setState({ showForm: !this.state.showForm });
+    this.setState({ openForm: !this.state.openForm });
   };
 
   render() {
-    if (this.state.products.length === 0) {
-      this.getProducts();
-    } else if (this.state.products[0] === "No Products Found") {
-      console.log("No Products Found");
-    }
-    const { showForm } = this.state;
+    const { openForm } = this.state;
     return (
       <>
         <Header as="h1" textAlign="center">
           Admin panel
         </Header>
-        <Button onClick={() => this.toggleForm()}>
-          {showForm ? "hide" : "new product"}
-        </Button>
-        {showForm ? (
+        <Button onClick={this.toggleForm}>New</Button>
+        <Modal open={openForm}>
           <ProductForm
             toggleForm={this.toggleForm}
             getProducts={this.getProducts}
           />
-        ) : null}
+        </Modal>
 
         {this.renderCategories()}
       </>
