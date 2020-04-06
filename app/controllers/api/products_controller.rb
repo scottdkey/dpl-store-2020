@@ -2,9 +2,10 @@
 
 class Api::ProductsController < ApplicationController
   before_action :set_product, only: %i[show update destroy]
+  before_action :set_category
 
   def index
-    render json: Product.all
+    render @category.products.all
   end
 
   def show
@@ -12,7 +13,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    product = Product.new(product_params)
+    product = @category.products.new(product_params)
     if product.save
       render json: product
     else
@@ -47,6 +48,10 @@ class Api::ProductsController < ApplicationController
   end
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = category.prodcuts.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.find(params[:category_id])
   end
 end
