@@ -31,7 +31,7 @@ const HomepageHeading = ({ mobile }) => (
         <Header
             as='h4'
             content='Great hats for great people'
-            inverted color="purple"
+            inverted
             style={{
                 fontSize: mobile ? '1.5em' : '1.7em',
                 fontWeight: 'normal',
