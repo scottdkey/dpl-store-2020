@@ -45,7 +45,7 @@ export default function Products() {
         <Tshirts />
         <Hoodies />
         <Hats />
-        <Stickers /> */}
+        <Stickers />
       </>
         )
 }
