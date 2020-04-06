@@ -9,7 +9,7 @@ export default class AdminPanel extends Component {
 
   componentDidMount() {
     if (this.state.products.length === 0) {
-      this.getProducts();
+      this.getCategories();
     } else if (this.state.products[0] === "No Products Found") {
       console.log("No Products Found");
     }
@@ -36,30 +36,37 @@ export default class AdminPanel extends Component {
       .catch((error) => console.log(error));
   };
 
+  getCategories = () => {
+    const {categories} = this.state
+    axios
+      .get('/api/categories')
+      .then(res => {
+        var products = []
+        axios.get(`/api/categories`)
+        res.data.forEach(category => {
+          this.setState({
+            categories: [...categories, {category:category, products:products}]
+          })
+        
+      })})
+  }
+
   putProductsInCategories = () => {
-    const tShirts = [];
-    const hoodies = [];
-    const hats = [];
-    const stickers = [];
-    this.state.products.forEach((product) => {
-      if (product.category === "T-Shirts") {
-        tShirts.push(product);
-      } else if (product.category === "Hoodies") {
-        hoodies.push(product);
-      } else if (product.category === "Hats") {
-        hats.push(product);
-      } else {
-        stickers.push(product);
-      }
-    });
-    this.setState({
-      categories: [
-        { name: "T-Shirts", products: tShirts },
-        { name: "Hoodies", products: hoodies },
-        { name: "Hats", products: hats },
-        { name: "Stickers", products: stickers },
-      ],
-    });
+    // this.state.products.forEach((product) => {
+    //   if (product.category === "T-Shirts") {
+    //     tShirts.push(product);
+    //   } else if (product.category === "Hoodies") {
+    //     hoodies.push(product);
+    //   } else if (product.category === "Hats") {
+    //     hats.push(product);
+    //   } else {
+    //     stickers.push(product);
+    //   }
+    // });
+    this.state.categories.forEach(category => {
+
+    })
+
   };
   deleteCategory() {}
 
@@ -83,7 +90,7 @@ export default class AdminPanel extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {products.map((product) => (
+              {/* {products.map((product) => (
                 <Table.Row key={product.id}>
                   <RenderProduct
                     toggleForm={this.toggleForm}
@@ -92,7 +99,7 @@ export default class AdminPanel extends Component {
                     product={product}
                   />
                 </Table.Row>
-              ))}
+              ))} */}
             </Table.Body>
           </Table>
         </div>
