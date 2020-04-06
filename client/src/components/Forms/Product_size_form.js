@@ -3,12 +3,26 @@ import { Form, Select, Button } from "semantic-ui-react";
 
 export default class SizeForm extends Component {
   state = {
-    sizes: this.props.sizes
+    sizes: []
   };
+
+  componentDidMount(){
+    const originalSizes = Object.entries(this.props.sizes)
+    const sizes = originalSizes.map(size =>{
+      return({size :size[0], quantity: size [1]})
+    })
+    this.setState({
+      sizes
+    })
+    
+  }
   addSize = () => {
-    // preventSubmit()
-    const sizes = [...this.state.sizes, { size: "NoSize", quantity: 0 }];
+    const sizes = [...this.state.sizes, { size: "noSize", quantity: 0 }];
+    if(sizes.length <= 4){
     this.setState({ sizes });
+    } else{
+      alert('maximum sizes reached')
+    }
   };
   
 
@@ -27,7 +41,7 @@ export default class SizeForm extends Component {
   sizeDropDownFormat = ({ size, index }) => {
 
     return (
-      <>
+      <Form.Group key={size}>
         <Select
           selection
           placeholder="Select a Size"
@@ -42,7 +56,7 @@ export default class SizeForm extends Component {
           name="quantity"
           onChange={e => this.sizeChange(e.target.name, e.target.value, index)}
         />
-      </>
+      </Form.Group>
     );
   };
   renderSizes = () =>
