@@ -31,7 +31,7 @@ const HomepageHeading = ({ mobile }) => (
         <Header
             as='h4'
             content='Great hats for great people'
-            inverted
+            inverted color="purple"
             style={{
                 fontSize: mobile ? '1.5em' : '1.7em',
                 fontWeight: 'normal',
@@ -65,7 +65,7 @@ class DesktopContainer extends Component {
                     onBottomPassedReverse={this.hideFixedMenu}
                 >
                     <Segment
-                        inverted
+                        inverted color="purple"
                         textAlign='center'
                         style={{ minHeight: 700, padding: '1em 0em' }}
                         vertical
@@ -127,7 +127,7 @@ class MobileContainer extends Component {
                 <Sidebar
                     as={Menu}
                     animation='push'
-                    inverted
+                    inverted color="purple"
                     onHide={this.handleSidebarHide}
                     vertical
                     visible={sidebarOpened}
@@ -146,7 +146,7 @@ class MobileContainer extends Component {
 
                 <Sidebar.Pusher dimmed={sidebarOpened} >
                     <Segment
-                        inverted
+                        inverted color="purple"
                         textAlign='center'
                         style={{ minHeight: 350, padding: '1em 0em' }}
                         vertical
