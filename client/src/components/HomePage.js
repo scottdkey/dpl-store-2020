@@ -191,25 +191,23 @@ ResponsiveContainer.propTypes = {
 
 const HomepageLayout = () => (
   <ResponsiveContainer >
-   <br/>
-   <br/>
       <Grid >
         <Header as='h3'>CATEGORIES</Header>
         <Grid.Row columns={4}>
           <Grid.Column>
-            <Link to="/tshirts" ><Image size="medium" rounded src={TShirts} fluid /></Link>
+            <Link to="/tshirts" ><RoundedImage as={Image} size="medium" src={Featured} fluid /></Link>
             <h4 align="center">T Shirts</h4>
           </Grid.Column>
           <Grid.Column>
-            <Link to="/hoodies" ><Image size="medium" rounded src={Hoodies} /></Link>
+            <Link to="/hoodies" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
             <h4 align="center">Jackets & Hoodies </h4>
           </Grid.Column>
           <Grid.Column>
-            <Link to="/hats" > <Image size="medium" rounded src={Hats} /></Link>
+            <Link to="/hats" > <RoundedImage as={Image} size="medium" src={Featured} /></Link>
             <h4 align="center">Hats</h4>
           </Grid.Column>
           <Grid.Column>
-            <Link to="/stickers" ><Image size="medium" rounded src={Stickers} /></Link>
+            <Link to="/stickers" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
             <h4 align="center">Stickers</h4>
           </Grid.Column>
         </Grid.Row>
@@ -218,29 +216,29 @@ const HomepageLayout = () => (
         <Header as="h3">FEATURED PRODUCTS</Header>
         <Grid.Row centered columns={2} >
           <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
+            <RoundedImage as={Image} size='large' src={Featured}/>
             <h4 align="left">$ Product Name</h4>
           </Grid.Column>
           <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
+            <RoundedImage as={Image} size='large' src={Featured}/>
             <h4 align="left">$ Product Name</h4>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row centered columns={2}>
           <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
+            <RoundedImage as={Image} size='large' src={Featured}/>
             <h4 align="left">$ Product Name</h4>
           </Grid.Column>
           <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
+            <RoundedImage as={Image} size='large' src={Featured}/>
             <h4 align="left">$ Product Name</h4>
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <br/>
-  
- 
-    
+      <br/> 
+      <div>
+            <button class="ui button" textAlign="center">See More</button></div>
+       <br />
   </ResponsiveContainer>
 );
 
@@ -274,5 +272,11 @@ const StyledFooter= styled.div` {
   }
 }
 `;
+
+const RoundedImage= styled.div `
+    border-radius: 25px;
+    width: 250px;
+    height: 250px;
+`
 
 export default HomepageLayout;

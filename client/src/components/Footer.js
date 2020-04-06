@@ -7,12 +7,13 @@ const Footer = () => (
   <>
     <StyledFooter as={Segment} inverted color="purple"  >
       <Grid>
-        <Grid.Column textAlign='center' width={9}>
-        <h1 textAlign="center">Any Questions?
-              <br/> We're here to help.</h1>
+        <Grid.Column width={9}>
+          <Grid.Row></Grid.Row>
+          <Grid.Row><h4>Any Questions? </h4></Grid.Row>
+          <Grid.Row><h1>We're here to help.</h1> </Grid.Row>
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
-        <Segment floated='right' color='white'><Icon name="mail"/>contact@devpointlabs.com</Segment>
+            <Segment floated='right' color='white'><Icon name="mail"/>contact@devpointlabs.com</Segment>
             <Segment floated='right' color='white'>370 South 300 East
             <br/>Salt Lake City, Utah
             <br/>84111</Segment>
@@ -78,5 +79,6 @@ const StyledFooter= styled.div` {
   }
 }
 `;
+
 
 export default Footer;
