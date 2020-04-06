@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Header, Table, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
-import RenderProduct from "./RenderProduct";
 
 export default class AdminPanel extends Component {
   state = { products: [], categories: [], openForm: false };
@@ -73,7 +72,7 @@ export default class AdminPanel extends Component {
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.name;
-      const products = c.products;
+      // const products = c.products;
       return (
         <div key={category}>
           <Table celled striped>

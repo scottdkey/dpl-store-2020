@@ -1,6 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Header, Card, Tab, Image } from "semantic-ui-react";
+import { Header, } from "semantic-ui-react";
 import Tshirts from "./Tshirts";
 import Hoodies from "./Hoodies";
 import Hats from "./Hats";

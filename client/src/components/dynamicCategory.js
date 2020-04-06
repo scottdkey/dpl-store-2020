@@ -3,8 +3,8 @@ import { Card } from "semantic-ui-react";
 import Products from "./Products";
 import axios from "axios";
 
-const dynamicCategory = ({ category_id }) => {
-  const [item, setItems] = useState([]);
+const DynamicCategory = ({category_id}) => {
+  const [items, setItems] = useState([]);
   // make another useEffect to get the category
   // /categories/:category_id/
 
@@ -13,7 +13,7 @@ const dynamicCategory = ({ category_id }) => {
   useEffect(() => {
     // /categories/:category_id/products/:product_id
     axios
-      .get("/categories/:category_id/products")
+      .get("/categories/category_id/products")
       .then((res) => {
         setItems(res.data);
       })
@@ -37,4 +37,4 @@ const dynamicCategory = ({ category_id }) => {
   );
 };
 
-export default Tshirts;
+export default DynamicCategory;

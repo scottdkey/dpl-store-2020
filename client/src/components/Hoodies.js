@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Card, } from 'semantic-ui-react';
-import Products from './Products';
 import axios from "axios";
  
 const Hoodies = () => {
@@ -15,7 +14,7 @@ const Hoodies = () => {
    axios.get("/api/products")
      .then((res) => {
        const filteredProducts = res.data.filter((product) => (
-         product.category == "Hoodies"
+         product.category === "Hoodies"
        ));
        setHoodies(filteredProducts);
      })
