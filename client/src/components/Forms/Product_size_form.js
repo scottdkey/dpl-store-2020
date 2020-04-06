@@ -37,7 +37,7 @@ export default class SizeForm extends Component {
   sizeDropDownFormat = ({ size, index }) => {
 
     return (
-      <>
+      <Form.Group key={size}>
         <Select
           selection
           placeholder="Select a Size"
@@ -52,7 +52,7 @@ export default class SizeForm extends Component {
           name="quantity"
           onChange={e => this.sizeChange(e.target.name, e.target.value, index)}
         />
-      </>
+      </Form.Group>
     );
   };
   renderSizes = () =>

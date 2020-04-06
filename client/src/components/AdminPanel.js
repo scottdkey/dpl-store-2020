@@ -100,6 +100,7 @@ export default class AdminPanel extends Component {
     });
   toggleForm = () => {
     this.setState({ showForm: !this.state.showForm });
+    console.log(this.state.showForm)
   };
 
   render() {
@@ -109,15 +110,15 @@ export default class AdminPanel extends Component {
         <Header as="h1" textAlign="center">
           Admin panel
         </Header>
-        <Button onClick={() => this.toggleForm()}>
-          {showForm ? "hide" : "new product"}
-        </Button>
-        {showForm ? (
+        {/* <Button onClick={() => this.toggleForm()}>
+          {/* {showForm ? "hide" : "new product"} */}
+          {/* New Product */}
+        {/* </Button> */}
           <ProductForm
+            showForm={this.showForm}
             toggleForm={this.toggleForm}
             getProducts={this.getProducts}
           />
-        ) : null}
 
         {this.renderCategories()}
       </>
