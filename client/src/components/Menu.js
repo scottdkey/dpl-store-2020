@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => (
 
-  <Menu borderless >
+  <Menu borderless inverted color="purple" >
     <Link to="/" ><Menu.Item active>.SHOP</Menu.Item></Link>
     <Menu.Item position='right'></Menu.Item>
     <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>

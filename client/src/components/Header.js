@@ -2,11 +2,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, Dropdown, } from 'semantic-ui-react';
-import TShirts from '../images/T-Shirts.jpg';
-import Hoodies from '../images/Hoodies.jpg';
-import Hats from '../images/Hat.jpg';
-import Stickers from '../images/Stickers.jpg';
-import Featured from '../images/blank.png';
 import { Link } from "react-router-dom";
 import styled, { keyframes } from 'styled-components';
 
@@ -50,7 +45,7 @@ HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
 }
 
-class DesktopContainer extends Component {
+class MainHeader extends Component {
   state = {}
 
   hideFixedMenu = () => this.setState({ fixed: false })
@@ -68,12 +63,12 @@ class DesktopContainer extends Component {
           onBottomPassedReverse={this.hideFixedMenu}
         >
           <Segment
-            inverted color="purple"
+            inverted
             textAlign='center'
             style={{ minHeight: 700, padding: '1em 0em' }}
             vertical
           >
-            <Menu 
+            <Menu
               fixed={fixed ? 'top' : null}
               inverted={!fixed}
               pointing={!fixed}
@@ -130,7 +125,7 @@ class MobileContainer extends Component {
         <Sidebar
           as={Menu}
           animation='push'
-          inverted color="purple"
+          inverted
           onHide={this.handleSidebarHide}
           vertical
           visible={sidebarOpened}
@@ -149,13 +144,13 @@ class MobileContainer extends Component {
 
         <Sidebar.Pusher dimmed={sidebarOpened} >
           <Segment
-            inverted color="purple"
+            inverted
             textAlign='center'
             style={{ minHeight: 350, padding: '1em 0em' }}
             vertical
           >
             <Container >
-              <Menu inverted color="purple" pointing secondary size='large' >
+              <Menu inverted pointing secondary size='large' >
                 <Menu.Item onClick={this.handleToggle}>
                   <Icon name='sidebar' />
                 </Menu.Item>
@@ -187,92 +182,6 @@ const ResponsiveContainer = ({ children }) => (
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node,
-}
+};
 
-const HomepageLayout = () => (
-  <ResponsiveContainer >
-   <br/>
-   <br/>
-      <Grid >
-        <Header as='h3'>CATEGORIES</Header>
-        <Grid.Row columns={4}>
-          <Grid.Column>
-            <Link to="/tshirts" ><Image size="medium" rounded src={TShirts} fluid /></Link>
-            <h4 align="center">T Shirts</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/hoodies" ><Image size="medium" rounded src={Hoodies} /></Link>
-            <h4 align="center">Jackets & Hoodies </h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/hats" > <Image size="medium" rounded src={Hats} /></Link>
-            <h4 align="center">Hats</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/stickers" ><Image size="medium" rounded src={Stickers} /></Link>
-            <h4 align="center">Stickers</h4>
-          </Grid.Column>
-        </Grid.Row>
-
-        <br />
-        <Header as="h3">FEATURED PRODUCTS</Header>
-        <Grid.Row centered columns={2} >
-          <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
-            <h4 align="left">$ Product Name</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
-            <h4 align="left">$ Product Name</h4>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row centered columns={2}>
-          <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
-            <h4 align="left">$ Product Name</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Image size='large' src={Featured} rounded/>
-            <h4 align="left">$ Product Name</h4>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-      <br/>
-  
- 
-    
-  </ResponsiveContainer>
-);
-
-const StyledFooter= styled.div` {
-  position: relative;
-  z-index: 1;
-  
-  &:before,
-  &:after {
-    background: inherit;
-    content: '';
-    display: block;
-    height: 75%;
-    left: 0;
-    position: absolute;
-    right: 0;
-    z-index: -1;
-    border-top-right-radius: 25px;
-  }
-
-  &:before {
-    top: 0;
-    transform: skewY(-1deg);
-    transform-origin: 0% 0;
-  }
-  
-  &:after {
-    bottom: 0;
-    transform: skewY(0deg);
-    transform-origin: 100%;
-  }
-}
-`;
-
-export default HomepageLayout;
+export default MainHeader; 

@@ -1,47 +1,77 @@
-import React from 'react';
-import { Card, } from 'semantic-ui-react';
-import Products from './Products';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, Dropdown, Button } from 'semantic-ui-react';
+import Hats from '../images/Hat.jpg';
+import Featured from '../images/blank.png';
+import { Link } from "react-router-dom";
+import styled, { keyframes } from 'styled-components';
 import Navbar from './Menu';
-import Footer from './Footer'; 
 
-const Tshirts = () => {
-  // we have a const called tshirts which is all products with category = tshirts
-  // const products = [Product.All]
-  // const tshirts = []
 
-  // def findTshirts = () => {
-  //   return products.map( product () => (
-  //     newShirt = product
-  //     if product.category == "tshirts"
-  //       tshirts << newShirt
-  //     end
-  //   )
-  // }
-
-  // componentDidMount() {
-  //   // TODO: Make GET request with axios
-  //   // TODO: Update state
-  // }
-
-  // renderTshirts = () => {
-    
-  // };
-
-  return (
-    <>
-    <Navbar/>
-    <h1>T-Shirts</h1>
-    tshirts.map( tshirt => (
-      <Card>
-      <Card.Content>
-        {/* <Card.Header>{ insert image of tshirt.mainImage }</Card.Header> */}
-        <Card.Content></Card.Content>
-        <Card.Meta></Card.Meta>
-      </Card.Content>
-    </Card>
-    <Footer/>
+const tshirtLayout = () => (
+  // <ResponsiveContainer >
+  
+      <>
+      <Navbar/>
+      <h1>TShirts</h1>
+      <Grid >
+          <Grid.Row columns={3}>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as ={Image} size="medium"  src={Featured} fluid /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name </h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" > <RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+          </Grid.Row>
+      </Grid>
+      <br />
+      <div>
+          <CenteredButton as={Button} class="ui button" textAlign="center">See More</CenteredButton></div>
+      <br />
     </>
-  )
-}
+  /* // </ResponsiveContainer> */
+);
 
-export default Tshirts;
+
+const CenteredButton= styled.div `
+display: flex; 
+justify-content: center;
+`;
+
+const RoundedImage= styled.div `
+  border-radius: 25px;
+  width: 250px;
+  height: 250px;
+`
+
+export default tshirtLayout; 

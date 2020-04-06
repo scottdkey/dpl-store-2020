@@ -12,12 +12,15 @@ import Hoodies from './components/Hoodies';
 import Hats from './components/Hats';
 import Stickers from './components/Stickers';
 import Products from './components/Products';
+import Footer from './components/Footer';
 
+// import Header from './components/Header'
+ 
 const App = () => (
-  // <Fragment>
-  //   <NavBar />
+  <Fragment>
+ 
     <FetchAdmin>
-      <Container>
+     <Container>
         <Switch>
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
@@ -28,10 +31,10 @@ const App = () => (
           <Route exact path="/stickers" component={Stickers} />
           <Route exact path="/allmerchandise" component={Products} />
         </Switch>
-      </Container>
-      {/* <Footer /> */}
+        </Container>
+      <Footer />
     </FetchAdmin>
-  // </Fragment>
+   </Fragment>
 );
 
 export default App;

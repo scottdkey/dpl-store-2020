@@ -1,23 +1,77 @@
-import React from 'react';
-import { Card, } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, Dropdown, Button } from 'semantic-ui-react';
+import Hats from '../images/Hat.jpg';
+import Featured from '../images/blank.png';
+import { Link } from "react-router-dom";
+import styled, { keyframes } from 'styled-components';
 import Navbar from './Menu';
-import Footer from './Footer';
 
-const Hoodies = () => {
-    return(
+
+const hoodiesLayout = () => (
+  // <ResponsiveContainer >
+  
       <>
       <Navbar/>
       <h1>Hoodies</h1>
-      <Card>
-    <Card.Content>
-      <Card.Header>
-        Hoodies Go In These Cards
-      </Card.Header>
-    </Card.Content>
-  </Card>
-  <Footer/> 
-  </>
-    )
-    }
+      <Grid >
+          <Grid.Row columns={3}>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as ={Image} size="medium"  src={Featured} fluid /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name </h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" > <RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+              <Grid.Column>
+                  <Link to="/" ><RoundedImage as= {Image} size="medium" src={Featured} /></Link>
+                  <h4 align="left">$ Product Name</h4>
+              </Grid.Column>
+          </Grid.Row>
+      </Grid>
+      <br />
+      <div>
+          <CenteredButton as={Button} class="ui button" textAlign="center">See More</CenteredButton></div>
+      <br />
+    </>
+  /* // </ResponsiveContainer> */
+);
 
-export default Hoodies;
+
+const CenteredButton= styled.div `
+display: flex; 
+justify-content: center;
+`;
+
+const RoundedImage= styled.div `
+  border-radius: 25px;
+  width: 250px;
+  height: 250px;
+`
+
+export default hoodiesLayout; 

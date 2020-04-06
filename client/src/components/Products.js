@@ -85,7 +85,7 @@ export default class Products extends Component {
         </Header>
             {this.renderCategories()}
             <br/> 
-            <Footer/>
+           
           </>
     );
   }
