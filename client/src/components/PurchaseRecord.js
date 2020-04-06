@@ -45,7 +45,7 @@ class PurchaseRecord extends React.Component {
   }
 
   getAllCartItems = () => {
-    let cart = getAllCartItems
+    let cart = getAllCartItems()
     if(cart === null || cart.length === 0){
       return(
         <div>
