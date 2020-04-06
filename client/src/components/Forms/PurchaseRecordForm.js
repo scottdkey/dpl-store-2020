@@ -2,6 +2,7 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 class PurchaseRecordForm extends React.Component {
+
   render() {
     const { email_address, first_name, last_name, address_one, address_two, city, state, zip_code } = this.props
     return (
@@ -11,6 +12,7 @@ class PurchaseRecordForm extends React.Component {
           <Form.Input
             label="Email"
             autoFocus
+            type='email'
             name="email_address"
             placeholder="Email"
             value={email_address}

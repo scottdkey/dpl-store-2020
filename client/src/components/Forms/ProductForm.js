@@ -18,6 +18,7 @@ export default class AdminProduct extends Component {
   };
 
   componentDidMount() {
+    const {product} = this.props
     if (this.props.product === undefined) {
       console.log("creating");
     } else {
