@@ -1,41 +1,33 @@
-import React from 'react';
-import { Card, } from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react';
+import { Card, SearchCategory, Container, } from 'semantic-ui-react';
 import Products from './Products';
 
-const Tshirts = () => {
-  // we have a const called tshirts which is all products with category = tshirts
-  // const products = [Product.All]
-  // const tshirts = []
+const Tshirts = ({ categories }) => {
+  const [tshirts, setTshirts] = useState([])
 
-  // def findTshirts = () => {
-  //   return products.map( product () => (
-  //     newShirt = product
-  //     if product.category == "tshirts"
-  //       tshirts << newShirt
-  //     end
-  //   )
-  // }
+  const categorizeTshirts = (categories) => {
+    categories.map(product => {
+      if (categories.key == "tshirt") {
+        tshirts.push(product);
+      }
+    }), []};
 
-  // componentDidMount() {
-  //   // TODO: Make GET request with axios
-  //   // TODO: Update state
-  // }
-
-  // renderTshirts = () => {
-    
-  // };
+  const renderTshirts = () => {
+    return(
+    tshirts.map( product => {
+    const price = "$" + product.price
+    return(
+      <Card
+      image={product.main_image}
+      header={product.title}
+      meta={price}
+      />
+        );
+      })
+    )};
 
   return (
-    <><h1>T-Shirts</h1>
-    tshirts.map( tshirt => (
-      <Card>
-      <Card.Content>
-        {/* <Card.Header>{ insert image of tshirt.mainImage }</Card.Header> */}
-        <Card.Content></Card.Content>
-        <Card.Meta></Card.Meta>
-      </Card.Content>
-    </Card>
-    </>
+    {renderTshirts()}
   )
 }
 
