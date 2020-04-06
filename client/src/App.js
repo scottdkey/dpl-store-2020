@@ -15,8 +15,6 @@ import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
 
 const App = () => (
-  // <Fragment>
-  //   <NavBar />
     <FetchAdmin>
       <Container>
         <Switch>
@@ -31,9 +29,7 @@ const App = () => (
           <Route exact path="/allmerchandise" component={Products} />
         </Switch>
       </Container>
-      {/* <Footer /> */}
     </FetchAdmin>
-  // </Fragment>
 );
 
 export default App;
