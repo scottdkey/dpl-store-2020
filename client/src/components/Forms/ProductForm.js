@@ -18,17 +18,17 @@ export default class AdminProduct extends Component {
   };
 
   componentDidMount() {
-    if (this.props.product === undefined) {
+    if (this.state === undefined) {
       console.log("creating");
     } else {
       this.setState({
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        category: product.category,
-        main_image: product.mainImage,
-        alt_image: product.altImage,
-        sizes: product.sizes
+        title: this.state.title,
+        description: this.state.description,
+        price: this.state.price,
+        category: this.state.category,
+        main_image: this.state.mainImage,
+        alt_image: this.state.altImage,
+        sizes: this.state.sizes
       });
     }
   }
