@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import {Table, Icon, Modal} from 'semantic-ui-react'
 import ProductForm from './Forms/ProductForm'
+import axios from 'axios'
 
 class RenderProduct extends Component {
-  state = { editing: false };
+  state = { editing: false, openForm: false };
 
   toggleEdit = () => {
-    this.setState({editing: !this.state.editing });
-    console.log(this.props)
+    this.setState({ editing: !this.state.editing });
   };
 
-  
+  deleteProduct = id => {
+    axios
+      .delete(`/api/products/${id}`)
+      .then(res => this.props.getProducts())
+      .catch(error => console.log(error));
+  };
 
   render() {
-    const {editing} = this.state
+    const { editing } = this.state;
     const { product } = this.props;
     return (
       <>
@@ -22,12 +27,14 @@ class RenderProduct extends Component {
         <Table.Cell collapsing textAlign="right">
           ${product.price}
         </Table.Cell>
-        <Table.Cell onClick={() => this.toggleEdit()}><Icon name="edit"/></Table.Cell>
-        <Table.Cell onClick={() => this.props.deleteProduct(product.id)}>
+        <Table.Cell onClick={() => this.toggleEdit()}>
+          <Icon name="edit" />
+        </Table.Cell>
+        <Table.Cell onClick={() => this.deleteProduct(product.id)}>
           <Icon name="trash alternate" />
         </Table.Cell>
         <Modal open={editing}>
-          <ProductForm {...this.props} toggleEdit={this.toggleEdit} />
+          <ProductForm {...this.props} toggleForm={this.toggleEdit} editing={editing}/>
         </Modal>
       </>
     );

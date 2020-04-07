@@ -3,6 +3,7 @@ import { Form, Modal, Button, Icon } from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
 import AltImageForm from "./Product_AltImage_Form";
+import CategoryForm from "./CategoryForm";
 // import axios from 'axios'
 
 export default class AdminProduct extends Component {
@@ -48,7 +49,7 @@ export default class AdminProduct extends Component {
       axios
         .put(`/api/products/${this.props.product.id}`, this.state)
         .then((res) => {
-          this.props.toggleEdit();
+          this.props.toggleForm();
           this.props.getProducts();
 
         })
@@ -70,15 +71,6 @@ export default class AdminProduct extends Component {
   handleChange = (e, { name, value }) => {
     this.setState({ ...this.state, [name]: value });
   };
-  trigger(){
-    if(this.props.product === undefined){
-      return(<Button>New</Button>)
-    }else {
-      return(
-        <Icon name="edit" />
-      )
-    }
-  }
 
   render() {
     const { title, description, price, category, main_image } = this.state;
@@ -119,7 +111,7 @@ export default class AdminProduct extends Component {
               name="category"
               placeholder="category"
               options={options}
-              value={category}
+              value={this.props.category}
               onChange={this.handleChange}
               required
             />
@@ -135,16 +127,19 @@ export default class AdminProduct extends Component {
             <AltImageForm />
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
-          <Form.Button color='red'  onClick={this.props.toggleForm}>Cancel</Form.Button>
+          <Form.Button color="red" onClick={this.props.toggleForm}>
+            Cancel
+          </Form.Button>
         </Form>
       </Modal.Content>
     );
   }
 }
 
+
 const options = [
   { key: "t", text: "T-Shirts", value: "T-Shirts" },
   { key: "ho", text: "Hoodies", value: "Hoodies" },
   { key: "ha", text: "Hats", value: "Hats" },
-  { key: "s", text: "Stickers", value: "Stickers" },
+  { key: "s", text: "Stickers", value: "Stickers" }
 ];
