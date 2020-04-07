@@ -56,7 +56,7 @@ class PurchaseRecord extends React.Component {
     return (
       <div>
         {cart.map((product)=> (
-          <div key={`product-${product.id}`}>{product.object.name}</div>
+          <div key={`product-${product.id}`}>{product.object.title}</div>
         ))}
         <Button onClick={this.getUserInfo}>Continue</Button>
         
