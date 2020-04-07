@@ -27,17 +27,17 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       <Card.Header>
         <Grid>
           <Grid.Column width={8}>
-            {/* /// main_image
-            {/* image.group itemsPerRow={4} all alt_images */}
-            // This is where the Image Goes */}
+            {/* main_image
+            image.group itemsPerRow={4} all alt_images */}
+            This is where the Image Goes
           </Grid.Column>
           <Grid.Column width={8}>
-            {/* // Header
-            // meta
-            // description
-            // price */}
-            {/* <SizeDropdown /> */}
-            {/* <Button onClick to add to cart */}
+            {/* Header
+            meta
+            description
+            price
+            sizeDropdown component
+            button onClick to add to cart */}
             This is where the details go
           </Grid.Column>
         </Grid>
