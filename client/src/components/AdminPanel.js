@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Header, Table, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
-import RenderProduct from "./RenderProduct";
+import RenderProduct from './RenderProduct'
 
 export default class AdminPanel extends Component {
   state = { products: [], categories: [], openForm: false };

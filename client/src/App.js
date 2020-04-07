@@ -1,5 +1,4 @@
-import React, { Fragment, } from 'react';
-import NavBar from './components/NavBar';
+import React from 'react';
 import Login from './components/Login';
 import { Switch, Route, } from 'react-router-dom';
 import { Container, } from "semantic-ui-react";
@@ -13,6 +12,7 @@ import Hats from './components/Hats';
 import Stickers from './components/Stickers';
 import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
+import DynamicCategory from './components/dynamicCategory';
 
 const App = () => (
   // <Fragment>
@@ -29,6 +29,7 @@ const App = () => (
           <Route exact path="/hats" component={Hats} />
           <Route exact path="/stickers" component={Stickers} />
           <Route exact path="/allmerchandise" component={Products} />
+          <Route exact path="/categories/category_id/products" component={DynamicCategory} />
         </Switch>
       </Container>
       {/* <Footer /> */}

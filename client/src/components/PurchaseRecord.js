@@ -1,8 +1,7 @@
-import React from 'react'
-import axios from 'axios'
-import PurchaseRecordForm from './Forms/PurchaseRecordForm'
-import { Button } from 'semantic-ui-react'
-import {getAllCartItems} from '../modules/CartFunctions'
+import React from 'react';
+import PurchaseRecordForm from './Forms/PurchaseRecordForm';
+import { Button } from 'semantic-ui-react';
+import {getAllCartItems} from '../modules/CartFunctions';
 
 class PurchaseRecord extends React.Component {
   state = {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Card, } from 'semantic-ui-react';
-import Products from './Products';
 import axios from "axios";
  
 const Tshirts = () => {
@@ -15,28 +14,28 @@ const Tshirts = () => {
    axios.get("/api/products")
      .then((res) => {
        const filteredProducts = res.data.filter((product) => (
-         product.category == "T-Shirts"
+         product.category === "T-Shirts"
        ));
        setTshirts(filteredProducts);
      })
      .catch(console.log);
  }, []);
  
-//  const renderTshirts = () =>
-//    stickers.map( product => (
-//      <Card
-//        key={product.id}
-//        image={product.main_image}
-//        header={product.title}
-//        meta={"$" + product.price}
-//      />
-//    ))
+ const renderTshirts = () =>
+   tshirts.map( product => (
+     <Card
+       key={product.id}
+       image={product.main_image}
+       header={product.title}
+       meta={"$" + product.price}
+     />
+   ))
  
  return (
    <>
    <h1>T-Shirts<hr /></h1>
    <Card.Group itemsPerRow={4}>
-     {/* {renderTshirtss()} */}
+     {renderTshirts()}
    </Card.Group>
    </>
  )
