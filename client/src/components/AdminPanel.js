@@ -15,46 +15,32 @@ export default class AdminPanel extends Component {
     }
   }
 
-  getProducts=() =>{
-    axios
-      .get("/api/products")
-      .then((res) => {
-        if (res.data.length === 0) {
-          this.setState({ products: ["No Products "] });
-        } else {
-          this.setState({ products: res.data });
-          this.putProductsInCategories();
-        }
-      })
-      .catch((e) => console.log(e));
-  }
 
   deleteProduct = (id, category_id) => {
     axios
       .delete(`/api/categories/${category_id}/products/${id}`)
       .then((res) => {
-      this.setState({categories:[]})
-      this.getCategories()
+        this.setState({ categories: []})
+        this.getCategories()
       })
       .catch((error) => console.log(error));
   };
 
   getCategories = () => {
-    const { categories } = this.state
     axios
       .get('/api/categories')
       .then(res => {
-        res.data.forEach(category=>{
+        res.data.forEach(category => {
           axios.get(`/api/categories/${category.id}/products`)
-          .then(res=> {
-            this.setState({
-              categories:[...this.state.categories, {category: category, products: res.data}]
+            .then(res => {
+              this.setState({
+                categories: [...this.state.categories, { category: category, products: res.data }]
+              })
             })
-          })
         })
       })
-    
   }
+
 
   deleteCategory() { }
 
