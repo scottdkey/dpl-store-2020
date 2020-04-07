@@ -85,7 +85,7 @@ class DesktopContainer extends Component {
                 </Menu.Item>
                 <Menu.Item position='right'>
                 <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-                <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
+                <Link to="/categories/1/products" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
                 <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
                 <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
                 <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>

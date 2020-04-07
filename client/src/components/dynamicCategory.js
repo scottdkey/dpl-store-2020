@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card } from "semantic-ui-react";
 import axios from "axios";
 
-const DynamicCategory = ({category_id}) => {
+const DynamicCategory = ({category_id, match}) => {
   const [items, setItems] = useState([]);
   // make another useEffect to get the category
   // /categories/:category_id/
@@ -13,8 +13,10 @@ const DynamicCategory = ({category_id}) => {
   // call to get both of them
 
   useEffect(() => {
+    console.log(match)
+    const cat_id = category_id || match.params.category_id
     axios
-      .get(`/api/categories/${category_id}/products`)
+      .get(`/api/categories/${cat_id}/products`)
       .then((res) => {
         setItems(res.data);
         console.log(res.data);
@@ -34,7 +36,6 @@ const DynamicCategory = ({category_id}) => {
 
   return (
     <>
-    You are Here
     {renderItems()}
     </>
   );

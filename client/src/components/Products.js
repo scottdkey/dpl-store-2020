@@ -4,39 +4,28 @@ import { Card, } from "semantic-ui-react";
 import DynamicCategory from './DynamicCategory';
 
 export default class Products extends Component {
-  state = { products: [], categories: []}
+  state = { categories: []}
 
   componentDidMount() {
-    if (this.state.products.length === 0) {
       this.getCategories();
-    } else if (this.state.products[0] === "No Products Found") {
-      console.log("No Products Found");
-    }
   }
 
   getCategories = () => {
     axios
       .get('/api/categories')
       .then(res => {
-        res.data.forEach(category => {
-          axios.get(`/api/categories/${category.id}/products`)
-            .then(res => {
-              this.setState({
-                categories: [...this.state.categories, { category: category, products: res.data }]
-              })
-            })
-        })
+        this.setState({categories:res.data})
       })
   }
 
   renderCategories = () =>
     this.state.categories.map((c) => {
-      const category = c.category.name;
+      const category = c.name;
+      console.log(c)
       return (
         <>
-        {category}
-        <Card.Group key={category}>
-          <DynamicCategory category_id={category.id} />
+        <Card.Group key={category} itemsPerRow={4} >
+          <DynamicCategory category_id={c.id} />
         </Card.Group>
         </>
       );
@@ -46,7 +35,7 @@ export default class Products extends Component {
     return(
       <>
       All Merchandise
-      {this.renderCategories()}
+      {this.state.categories.length === 0 ? "No Products" : this.renderCategories()}
       </>
     )
   }
