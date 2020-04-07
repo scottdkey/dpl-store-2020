@@ -3,18 +3,23 @@ import { Table } from "semantic-ui-react";
 import RenderProduct from "./RenderProduct";
 
 class RenderCategories extends Component {
-  render() {
-    return (this.props.categories.map(c => {
-      const category = c.name;
-      const products = c.products;
+  state = {
+    products: this.props.products,
+    category: this.props.category,
+    load: this.props.load
+  };
+
+  render(){
+    const { products, category, load } = this.props;
+    if (products.length <= 0) {
+      return (<h2>{load ? "Loading" : "Please Pick a Category"}</h2>)
+    } else {
       return (
         <div key={category}>
           <Table celled striped>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell colSpan="4">
-                  {category}
-                </Table.HeaderCell>
+                <Table.HeaderCell colSpan="4">{category}</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -31,7 +36,7 @@ class RenderCategories extends Component {
           </Table>
         </div>
       );
-    }));
+    }
   }
 }
 
