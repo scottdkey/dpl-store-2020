@@ -13,6 +13,7 @@ import Stickers from './components/Stickers';
 import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
 import DynamicCategory from './components/dynamicCategory';
+import Cart from './components/Cart'
 
 const App = () => (
   // <Fragment>
@@ -30,6 +31,7 @@ const App = () => (
           <Route exact path="/stickers" component={Stickers} />
           <Route exact path="/allmerchandise" component={Products} />
           <Route exact path="/categories/category_id/products" component={DynamicCategory} />
+          <Route exact path='/cart' component={Cart} />
         </Switch>
       </Container>
       {/* <Footer /> */}
