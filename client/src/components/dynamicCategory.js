@@ -13,7 +13,7 @@ const DynamicCategory = ({category_id}) => {
   useEffect(() => {
     // /categories/:category_id/products/:product_id
     axios
-      .get("/categories/category_id/products")
+      .get("/api/categories/category_id/products")
       .then((res) => {
         setItems(res.data);
       })
@@ -32,6 +32,7 @@ const DynamicCategory = ({category_id}) => {
 
   return (
     <>
+    <h1>You are Here</h1>
       <Card.Group itemsPerRow={4}>{renderItems()}</Card.Group>
     </>
   );
