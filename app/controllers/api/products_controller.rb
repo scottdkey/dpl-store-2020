@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_product, only: %i[show update destroy]
   before_action :set_category
+  before_action :set_product, only: [:show,:update, :destroy]
+
 
   def index
-    render @category.products.all
+    render json: @category.products.all
   end
 
   def show
@@ -48,7 +49,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def set_product
-    @product = category.prodcuts.find(params[:id])
+    @product = @category.products.find(params[:id])
   end
 
   def set_category

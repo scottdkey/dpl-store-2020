@@ -22,21 +22,21 @@ const Tshirts = () => {
      .catch(console.log);
  }, []);
  
- const renderTshirts = () =>
-   stickers.map( product => (
-     <Card
-       key={product.id}
-       image={product.main_image}
-       header={product.title}
-       meta={"$" + product.price}
-     />
-   ))
+//  const renderTshirts = () =>
+//    stickers.map( product => (
+//      <Card
+//        key={product.id}
+//        image={product.main_image}
+//        header={product.title}
+//        meta={"$" + product.price}
+//      />
+//    ))
  
  return (
    <>
    <h1>T-Shirts<hr /></h1>
    <Card.Group itemsPerRow={4}>
-     {renderTshirtss()}
+     {/* {renderTshirtss()} */}
    </Card.Group>
    </>
  )
