@@ -12,7 +12,7 @@ import Hats from './components/Hats';
 import Stickers from './components/Stickers';
 import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
-import DynamicCategory from './components/DynamicCategory';
+import DynamicCategory from './components/dynamicCategory';
 
 const App = () => (
   // <Fragment>

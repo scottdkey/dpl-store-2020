@@ -23,7 +23,7 @@ class RenderProduct extends Component {
           ${product.price}
         </Table.Cell>
         <Table.Cell onClick={() => this.toggleEdit()}><Icon name="edit"/></Table.Cell>
-        <Table.Cell onClick={() => this.props.deleteProduct(product.id)}>
+        <Table.Cell onClick={() => this.props.deleteProduct(product.id, product.category_id)}>
           <Icon name="trash alternate" />
         </Table.Cell>
         <Modal open={editing}>

@@ -20,6 +20,7 @@
       main_image: Faker::Avatar.image,
     )
   end
+  
   category2 = Category.create(name:'Hoodies')
   5.times do
     Product.create(

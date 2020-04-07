@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header, Table, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
+import RenderProduct from './RenderProduct'
 
 export default class AdminPanel extends Component {
   state = { products: [], categories: [], openForm: false };
@@ -14,65 +15,39 @@ export default class AdminPanel extends Component {
     }
   }
 
-  getProducts() {
-    axios
-      .get("/api/products")
-      .then((res) => {
-        if (res.data.length === 0) {
-          this.setState({ products: ["No Products "] });
-        } else {
-          this.setState({ products: res.data });
-          this.putProductsInCategories();
-        }
-      })
-      .catch((e) => console.log(e));
-  }
 
-  deleteProduct = (id) => {
+  deleteProduct = (id, category_id) => {
     axios
-      .delete(`/api/products/${id}`)
-      .then((res) => this.getProducts())
+      .delete(`/api/categories/${category_id}/products/${id}`)
+      .then((res) => {
+        this.setState({ categories: []})
+        this.getCategories()
+      })
       .catch((error) => console.log(error));
   };
 
   getCategories = () => {
-    const {categories} = this.state
     axios
       .get('/api/categories')
       .then(res => {
-        var products = []
-        axios.get(`/api/categories`)
         res.data.forEach(category => {
-          this.setState({
-            categories: [...categories, {category:category, products:products}]
-          })
-        
-      })})
+          axios.get(`/api/categories/${category.id}/products`)
+            .then(res => {
+              this.setState({
+                categories: [...this.state.categories, { category: category, products: res.data }]
+              })
+            })
+        })
+      })
   }
 
-  putProductsInCategories = () => {
-    // this.state.products.forEach((product) => {
-    //   if (product.category === "T-Shirts") {
-    //     tShirts.push(product);
-    //   } else if (product.category === "Hoodies") {
-    //     hoodies.push(product);
-    //   } else if (product.category === "Hats") {
-    //     hats.push(product);
-    //   } else {
-    //     stickers.push(product);
-    //   }
-    // });
-    this.state.categories.forEach(category => {
 
-    })
-
-  };
-  deleteCategory() {}
+  deleteCategory() { }
 
   renderCategories = () =>
     this.state.categories.map((c) => {
-      const category = c.name;
-      // const products = c.products;
+      const category = c.category.name;
+      const products = c.products;
       return (
         <div key={category}>
           <Table celled striped>
@@ -89,7 +64,7 @@ export default class AdminPanel extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {/* {products.map((product) => (
+              {products.map((product) => (
                 <Table.Row key={product.id}>
                   <RenderProduct
                     toggleForm={this.toggleForm}
@@ -98,7 +73,7 @@ export default class AdminPanel extends Component {
                     product={product}
                   />
                 </Table.Row>
-              ))} */}
+              ))}
             </Table.Body>
           </Table>
         </div>
