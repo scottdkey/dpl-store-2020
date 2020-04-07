@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Image, } from "semantic-ui-react";
 import axios from "axios";
+import { Link, } from "react-router-dom";
 
 const DynamicCategory = ({category_id, match}) => {
   const [items, setItems] = useState([]);
+  const cat_id = category_id || match.params.category_id
   // make another useEffect to get the category
   // /categories/:category_id/
 
@@ -26,12 +28,15 @@ const DynamicCategory = ({category_id, match}) => {
 
   const renderItems = () =>
     items.map((product) => (
-      <Card
-        key={product.id}
-        image={product.main_image}
-        header={product.title}
-        meta={"$" + product.price}
-      />
+      <>
+      <Image src={product.main_image} as={Link} to={{pathname:`/categories/${cat_id}/products/${product.id}`, product: product, }} />
+      <Card key={product.id}>
+        <Card.Content>
+          <Card.Header>{product.title}</Card.Header>
+          <Card.Meta>{"$" + product.price}</Card.Meta>
+        </Card.Content>
+      </Card>
+      </>
     ));
 
   return (

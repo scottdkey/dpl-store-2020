@@ -9,6 +9,7 @@ import Home from './components/HomePage';
 import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
 import DynamicCategory from './components/DynamicCategory';
+import DynamicProduct from './components/DynamicProduct';
 
 const App = () => (
     <FetchAdmin>
@@ -20,6 +21,7 @@ const App = () => (
           <Route exact path='/purchase-record' component={PurchaseRecord} />
           <Route exact path="/allmerchandise" component={Products} />
           <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
+          <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
         </Switch>
       </Container>
     </FetchAdmin>

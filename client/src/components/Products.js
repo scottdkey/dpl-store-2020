@@ -23,11 +23,9 @@ export default class Products extends Component {
       const category = c.name;
       console.log(c)
       return (
-        <>
-        <Card.Group key={category} itemsPerRow={4} >
+        <Card.Group key={category} >
           <DynamicCategory category_id={c.id} />
         </Card.Group>
-        </>
       );
     });
 
