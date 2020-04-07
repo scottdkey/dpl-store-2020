@@ -1,6 +1,6 @@
 import React, { Component, } from "react";
 import axios from "axios";
-import { Header, Table, } from "semantic-ui-react";
+import { Card, } from "semantic-ui-react";
 import DynamicCategory from './DynamicCategory';
 
 export default class Products extends Component {
@@ -32,28 +32,20 @@ export default class Products extends Component {
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.category.name;
-      const products = c.products;
       return (
-        <div key={category}>
-          <Table celled striped>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell colSpan="4">
-                  {category}
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-              <Table.Body>
-                  <DynamicCategory category_id={c.id} />
-              </Table.Body>
-          </Table>
-        </div>
+        <>
+        {category}
+        <Card.Group key={category}>
+          <DynamicCategory category_id={category.id} />
+        </Card.Group>
+        </>
       );
     });
 
   render(){
     return(
       <>
+      All Merchandise
       {this.renderCategories()}
       </>
     )

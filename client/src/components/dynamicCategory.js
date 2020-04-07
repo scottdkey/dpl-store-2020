@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "semantic-ui-react";
-import Products from "./Products";
 import axios from "axios";
 
 const DynamicCategory = ({category_id}) => {
@@ -10,12 +9,15 @@ const DynamicCategory = ({category_id}) => {
 
   // refactor component to get products by category
   // when the controller exists (see Brianna)
+  // /categories/:category_id/products/:product_id
+  // call to get both of them
+
   useEffect(() => {
-    // /categories/:category_id/products/:product_id
     axios
-      .get("/api/categories/category_id/products")
+      .get(`/api/categories/${category_id}/products`)
       .then((res) => {
         setItems(res.data);
+        console.log(res.data);
       })
       .catch(console.log);
   }, []);
@@ -32,8 +34,8 @@ const DynamicCategory = ({category_id}) => {
 
   return (
     <>
-    <h1>You are Here</h1>
-      <Card.Group itemsPerRow={4}>{renderItems()}</Card.Group>
+    You are Here
+    {renderItems()}
     </>
   );
 };

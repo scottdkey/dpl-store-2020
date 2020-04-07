@@ -22,7 +22,7 @@ const App = () => (
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
           <Route exact path="/login" component={Login} />
           <Route exact path='/purchase-record' component={PurchaseRecord} />
-          <Route exact path="/tshirts" component={Tshirts} />
+          <Route exact path="/categories/1" component={Tshirts} />
           <Route exact path="/hoodies" component={Hoodies} />
           <Route exact path="/hats" component={Hats} />
           <Route exact path="/stickers" component={Stickers} />
