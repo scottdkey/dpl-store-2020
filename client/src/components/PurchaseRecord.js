@@ -2,6 +2,7 @@ import React from 'react';
 import PurchaseRecordForm from './Forms/PurchaseRecordForm';
 import { Button } from 'semantic-ui-react';
 import {getAllCartItems} from '../modules/CartFunctions';
+import { useParams } from 'react-router-dom';
 
 class PurchaseRecord extends React.Component {
   state = {
@@ -18,6 +19,7 @@ class PurchaseRecord extends React.Component {
     products: [],
     showForm: false,
     validEmail: false,
+    total: 0,
   }
 
 
@@ -42,6 +44,12 @@ class PurchaseRecord extends React.Component {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email)) { this.setState({ validEmail: true, }) }
   }
+  addTotalOfProductWithQuantity = (quantity, price) => {
+    let total = quantity * price
+    return (
+      <h3>${total}</h3>
+    )
+  }
 
   getAllCartItems = () => {
     let cart = getAllCartItems()
@@ -56,8 +64,12 @@ class PurchaseRecord extends React.Component {
     return (
       <div>
         {cart.map((product)=> (
-          <div key={`product-${product.id}`}>{product.object.title}</div>
+          <div key={`product-${product.id}`}>
+            {product.object.title}
+            {this.addTotalOfProductWithQuantity(product.quantity, product.object.price)}
+            </div>
         ))}
+        <div><h3>total:</h3></div>
         <Button onClick={this.getUserInfo}>Continue</Button>
         
       </div>
