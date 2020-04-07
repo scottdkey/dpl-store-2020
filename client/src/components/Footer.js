@@ -1,6 +1,8 @@
 import React from 'react';
-import { Segment, Header, Grid, Container, Responsive, Icon } from "semantic-ui-react";
+import { Segment, Header, Grid, Container, Responsive, Icon, Image } from "semantic-ui-react";
 import styled from 'styled-components';
+import Logo from '../images/dpl_logo.svg';
+import Pin from '../images/Pin.svg';
 
 const Footer = () => (
   
@@ -14,26 +16,15 @@ const Footer = () => (
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
             <Segment floated='right' color='white'><Icon name="mail"/>contact@devpointlabs.com</Segment>
-            <Segment floated='right' color='white'>370 South 300 East
+            <Segment floated='right' color='white'><Image src={Pin} size="mini" float="left"/>370 South 300 East
             <br/>Salt Lake City, Utah
             <br/>84111</Segment>
             <Segment floated='right' color='white'><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
         </Grid.Column>
       </Grid>  
     </StyledFooter>
-  <StickyFooter as={Segment} inverted color="purple">
-        <Grid inverted >
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as='h3' textAlign="center" content='DevPoint Labs' />
-            </Grid.Column>
-            <Grid.Column width={10}>
-              <p inverted textAlign="center">370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-    <Segment inverted color="purple" textAlign="right">
-    <p textAlign="right">2020 DevPoint Labs Terms Policy</p></Segment>
+    <StickyFooter as={Segment} inverted color="purple">
+    <p><Image align="left" size="small" src={Logo} class="filter-white"></Image>2020 DevPoint Labs Terms Policy</p>
     </StickyFooter>
     </>
 );

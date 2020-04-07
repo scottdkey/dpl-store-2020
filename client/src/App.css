@@ -82,3 +82,12 @@
   max-width: 300px;
   margin: auto;
 }
+
+.Container {
+  margin-left: 1in;
+  margin-right: 1in;
+}
+
+filter-white {
+  fill: white 
+}

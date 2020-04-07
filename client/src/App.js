@@ -1,8 +1,7 @@
 import React, { Fragment, } from 'react';
-import NavBar from './components/NavBar';
 import Login from './components/Login';
 import { Switch, Route, } from 'react-router-dom';
-import { Container, } from "semantic-ui-react";
+import { Container, Menu, Header, } from "semantic-ui-react";
 import FetchAdmin from './components/FetchAdmin';
 import AdminPanel from './components/AdminPanel';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -13,13 +12,17 @@ import Hats from './components/Hats';
 import Stickers from './components/Stickers';
 import Products from './components/Products';
 import Footer from './components/Footer';
+import Navbar from './components/Menu';
+import CartLayout from './components/Cart';
+import MainHeader from './components/Header';
 
 // import Header from './components/Header'
  
 const App = () => (
   <Fragment>
- 
     <FetchAdmin>
+      {/* <Navbar/> 
+    <MainHeader/>  */}
      <Container>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -29,6 +32,7 @@ const App = () => (
           <Route exact path="/hoodies" component={Hoodies} />
           <Route exact path="/hats" component={Hats} />
           <Route exact path="/stickers" component={Stickers} />
+          <Route exact path="/cart" component={CartLayout} />
           <Route exact path="/allmerchandise" component={Products} />
         </Switch>
         </Container>

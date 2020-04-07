@@ -1,12 +1,7 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, Dropdown, } from 'semantic-ui-react';
-import TShirts from '../images/T-Shirts.jpg';
-import Hoodies from '../images/Hoodies.jpg';
-import Hats from '../images/Hat.jpg';
-import Stickers from '../images/Stickers.jpg';
-import Featured from '../images/blank.png';
+import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, Dropdown, Button, GridColumn, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import styled, { keyframes } from 'styled-components';
 
@@ -18,32 +13,24 @@ const getWidth = () => {
 }
 
 const HomepageHeading = ({ mobile }) => (
-  <Container text >
-    <Header
-      as='h1'
-      content='DevPoint Store'
-      inverted
-      style={{
-        fontSize: mobile ? '2em' : '4em',
-        fontWeight: 'thick',
-        marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em',
-        textAlign: 'left'
-      }}
-    />
+  <Grid columns={2} >
+    <Grid.Row>
+      <Grid.Column>
+        <Button inverted color="purple">Keep Shopping</Button>
+      </Grid.Column>
+      <Grid.Column>
     <Header
       as='h4'
-      content='Find something you love.'
+      content='My Cart '
       inverted
       style={{
         fontSize: mobile ? '1.5em' : '1.7em',
         fontWeight: 'normal',
         marginTop: mobile ? '0.5em' : '1.5em',
-        textAlign: 'left'
-      }}
-    />
-
-  </Container>
+      }}/>
+      </Grid.Column>
+    </Grid.Row>
+   </Grid> 
 )
 
 HomepageHeading.propTypes = {
@@ -70,7 +57,7 @@ class DesktopContainer extends Component {
           <Segment
             inverted color="purple"
             textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
+            style={{ minHeight: 500, padding: '1em 0em' }}
             vertical
           >
             <Menu 
@@ -92,7 +79,7 @@ class DesktopContainer extends Component {
                       <Dropdown.Item as='a' href='/stickers'>Stickers</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <Link to="/cart"><Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item></Link> 
+                  <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -110,7 +97,7 @@ DesktopContainer.propTypes = {
   children: PropTypes.node,
 }
 
-class MainHeader extends Component {
+class MobileContainer extends Component {
   state = {}
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false })
@@ -174,19 +161,33 @@ class MainHeader extends Component {
   }
 }
 
-// MobileContainer.propTypes = {
-//   children: PropTypes.node,
-// }
+MobileContainer.propTypes = {
+  children: PropTypes.node,
+}
 
-// const ResponsiveContainer = ({ children }) => (
-//   <div>
-//     <DesktopContainer>{children}</DesktopContainer>
-//     <MobileContainer>{children}</MobileContainer>
-//   </div>
-// )
+const ResponsiveContainer = ({ children }) => (
+  <div>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+)
 
-// ResponsiveContainer.propTypes = {
-//   children: PropTypes.node,
-// }
+ResponsiveContainer.propTypes = {
+  children: PropTypes.node,
+}
 
-export default MainHeader; 
+const CartLayout = () => (
+  <Container>
+  <ResponsiveContainer >
+    
+  </ResponsiveContainer>
+  </Container>
+);
+
+const RoundedImage= styled.div `
+    border-radius: 25px;
+    width: 250px;
+    height: 250px;
+`
+
+export default CartLayout;

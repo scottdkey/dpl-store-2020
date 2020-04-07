@@ -92,7 +92,7 @@ class DesktopContainer extends Component {
                       <Dropdown.Item as='a' href='/stickers'>Stickers</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                  <Link to="/cart"><Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item></Link> 
                 </Menu.Item>
               </Container>
             </Menu>
@@ -190,6 +190,7 @@ ResponsiveContainer.propTypes = {
 }
 
 const HomepageLayout = () => (
+  <Container>
   <ResponsiveContainer >
       <Grid >
         <Header as='h3'>CATEGORIES</Header>
@@ -240,38 +241,8 @@ const HomepageLayout = () => (
             <button class="ui button" textAlign="center">See More</button></div>
        <br />
   </ResponsiveContainer>
+  </Container>
 );
-
-const StyledFooter= styled.div` {
-  position: relative;
-  z-index: 1;
-  
-  &:before,
-  &:after {
-    background: inherit;
-    content: '';
-    display: block;
-    height: 75%;
-    left: 0;
-    position: absolute;
-    right: 0;
-    z-index: -1;
-    border-top-right-radius: 25px;
-  }
-
-  &:before {
-    top: 0;
-    transform: skewY(-1deg);
-    transform-origin: 0% 0;
-  }
-  
-  &:after {
-    bottom: 0;
-    transform: skewY(0deg);
-    transform-origin: 100%;
-  }
-}
-`;
 
 const RoundedImage= styled.div `
     border-radius: 25px;
