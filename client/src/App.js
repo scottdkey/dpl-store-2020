@@ -12,11 +12,9 @@ import Hats from './components/Hats';
 import Stickers from './components/Stickers';
 import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
-import DynamicCategory from './components/dynamicCategory';
+import DynamicCategory from './components/DynamicCategory';
 
 const App = () => (
-  // <Fragment>
-  //   <NavBar />
     <FetchAdmin>
       <Container>
         <Switch>
@@ -32,9 +30,7 @@ const App = () => (
           <Route exact path="/categories/category_id/products" component={DynamicCategory} />
         </Switch>
       </Container>
-      {/* <Footer /> */}
     </FetchAdmin>
-  // </Fragment>
 );
 
 export default App;

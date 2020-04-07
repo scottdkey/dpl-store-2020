@@ -1,57 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { Component, } from "react";
 import axios from "axios";
-import { Header, } from "semantic-ui-react";
-import Tshirts from "./Tshirts";
-import Hoodies from "./Hoodies";
-import Hats from "./Hats";
-import Stickers from "./Stickers";
+import { Header, Table, } from "semantic-ui-react";
+import DynamicCategory from './DynamicCategory';
 
-export default function Products() {
-  const [categories, setCategories] = useState({
-    tshirts: [],
-    hoodies: [],
-    hats: [],
-    stickers: [],
-  });
+export default class Products extends Component {
+  state = { products: [], categories: []}
 
-  useEffect(() => {
+  componentDidMount() {
+    if (this.state.products.length === 0) {
+      this.getCategories();
+    } else if (this.state.products[0] === "No Products Found") {
+      console.log("No Products Found");
+    }
+  }
+
+  getCategories = () => {
     axios
-      .get("/api/products")
-      .then((res) => {
-        putProductsInCategories(res.data);
+      .get('/api/categories')
+      .then(res => {
+        res.data.forEach(category => {
+          axios.get(`/api/categories/${category.id}/products`)
+            .then(res => {
+              this.setState({
+                categories: [...this.state.categories, { category: category, products: res.data }]
+              })
+            })
+        })
       })
-      .catch((e) => console.log(e));
-  }, []);
+  }
 
-  const putProductsInCategories = (products) => {
-    const tshirts = [];
-    const hoodies = [];
-    const hats = [];
-    const stickers = [];
-
-    products.map((product) => {
-      if (product.category === "T-Shirts") {
-        tshirts.push(product);
-      } else if (product.category === "Hoodies") {
-        hoodies.push(product);
-      } else if (product.category === "Hats") {
-        hats.push(product);
-      } else {
-        stickers.push(product);
-      }
+  renderCategories = () =>
+    this.state.categories.map((c) => {
+      const category = c.category.name;
+      const products = c.products;
+      return (
+        <div key={category}>
+          <Table celled striped>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell colSpan="4">
+                  {category}
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+              <Table.Body>
+                  <DynamicCategory category_id={c.id} />
+              </Table.Body>
+          </Table>
+        </div>
+      );
     });
-    setCategories({ tshirts, hoodies, hats, stickers });
-  };
 
-  return (
-    <>
-      <Header as="h1" textAlign="center">
-        All Merchandise
-      </Header>
-      <Tshirts />
-      <Hoodies />
-      <Hats />
-      <Stickers />
-    </>
-  );
-}
+  render(){
+    return(
+      <>
+      {this.renderCategories()}
+      </>
+    )
+  }
+};
