@@ -83,7 +83,7 @@ class Cart extends React.Component {
         <div style={style.itemsContainer}>
           <Header as='h1' textAlign='center' style={{margin:'5%'}}>No items in cart</Header>
           <div>
-            <Button style={style.buttonDisabled}>Checkout</Button>
+            <Button disabled style={style.buttonDisabled}>Checkout</Button>
           </div>
         </div>)
     }
@@ -111,12 +111,8 @@ const style = {
     width: '100%',
   },
   buttonDisabled: {
-    color: 'white',
-    backgroundColor: '#4901DB',
     borderRadius: '30px',
     width: '100%',
-    cursor: 'default',
-    opacity: '.2'
   },
   headerContainer: {
     backgroundColor: '#4901DB',
