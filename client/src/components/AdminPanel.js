@@ -6,19 +6,43 @@ import RenderCategories from "./AdminPanelComponents/RenderCategories";
 import CategoryForm from "./Forms/CategoryForm";
 import CategorySelector from "./Selectors/CategorySelector";
 
-export default class AdminPanel extends Component {
-  state = {
-    products: [],
-    categories: [],
-    openForm: false,
-    load: true,
-    category: "All Categories"
-  };
 
-  componentWillMount() {
-    this.getCategories(categories);
+const categories = [
+  {
+    name: "T-Shirts",
+    image:
+      "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/424074/item/goods_63_424074.jpg?width=2000"
+  },
+  {
+    name: "Hoodies",
+    image:
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/comfortable-hoodies-20-1555533088.jpg?crop=1xw:1xh;center,top&resize=768:*;jelasjdfie"
+  },
+  {
+    name: "Hats",
+    image:
+      "https://cdn.shopify.com/s/files/1/0528/1597/products/Exosso_web_grande.jpg?v=1567298995"
+  },
+  {
+    name: "Stickers",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/81B%2B1ls383L._AC_SL1500_.jpg;ilasjkdfkja"
+  }
+];
+export default class AdminPanel extends Component {
+    state = {
+      products: [],
+      categories: categories,
+      openForm: false,
+      load: true,
+      category: "All Categories"
+    };
+
+  
+
+  componentDidMount() {
+    this.getCategories();
     this.getProducts();
-    
   }
 
   getCategories(categories){
@@ -35,12 +59,13 @@ export default class AdminPanel extends Component {
           products: res.data,
           load: false
         });
+        this.getCategories(categories)
       })
       .catch(e => console.log(e));
   }
   deleteProduct = id => {
     const products = this.state.products.filter(product => {
-      if (product.id != id) {
+      if (product.id !== id) {
         return product;
       }
     });
@@ -111,26 +136,3 @@ export default class AdminPanel extends Component {
     );
   }
 }
-
-const categories = [
-  {
-    name: "T-Shirts",
-    image:
-      "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/424074/item/goods_63_424074.jpg?width=2000"
-  },
-  {
-    name: "Hoodies",
-    image:
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/comfortable-hoodies-20-1555533088.jpg?crop=1xw:1xh;center,top&resize=768:*;jelasjdfie"
-  },
-  {
-    name: "Hats",
-    image:
-      "https://cdn.shopify.com/s/files/1/0528/1597/products/Exosso_web_grande.jpg?v=1567298995"
-  },
-  {
-    name: "Stickers",
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/81B%2B1ls383L._AC_SL1500_.jpg;ilasjkdfkja"
-  }
-];

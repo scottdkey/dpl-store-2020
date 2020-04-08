@@ -22,12 +22,6 @@ class CategoryForm extends Component {
       editing: !this.state.editing
     });
   };
-
-  // componentDidMount() {
-  //   this.setState({
-  //     categories: this.props.categories
-  //   });
-  // }
   addCategory = () => {
     const categories = [...this.state.categories, { name: "New", file: "" }];
     this.setState({
@@ -38,13 +32,9 @@ class CategoryForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const {
-      categories: { name, image }
-    } = this.state;
+    this.props.getCategories(this.state.categories)
   };
   handleChange = (name, value, index, e) => {
-    console.log(e);
-    console.log(name, value, index);
     const newCategory = this.state.categories[index];
     newCategory[name] = value;
     const categories = this.state.categories.map((category, i) =>
@@ -54,10 +44,10 @@ class CategoryForm extends Component {
   };
 
   categoriesRender = () =>
-    this.state.categories.map(category => (
-      <Modal.Content>
+    this.state.categories.map((category, index) => (
+      <Modal.Content key={`${category.name}-${index}`} >
         <h3>{category.name}</h3>
-        <img style={styles.image} src={category.image} />
+        <img style={styles.image} src={category.image} alt={category.name}/>
       </Modal.Content>
     ));
 
@@ -87,7 +77,7 @@ class CategoryForm extends Component {
               );
             }}
           </Dropzone>
-          <img style={styles.image} src={category.image} />
+          <img style={styles.image} src={category.image} alt={category.image}/>
         </div>
       </Modal.Content>
     );

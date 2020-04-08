@@ -1,5 +1,5 @@
-import React, { Fragment, } from 'react';
-import NavBar from './components/NavBar';
+import React from 'react';
+// import NavBar from './components/NavBar';
 import Login from './components/Login';
 import { Switch, Route, } from 'react-router-dom';
 import { Container, } from "semantic-ui-react";

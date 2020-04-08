@@ -3,7 +3,7 @@ import { Form, Modal} from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
 import AltImageForm from "./Product_AltImage_Form";
-import CategoryForm from "./CategoryForm";
+// import CategoryForm from "./CategoryForm";
 // import axios from 'axios'
 
 export default class AdminProduct extends Component {
@@ -73,7 +73,7 @@ export default class AdminProduct extends Component {
   };
 
   render() {
-    const { title, description, price, category, main_image } = this.state;
+    const { title, description, price, main_image } = this.state;
     return (
       <Modal.Content>
         <Form onSubmit={this.handleSubmit}>

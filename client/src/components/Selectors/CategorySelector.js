@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Select, Button } from "semantic-ui-react";
-import axios from "axios";
+import { Select } from "semantic-ui-react";
+// import axios from "axios";
 
 class CategorySelector extends Component {
   state = {

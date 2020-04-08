@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Table, Icon, Modal} from 'semantic-ui-react'
 import ProductForm from '../Forms/ProductForm'
-import axios from 'axios'
+// import axios from 'axios'
 
 class RenderProduct extends Component {
   state = { editing: false, openForm: false };
