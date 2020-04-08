@@ -17,7 +17,7 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {small:1,medium:1,large:1},
-      main_image: Faker::Avatar.image,
+      main_image: Faker::Avatar.image(set: "set4"),
     )
   end
   
@@ -30,7 +30,7 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {small:1,medium:1,large:1},
-      main_image: Faker::Avatar.image,
+      main_image: Faker::Avatar.image(set: "set4"),
     )
   end
   category3 = Category.create(name:'Hats')
@@ -42,7 +42,7 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {small:1,medium:1,large:1},
-      main_image: Faker::Avatar.image,
+      main_image: Faker::Avatar.image(set: "set4"),
     )
   end
   category4 = Category.create(name:'Stickers')
@@ -54,7 +54,7 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {small:1,medium:1,large:1},
-      main_image: Faker::Avatar.image,
+      main_image: Faker::Avatar.image(set: "set4"),
     )
   end
 

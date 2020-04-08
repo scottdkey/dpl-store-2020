@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_category
+  before_action :set_category, only: [:index, :show, :create, :update, :destory]
   before_action :set_product, only: [:show,:update, :destroy]
 
 
   def index
     render json: @category.products.all
+  end
+
+  def all_products
+    render json: Product.all
   end
 
   def show
