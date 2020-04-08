@@ -8,7 +8,7 @@ import Hats from '../images/Hat.jpg';
 import Stickers from '../images/Stickers.jpg';
 import Featured from '../images/blank.png';
 import { Link } from "react-router-dom";
-import Links from './Links';
+import Links from './SharedComponents/Links';
 
 
 const getWidth = () => {
@@ -230,7 +230,7 @@ const HomepageLayout = () => (
               <Header inverted as='h3' textAlign="center" content='DevPoint Labs' />
             </Grid.Column>
             <Grid.Column width={10}>
-              <p inverted textalign="centered">370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
+              <p inverted='true' textalign="centered">370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>

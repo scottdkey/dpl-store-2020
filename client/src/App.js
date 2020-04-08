@@ -10,7 +10,7 @@ import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
 import DynamicCategory from './components/DynamicCategory';
 import DynamicProduct from './components/DynamicProduct';
-import Links from './components/Links';
+import Links from './components/SharedComponents/Links';
 
 const App = () => (
     <FetchAdmin>
