@@ -7,7 +7,7 @@ class CategoryForm extends Component {
     super(props);
     const categories = this.props.categories;
     this.state = {
-      categories: categories,
+      categories,
       editing: false
     };
     this.handleEvent = this.handleEvent.bind(this);

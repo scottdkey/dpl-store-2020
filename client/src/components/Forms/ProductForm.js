@@ -10,6 +10,7 @@ export default class AdminProduct extends Component {
   constructor(props) {
     super(props);
     const product = this.props.product;
+    console.log(product)
     if (product === undefined) {
       this.state = {
         title: "",
@@ -17,18 +18,19 @@ export default class AdminProduct extends Component {
         price: 0.0,
         category: "",
         main_image: "",
-        // alt_image: {},
+        alt_image: [],
         sizes: "",
         // numAltImages: [],
       };
     } else {
       this.state = {
-        title: props.product.title,
-        description: props.product.description,
-        price: props.product.price,
-        category: props.product.category,
-        main_image: props.product.main_image,
-        sizes: props.product.sizes,
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        category: product.category,
+        main_image: product.main_image,
+        sizes: product.sizes,
+        alt_image: product.alt_image
       };
     }
   }
@@ -73,7 +75,7 @@ export default class AdminProduct extends Component {
   };
 
   render() {
-    const { title, description, price, category, main_image } = this.state;
+    const { title, description, price, category, main_image, alt_image } = this.state;
     return (
       <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
@@ -124,7 +126,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-            <AltImageForm />
+            <AltImageForm alt_image={alt_image}/>
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
           <Form.Button color="red" onClick={this.props.toggleForm}>
