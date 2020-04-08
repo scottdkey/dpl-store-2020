@@ -19,9 +19,9 @@ const Links = () => {
 
   const renderLinks = () => 
     categories.map( (category) => (
-      <>
+      <div key={`link${category.id}`}>
       <Menu.Item as={Link} to={{pathname:`/categories/${category.id}/products`}}>{category.name}</Menu.Item>
-      </>
+      </div>
     ))
   
 
@@ -34,8 +34,3 @@ const Links = () => {
 }
 
 export default Links;
-
-
-// {/* <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-// <Link to="/tshirts" ><Menu.Item as='a'>Tshirts</Menu.Item></Link>
-// <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link> */}
