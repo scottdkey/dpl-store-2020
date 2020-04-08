@@ -1,8 +1,8 @@
 class Api::PurchaseRecordsController < ApplicationController
-  before_actions: :set_purchase_record, only: [:show, :update, :destroy]
+  before_action :set_purchase_record, only: [:show, :update, :destroy]
 
   def index
-    render json: Purchase_Record.All
+    render json: PurchaseRecord.All
   end
 
   def show
@@ -10,7 +10,7 @@ class Api::PurchaseRecordsController < ApplicationController
   end
 
   def create
-    purchase_record = Purchase_Record.new(purchase_record_paramas)
+    purchase_record = PurchaseRecord.new(purchase_record_paramas)
     if purchase_record.save
       render json: purchase_record
     else
@@ -33,10 +33,10 @@ class Api::PurchaseRecordsController < ApplicationController
   private
 
   def purchase_record_paramas
-    params.require(purchase_record).permit(:order_total, :email_address, :first_name, :last_name, :address_one, :address_two, :city, :state, :zip_code, :fulfilled)
+    params.require(:purchase_record).permit(:order_total, :email_address, :first_name, :last_name, :address_one, :address_two, :city, :state, :zip_code, :fulfilled)
   end
 
   def set_purchase_record
-    @purchase_record = Purchase_Record.find(params[:id])
+    @purchase_record = PurchaseRecord.find(params[:id])
   end
 end
