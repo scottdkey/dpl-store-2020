@@ -8,6 +8,7 @@ import Hats from '../images/Hat.jpg';
 import Stickers from '../images/Stickers.jpg';
 import Featured from '../images/blank.png';
 import { Link } from "react-router-dom";
+import Links from './Links';
 
 
 const getWidth = () => {
@@ -81,27 +82,12 @@ class DesktopContainer extends Component {
             >
 
 
-
-              {/* categories.map( (category) => {
-                
-                  <Menu.Item as='a'
-                   active>
-                   .SHOP
-                 </Menu.Item>
-                 <Menu.Item position='right'>
-                 <Link to={`/categories/${category.id}/products`} ><Menu.Item as='a'>{category.name}</Menu.Item></Link>
-                 </Menu.Item>
-                
-              }) */}
-
               <Container >
                 <Menu.Item as='a' active>
                   .SHOP
                 </Menu.Item>
                 <Menu.Item position='right'>
-                <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-                <Link to="/tshirts" ><Menu.Item as='a'>Tshirts</Menu.Item></Link>
-                <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
+                <Links />
                 <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
                 <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
                 </Menu.Item>
@@ -149,9 +135,7 @@ class MobileContainer extends Component {
           <Menu.Item as='a' active>
             .Shop
           </Menu.Item>
-          <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-          <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
-          <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
+          <Links />
           <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
         </Sidebar>
 
