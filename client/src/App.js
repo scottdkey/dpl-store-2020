@@ -19,7 +19,7 @@ const App = () => (
   // <Fragment>
   //   <NavBar />
     <FetchAdmin>
-      <Container>
+      <div style={{marginLeft:'0px'}}>
         <Switch>
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
@@ -33,10 +33,11 @@ const App = () => (
           <Route exact path="/categories/category_id/products" component={DynamicCategory} />
           <Route exact path='/cart' component={Cart} />
         </Switch>
-      </Container>
+      </div>
       {/* <Footer /> */}
     </FetchAdmin>
   // </Fragment>
 );
+
 
 export default App;

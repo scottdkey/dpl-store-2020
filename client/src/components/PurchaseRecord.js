@@ -46,9 +46,17 @@ class PurchaseRecord extends React.Component {
   }
   addTotalOfProductWithQuantity = (quantity, price) => {
     let total = quantity * price
+    this.changeTotal(total)
     return (
       <h3>${total}</h3>
     )
+  }
+
+  changeTotal = (num) => {
+    const {total} = this.state
+    this.setState({
+      total: total + num
+    })
   }
 
   getAllCartItems = () => {
@@ -66,10 +74,11 @@ class PurchaseRecord extends React.Component {
         {cart.map((product)=> (
           <div key={`product-${product.id}`}>
             {product.object.title}
-            {this.addTotalOfProductWithQuantity(product.quantity, product.object.price)}
+            {`$${product.object.price}`}
+            {product.size}
             </div>
         ))}
-        <div><h3>total:</h3></div>
+        <div><h3>Total: ${this.state.total}</h3></div>
         <Button onClick={this.getUserInfo}>Continue</Button>
         
       </div>
