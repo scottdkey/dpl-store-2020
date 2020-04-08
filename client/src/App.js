@@ -11,6 +11,8 @@ import Products from './components/Products';
 import DynamicCategory from './components/DynamicCategory';
 import DynamicProduct from './components/DynamicProduct';
 import Links from './components/SharedComponents/Links';
+import StyledCard from './components/SharedComponents/StyledCard';
+import Parent from './components/SharedComponents/Parent';
 
 const App = () => (
     <FetchAdmin>
@@ -23,7 +25,8 @@ const App = () => (
           <Route exact path="/allmerchandise" component={Products} />
           <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
           <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
-          <Route exact path='/links' component={Links} />
+          <Route exact path='/styled' component={StyledCard} />
+          <Route exact path='/parent' component={Parent} />
         </Switch>
       </Container>
     </FetchAdmin>

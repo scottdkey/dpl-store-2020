@@ -8,7 +8,7 @@ import Hats from '../images/Hat.jpg';
 import Stickers from '../images/Stickers.jpg';
 import Featured from '../images/blank.png';
 import { Link } from "react-router-dom";
-import Links from './SharedComponents/Links';
+import Links from '../components/SharedComponents/Links';
 
 
 const getWidth = () => {

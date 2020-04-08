@@ -19,7 +19,6 @@ const DynamicProduct = ({category_id, product_id, match}) => {
   }, []);
 
 
-
     return(
       <>
       <h1>{product.title}</h1>
