@@ -1,42 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, } from 'semantic-ui-react';
-import Products from './Products';
-
+import axios from "axios";
+ 
 const Tshirts = () => {
-  // we have a const called tshirts which is all products with category = tshirts
-  // const products = [Product.All]
-  // const tshirts = []
-
-  // def findTshirts = () => {
-  //   return products.map( product () => (
-  //     newShirt = product
-  //     if product.category == "tshirts"
-  //       tshirts << newShirt
-  //     end
-  //   )
-  // }
-
-  // componentDidMount() {
-  //   // TODO: Make GET request with axios
-  //   // TODO: Update state
-  // }
-
-  // renderTshirts = () => {
-    
-  // };
-
-  return (
-    <><h1>T-Shirts</h1>
-    tshirts.map( tshirt => (
-      <Card>
-      <Card.Content>
-        {/* <Card.Header>{ insert image of tshirt.mainImage }</Card.Header> */}
-        <Card.Content></Card.Content>
-        <Card.Meta></Card.Meta>
-      </Card.Content>
-    </Card>
-    </>
-  )
+ const [tshirts, setTshirts] = useState([]);
+  // make another useeffect to get the category
+ // /categories/:category_id/
+ 
+ // refactor component to get products by category
+ // when the controller exists (see Brianna)
+ useEffect(() => {
+   // /categories/:category_id/products
+   axios.get("/api/products")
+     .then((res) => {
+       const filteredProducts = res.data.filter((product) => (
+         product.category === "T-Shirts"
+       ));
+       setTshirts(filteredProducts);
+     })
+     .catch(console.log);
+ }, []);
+ 
+ const renderTshirts = () =>
+   tshirts.map( product => (
+     <Card
+       key={product.id}
+       image={product.main_image}
+       header={product.title}
+       meta={"$" + product.price}
+     />
+   ))
+ 
+ return (
+   <>
+   <h1>T-Shirts<hr /></h1>
+   <Card.Group itemsPerRow={4}>
+     {renderTshirts()}
+   </Card.Group>
+   </>
+ )
 }
-
+ 
 export default Tshirts;

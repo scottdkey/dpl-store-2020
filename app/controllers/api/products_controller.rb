@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_product, only: %i[show update destroy]
+  before_action :set_category, only: [:index, :show, :create, :update, :destory]
+  before_action :set_product, only: [:show,:update, :destroy]
+
 
   def index
+    render json: @category.products.all
+  end
+
+  def all_products
     render json: Product.all
   end
 
@@ -12,7 +18,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    product = Product.new(product_params)
+    product = @category.products.new(product_params)
     if product.save
       render json: product
     else
@@ -47,6 +53,10 @@ class Api::ProductsController < ApplicationController
   end
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = @category.products.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.find(params[:category_id])
   end
 end
