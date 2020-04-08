@@ -42,5 +42,5 @@ const Hats = () => {
     </>
   )
 }
-
+ 
 export default Hats;

@@ -42,5 +42,5 @@ const Stickers = () => {
     </>
   )
 }
-
+ 
 export default Stickers;

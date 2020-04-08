@@ -1,7 +1,7 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
+import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, SearchCategory,} from 'semantic-ui-react';
 import TShirts from '../images/T-Shirts.jpg';
 import Hoodies from '../images/Hoodies.jpg';
 import Hats from '../images/Hat.jpg';
@@ -79,13 +79,28 @@ class DesktopContainer extends Component {
               secondary={!fixed}
               size='large'
             >
+
+
+
+              {/* categories.map( (category) => {
+                
+                  <Menu.Item as='a'
+                   active>
+                   .SHOP
+                 </Menu.Item>
+                 <Menu.Item position='right'>
+                 <Link to={`/categories/${category.id}/products`} ><Menu.Item as='a'>{category.name}</Menu.Item></Link>
+                 </Menu.Item>
+                
+              }) */}
+
               <Container >
                 <Menu.Item as='a' active>
                   .SHOP
                 </Menu.Item>
                 <Menu.Item position='right'>
                 <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-                <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
+                <Link to="/tshirts" ><Menu.Item as='a'>Tshirts</Menu.Item></Link>
                 <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
                 <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
                 <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>

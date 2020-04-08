@@ -42,5 +42,5 @@ const Tshirts = () => {
     </>
   )
 }
-
+ 
 export default Tshirts;

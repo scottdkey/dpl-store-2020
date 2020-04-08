@@ -11,7 +11,7 @@ export default function Products() {
 
   useEffect(() => {
     axios
-      .get("/api/products")
+      .get('/api/categories')
       .then(res => {
         putProductsInCategories(res.data);
       })
