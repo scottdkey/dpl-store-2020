@@ -19,6 +19,9 @@ class RenderCategories extends Component {
     </>
   )
 
+  //need way to sperate products if there are all products
+  //working on this later
+
   render(){
     const {category, products, load } = this.props;
     if (products.length <= 0) {

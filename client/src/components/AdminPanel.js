@@ -97,7 +97,7 @@ export default class AdminPanel extends Component {
             openForm={openForm}
           />
         </Modal>
-        {/* <CategoryForm categories={categories}/> */}
+        <CategoryForm categories={categories}/>
         <RenderCategories
           toggleForm={this.toggleForm}
           categories={categories}
@@ -113,8 +113,24 @@ export default class AdminPanel extends Component {
 }
 
 const categories = [
-  { name: "T-Shirts", image: "ksdlafjeilajsdfkljaeslfjel" },
-  { name: "Hoodies", image: "asdlkfjeliajsdlf;jelasjdfie" },
-  { name: "Hats", image: "asl;kfjel;ajsdf;ljaskldjfads" },
-  { name: "Stickers", image: "asldkjfeijasldkfje;ilasjkdfkja" }
+  {
+    name: "T-Shirts",
+    image:
+      "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/424074/item/goods_63_424074.jpg?width=2000"
+  },
+  {
+    name: "Hoodies",
+    image:
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/comfortable-hoodies-20-1555533088.jpg?crop=1xw:1xh;center,top&resize=768:*;jelasjdfie"
+  },
+  {
+    name: "Hats",
+    image:
+      "https://cdn.shopify.com/s/files/1/0528/1597/products/Exosso_web_grande.jpg?v=1567298995"
+  },
+  {
+    name: "Stickers",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/81B%2B1ls383L._AC_SL1500_.jpg;ilasjkdfkja"
+  }
 ];
