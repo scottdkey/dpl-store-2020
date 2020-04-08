@@ -73,7 +73,7 @@ export default class AdminProduct extends Component {
   };
 
   render() {
-    const { title, description, price, main_image } = this.state;
+    const { title, description, price, category, main_image } = this.state;
     return (
       <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
@@ -111,7 +111,7 @@ export default class AdminProduct extends Component {
               name="category"
               placeholder="category"
               options={options}
-              value={this.props.category}
+              value={category}
               onChange={this.handleChange}
               required
             />
