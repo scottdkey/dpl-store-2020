@@ -1,6 +1,6 @@
 import React from 'react'
 import { getAllCartItems, deleteItemFromCart, putItemInCart } from '../modules/CartFunctions'
-import { Button, Segment } from 'semantic-ui-react'
+import { Button, Segment, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 // var product1 = { title: 'hat', price:10 }
@@ -13,7 +13,8 @@ import { Link } from 'react-router-dom'
 
 class Cart extends React.Component {
   state = {
-    cart: []
+    cart: [],
+    total: 0
   }
 
   deleteCartItem = (id) => {
@@ -27,39 +28,51 @@ class Cart extends React.Component {
   putItemsInCart() {
     let cart = getAllCartItems()
     this.setState({ cart: cart })
+    if (cart.length > 0) {
+      this.addTotal(cart)
+    }
+  }
+
+  addTotal = (cart) => {
+    let total = 0
+    cart.forEach(item => {
+      total += item.object.price
+    })
+    this.setState({total: total})
   }
 
 
   renderCartItems = () => {
-    const { cart } = this.state
+    const { cart, total } = this.state
     if (cart.length > 0) {
       return (
         <div style={style.itemsContainer}>
           <div style={style.cartContainer}>
-          {cart.map(item => {
-            return (
-              <div key={`cartItem-${item.id}`}>
-                <div style={style.photo}></div>
+            {cart.map(item => {
+              return (
+                <div key={`cartItem-${item.id}`}>
+                  <div style={style.photo}></div>
 
-                <div  style={style.informationContainer}>
-                  <div>
-                    <h3 style={{margin:'0px'}}>{item.object.title}</h3>
-                    <h6 style={{margin:'0px', color:'#444'}}>{item.size}</h6>
+                  <div style={style.informationContainer}>
+                    <div>
+                      <h3 style={{ margin: '0px' }}>{item.object.title}</h3>
+                      <h6 style={{ margin: '0px', color: '#444' }}>{item.size}</h6>
+                    </div>
+
+                    <div>
+                      <h1>${item.object.price}</h1>
+                    </div>
                   </div>
 
                   <div>
-                    <h1>${item.object.price}</h1>
+                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
                   </div>
                 </div>
-
-                <div>
-                  <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
-                </div>
-              </div>
-            )
-          })}
+              )
+            })}
           </div>
           <div>
+            <Header as='h1' textAlign='center'>Total: ${total}</Header>
             <Button style={style.button}><Link to='purchase-record' style={{ color: 'white' }}>Checkout</Link></Button>
           </div>
         </div>
@@ -113,34 +126,34 @@ const style = {
   header: {
     margin: '0px'
   },
-  itemsContainer:{
-    margin:'2% 15%',
+  itemsContainer: {
+    margin: '2% 15%',
   },
-  cartContainer:{
-    display:'flex',
-    margin:'0px',
-    alignItems:'stretch',
-    justifyContent:'space-between',
-    flexWrap:'wrap',
+  cartContainer: {
+    display: 'flex',
+    margin: '0px',
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
     marginBottom: '5%'
   },
-  photo:{
+  photo: {
     width: '200px',
     height: '200px',
     backgroundColor: 'whitesmoke',
     borderRadius: '20px',
-    boxShadow:'0px 3px 10px #cccccc'
+    boxShadow: '0px 3px 10px #cccccc'
   },
-  informationContainer:{
-    display:'flex',
-    justifyContent:'space-between',
-    marginTop:'5%'
+  informationContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '5%'
   },
-  removeButton:{
-    width:'100%',
-    backgroundColor:'whitesmoke',
-    color:'red',
-    marginTop:'2%'
+  removeButton: {
+    width: '100%',
+    backgroundColor: 'whitesmoke',
+    color: 'red',
+    marginTop: '2%'
   }
 }
 
