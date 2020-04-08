@@ -1,82 +1,78 @@
 import React, { Component } from "react";
-import { Header, Table, Button, Modal } from "semantic-ui-react";
+import { Header, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
-import RenderProduct from "./RenderProduct";
-import RenderCategories from "./RenderCategories";
+import RenderCategories from "./AdminPanelComponents/RenderCategories";
 import CategoryForm from "./Forms/CategoryForm";
-import CategorySelector from "./Forms/CategorySelector";
+import CategorySelector from "./Selectors/CategorySelector";
 
 export default class AdminPanel extends Component {
-  state = { products: [], categories: [], openForm: false, load: true, category: []};
+  state = {
+    products: [],
+    categories: [],
+    openForm: false,
+    load: true,
+    category: "All Categories"
+  };
 
-  // componentDidMount() {
-  //   if (this.state.products === 0) {
-  //     this.setState({ products: ["No Products "] });
-  //   } else if (this.state.products.length === 0) {
-  //     this.getProducts();
-  //     // this.putProductsInCategories()
-  //   } else {
-  //     console.log("No Products Found");
-  //   }
-  // }
-
-  componentDidMount() {
-    this.getProducts()
+  componentWillMount() {
+    this.getCategories(categories);
+    this.getProducts();
+    
   }
 
-  // putProductsInCategories = () => {
-  //   const tShirts = [];
-  //   const hoodies = [];
-  //   const hats = [];
-  //   const stickers = [];
-  //   this.state.products.forEach(product => {
-  //     if (product.category === "T-Shirts") {
-  //       tShirts.push(product);
-  //     } else if (product.category === "Hoodies") {
-  //       hoodies.push(product);
-  //     } else if (product.category === "Hats") {
-  //       hats.push(product);
-  //     } else {
-  //       stickers.push(product);
-  //     }
-  //   });
-  //   this.setState({
-  //     categories: [
-  //       { name: "T-Shirts", products: tShirts },
-  //       { name: "Hoodies", products: hoodies },
-  //       { name: "Hats", products: hats },
-  //       { name: "Stickers", products: stickers }
-  //     ]
-  //   });
-  // };
-  // getCategories(){
-  //   categories
-  // }
+  getCategories(categories){
+    this.setState({
+      categories
+    })
+  }
 
   getProducts() {
     axios
       .get("/api/products")
       .then(res => {
-        this.setState({ 
-          products: res.data, 
-          load: false });
+        this.setState({
+          products: res.data,
+          load: false
+        });
       })
       .catch(e => console.log(e));
   }
-  getCategories(){
-
+  deleteProduct = id => {
+    const products = this.state.products.filter(product => {
+      if (product.id != id) {
+        return product;
+      }
+    });
+    axios
+      .delete(`/api/products/${id}`)
+      .then(res => this.searchUpdate(products))
+      .catch(error => console.log(error));
+  };
+  updateProducts = category => {
+    if(category === undefined){
+      category = this.state.category
+    }
+    axios.get("/api/products").then(res => {
+      if (category === "All Categories") {
+        this.setProducts(res.data, category)
+      } else {
+        const products = res.data.filter(product => {
+          return product.category === category;
+        });
+        this.setProducts(products, category)
+      }
+    });
+  };
+  setProducts = (products, category) =>{
+    this.setState({
+      products,
+      category
+    });
   }
-
-  // deleteCategory() {}
 
   toggleForm = () => {
     this.setState({ openForm: !this.state.openForm });
-  };
-
-  searchUpdate = products => {
-    console.log(products)
-    this.setState({ products });
   };
 
   render() {
@@ -87,15 +83,17 @@ export default class AdminPanel extends Component {
           Admin panel
         </Header>
         <CategorySelector
-          products={this.state.products}
+          products={products}
           getProducts={this.getProducts}
-          searchUpdate={this.searchUpdate}
+          getCategories={this.getCategories}
+          updateProducts={this.updateProducts}
+          categories={categories}
         />
-        <Button onClick={this.toggleForm}>New</Button>
+        <Button onClick={this.toggleForm}>New Product</Button>
         <Modal open={openForm}>
           <ProductForm
             toggleForm={this.toggleForm}
-            getProducts={this.getProducts}
+            updateProducts={this.updateProducts}
             openForm={openForm}
           />
         </Modal>
@@ -103,7 +101,8 @@ export default class AdminPanel extends Component {
         <RenderCategories
           toggleForm={this.toggleForm}
           categories={categories}
-          getProducts={this.getProducts}
+          updateProducts={this.updateProducts}
+          deleteProduct={this.deleteProduct}
           products={products}
           category={category}
           load={load}
@@ -112,3 +111,10 @@ export default class AdminPanel extends Component {
     );
   }
 }
+
+const categories = [
+  { name: "T-Shirts", image: "ksdlafjeilajsdfkljaeslfjel" },
+  { name: "Hoodies", image: "asdlkfjeliajsdlf;jelasjdfie" },
+  { name: "Hats", image: "asl;kfjel;ajsdf;ljaskldjfads" },
+  { name: "Stickers", image: "asldkjfeijasldkfje;ilasjkdfkja" }
+];

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Modal, Button, Icon } from "semantic-ui-react";
+import { Form, Modal} from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
 import AltImageForm from "./Product_AltImage_Form";

@@ -9,10 +9,20 @@ class RenderCategories extends Component {
     load: this.props.load
   };
 
+  notFoundMessage = ()=> (
+    <>
+    <div>Nothing Was Found!</div>
+    <br/>
+    <br/>
+    <div>Please Refresh your page or</div>
+    <div>create a product in this Category</div>
+    </>
+  )
+
   render(){
-    const { products, category, load } = this.props;
+    const {category, products, load } = this.props;
     if (products.length <= 0) {
-      return (<h2>{load ? "Loading" : "Please Pick a Category"}</h2>)
+      return (<h2>{load ? "Loading" : this.notFoundMessage()}</h2>)
     } else {
       return (
         <div key={category}>
@@ -29,6 +39,7 @@ class RenderCategories extends Component {
                     toggleForm={this.props.toggleForm}
                     getProducts={this.props.getProducts}
                     product={product}
+                    deleteProduct={this.props.deleteProduct}
                   />
                 </Table.Row>
               ))}

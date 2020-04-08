@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Modal, Select, Button, Icon } from "semantic-ui-react";
+import { Form, Modal, Button, Icon } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
 
 class CategoryForm extends Component {
