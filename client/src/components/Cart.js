@@ -3,9 +3,9 @@ import { getAllCartItems, deleteItemFromCart, putItemInCart } from '../modules/C
 import { Button, Segment, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-// var product1 = { title: 'hat', price:10 }
-// var product2 = { title: 'shirt' , price:10}
-// var product3 = { title: 'hoodie' , price:10}
+// var product1 = { title: 'Hat', price:20 }
+// var product2 = { title: 'Shirt' , price:10}
+// var product3 = { title: 'Hoodie' , price:30}
 // putItemInCart(product1, 'small', 1)
 // putItemInCart(product2, 'medium', 2)
 // putItemInCart(product3, 'large', 4)
@@ -50,7 +50,7 @@ class Cart extends React.Component {
           <div style={style.cartContainer}>
             {cart.map(item => {
               return (
-                <div key={`cartItem-${item.id}`}>
+                <div style={style.item} key={`cartItem-${item.id}`}>
                   <div style={style.photo}></div>
 
                   <div style={style.informationContainer}>
@@ -94,7 +94,7 @@ class Cart extends React.Component {
     return (
       <div>
         <div style={style.headerContainer}>
-          <Button style={style.headerButton}>Continue Shopping</Button>
+          <Button style={style.headerButton}><Link style={{color: 'rgba(255,255,255, 0.7)'}}to='/'>Continue Shopping</Link></Button>
           <h1 style={style.header}>My Cart</h1>
         </div>
         {this.renderCartItems()}
@@ -120,7 +120,6 @@ const style = {
   },
   headerButton: {
     backgroundColor: 'rgba(0,0,0, 0.13)',
-    color: 'rgba(255,255,255, 0.7)',
     fontSize: '12px',
   },
   header: {
@@ -154,6 +153,9 @@ const style = {
     backgroundColor: 'whitesmoke',
     color: 'red',
     marginTop: '2%'
+  },
+  item:{
+    marginBottom:'5%'
   }
 }
 
