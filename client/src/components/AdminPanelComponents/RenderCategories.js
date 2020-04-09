@@ -2,14 +2,9 @@ import React, { Component } from "react";
 import { Table } from "semantic-ui-react";
 import RenderProduct from "./RenderProduct";
 
-class RenderCategories extends Component {
-  state = {
-    products: this.props.products,
-    category: this.props.category,
-    load: this.props.load
-  };
+class RenderCategories extends Component{
 
-  notFoundMessage = ()=> (
+notFoundMessage = ()=> (
     <>
     <div>Nothing Was Found!</div>
     <br/>
@@ -19,12 +14,12 @@ class RenderCategories extends Component {
     </>
   )
 
+
   //need way to sperate products if there are all products
   //working on this later
-
   render(){
     const {category, products, load } = this.props;
-    if (products.length <= 0) {
+    if (products === 'undefined') {
       return (<h2>{load ? "Loading" : this.notFoundMessage()}</h2>)
     } else {
       return (

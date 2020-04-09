@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Select } from "semantic-ui-react";
+import Axios from "axios";
 // import axios from "axios";
 
 class CategorySelector extends Component {
@@ -7,22 +8,21 @@ class CategorySelector extends Component {
     CategoryOptions: [],
     value: "All Catagories",
   };
-  componentDidMount() {
-    const {categories} = this.props
+  componentDidMount = async() => {
+    const res = await Axios.get('/api/categories')
+    const categories = res.data
     const CategoryOptions = Array.from(
       new Set(categories.map(catagory => catagory.name))
     ).map((cat, i) => {
-      return { value: cat, key: i + 1, text: cat };
+      return { value: cat, key: i, text: cat };
     });
-    CategoryOptions.unshift(AllCategories)
-    this.setState({
-      CategoryOptions: CategoryOptions
-    })
+    this.setState({CategoryOptions})
   }
 
   handleChange = (e, {value}) =>{
     this.setState({ value })
-    this.props.updateProducts(value)
+    this.props.setCategory(value)
+    this.props.updateProducts()
   }
 
   render(){
@@ -43,4 +43,3 @@ class CategorySelector extends Component {
 }
 
 export default CategorySelector
-const AllCategories = {value: "All Categories", key: 0, text: "All Categories"}

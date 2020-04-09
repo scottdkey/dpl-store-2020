@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { Form, Modal, Button, Icon } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
+import Axios from "axios";
 
 class CategoryForm extends Component {
-  constructor(props) {
-    super(props);
-    const categories = this.props.categories;
-    this.state = {
-      categories,
+state = {
+      categories: [],
       editing: false
     };
-    this.handleEvent = this.handleEvent.bind(this);
+
+  componentDidMount = async() =>{
+    const res = await Axios.get('/api/categories')
+    this.setState({
+      categories: res.data
+    })
   }
 
   handleEvent() {
