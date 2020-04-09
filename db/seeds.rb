@@ -8,49 +8,55 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do
-  Product.create(
-    title: Faker::Appliance.equipment,
-    description: Faker::Movies::HarryPotter.quote,
-    price: Faker::Number.decimal(l_digits: 2),
-    has_size: true,
-    sizes: {small:1,medium:1,large:1},
-    category: 'T-Shirts',
-    main_image: Faker::Avatar.image,
-  )
-end
-5.times do
-  Product.create(
-    title: Faker::Appliance.equipment,
-    description: Faker::Movies::HarryPotter.quote,
-    price: Faker::Number.decimal(l_digits: 2),
-    has_size: true,
-    sizes: {small:1,medium:1,large:1},
-    category: 'Hoodies',
-    main_image: Faker::Avatar.image,
-  )
-end
-5.times do
-  Product.create(
-    title: Faker::Appliance.equipment,
-    description: Faker::Movies::HarryPotter.quote,
-    price: Faker::Number.decimal(l_digits: 2),
-    has_size: true,
-    sizes: {small:1,medium:1,large:1},
-    category: 'Hats',
-    main_image: Faker::Avatar.image,
-  )
-end
-5.times do
-  Product.create(
-    title: Faker::Appliance.equipment,
-    description: Faker::Movies::HarryPotter.quote,
-    price: Faker::Number.decimal(l_digits: 2),
-    has_size: true,
-    sizes: {small:1,medium:1,large:1},
-    category: 'Stickers',
-    main_image: Faker::Avatar.image,
-  )
-end
+  category1 = Category.create(name:'T-Shirts')
+  5.times do
+    Product.create(
+      category_id: category1.id,
+      title: Faker::Appliance.equipment,
+      description: Faker::Movies::HarryPotter.quote,
+      price: Faker::Number.decimal(l_digits: 2),
+      has_size: true,
+      sizes: {small:1,medium:1,large:1},
+      main_image: Faker::Avatar.image(set: "set4"),
+    )
+  end
+  
+  category2 = Category.create(name:'Hoodies')
+  5.times do
+    Product.create(
+      category_id: category2.id,
+      title: Faker::Appliance.equipment,
+      description: Faker::Movies::HarryPotter.quote,
+      price: Faker::Number.decimal(l_digits: 2),
+      has_size: true,
+      sizes: {small:1,medium:1,large:1},
+      main_image: Faker::Avatar.image(set: "set4"),
+    )
+  end
+  category3 = Category.create(name:'Hats')
+  5.times do
+    Product.create(
+      category_id: category3.id,
+      title: Faker::Appliance.equipment,
+      description: Faker::Movies::HarryPotter.quote,
+      price: Faker::Number.decimal(l_digits: 2),
+      has_size: true,
+      sizes: {small:1,medium:1,large:1},
+      main_image: Faker::Avatar.image(set: "set4"),
+    )
+  end
+  category4 = Category.create(name:'Stickers')
+  5.times do
+    Product.create(
+      category_id: category4.id,
+      title: Faker::Appliance.equipment,
+      description: Faker::Movies::HarryPotter.quote,
+      price: Faker::Number.decimal(l_digits: 2),
+      has_size: true,
+      sizes: {small:1,medium:1,large:1},
+      main_image: Faker::Avatar.image(set: "set4"),
+    )
+  end
+
 
 puts 'Products Seeded'

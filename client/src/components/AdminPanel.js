@@ -51,7 +51,8 @@ export default class AdminPanel extends Component {
     })
   }
 
-  getProducts() {
+
+  deleteProduct = (id, category_id) => {
     axios
       .get("/api/products")
       .then(res => {

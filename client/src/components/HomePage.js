@@ -1,13 +1,14 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
+import { Container, Grid, Header, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility, SearchCategory,} from 'semantic-ui-react';
 import TShirts from '../images/T-Shirts.jpg';
 import Hoodies from '../images/Hoodies.jpg';
 import Hats from '../images/Hat.jpg';
 import Stickers from '../images/Stickers.jpg';
 import Featured from '../images/blank.png';
 import { Link } from "react-router-dom";
+import Links from './Links';
 
 
 const getWidth = () => {
@@ -79,16 +80,16 @@ class DesktopContainer extends Component {
               secondary={!fixed}
               size='large'
             >
+
+
               <Container >
                 <Menu.Item as='a' active>
                   .SHOP
                 </Menu.Item>
                 <Menu.Item position='right'>
-                <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-                <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
-                <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
+                <Links />
                 <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
-                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                <Menu.Item as='a'><Link to='/cart'><Icon name="shopping cart" />Cart </Link></Menu.Item>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -134,9 +135,7 @@ class MobileContainer extends Component {
           <Menu.Item as='a' active>
             .Shop
           </Menu.Item>
-          <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-          <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
-          <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
+          <Links />
           <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
         </Sidebar>
 
@@ -231,14 +230,14 @@ const HomepageLayout = () => (
               <Header inverted as='h3' textAlign="center" content='DevPoint Labs' />
             </Grid.Column>
             <Grid.Column width={10}>
-              <p inverted textalign="centered">370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
+              <p>370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
     </Segment>
     <Segment inverted vertical textAlign="right" padding="15px">
-    <p textAlign="right">2020 DevPoint Labs Terms Policy</p>
+    <p>2020 DevPoint Labs Terms Policy</p>
     </Segment>
   </ResponsiveContainer>
 );
