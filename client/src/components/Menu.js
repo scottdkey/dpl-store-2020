@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Container, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import Beaker from "../images/logo_black.svg";
+import Links from '../components/SharedComponents/Links';
 
 
 const getWidth = () => {
@@ -56,9 +57,7 @@ class DesktopContainer extends Component {
                   <Image src={Beaker} size="tiny" className="filter-white"></Image>
                 </Menu.Item></Link>
                 <Menu.Item position='right'>
-                <Link to="/allmerchandise" ><Menu.Item>All Products</Menu.Item></Link>
-                <Link to="/tshirts" ><Menu.Item>T-Shirts</Menu.Item></Link>
-                <Link to="/hoodies" ><Menu.Item>Hoodies </Menu.Item></Link>
+                <Links />
                 <Menu.Item >More<Icon name="dropdown"/></Menu.Item>
                 <Link to="/cart"><Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item></Link> 
                 </Menu.Item>
@@ -105,9 +104,7 @@ class MobileContainer extends Component {
           <Menu.Item as='a' active>
             .Shop
           </Menu.Item>
-          <Link to="/allmerchandise" ><Menu.Item as='a'>All </Menu.Item></Link>
-          <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
-          <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
+          <Links />
           <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
         </Sidebar>
 
