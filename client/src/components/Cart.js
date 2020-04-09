@@ -19,7 +19,8 @@ import { Link } from 'react-router-dom'
 class Cart extends React.Component {
   state = {
     cart: [],
-    total: 0
+    total: 0,
+    pictureHeight: 0
   }
 
   deleteCartItem = (id) => {
@@ -29,7 +30,16 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.putItemsInCart()
+    window.addEventListener('resize', this.handleResize)
   }
+  handleResize=() =>{
+    this.setState({
+      pictureHeight: ((window.innerWidth)/5)
+    })
+  }
+
+  
+
 
   putItemsInCart() {
     let cart = getAllCartItems()
@@ -48,18 +58,18 @@ class Cart extends React.Component {
   }
 
   renderCartItems = () => {
-    const { cart, total } = this.state
+    const { cart, total ,pictureHeight} = this.state
     if (cart.length > 0) {
       return (
         <div style={style.itemsContainer}>
           <div style={style.cartContainer}>
             {cart.map(item => {
               let size = ''
-              if(item.size === 'No Size'){size =''}else{size = `${item.size}`}
+              if (item.size === 'No Size') { size = '' } else { size = `${item.size}` }
               return (
                 <div style={style.item} key={`cartItem-${item.id}`}>
 
-                  <div style={style.photoHolder}>
+                  <div style={{...style.photoHolder, height:pictureHeight}} ref={el => (this.container = el)}>
                     <div style={style.crop}>
                       <Image style={style.photo} src={`${item.object.main_image}`} />
                     </div>
@@ -172,11 +182,10 @@ const style = {
     display: 'inline-block',
     verticalAlign: 'top',
     width: '100%',
-    height:'250px',
     marginRight: '.5em',
     marginBottom: '.3em',
-    borderRadius:'20px',
-    overflow:'hidden',
+    borderRadius: '20px',
+    overflow: 'hidden',
     boxShadow: '0px 3px 10px #cccccc',
   },
   informationContainer: {
