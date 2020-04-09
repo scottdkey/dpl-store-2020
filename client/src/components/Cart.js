@@ -155,6 +155,7 @@ const style = {
   },
   itemsContainer: {
     margin: '3% 20%',
+    marginBottom:'15%'
   },
   cartContainer: {
     display: 'flex',
