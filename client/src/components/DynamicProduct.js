@@ -48,17 +48,3 @@ const DynamicProduct = ({category_id, product_id, match}) => {
 };
 
 export default DynamicProduct;
-
-// how we do the side by side pic and description
-{/* <Card>
-<Card.Header>
-  <Grid>
-    <Grid.Column width={8}>
-      This is where the Image Goes
-    </Grid.Column>
-    <Grid.Column width={8}>
-      This is where the details go
-    </Grid.Column>
-  </Grid>
-</Card.Header>
-</Card> */}

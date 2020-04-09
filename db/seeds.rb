@@ -53,7 +53,7 @@
       description: Faker::Movies::HarryPotter.quote,
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
-      sizes: {small:1,medium:1,large:1},
+      sizes: {no_size:3},
       main_image: Faker::Avatar.image(set: "set4"),
     )
   end
