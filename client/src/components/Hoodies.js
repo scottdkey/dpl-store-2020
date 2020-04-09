@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, } from 'semantic-ui-react';
 import axios from "axios";
+import Card from './SharedComponents/StyledCard'
  
 const Hoodies = () => {
  const [hoodies, setHoodies] = useState([]);
@@ -34,6 +35,7 @@ const Hoodies = () => {
  return (
    <>
    <h1>Hoodies<hr /></h1>
+   
    <Card.Group itemsPerRow={4}>
      {renderHoodies()}
    </Card.Group>

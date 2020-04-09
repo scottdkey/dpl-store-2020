@@ -21,19 +21,19 @@ const HomepageLayout = () => (
         <Header as='h3'>CATEGORIES</Header>
         <Grid.Row columns={4}>
           <Grid.Column>
-            <Link to="/tshirts" ><RoundedImage as={Image} size="medium" src={Featured} fluid /></Link>
+            <Link to="/categories/1/products" ><RoundedImage as={Image} size="medium" src={Featured} fluid /></Link>
             <h4 align="center">T Shirts</h4>
           </Grid.Column>
           <Grid.Column>
-            <Link to="/hoodies" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
+            <Link to="/categories/2/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
             <h4 align="center">Jackets & Hoodies </h4>
           </Grid.Column>
           <Grid.Column>
-            <Link to="/hats" > <RoundedImage as={Image} size="medium" src={Featured} /></Link>
+            <Link to="/categories/3/products" > <RoundedImage as={Image} size="medium" src={Featured} /></Link>
             <h4 align="center">Hats</h4>
           </Grid.Column>
           <Grid.Column>
-            <Link to="/stickers" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
+            <Link to="/categories/4/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
             <h4 align="center">Stickers</h4>
           </Grid.Column>
         </Grid.Row>

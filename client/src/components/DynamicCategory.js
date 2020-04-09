@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, } from "semantic-ui-react";
+import { Card, Image, Button, } from "semantic-ui-react";
 import axios from "axios";
 import { Link, } from "react-router-dom";
 
@@ -21,22 +21,22 @@ const DynamicCategory = ({category_id, match}) => {
       .get(`/api/categories/${cat_id}/products`)
       .then((res) => {
         setItems(res.data);
-        console.log(res.data);
       })
       .catch(console.log);
   }, []);
 
   const renderItems = () =>
     items.map((product) => (
-      <>
-      <Card key={product.id}>
-        <Image src={product.main_image} as={Link} to={{pathname:`/categories/${cat_id}/products/${product.id}`, product: product, }} />
+      <div key={product.id}>
+      <Image src={product.main_image} as={Link} to={{pathname:`/categories/${cat_id}/products/${product.id}`, state:{...product} }} />
+      <Card >
+        {/* <Image src={product.main_image} /> */}
         <Card.Content>
           <Card.Header>{product.title}</Card.Header>
           <Card.Meta>{"$" + product.price}</Card.Meta>
         </Card.Content>
       </Card>
-      </>
+      </div>
     ));
 
   return (

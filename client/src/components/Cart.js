@@ -54,7 +54,7 @@ class Cart extends React.Component {
     cart.forEach(item => {
       total += item.object.price
     })
-    this.setState({ total: total })
+    this.setState({ total: total.toFixed(2) })
   }
 
   renderCartItems = () => {
@@ -93,7 +93,7 @@ class Cart extends React.Component {
           </div>
 
           <div>
-            <Header as='h1' textAlign='center'>Total: ${total}.00</Header>
+            <Header as='h1' textAlign='center'>Total: ${total}</Header>
               <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
           </div>
         </div>
