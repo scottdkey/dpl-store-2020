@@ -59,7 +59,7 @@ class Cart extends React.Component {
 
                   <div style={style.photoHolder}>
                     <div style={style.crop}>
-                    <Image style={style.photo} src={`${item.object.main_image}`} />
+                      <Image style={style.photo} src={`${item.object.main_image}`} />
                     </div>
                   </div>
 
