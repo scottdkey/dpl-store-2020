@@ -10,6 +10,7 @@ export default class AdminProduct extends Component {
   constructor(props) {
     super(props);
     const product = this.props.product;
+    console.log(product)
     if (product === undefined) {
       this.state = {
         title: "",
