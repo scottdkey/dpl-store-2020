@@ -1,71 +1,52 @@
 import React, { Component } from "react";
-import { Header, Table, Button } from "semantic-ui-react";
+import { Header, Table, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
-import RenderProduct from "./RenderProduct";
+import RenderProduct from './RenderProduct'
 
 export default class AdminPanel extends Component {
-  state = { products: [], categories: [], showForm: false };
+  state = { products: [], categories: [], openForm: false };
 
   componentDidMount() {
     if (this.state.products.length === 0) {
-      this.getProducts();
+      this.getCategories();
     } else if (this.state.products[0] === "No Products Found") {
       console.log("No Products Found");
     }
   }
 
-  getProducts() {
-    axios
-      .get("/api/products")
-      .then((res) => {
-        if (res.data.length === 0) {
-          this.setState({ products: ["No Products "] });
-        } else {
-          this.setState({ products: res.data });
-          this.putProductsInCategories();
-        }
-      })
-      .catch((e) => console.log(e));
-  }
 
-  deleteProduct = (id) => {
+  deleteProduct = (id, category_id) => {
     axios
-      .delete(`/api/products/${id}`)
-      .then((res) => this.getProducts())
+      .delete(`/api/categories/${category_id}/products/${id}`)
+      .then((res) => {
+        this.setState({ categories: []})
+        this.getCategories()
+      })
       .catch((error) => console.log(error));
   };
 
-  putProductsInCategories = () => {
-    const tShirts = [];
-    const hoodies = [];
-    const hats = [];
-    const stickers = [];
-    this.state.products.forEach((product) => {
-      if (product.category === "T-Shirts") {
-        tShirts.push(product);
-      } else if (product.category === "Hoodies") {
-        hoodies.push(product);
-      } else if (product.category === "Hats") {
-        hats.push(product);
-      } else {
-        stickers.push(product);
-      }
-    });
-    this.setState({
-      categories: [
-        { name: "T-Shirts", products: tShirts },
-        { name: "Hoodies", products: hoodies },
-        { name: "Hats", products: hats },
-        { name: "Stickers", products: stickers },
-      ],
-    });
-  };
-  deleteCategory() {}
+  getCategories = () => {
+    axios
+      .get('/api/categories')
+      .then(res => {
+        res.data.forEach(category => {
+          axios.get(`/api/categories/${category.id}/products`)
+            .then(res => {
+              this.setState({
+                categories: [...this.state.categories, { category: category, products: res.data }]
+              })
+            })
+        })
+      })
+  }
+
+
+  deleteCategory() { }
 
   renderCategories = () =>
     this.state.categories.map((c) => {
-      const category = c.name;
+      const category = c.category.name;
       const products = c.products;
       return (
         <div key={category}>
@@ -99,25 +80,23 @@ export default class AdminPanel extends Component {
       );
     });
   toggleForm = () => {
-    this.setState({ showForm: !this.state.showForm });
+    this.setState({ openForm: !this.state.openForm });
   };
 
   render() {
-    const { showForm } = this.state;
+    const { openForm } = this.state;
     return (
       <>
         <Header as="h1" textAlign="center">
           Admin panel
         </Header>
-        <Button onClick={() => this.toggleForm()}>
-          {showForm ? "hide" : "new product"}
-        </Button>
-        {showForm ? (
+        <Button onClick={this.toggleForm}>New</Button>
+        <Modal open={openForm}>
           <ProductForm
             toggleForm={this.toggleForm}
             getProducts={this.getProducts}
           />
-        ) : null}
+        </Modal>
 
         {this.renderCategories()}
       </>

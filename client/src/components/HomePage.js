@@ -11,8 +11,8 @@ import LargeLogo from '../images/logo_black.svg'
 const HomepageLayout = () => (
     <>
     <div class="image-container">
-    {/* <Image src={BlueHeader} fluid /> */}
-    <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} />
+    <Image src={BlueHeader} fluid />
+    {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
     <div class="centered"><h1>DevPoint Store</h1>
     <h3>Find something you'll love.</h3></div> 
     </div>

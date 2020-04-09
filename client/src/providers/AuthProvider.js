@@ -22,7 +22,7 @@ export class AuthProvider extends React.Component {
     axios.post("/api/auth/sign_in", admin)
       .then( res => {
         this.setState({ admin: res.data.data, });
-        history.push("/");
+        history.push("/adminpanel");
       })
       .catch( res => {
         console.log(res);
@@ -33,7 +33,7 @@ export class AuthProvider extends React.Component {
     axios.delete("/api/auth/sign_out")
       .then( res => {
         this.setState({ admin: null, });
-        history.push('/login');
+        history.push('/');
       })
       .catch( res => {
         console.log(res);

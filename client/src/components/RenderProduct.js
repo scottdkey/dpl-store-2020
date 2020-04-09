@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import {Table, Icon} from 'semantic-ui-react'
+import {Table, Icon, Modal} from 'semantic-ui-react'
 import ProductForm from './Forms/ProductForm'
 
 class RenderProduct extends Component {
   state = { editing: false };
 
-  toggleEdit = () => {this.setState({editing: !this.state.editing });
+  toggleEdit = () => {
+    this.setState({editing: !this.state.editing });
+    console.log(this.props)
   };
 
   
@@ -15,20 +17,18 @@ class RenderProduct extends Component {
     const { product } = this.props;
     return (
       <>
-          <Table.Cell collapsing>{product.title}</Table.Cell>
-          <Table.Cell>{product.description}</Table.Cell>
-          <Table.Cell collapsing textAlign="right">
-            ${product.price}
-          </Table.Cell>
-          <Table.Cell onClick={() => this.toggleEdit()}>
-            <Icon name="edit outline" />
-          </Table.Cell>
-          <Table.Cell onClick={() => this.props.deleteProduct(product.id)}>
-            <Icon name="trash alternate" />
-          </Table.Cell>
-          <Table.Cell>
-            {editing ? <ProductForm {...this.props} toggleEdit={this.toggleEdit} /> : null}
-          </Table.Cell>
+        <Table.Cell collapsing>{product.title}</Table.Cell>
+        <Table.Cell>{product.description}</Table.Cell>
+        <Table.Cell collapsing textAlign="right">
+          ${product.price}
+        </Table.Cell>
+        <Table.Cell onClick={() => this.toggleEdit()}><Icon name="edit"/></Table.Cell>
+        <Table.Cell onClick={() => this.props.deleteProduct(product.id, product.category_id)}>
+          <Icon name="trash alternate" />
+        </Table.Cell>
+        <Modal open={editing}>
+          <ProductForm {...this.props} toggleEdit={this.toggleEdit} />
+        </Modal>
       </>
     );
   }
