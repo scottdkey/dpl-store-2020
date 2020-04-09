@@ -80,7 +80,7 @@ class Cart extends React.Component {
     else {
       return (
         <div style={style.itemsContainer}>
-          <Header as='h1' textAlign='center' style={{margin:'5%'}}>No items in cart</Header>
+          <Header as='h1' textAlign='center' style={{margin:'5%'}}>No Items In Cart</Header>
           <div>
             <Button disabled style={style.buttonDisabled}>Checkout</Button>
           </div>
