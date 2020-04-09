@@ -27,16 +27,16 @@ const DynamicCategory = ({category_id, match}) => {
 
   const renderItems = () =>
     items.map((product) => (
-      <>
+      <div key={product.id}>
       <Image src={product.main_image} as={Link} to={{pathname:`/categories/${cat_id}/products/${product.id}`, state:{...product} }} />
-      <Card key={product.id}>
+      <Card >
         {/* <Image src={product.main_image} /> */}
         <Card.Content>
           <Card.Header>{product.title}</Card.Header>
           <Card.Meta>{"$" + product.price}</Card.Meta>
         </Card.Content>
       </Card>
-      </>
+      </div>
     ));
 
   return (
