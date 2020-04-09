@@ -64,8 +64,8 @@ class Cart extends React.Component {
         <div style={style.itemsContainer}>
           <div style={style.cartContainer}>
             {cart.map(item => {
-              let size = ''
-              if (item.size === 'No Size') { size = '' } else { size = `${item.size}` }
+              let sizeColor = ''
+              if (item.size === 'No Size') { sizeColor = 'white' } else { sizeColor = '#777'}
               return (
                 <div style={style.item} key={`cartItem-${item.id}`}>
 
@@ -78,7 +78,7 @@ class Cart extends React.Component {
                   <div style={style.informationContainer}>
                     <div>
                       <h3 style={{ margin: '0px' }}>{item.object.title}</h3>
-                      <h6 style={{ margin: '0px', color: '#444' }}>{size}</h6>
+                      <h6 style={{ margin: '0px', color: sizeColor }}>{item.size}</h6>
                     </div>
                     <div>
                       <h1>${item.object.price}</h1>
