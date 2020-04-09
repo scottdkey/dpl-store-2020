@@ -114,12 +114,12 @@ const style = {
     backgroundColor: '#ededed',
     padding: '0',
     textAlign: 'center',
-    padding: '2%',
+    padding: '1%',
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px'
   },
   form: {
-    padding: '10px'
+    padding: '3%'
   },
   submitBtn: {
     color: 'white',
@@ -129,7 +129,7 @@ const style = {
     width:'100%'
   },
   cancelBtn: {
-    color: 'red',
+    color: '#990000',
     borderRadius: '30px',
     marginTop: '3%',
     width:'100%'
