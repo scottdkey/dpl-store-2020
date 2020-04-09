@@ -1,6 +1,6 @@
 import React from 'react'
 import { getAllCartItems, deleteItemFromCart, putItemInCart } from '../modules/CartFunctions'
-import { Button, Segment, Header } from 'semantic-ui-react'
+import { Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 // var product1 = { title: 'Hat', price:20 , id:13}
@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 // putItemInCart(product1, 'small', 1)
 // putItemInCart(product2, 'medium', 2)
 // putItemInCart(product3, 'large', 4)
-
 
 class Cart extends React.Component {
   state = {
@@ -21,6 +20,7 @@ class Cart extends React.Component {
     deleteItemFromCart(id)
     this.putItemsInCart()
   }
+
   componentDidMount() {
     this.putItemsInCart()
   }
@@ -51,18 +51,15 @@ class Cart extends React.Component {
               return (
                 <div style={style.item} key={`cartItem-${item.id}`}>
                   <div style={style.photo}></div>
-
                   <div style={style.informationContainer}>
                     <div>
                       <h3 style={{ margin: '0px' }}>{item.object.title}</h3>
                       <h6 style={{ margin: '0px', color: '#444' }}>{item.size}</h6>
                     </div>
-
                     <div>
                       <h1>${item.object.price}</h1>
                     </div>
                   </div>
-
                   <div>
                     <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
                   </div>
@@ -70,6 +67,7 @@ class Cart extends React.Component {
               )
             })}
           </div>
+
           <div>
             <Header as='h1' textAlign='center'>Total: ${total}</Header>
             <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
@@ -89,7 +87,6 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { cart } = this.state
     return (
       <div>
         <div style={style.headerContainer}>

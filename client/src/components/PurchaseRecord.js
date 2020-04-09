@@ -17,17 +17,17 @@ class PurchaseRecord extends React.Component {
     state: '',
     zip_code: '',
     fufilled: false,
-    products: [],
     validEmail: false,
     total: 0,
     showForm: true,
   }
-  // t.integer "quantity"
-  // t.string "size_choice"
-  // t.bigint "purchase_records_id", null: false
-  // t.bigint "product_id", null: false
 
-  // /api/products/:product_id/purchase_records/:purchase_record_id/purchase_products(.:format)
+  handleChange = (e, { name, value }) => {
+    this.setState({ ...this.state, [name]: value });
+    if (name === 'email_address') {
+      this.emailChange(value)
+    }
+  };
 
   handleSubmit = () => {
     if (this.state.validEmail === true) {
@@ -44,10 +44,8 @@ class PurchaseRecord extends React.Component {
     let cart = getAllCartItems()
     cart.forEach(item => {
       axios.post(`/api/purchase_records/${id}/purchase_products`,{quantity:item.quantity, size_choice:item.size, product_id:item.object.id})
-      .then(res=> {
-        this.setState({showForm:false})
-      }
-        ).catch(e=> console.log(e))
+      .then(res=> {this.setState({showForm:false})})
+      .catch(e=> console.log(e))
     })
   }
 
@@ -62,7 +60,6 @@ class PurchaseRecord extends React.Component {
     cart.forEach(item => {
       total += item.object.price
     })
-  
     this.setState({total: total})
   }
 
@@ -92,14 +89,6 @@ class PurchaseRecord extends React.Component {
     )
   }
 
-
-  handleChange = (e, { name, value }) => {
-    this.setState({ ...this.state, [name]: value });
-    if (name === 'email_address') {
-      this.emailChange(value)
-    }
-  };
-
   renderCompleted = () => {
     return(
       <div style={{...style.itemsContainer, padding:'3%'}}>
@@ -109,12 +98,9 @@ class PurchaseRecord extends React.Component {
     )
   }
 
-
   render() {
     const { email_address, first_name, last_name, address_one, address_two, city, state, zip_code, showForm } = this.state
-    if(this.state.total === 0){
-      this.addTotal()
-    }
+    if(this.state.total === 0){this.addTotal()}
     
     return (
       <>
