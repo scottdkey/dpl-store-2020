@@ -38,7 +38,7 @@ class Cart extends React.Component {
     })
   }
 
-  
+
 
 
   putItemsInCart() {
@@ -69,7 +69,7 @@ class Cart extends React.Component {
               return (
                 <div style={style.item} key={`cartItem-${item.id}`}>
 
-                  <div style={{...style.photoHolder, height:pictureHeight}} ref={el => (this.container = el)}>
+                  <div style={{...style.photoHolder, height:pictureHeight}} >
                     <div style={style.crop}>
                       <Image style={style.photo} src={`${item.object.main_image}`} />
                     </div>
@@ -94,7 +94,7 @@ class Cart extends React.Component {
 
           <div>
             <Header as='h1' textAlign='center'>Total: ${total}.00</Header>
-            <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
+              <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
           </div>
         </div>
       )

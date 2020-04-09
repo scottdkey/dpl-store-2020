@@ -105,7 +105,7 @@ class PurchaseRecord extends React.Component {
     return (
       <>
         <div style={style.headerContainer}>
-          <Link to='/'><Button style={style.headerButton}>Continue Shopping</Button></Link>
+          <Link to='/cart'><Button style={style.headerButton}>Back To Cart</Button></Link>
           <h1 style={style.header}>Checkout</h1>
         </div>
         <div style={style.purchaseContainer}>
