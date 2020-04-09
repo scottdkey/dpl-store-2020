@@ -11,10 +11,11 @@ import Products from './components/Products';
 import DynamicCategory from './components/DynamicCategory';
 import DynamicProduct from './components/DynamicProduct';
 import Links from './components/Links';
+import Cart from './components/Cart'
 
 const App = () => (
     <FetchAdmin>
-      <Container>
+      <div>
         <Switch>
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
@@ -24,9 +25,11 @@ const App = () => (
           <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
           <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
           <Route exact path='/links' component={Links} />
+          <Route exact path='/cart' component={Cart} />
         </Switch>
-      </Container>
+      </div>
     </FetchAdmin>
 );
+
 
 export default App;

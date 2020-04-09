@@ -18,11 +18,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :purchase_products
+      resources :purchase_records do
+        resources :purchase_products
+      end
   end
 
-  namespace :api do
-    resources :purchase_records
-    resources :purchase_products
-  end
 end
