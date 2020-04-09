@@ -11,15 +11,20 @@ const Footer = () => (
       <Grid>
         <Grid.Column width={9}>
           <Grid.Row></Grid.Row>
-          <Grid.Row><h4>Any Questions? </h4></Grid.Row>
-          <Grid.Row><h1>We're here to help.</h1> </Grid.Row>
+          <Grid.Row><h4 style={{marginTop: "100px", marginLeft: "300px"}}>Any Questions? </h4></Grid.Row>
+          <Grid.Row><h1 style={{marginLeft: "300px"}}>We're here to help.</h1> </Grid.Row>
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
           <div class = "ui vertical segment">
             <Segment floated='right' className= "segment-size" color='white'><Icon name="mail"/>contact@devpointlabs.com</Segment>
-            <Segment floated='right' className= "segment-size" color='white'><Image src={Pin} size="mini" float="left"/>370 South 300 East
-            <br/>Salt Lake City, Utah
-            <br/>84111</Segment>
+            <Segment floated='right' className= "segment-size" color='white' style={{display: "flex", alignItems: "center"}} >
+              <Image src={Pin} size="mini" inline style={{height: "16px", width: "16px"}}/>
+              <div>
+                370 South 300 East<br />
+                Salt Lake City, Utah<br/>
+                84111
+              </div>
+            </Segment>
             <Segment floated='right' className= "segment-size" color='white'><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
             </div>
         </Grid.Column>

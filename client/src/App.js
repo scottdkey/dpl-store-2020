@@ -23,7 +23,6 @@ const App = () => (
   <Fragment>
     <FetchAdmin>
     <Navbar /> 
-    {/* <MainHeader/>  */} */}
      <Container fluid>
         <Switch>
           <Route exact path="/" component={Home} />

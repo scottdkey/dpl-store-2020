@@ -33,7 +33,10 @@ class DesktopContainer extends Component {
     const { fixed } = this.state
 
     return (
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
+      <Responsive 
+        getWidth={getWidth} 
+        minWidth={Responsive.onlyTablet.minWidth}
+        >
         <Visibility
           once={false}
           onBottomPassed={this.showFixedMenu}
@@ -44,18 +47,20 @@ class DesktopContainer extends Component {
               inverted={!fixed}
               pointing={!fixed}
               secondary={!fixed}
+              inverted 
               size='large'
+              style={{margin: 0, border: "none"}}
             >
-              <Container >
-                <Menu.Item as='a' active>
+              <Container fluid >
+              <Link to="/" ><Menu.Item>
                   <Image src={Beaker} size="tiny" className="filter-white"></Image>
-                </Menu.Item>
+                </Menu.Item></Link>
                 <Menu.Item position='right'>
-                <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-                <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
-                <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
-                <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
-                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                <Link to="/allmerchandise" ><Menu.Item>All Products</Menu.Item></Link>
+                <Link to="/tshirts" ><Menu.Item>T-Shirts</Menu.Item></Link>
+                <Link to="/hoodies" ><Menu.Item>Hoodies </Menu.Item></Link>
+                <Menu.Item >More<Icon name="dropdown"/></Menu.Item>
+                <Menu.Item ><Icon name="shopping cart" inverted />Cart </Menu.Item>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -100,21 +105,21 @@ class MobileContainer extends Component {
           <Menu.Item as='a' active>
             .Shop
           </Menu.Item>
-          <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
+          <Link to="/allmerchandise" ><Menu.Item as='a'>All </Menu.Item></Link>
           <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
           <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
           <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened} >
-          <Segment
-            inverted
-            textAlign='center'
-            style={{ minHeight: 350, padding: '1em 0em' }}
-            vertical
-          >
-            <Container >
-              <Menu inverted pointing secondary size='large' >
+            <Container fluid >
+              <Menu 
+                className="dpl-blue" 
+                inverted 
+                pointing 
+                secondary 
+                size='large'
+                >
                 <Menu.Item onClick={this.handleToggle}>
                   <Icon name='sidebar' />
                 </Menu.Item>
@@ -124,10 +129,8 @@ class MobileContainer extends Component {
               </Menu>
             </Container>
             <HomepageHeading mobile />
-          </Segment>
-
           {children}
-        </Sidebar.Pusher>
+        </Sidebar.Pusher> 
       </Responsive>
     )
   }
