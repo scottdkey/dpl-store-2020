@@ -140,10 +140,10 @@ const style = {
     marginBottom: '5%'
   },
   photo: {
-    width: '200px',
+    maxWidth: '100%',
     height: '200px',
     backgroundColor: '#ededed',
-    borderRadius: '20px',
+    borderRadius: '10px',
     boxShadow: '0px 3px 10px #cccccc'
   },
   informationContainer: {
@@ -158,7 +158,8 @@ const style = {
     marginTop: '2%'
   },
   item:{
-    marginBottom:'5%'
+    marginBottom:'5%',
+    width:'30%',
   }
 }
 
