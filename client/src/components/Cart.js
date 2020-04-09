@@ -1,14 +1,20 @@
 import React from 'react'
 import { getAllCartItems, deleteItemFromCart, putItemInCart } from '../modules/CartFunctions'
-import { Button, Header } from 'semantic-ui-react'
+import { Button, Header, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-// var product1 = { title: 'Hat', price:20 , id:13}
-// var product2 = { title: 'Shirt' , price:10, id:4}
-// var product3 = { title: 'Hoodie' , price:30, id:10}
-// putItemInCart(product1, 'small', 1)
-// putItemInCart(product2, 'medium', 2)
-// putItemInCart(product3, 'large', 4)
+// var product1 = { title: 'Hat', price:20 , id:13, main_image:'https://i.pinimg.com/originals/33/cd/6b/33cd6bc701673e86aadc54e47d2d65ea.jpg'}
+// var product2 = { title: 'Shirt' , price:10, id:4, main_image:'https://ae01.alicdn.com/kf/HTB1ClpxqkKWBuNjy1zjq6AOypXa5/Liseaven-T-Shirt-Men-Cotton-T-Shirt-Full-Sleeve-tshirt-Men-Solid-Color-T-shirts-tops.jpg_640x640.jpg'}
+// var product3 = { title: 'Hoodie' , price:30, id:10, main_image:'https://shopproclub.com/media/catalog/product/cache/9537d43b9bc5b6785a205b28a3ee3fc1/1/4/143.NAVY.PT04.jpg'}
+// var product4 = { title: 'Hat2', price:20 , id:13, main_image:'https://assets.adidas.com/images/w_600,f_auto,q_auto:sensitive,fl_lossy/03a55f74c710453a8699a724016dad6c_9366/Saturday_Hat_Black_BH9346_04_standard.jpg'}
+// var product5 = { title: 'Sticker' , price:10, id:4, main_image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTukPyZC5Wmnjznx0hW_O6NoisZB9aGKH2Ko1U3-uTSoHrxvuJz&usqp=CAU'}
+// var product6 = { title: 'Hoodie2' , price:30, id:10, main_image:'https://gloimg.rglcdn.com/rosegal/pdm-product-pic/Clothing/2019/10/11/source-img/20191011215306_93452.jpg'}
+// putItemInCart(product1, 'Small', 1)
+// putItemInCart(product2, 'Medium', 2)
+// putItemInCart(product3, 'Large', 4)
+// putItemInCart(product4, 'Small', 1)
+// putItemInCart(product5, 'No Size', 2)
+// putItemInCart(product6, 'Large', 4)
 
 class Cart extends React.Component {
   state = {
@@ -38,7 +44,7 @@ class Cart extends React.Component {
     cart.forEach(item => {
       total += item.object.price
     })
-    this.setState({total: total})
+    this.setState({ total: total })
   }
 
   renderCartItems = () => {
@@ -50,7 +56,13 @@ class Cart extends React.Component {
             {cart.map(item => {
               return (
                 <div style={style.item} key={`cartItem-${item.id}`}>
-                  <div style={style.photo}></div>
+
+                  <div style={style.photoHolder}>
+                    <div style={style.crop}>
+                    <Image style={style.photo} src={`${item.object.main_image}`} />
+                    </div>
+                  </div>
+
                   <div style={style.informationContainer}>
                     <div>
                       <h3 style={{ margin: '0px' }}>{item.object.title}</h3>
@@ -78,7 +90,7 @@ class Cart extends React.Component {
     else {
       return (
         <div style={style.itemsContainer}>
-          <Header as='h1' textAlign='center' style={{margin:'5%'}}>No Items In Cart</Header>
+          <Header as='h1' textAlign='center' style={{ margin: '5%' }}>No Items In Cart</Header>
           <div>
             <Button disabled style={style.buttonDisabled}>Checkout</Button>
           </div>
@@ -90,7 +102,7 @@ class Cart extends React.Component {
     return (
       <div>
         <div style={style.headerContainer}>
-        <Link to='/'><Button style={style.headerButton}>Continue Shopping</Button></Link>
+          <Link to='/'><Button style={style.headerButton}>Continue Shopping</Button></Link>
           <h1 style={style.header}>My Cart</h1>
         </div>
         {this.renderCartItems()}
@@ -134,14 +146,36 @@ const style = {
     alignItems: 'stretch',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    marginBottom: '5%'
+    marginBottom: '1%'
   },
   photo: {
-    maxWidth: '100%',
-    height: '200px',
-    backgroundColor: '#ededed',
     borderRadius: '10px',
-    boxShadow: '0px 3px 10px #cccccc'
+    display: 'block',
+    minWidth: '100%',
+    minHeight: '100%',
+    margin: ' auto',
+    position: 'absolute',
+    top: '-100%',
+    right: '-100%',
+    bottom: '-100%',
+    left: '-100%',
+  },
+  crop: {
+    height: '100%',
+    overflow: 'hidden',
+    position: 'relative',
+  },
+  photoHolder: {
+    background: '#fff',
+    display: 'inline-block',
+    verticalAlign: 'top',
+    width: '100%',
+    height:'250px',
+    marginRight: '.5em',
+    marginBottom: '.3em',
+    borderRadius:'20px',
+    overflow:'hidden',
+    boxShadow: '0px 3px 10px #cccccc',
   },
   informationContainer: {
     display: 'flex',
@@ -154,9 +188,9 @@ const style = {
     color: 'red',
     marginTop: '2%'
   },
-  item:{
-    marginBottom:'5%',
-    width:'30%',
+  item: {
+    marginBottom: '5%',
+    width: '30%',
   }
 }
 
