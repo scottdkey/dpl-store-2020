@@ -1,8 +1,9 @@
 import React from 'react';
 import PurchaseRecordForm from './Forms/PurchaseRecordForm';
-import { Button } from 'semantic-ui-react';
-import { getAllCartItems } from '../modules/CartFunctions';
+import { Button, Header } from 'semantic-ui-react';
+import { getAllCartItems , clearCart} from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 class PurchaseRecord extends React.Component {
   state = {
@@ -14,26 +15,40 @@ class PurchaseRecord extends React.Component {
     address_two: '',
     city: '',
     state: '',
-    zip_code: 0,
+    zip_code: '',
     fufilled: false,
     products: [],
     validEmail: false,
     total: 0,
+    showForm: true,
   }
+  // t.integer "quantity"
+  // t.string "size_choice"
+  // t.bigint "purchase_records_id", null: false
+  // t.bigint "product_id", null: false
 
+  // /api/products/:product_id/purchase_records/:purchase_record_id/purchase_products(.:format)
 
   handleSubmit = () => {
-    console.log("submit clicked")
     if (this.state.validEmail === true) {
-      console.log('submitting')
-      // axios.post('/api/purchase_records', (this.state)).then(res => {
-      //   this.props.toggleForm();
-      //   this.props.getProducts()
-      // }).catch(err => {
-      //   console.log(err)
-      // })
+      axios.post('/api/purchase_records', (this.state)).then(res => {
+        this.createPurchaseProducts(res.data.id)
+      }).catch(err => {
+        console.log(err)
+      })
     }
     else { alert('invalid email') }
+  }
+
+  createPurchaseProducts = (id) => {
+    let cart = getAllCartItems()
+    cart.forEach(item => {
+      axios.post(`/api/purchase_records/${id}/purchase_products`,{quantity:item.quantity, size_choice:item.size, product_id:item.object.id})
+      .then(res=> {
+        this.setState({showForm:false})
+      }
+        ).catch(e=> console.log(e))
+    })
   }
 
   emailChange = (email) => {
@@ -47,6 +62,7 @@ class PurchaseRecord extends React.Component {
     cart.forEach(item => {
       total += item.object.price
     })
+  
     this.setState({total: total})
   }
 
@@ -84,6 +100,15 @@ class PurchaseRecord extends React.Component {
     }
   };
 
+  renderCompleted = () => {
+    return(
+      <div style={{...style.itemsContainer, padding:'3%'}}>
+        <Header as='h3' textAlign='center'>Thank You For Your Purchase</Header>
+        <Link to='/'><Button onClick={()=>clearCart()} style={style.doneBtn}>Done</Button></Link>
+      </div>
+    )
+  }
+
 
   render() {
     const { email_address, first_name, last_name, address_one, address_two, city, state, zip_code, showForm } = this.state
@@ -99,18 +124,20 @@ class PurchaseRecord extends React.Component {
         </div>
         <div style={style.purchaseContainer}>
           {this.getAllCartItems()}
-          <PurchaseRecordForm
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            email_address={email_address}
-            first_name={first_name}
-            last_name={last_name}
-            address_one={address_one}
-            address_two={address_two}
-            city={city}
-            state={state}
-            zip_code={zip_code}
-          />
+          {showForm ? 
+            <PurchaseRecordForm
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              email_address={email_address}
+              first_name={first_name}
+              last_name={last_name}
+              address_one={address_one}
+              address_two={address_two}
+              city={city}
+              state={state}
+              zip_code={zip_code}
+            />
+            : this.renderCompleted()}
           <div>
           </div>
         </div>
@@ -161,6 +188,13 @@ const style = {
   },
   total: {
     textAlign: 'right',
+  },
+  doneBtn:{
+    color: 'white',
+    backgroundColor: '#4901DB',
+    borderRadius: '30px',
+    width:'100%',
+    marginTop:'3%'
   }
 }
 

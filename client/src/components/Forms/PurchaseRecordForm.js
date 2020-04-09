@@ -17,6 +17,7 @@ class PurchaseRecordForm extends React.Component {
                 label="First Name"
                 name="first_name"
                 autoFocus
+                required
                 fluid
                 placeholder="First Name"
                 value={first_name}
@@ -25,6 +26,7 @@ class PurchaseRecordForm extends React.Component {
               <Form.Input
                 label="Last Name"
                 name="last_name"
+                required
                 fluid
                 placeholder="Last Name"
                 value={last_name}
@@ -34,6 +36,7 @@ class PurchaseRecordForm extends React.Component {
             <Form.Input
               label="Email"
               type='email'
+              required
               name="email_address"
               placeholder="Email"
               value={email_address}
@@ -43,6 +46,7 @@ class PurchaseRecordForm extends React.Component {
             <Form.Input
               label="Address Line 1"
               name="address_one"
+              required
               placeholder="Address Line 1"
               value={address_one}
               fluid
@@ -61,6 +65,7 @@ class PurchaseRecordForm extends React.Component {
             <Form.Input
               label="City"
               name="city"
+              required
               placeholder="City"
               value={city}
               onChange={this.props.handleChange}
@@ -69,12 +74,14 @@ class PurchaseRecordForm extends React.Component {
               label="State"
               name="state"
               placeholder="State"
+              required
               value={state}
               onChange={this.props.handleChange}
             />
             <Form.Input
               label="Zip Code"
               name="zip_code"
+              required
               placeholder="Zip Code"
               value={zip_code}
               onChange={this.props.handleChange}
@@ -117,7 +124,7 @@ const style = {
     marginTop:'3%'
   },
   cancelBtn:{
-    color: '#d40808',
+    color: 'red',
     borderRadius: '30px',
     marginTop:'3%',
     width:'45%'

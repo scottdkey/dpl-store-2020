@@ -30,7 +30,14 @@ export const deleteItemFromCart = (id) => {
 
 
 export const getAllCartItems = () => {
-  return JSON.parse(localStorage.getItem('cart'))
+  if(localStorage.cart=== undefined){
+    return([])
+  }
+  return (JSON.parse(localStorage.getItem('cart')))
+}
+
+export const clearCart = () => {
+  localStorage.clear()
 }
 
 
