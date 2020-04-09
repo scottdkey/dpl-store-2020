@@ -19,7 +19,8 @@ import { Link } from 'react-router-dom'
 class Cart extends React.Component {
   state = {
     cart: [],
-    total: 0
+    total: 0,
+    pictureHeight: ((window.innerWidth)/5.5)
   }
 
   deleteCartItem = (id) => {
@@ -29,7 +30,16 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.putItemsInCart()
+    window.addEventListener('resize', this.handleResize)
   }
+  handleResize=() =>{
+    this.setState({
+      pictureHeight: ((window.innerWidth)/5.5)
+    })
+  }
+
+
+
 
   putItemsInCart() {
     let cart = getAllCartItems()
@@ -48,18 +58,18 @@ class Cart extends React.Component {
   }
 
   renderCartItems = () => {
-    const { cart, total } = this.state
+    const { cart, total ,pictureHeight} = this.state
     if (cart.length > 0) {
       return (
         <div style={style.itemsContainer}>
           <div style={style.cartContainer}>
             {cart.map(item => {
-              let size = ''
-              if(item.size === 'No Size'){size =''}else{size = `${item.size}`}
+              let sizeColor = ''
+              if (item.size === 'No Size') { sizeColor = 'white' } else { sizeColor = '#777'}
               return (
                 <div style={style.item} key={`cartItem-${item.id}`}>
 
-                  <div style={style.photoHolder}>
+                  <div style={{...style.photoHolder, height:pictureHeight}} >
                     <div style={style.crop}>
                       <Image style={style.photo} src={`${item.object.main_image}`} />
                     </div>
@@ -68,7 +78,7 @@ class Cart extends React.Component {
                   <div style={style.informationContainer}>
                     <div>
                       <h3 style={{ margin: '0px' }}>{item.object.title}</h3>
-                      <h6 style={{ margin: '0px', color: '#444' }}>{size}</h6>
+                      <h6 style={{ margin: '0px', color: sizeColor }}>{item.size}</h6>
                     </div>
                     <div>
                       <h1>${item.object.price}</h1>
@@ -83,8 +93,8 @@ class Cart extends React.Component {
           </div>
 
           <div>
-            <Header as='h1' textAlign='center'>Total: ${total}</Header>
-            <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
+            <Header as='h1' textAlign='center'>Total: ${total}.00</Header>
+              <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
           </div>
         </div>
       )
@@ -140,18 +150,18 @@ const style = {
     margin: '0px'
   },
   itemsContainer: {
-    margin: '2% 15%',
+    margin: '2% 20%',
   },
   cartContainer: {
     display: 'flex',
     margin: '0px',
     alignItems: 'stretch',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     flexWrap: 'wrap',
     marginBottom: '1%'
   },
   photo: {
-    borderRadius: '10px',
+    // borderRadius: '10px',
     display: 'block',
     minWidth: '100%',
     minHeight: '100%',
@@ -172,11 +182,10 @@ const style = {
     display: 'inline-block',
     verticalAlign: 'top',
     width: '100%',
-    height:'250px',
     marginRight: '.5em',
     marginBottom: '.3em',
-    borderRadius:'20px',
-    overflow:'hidden',
+    borderRadius: '5px',
+    overflow: 'hidden',
     boxShadow: '0px 3px 10px #cccccc',
   },
   informationContainer: {
@@ -187,12 +196,12 @@ const style = {
   removeButton: {
     width: '100%',
     backgroundColor: 'whitesmoke',
-    color: 'red',
+    color: '#990000',
     marginTop: '2%'
   },
   item: {
-    marginBottom: '5%',
     width: '30%',
+    margin:'1%'
   }
 }
 
