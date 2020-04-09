@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Table, Header, Card, Tab, Image  } from 'semantic-ui-react';
-import Navbar from './Menu';
-import Footer from './Footer';
+import { Table, Header, Card, Tab, Image, Container  } from 'semantic-ui-react';
+import BlueHeader from '../images/BlueHeader.svg';
 
 export default class Products extends Component {
   state = { products: [], categories: [] }
@@ -79,12 +78,18 @@ export default class Products extends Component {
     }
     return (
           <>
-            <Navbar/>
-            <Header as="h1" textAlign="center">
-              All Merchandise
-        </Header>
+            <div class="image-container">
+            <Image src={BlueHeader} fluid />
+            <div class="centered"><h1>All Merchandise</h1>
+            <h3>Find something you''ll love.</h3></div> 
+            </div>
+            <Container>
             {this.renderCategories()}
             <br/> 
+            <div align="center">
+            <button class="ui button" style={{align:"center"}}>See More</button></div>
+            <br />
+            </Container>
            
           </>
     );

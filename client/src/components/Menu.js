@@ -1,25 +1,157 @@
-import React from 'react';
-import { Menu, Icon, Dropdown, } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Container, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
+import { Link } from "react-router-dom";
+import Beaker from "../images/logo_black.svg";
 
 
-const Navbar = () => (
+const getWidth = () => {
+  const isSSR = typeof window === 'undefined'
 
-  <Menu borderless inverted color="purple" >
-    <Link to="/" ><Menu.Item active>.SHOP</Menu.Item></Link>
-    <Menu.Item position='right'></Menu.Item>
-    <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
-    <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
-    <Link to="/hats" ><Menu.Item as='a'>Hats</Menu.Item></Link>
-    <Dropdown text='More' pointing className='link item'>
-      <Dropdown.Menu>
-        <Dropdown.Item as='a' href='/tshirts'>Tshirts</Dropdown.Item>
-        <Dropdown.Item as='a' href='/stickers'>Stickers</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-    <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>      
-      </Menu >
-  
+  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
+}
+
+const HomepageHeading = ({ mobile }) => (
+  <Container text >
+   
+    
+  </Container>
 )
 
-export default Navbar; 
+HomepageHeading.propTypes = {
+  mobile: PropTypes.bool,
+}
+
+class DesktopContainer extends Component {
+  state = {}
+
+  hideFixedMenu = () => this.setState({ fixed: false })
+  showFixedMenu = () => this.setState({ fixed: true })
+
+  render() {
+    const { children } = this.props
+    const { fixed } = this.state
+
+    return (
+      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
+        <Visibility
+          once={false}
+          onBottomPassed={this.showFixedMenu}
+          onBottomPassedReverse={this.hideFixedMenu}
+        >
+            <Menu className="dpl-blue"
+              fixed={fixed ? 'top' : null}
+              inverted={!fixed}
+              pointing={!fixed}
+              secondary={!fixed}
+              size='large'
+            >
+              <Container >
+                <Menu.Item as='a' active>
+                  <Image src={Beaker} size="tiny" className="filter-white"></Image>
+                </Menu.Item>
+                <Menu.Item position='right'>
+                <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
+                <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
+                <Link to="/hoodies" ><Menu.Item as='a'>Hoodies </Menu.Item></Link>
+                <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
+                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                </Menu.Item>
+              </Container>
+            </Menu>
+            <HomepageHeading />
+        </Visibility>
+
+        {children}
+      </Responsive >
+    )
+  }
+}
+
+DesktopContainer.propTypes = {
+  children: PropTypes.node,
+}
+
+class MobileContainer extends Component {
+  state = {}
+
+  handleSidebarHide = () => this.setState({ sidebarOpened: false })
+
+  handleToggle = () => this.setState({ sidebarOpened: true })
+
+  render() {
+    const { children } = this.props
+    const { sidebarOpened } = this.state
+
+    return (
+      <Responsive 
+        as={Sidebar.Pushable}
+        getWidth={getWidth}
+        maxWidth={Responsive.onlyMobile.maxWidth}
+      >
+        <Sidebar 
+          as={Menu}
+          animation='push'
+          inverted className="dpl-blue"
+          onHide={this.handleSidebarHide}
+          vertical
+          visible={sidebarOpened}
+        >
+          <Menu.Item as='a' active>
+            .Shop
+          </Menu.Item>
+          <Link to="/allmerchandise" ><Menu.Item as='a'>All Products</Menu.Item></Link>
+          <Link to="/tshirts" ><Menu.Item as='a'>T-Shirts</Menu.Item></Link>
+          <Link to="/hoodies" ><Menu.Item as='a'>Hoodies</Menu.Item></Link>
+          <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
+        </Sidebar>
+
+        <Sidebar.Pusher dimmed={sidebarOpened} >
+          <Segment
+            inverted
+            textAlign='center'
+            style={{ minHeight: 350, padding: '1em 0em' }}
+            vertical
+          >
+            <Container >
+              <Menu inverted pointing secondary size='large' >
+                <Menu.Item onClick={this.handleToggle}>
+                  <Icon name='sidebar' />
+                </Menu.Item>
+                <Menu.Item position='right'>
+                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                </Menu.Item>
+              </Menu>
+            </Container>
+            <HomepageHeading mobile />
+          </Segment>
+
+          {children}
+        </Sidebar.Pusher>
+      </Responsive>
+    )
+  }
+}
+
+MobileContainer.propTypes = {
+  children: PropTypes.node,
+}
+
+const ResponsiveContainer = ({ children }) => (
+  <div>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+)
+
+ResponsiveContainer.propTypes = {
+  children: PropTypes.node,
+}
+
+const HomepageLayout = () => (
+  <ResponsiveContainer >
+    
+  </ResponsiveContainer>
+);
+
+export default HomepageLayout;

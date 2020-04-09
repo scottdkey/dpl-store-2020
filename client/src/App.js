@@ -1,4 +1,5 @@
 import React, { Fragment, } from 'react';
+import './App.css';
 import Login from './components/Login';
 import { Switch, Route, } from 'react-router-dom';
 import { Container, Menu, Header, } from "semantic-ui-react";
@@ -21,9 +22,9 @@ import MainHeader from './components/Header';
 const App = () => (
   <Fragment>
     <FetchAdmin>
-      {/* <Navbar/> 
-    <MainHeader/>  */}
-     <Container>
+    <Navbar /> 
+    {/* <MainHeader/>  */} */}
+     <Container fluid>
         <Switch>
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />

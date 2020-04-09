@@ -7,7 +7,7 @@ import Pin from '../images/Pin.svg';
 const Footer = () => (
   
   <>
-    <StyledFooter as={Segment} inverted color="purple"  >
+    <StyledFooter as={Segment} inverted className="dpl-blue" >
       <Grid>
         <Grid.Column width={9}>
           <Grid.Row></Grid.Row>
@@ -15,30 +15,23 @@ const Footer = () => (
           <Grid.Row><h1>We're here to help.</h1> </Grid.Row>
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
-            <Segment floated='right' color='white'><Icon name="mail"/>contact@devpointlabs.com</Segment>
-            <Segment floated='right' color='white'><Image src={Pin} size="mini" float="left"/>370 South 300 East
+          <div class = "ui vertical segment">
+            <Segment floated='right' className= "segment-size" color='white'><Icon name="mail"/>contact@devpointlabs.com</Segment>
+            <Segment floated='right' className= "segment-size" color='white'><Image src={Pin} size="mini" float="left"/>370 South 300 East
             <br/>Salt Lake City, Utah
             <br/>84111</Segment>
-            <Segment floated='right' color='white'><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
+            <Segment floated='right' className= "segment-size" color='white'><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
+            </div>
         </Grid.Column>
       </Grid>  
     </StyledFooter>
-    <StickyFooter as={Segment} inverted color="purple">
-    <p><Image align="left" size="small" src={Logo} class="filter-white"></Image>2020 DevPoint Labs Terms Policy</p>
-    </StickyFooter>
+    <Segment inverted className="dpl-blue" align="right">
+    <p><Image align="left" size="small" src={Logo} className="filter-white"></Image>2020 DevPoint Labs Terms Policy</p>
+    </Segment>
     </>
 );
 
-const StickyFooter = styled.div `{
-  position: ;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background: 6E54A3;
-  color: white;
-  text-align: center;
-}
-`;
+
 const StyledFooter= styled.div` {
   position: relative;
   z-index: 1;

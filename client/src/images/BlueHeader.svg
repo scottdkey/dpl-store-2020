@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="807px" viewBox="0 0 1440 807" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>BlueHeader</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,746.868809 L0,0 L1440,0 L1440,746.868809 L829,746.868809 L829,746.868809 C815.624798,746.868809 793.134207,753.883026 761.528229,767.911459 L760.567682,768.33871 C734.592393,779.916937 704.916025,779.887858 678.963477,768.258749 C647.139691,753.998789 624.485199,746.868809 611,746.868809 L0,746.868809 Z" id="path-1"></path>
+        <filter x="-2.4%" y="-3.2%" width="104.9%" height="109.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.28997309   0 0 0 0 0.191481756   0 0 0 0 0.490743886  0 0 0 0.207359047 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home">
+            <g id="BlueHeader">
+                <g id="Header">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#4901DB" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="Icons/Large/LineArrowDown" transform="translate(698.000000, 730.365209)" fill="#FFFFFF">
+                    <g id="Icons/Raw/LineArrowDown">
+                        <g id="Group">
+                            <path d="M39.5435148,10.453541 C38.9339055,9.84969601 37.9446868,9.84876928 37.3337493,10.4513014 L21.1048437,26.4605681 C20.4955469,27.0627912 19.504375,27.062714 18.8939844,26.4594096 L2.66625072,10.4513014 C2.05539137,9.84869205 1.06617266,9.84969601 0.456485183,10.453541 C-0.153046042,11.0573859 -0.152030417,12.0353228 0.458750808,12.6378549 L16.6853908,28.644882 C17.5995313,29.5483712 18.7999219,30 20.0004687,30 C21.2003125,30 22.4003905,29.5485257 23.3133592,28.6459632 L39.5412492,12.6378549 C40.1520304,12.0353228 40.153046,11.0573859 39.5435148,10.453541 Z" id="Path"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
