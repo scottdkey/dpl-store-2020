@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, } from 'semantic-ui-react';
 import Products from './Products';
 import axios from "axios";
-
+import Card from './SharedComponents/StyledCard'
+ 
 const Hoodies = () => {
   const [hoodies, setHoodies] = useState([]);
   
