@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Modal} from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
-import AltImageForm from "./Product_AltImage_Form";
+import ImageForm from "./Product_ImageForm";
 // import CategoryForm from "./CategoryForm";
 // import axios from 'axios'
 
@@ -17,7 +17,7 @@ export default class AdminProduct extends Component {
         price: 0.0,
         category: "",
         main_image: "",
-        alt_image: [],
+        alt_image: {},
         sizes: "",
         // numAltImages: [],
       };
@@ -34,6 +34,8 @@ export default class AdminProduct extends Component {
     }
   }
 
+
+
   handleSubmit = () => {
     if (this.props.product === undefined) {
       axios
@@ -47,8 +49,9 @@ export default class AdminProduct extends Component {
           console.log(err);
         });
     } else {
+      console.log(this.props.product)
       axios
-        .put(`/api/products/${this.props.product.id}`, this.state)
+        .put(`/api/categories/${this.props.product.category_id}/products/${this.props.product.id}`, this.state)
         .then((res) => {
           this.props.toggleForm();
           this.props.getProducts();
@@ -116,16 +119,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-
-            <Form.Input
-              label="Main Image"
-              name="main_image"
-              placeholder="Main Image"
-              value={main_image}
-              onChange={this.handleChange}
-              required
-            />
-            <AltImageForm alt_image={alt_image}/>
+            <ImageForm alt_image={alt_image} main_image={main_image} />
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
           <Form.Button color="red" onClick={this.props.toggleForm}>
