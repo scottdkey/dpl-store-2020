@@ -77,7 +77,7 @@ class PurchaseRecord extends React.Component {
             <div key={`product-${product.id}`} style={style.item}>
               <div style={{ margin: '5px' }}>
                 <h4 style={{ margin: '0px' }}>{product.object.title}</h4>
-                <h6 style={{ margin: '0px' }}>{product.size}</h6>
+                <h6 style={{ margin: '0px', color:'#777' }}>{product.size}</h6>
               </div>
               <div style={{ marginTop: '15px' }}>
                 <h3>{`$${product.object.price}`}</h3>
