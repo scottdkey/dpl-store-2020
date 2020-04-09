@@ -230,11 +230,7 @@ const HomepageLayout = () => (
               <Header inverted as='h3' textAlign="center" content='DevPoint Labs' />
             </Grid.Column>
             <Grid.Column width={10}>
-<<<<<<< HEAD
               <p inverted='true' textalign="centered">370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
-=======
-              <p>370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
->>>>>>> 61efdf72a62dd20de455a58eb5a090e3f32810af
             </Grid.Column>
           </Grid.Row>
         </Grid>

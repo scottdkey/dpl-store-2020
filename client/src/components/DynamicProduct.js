@@ -1,6 +1,8 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
-import { Card, Grid, } from 'semantic-ui-react';
+import { Card, Grid, Button, } from 'semantic-ui-react';
+import { putItemInCart } from '../modules/CartFunctions';
+import { Link } from 'react-router-dom';
 
 
 const DynamicProduct = ({category_id, product_id, match}) => {
@@ -8,12 +10,12 @@ const DynamicProduct = ({category_id, product_id, match}) => {
 
   useEffect( () => {
     const cat_id = match.params.category_id
-    const prod_id = match.params.product_id
+    const prod_id = match.params.id
     axios
       .get(`/api/categories/${cat_id}/products/${prod_id}`)
       .then( (res) => {
         setProduct(res.data);
-        console.log(res.data);
+        console.log(res);
       })
       .catch(console.log);
   }, []);
@@ -22,7 +24,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
     return(
       <>
       <h1>{product.title}</h1>
-      <Card>
+      <Card key={product.id}>
       <Card.Header>
         <Grid>
           <Grid.Column width={8}>
@@ -38,6 +40,8 @@ const DynamicProduct = ({category_id, product_id, match}) => {
             sizeDropdown component
             button onClick to add to cart */}
             This is where the details go
+            <Button as={Link} to="/cart" style={style.button} content="Add to Cart" className="pillButton" onClick={() => putItemInCart(product)} />
+            {console.log(product)}
           </Grid.Column>
         </Grid>
       </Card.Header>
@@ -47,6 +51,15 @@ const DynamicProduct = ({category_id, product_id, match}) => {
 };
 
 export default DynamicProduct;
+
+const style= {
+  button: {
+    color: 'white',
+    backgroundColor: '#4901DB',
+    borderRadius: '30px',
+  },
+}
+
 
 // how we do the side by side pic and description
 {/* <Card>
