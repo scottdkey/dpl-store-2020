@@ -1,51 +1,40 @@
-import React, { Component, useState, useEffect } from 'react';
-import axios from 'axios';
-import { Table, Header, Card, Tab, Image } from 'semantic-ui-react';
-import Tshirts from './Tshirts';
-import Hoodies from './Hoodies';
-import Hats from './Hats';
-import Stickers from './Stickers';
+import React, { Component, } from "react";
+import axios from "axios";
+import { Card, } from "semantic-ui-react";
+import DynamicCategory from './DynamicCategory';
 
-export default function Products() {
-  const [ categories, setCategories ] = useState({tshirts:[],hoodies:[],hats:[],stickers:[]})
+export default class Products extends Component {
+  state = { categories: []}
 
-  useEffect(() => {
+  componentDidMount() {
+      this.getCategories();
+  }
+
+  getCategories = () => {
     axios
       .get('/api/categories')
       .then(res => {
-        putProductsInCategories(res.data);
+        this.setState({categories:res.data})
       })
-      .catch (e => console.log(e))}, []);
+  }
 
-  const putProductsInCategories = (products) => {
-    const tshirts = [];
-    const hoodies = [];
-    const hats = [];
-    const stickers = [];
-    
-    products.map( (product) => {
-      if (product.category === "T-Shirts") {
-        tshirts.push(product);
-      } else if (product.category === "Hoodies") {
-        hoodies.push(product);
-      } else if (product.category === "Hats") {
-        hats.push(product);
-      } else {
-        stickers.push(product);
-      }
+  renderCategories = () =>
+    this.state.categories.map((c) => {
+      const category = c.name;
+      console.log(c)
+      return (
+        <Card.Group key={category} >
+          <DynamicCategory category_id={c.id} />
+        </Card.Group>
+      );
     });
-    setCategories({ tshirts, hoodies, hats, stickers})
-  };
 
-  return(
+  render(){
+    return(
       <>
-        <Header as="h1" textAlign="center">
-          All Merchandise
-        </Header>
-        <Tshirts />
-        <Hoodies />
-        <Hats />
-        <Stickers />
+      All Merchandise
+      {this.state.categories.length === 0 ? "No Products" : this.renderCategories()}
       </>
-        )
-}
+    )
+  }
+};
