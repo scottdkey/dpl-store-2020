@@ -89,7 +89,7 @@ class DesktopContainer extends Component {
                 <Menu.Item position='right'>
                 <Links />
                 <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
-                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                <Menu.Item as='a'><Link to='/cart'><Icon name="shopping cart" />Cart </Link></Menu.Item>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -230,14 +230,18 @@ const HomepageLayout = () => (
               <Header inverted as='h3' textAlign="center" content='DevPoint Labs' />
             </Grid.Column>
             <Grid.Column width={10}>
+<<<<<<< HEAD
               <p inverted='true' textalign="centered">370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
+=======
+              <p>370 S. 300 E. SLC, Utah 84111 / 801-448-7240 / contact@devpointlabs.com</p>
+>>>>>>> 61efdf72a62dd20de455a58eb5a090e3f32810af
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
     </Segment>
     <Segment inverted vertical textAlign="right" padding="15px">
-    <p textAlign="right">2020 DevPoint Labs Terms Policy</p>
+    <p>2020 DevPoint Labs Terms Policy</p>
     </Segment>
   </ResponsiveContainer>
 );
