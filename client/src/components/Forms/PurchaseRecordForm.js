@@ -114,7 +114,7 @@ const style = {
     backgroundColor: '#ededed',
     padding: '0',
     textAlign: 'center',
-    padding: '2%',
+    padding: '1%',
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px'
   },
