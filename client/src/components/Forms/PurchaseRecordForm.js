@@ -119,7 +119,7 @@ const style = {
     borderTopRightRadius: '10px'
   },
   form: {
-    padding: '10px'
+    padding: '3%'
   },
   submitBtn: {
     color: 'white',
