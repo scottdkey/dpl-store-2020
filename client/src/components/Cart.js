@@ -92,9 +92,9 @@ class Cart extends React.Component {
             })}
           </div>
 
-          <div>
+          <div style={{textAlign:'center'}}>
             <Header as='h1' textAlign='center'>Total: ${total}.00</Header>
-              <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
+              <Link to='purchase-record' style={{color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
           </div>
         </div>
       )
@@ -128,7 +128,7 @@ const style = {
     color: 'white',
     backgroundColor: '#4901DB',
     borderRadius: '30px',
-    width: '100%',
+    width: '200%',
   },
   buttonDisabled: {
     borderRadius: '30px',
@@ -150,7 +150,7 @@ const style = {
     margin: '0px'
   },
   itemsContainer: {
-    margin: '2% 20%',
+    margin: '3% 20%',
   },
   cartContainer: {
     display: 'flex',
