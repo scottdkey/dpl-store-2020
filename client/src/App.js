@@ -15,7 +15,7 @@ import Cart from './components/Cart'
 
 const App = () => (
     <FetchAdmin>
-      <Container>
+      <div>
         <Switch>
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
@@ -27,7 +27,7 @@ const App = () => (
           <Route exact path='/links' component={Links} />
           <Route exact path='/cart' component={Cart} />
         </Switch>
-      </Container>
+      </div>
     </FetchAdmin>
 );
 

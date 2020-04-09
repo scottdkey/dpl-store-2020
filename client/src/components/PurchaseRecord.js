@@ -1,8 +1,8 @@
 import React from 'react';
 import PurchaseRecordForm from './Forms/PurchaseRecordForm';
 import { Button } from 'semantic-ui-react';
-import {getAllCartItems} from '../modules/CartFunctions';
-import { useParams } from 'react-router-dom';
+import { getAllCartItems } from '../modules/CartFunctions';
+import { Link } from 'react-router-dom';
 
 class PurchaseRecord extends React.Component {
   state = {
@@ -17,7 +17,6 @@ class PurchaseRecord extends React.Component {
     zip_code: 0,
     fufilled: false,
     products: [],
-    showForm: false,
     validEmail: false,
     total: 0,
   }
@@ -33,58 +32,50 @@ class PurchaseRecord extends React.Component {
       // }).catch(err => {
       //   console.log(err)
       // })
-    } 
+    }
     else { alert('invalid email') }
   }
-
-  getUserInfo = () => { this.setState({ showForm: true }) }
 
   emailChange = (email) => {
     //need to work on this part
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email)) { this.setState({ validEmail: true, }) }
   }
-  addTotalOfProductWithQuantity = (quantity, price) => {
-    let total = quantity * price
-    this.changeTotal(total)
-    return (
-      <h3>${total}</h3>
-    )
+  addTotal = () => {
+    let cart = getAllCartItems()
+    let total = 0
+    cart.forEach(item => {
+      total += item.object.price
+    })
+    this.setState({total: total})
   }
 
-  changeTotal = (num) => {
-    const {total} = this.state
-    this.setState({
-      total: total + num
-    })
-  }
 
   getAllCartItems = () => {
     let cart = getAllCartItems()
-    if(cart === null || cart.length === 0){
-      return(
-        <div>
-        <div>No Items In Your Cart</div>
-        <Button disabled onClick={this.getUserInfo}>Continue</Button>
-        </div>
-      )
-    }
     return (
-      <div>
-        {cart.map((product)=> (
-          <div key={`product-${product.id}`}>
-            {product.object.title}
-            {`$${product.object.price}`}
-            {product.size}
+      <div style={style.itemsContainer}>
+        <div style={style.itemsHeader}><h3>Your Items </h3></div>
+        <div style={style.itemsContent}>
+          {cart.map((product) => (
+            <div key={`product-${product.id}`} style={style.item}>
+              <div style={{ margin: '5px' }}>
+                <h4 style={{ margin: '0px' }}>{product.object.title}</h4>
+                <h6 style={{ margin: '0px' }}>{product.size}</h6>
+              </div>
+              <div style={{ marginTop: '15px' }}>
+                <h3>{`$${product.object.price}`}</h3>
+              </div>
             </div>
-        ))}
-        <div><h3>Total: ${this.state.total}</h3></div>
-        <Button onClick={this.getUserInfo}>Continue</Button>
-        
+          ))}
+          <div style={style.total}>
+            <h2>Total: ${this.state.total}</h2>
+          </div>
+        </div>
       </div>
     )
   }
-  
+
 
   handleChange = (e, { name, value }) => {
     this.setState({ ...this.state, [name]: value });
@@ -93,34 +84,83 @@ class PurchaseRecord extends React.Component {
     }
   };
 
-  verifyCart = () => {
-    return (
-      <div>
-        {this.getAllCartItems()}
-      </div>
-    )
-  }
-
 
   render() {
     const { email_address, first_name, last_name, address_one, address_two, city, state, zip_code, showForm } = this.state
+    if(this.state.total === 0){
+      this.addTotal()
+    }
+    
     return (
-      <div>
-        {showForm ? <PurchaseRecordForm
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          email_address={email_address}
-          first_name={first_name}
-          last_name={last_name}
-          address_one={address_one}
-          address_two={address_two}
-          city={city}
-          state={state}
-          zip_code={zip_code}
-        />
-          : this.verifyCart()}
-      </div>
+      <>
+        <div style={style.headerContainer}>
+          <Link to='/'><Button style={style.headerButton}>Continue Shopping</Button></Link>
+          <h1 style={style.header}>Checkout</h1>
+        </div>
+        <div style={style.purchaseContainer}>
+          {this.getAllCartItems()}
+          <PurchaseRecordForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            email_address={email_address}
+            first_name={first_name}
+            last_name={last_name}
+            address_one={address_one}
+            address_two={address_two}
+            city={city}
+            state={state}
+            zip_code={zip_code}
+          />
+          <div>
+          </div>
+        </div>
+      </>
     )
+  }
+}
+
+const style = {
+  purchaseContainer: {
+    margin: '0 15%'
+  },
+  itemsContainer: {
+    borderRadius: '10px',
+    boxShadow: '5px 5px 20px #d1d1d1',
+    marginTop: '3%',
+  },
+  itemsHeader: {
+    padding: '0',
+    textAlign: 'center',
+    padding: '1%',
+    borderTopLeftRadius: '10px',
+    borderTopRightRadius: '10px',
+    backgroundColor: '#e3e3e3',
+  },
+  headerContainer: {
+    backgroundColor: '#4901DB',
+    color: 'white',
+    padding: '20px 50px',
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  headerButton: {
+    backgroundColor: 'rgba(0,0,0, 0.13)',
+    fontSize: '12px',
+    color: 'rgba(255,255,255, 0.7)'
+  },
+  header: {
+    margin: '0px'
+  },
+  itemsContent: {
+    padding: '3%'
+  },
+  item: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    borderBottom: '1px solid grey'
+  },
+  total: {
+    textAlign: 'right',
   }
 }
 
