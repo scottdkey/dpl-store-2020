@@ -20,7 +20,7 @@ class Cart extends React.Component {
   state = {
     cart: [],
     total: 0,
-    pictureHeight: 0
+    pictureHeight: ((window.innerWidth)/5.5)
   }
 
   deleteCartItem = (id) => {
@@ -34,7 +34,7 @@ class Cart extends React.Component {
   }
   handleResize=() =>{
     this.setState({
-      pictureHeight: ((window.innerWidth)/5)
+      pictureHeight: ((window.innerWidth)/5.5)
     })
   }
 
@@ -93,7 +93,7 @@ class Cart extends React.Component {
           </div>
 
           <div>
-            <Header as='h1' textAlign='center'>Total: ${total}</Header>
+            <Header as='h1' textAlign='center'>Total: ${total}.00</Header>
             <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
           </div>
         </div>
@@ -150,18 +150,18 @@ const style = {
     margin: '0px'
   },
   itemsContainer: {
-    margin: '2% 15%',
+    margin: '2% 20%',
   },
   cartContainer: {
     display: 'flex',
     margin: '0px',
     alignItems: 'stretch',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     flexWrap: 'wrap',
     marginBottom: '1%'
   },
   photo: {
-    borderRadius: '10px',
+    // borderRadius: '10px',
     display: 'block',
     minWidth: '100%',
     minHeight: '100%',
@@ -184,7 +184,7 @@ const style = {
     width: '100%',
     marginRight: '.5em',
     marginBottom: '.3em',
-    borderRadius: '20px',
+    borderRadius: '5px',
     overflow: 'hidden',
     boxShadow: '0px 3px 10px #cccccc',
   },
@@ -196,12 +196,12 @@ const style = {
   removeButton: {
     width: '100%',
     backgroundColor: 'whitesmoke',
-    color: 'red',
+    color: '#990000',
     marginTop: '2%'
   },
   item: {
-    marginBottom: '5%',
     width: '30%',
+    margin:'1%'
   }
 }
 

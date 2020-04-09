@@ -129,7 +129,7 @@ const style = {
     width:'100%'
   },
   cancelBtn: {
-    color: 'red',
+    color: '#990000',
     borderRadius: '30px',
     marginTop: '3%',
     width:'100%'
