@@ -77,7 +77,8 @@ const DynamicProduct = ({category_id, product_id, match}) => {
             
           </Grid.Column>
           <Grid.Column width={7}>
-            <Grid.Row><h1>{product.title}</h1></Grid.Row>
+            
+            <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
             <br/>
             <Grid.Row><h4>{product.description}</h4></Grid.Row>
             <br/> 

@@ -16,7 +16,7 @@ const HomepageLayout = () => (
     <div class="centered"><h1>DevPoint Store</h1>
     <h3>Find something you'll love.</h3></div> 
     </div>
-    <Container> 
+    <Container style={{marginBottom: '20%'}}> 
       <Grid >
         <Header as='h3'>CATEGORIES</Header>
         <Grid.Row columns={4}>
