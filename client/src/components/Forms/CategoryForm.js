@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Modal, Button, Icon, FormButton } from "semantic-ui-react";
+import { Form, Modal, Button, } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 import { Image, CloudinaryContext } from "cloudinary-react";
@@ -20,11 +20,17 @@ class CategoryForm extends Component {
     const category = res.data.filter(
       category => category.name === this.props.category
     )[0];
-    this.setState({
-      name: category.name,
-      image: category.image,
-      id: category.id
-    });
+    if (category=== undefined){
+      console.log('error')
+    } else {
+          this.setState({
+            name: category.name,
+            image: category.image,
+            id: category.id
+          });
+
+    }
+
   };
 
   handleSubmit = e => {
@@ -89,7 +95,7 @@ class CategoryForm extends Component {
   render() {
     return (
       <>
-        <Modal trigger={<Button>Edit</Button>}>
+        <Modal trigger={<Button as="td">Edit</Button>}>
           {this.categoryFormat()}
         </Modal>
       </>

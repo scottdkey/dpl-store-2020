@@ -9,7 +9,8 @@ import ImageForm from "./Product_ImageForm";
 export default class AdminProduct extends Component {
   constructor(props) {
     super(props);
-    const product = this.props.product;
+    const {product}  = this.props;
+    this.getCategoryOptions()
     if (product === undefined) {
       this.state = {
         title: "",
@@ -17,46 +18,55 @@ export default class AdminProduct extends Component {
         price: 0.0,
         category: "",
         main_image: "",
-        alt_image: '',
-        sizes: "",
+        alt_image: [],
+        sizes: {},
+        options: []
       };
     } else {
       this.state = {
         title: product.title,
         description: product.description,
         price: product.price,
-        category: product.category,
+        category: product.category_id,
         main_image: product.main_image,
         sizes: product.sizes,
         alt_image: product.alt_image,
+        options: []
       };
     }
   }
 
-
+    getCategoryOptions = async() =>{
+    const res = await axios.get(`/api/categories/`)
+    const options = res.data.map( c => (
+      {key: c.name, text: c.name, value: c.id}
+    ))
+    this.setState({
+      options
+    })
+  }
 
 
 
   handleSubmit = () => {
+    const {title, description, price, category, main_image, alt_image, sizes} = this.state
+    const currentState = {title, description, price, main_image, alt_image, sizes}
     if (this.props.product === undefined) {
       axios
-        .post(`/api/products`, this.state)
+        .post(`/api/categories/${category}/products`, currentState)
         .then((res) => {
-                this.props.toggleForm();
+          this.props.toggleForm();
           this.props.getProducts();
-    
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
-      console.log(this.props.product)
       axios
-        .put(`/api/categories/${this.props.product.category_id}/products/${this.props.product.id}`, this.state)
+        .put(`/api/categories/${category}/products/${this.props.product.id}`, currentState)
         .then((res) => {
           this.props.toggleForm();
-          this.props.getProducts();
-
+          this.props.getProducts()
         })
         .catch((e) => {
           console.log(e);
@@ -78,7 +88,7 @@ export default class AdminProduct extends Component {
   };
 
   render() {
-    const { title, description, price, category, main_image, alt_image } = this.state;
+    const { title, description, price, category, main_image, alt_image, options } = this.state;
     return (
       <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
@@ -115,7 +125,7 @@ export default class AdminProduct extends Component {
               label="category"
               name="category"
               placeholder="category"
-              options={this.props.options}
+              options={options}
               value={category}
               onChange={this.handleChange}
               required

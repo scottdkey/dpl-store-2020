@@ -75,7 +75,7 @@ class ImageForm extends Component {
       <>
         {this.renderMainImage()}
         {/* {this.renderAltImage()} */}
-        <Form.Button as="div" onClick={this.addImage}>
+        <Form.Button onClick={this.addImage}>
           <Icon name="plus" />
         </Form.Button>
       </>

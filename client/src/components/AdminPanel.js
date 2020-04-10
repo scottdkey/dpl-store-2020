@@ -24,11 +24,11 @@ export default class AdminPanel extends Component {
   }
     getCategoryOptions = async() =>{
     const res = await axios.get(`/api/categories/`)
-    const options = res.data.map( c => (
+    const categoryOptions = res.data.map( c => (
       {key: c.name, text: c.name, value: c.id}
     ))
     this.setState({
-      categoryOptions: options
+      categoryOptions
     })
   }
 
@@ -99,10 +99,8 @@ export default class AdminPanel extends Component {
         <Modal open={openForm}>
           <ProductForm
             toggleForm={this.toggleForm}
-            updateProducts={this.updateProducts}
+            getProducts={this.getProducts}
             openForm={openForm}
-            options={categoryOptions}
-
           />
         </Modal>
         <RenderCategories
