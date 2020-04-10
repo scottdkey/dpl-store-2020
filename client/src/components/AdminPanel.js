@@ -3,7 +3,7 @@ import { Header, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderCategories from "./AdminPanelComponents/RenderCategories";
-import CategoryForm from "./Forms/CategoryForm";
+// import CategoryForm from "./Forms/CategoryForm";
 import CategorySelector from "./Selectors/CategorySelector";
 
 export default class AdminPanel extends Component {
@@ -12,7 +12,7 @@ export default class AdminPanel extends Component {
       categories: [],
       openForm: false,
       load: true,
-      category: "All Categories"
+      category: 'All Categories'
     };
 
   componentDidMount(){
@@ -91,7 +91,6 @@ export default class AdminPanel extends Component {
             openForm={openForm}
           />
         </Modal>
-        <CategoryForm categories={categories}/>
         <RenderCategories
           toggleForm={this.toggleForm}
           categories={categories}
