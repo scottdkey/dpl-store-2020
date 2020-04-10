@@ -17,9 +17,8 @@ export default class AdminProduct extends Component {
         price: 0.0,
         category: "",
         main_image: "",
-        alt_image: {},
+        alt_image: '',
         sizes: "",
-        // numAltImages: [],
       };
     } else {
       this.state = {
@@ -29,10 +28,12 @@ export default class AdminProduct extends Component {
         category: product.category,
         main_image: product.main_image,
         sizes: product.sizes,
-        alt_image: product.alt_image
+        alt_image: product.alt_image,
       };
     }
   }
+
+
 
 
 
@@ -114,7 +115,7 @@ export default class AdminProduct extends Component {
               label="category"
               name="category"
               placeholder="category"
-              options={options}
+              options={this.props.options}
               value={category}
               onChange={this.handleChange}
               required
@@ -130,11 +131,3 @@ export default class AdminProduct extends Component {
     );
   }
 }
-
-
-const options = [
-  { key: "t", text: "T-Shirts", value: "T-Shirts" },
-  { key: "ho", text: "Hoodies", value: "Hoodies" },
-  { key: "ha", text: "Hats", value: "Hats" },
-  { key: "s", text: "Stickers", value: "Stickers" }
-];

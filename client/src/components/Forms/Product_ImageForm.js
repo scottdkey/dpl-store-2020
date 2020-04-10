@@ -64,17 +64,17 @@ class ImageForm extends Component {
     this.imagesFormat(this.state.main_image,)
   )
 
-  renderAltImage = () => (
-  this.state.alt_image.map((image, index) => {
-      return this.imagesFormat(image.url, index);
-    })
-  )
+  // renderAltImage = () => (
+  // this.state.alt_image.map((image, index) => {
+  //     return this.imagesFormat(image.url, index);
+  //   })
+  // )
 
   render() {
     return (
       <>
         {this.renderMainImage()}
-        {this.renderAltImage()}
+        {/* {this.renderAltImage()} */}
         <Form.Button as="div" onClick={this.addImage}>
           <Icon name="plus" />
         </Form.Button>

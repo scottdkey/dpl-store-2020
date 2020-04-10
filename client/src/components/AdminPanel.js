@@ -12,12 +12,24 @@ export default class AdminPanel extends Component {
       categories: [],
       openForm: false,
       load: true,
-      category: 'All Categories'
+      category: 'All Categories',
+      categoryOptions: []
     };
 
   componentDidMount(){
     this.getCategories()
+    this.getCategoryOptions();
     this.getProducts()
+ 
+  }
+    getCategoryOptions = async() =>{
+    const res = await axios.get(`/api/categories/`)
+    const options = res.data.map( c => (
+      {key: c.name, text: c.name, value: c.id}
+    ))
+    this.setState({
+      categoryOptions: options
+    })
   }
 
 
@@ -69,7 +81,7 @@ export default class AdminPanel extends Component {
   };
 
   render() {
-    const { openForm, categories, load, products, category } = this.state;
+    const { openForm, categories, load, products, category, categoryOptions } = this.state;
     return (
       <>
         <Header as="h1" textAlign="center">
@@ -89,6 +101,8 @@ export default class AdminPanel extends Component {
             toggleForm={this.toggleForm}
             updateProducts={this.updateProducts}
             openForm={openForm}
+            options={categoryOptions}
+
           />
         </Modal>
         <RenderCategories
