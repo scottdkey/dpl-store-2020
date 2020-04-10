@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Image  } from "semantic-ui-react";
+import { Card, Image, Container  } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from "../images/BlueHeader.svg"
 
@@ -38,9 +38,14 @@ export default class Products extends Component {
             <h3>Find something you''ll love.</h3>
           </div>
         </div>
+        <Container>
+          <div style = {{justifyContent: 'space-between', alignContent: 'center', padding: '20px'}}>
         {this.state.categories.length === 0
           ? "No Products"
           : this.renderCategories()}
+          </div>
+          </Container>
+          <br/>
         <div align="center">
           <button class="ui button" style={{ align: "center" }}>
             See More
@@ -51,3 +56,4 @@ export default class Products extends Component {
     );
   }
 }
+

@@ -92,8 +92,9 @@ class Cart extends React.Component {
             })}
           </div>
 
-          <div>
+          <div style={style.itemsContainer}>
             <Header as='h1' textAlign='center'>Total: ${total}</Header>
+            
               <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
           </div>
         </div>
@@ -103,8 +104,8 @@ class Cart extends React.Component {
       return (
         <div style={style.itemsContainer}>
           <Header as='h1' textAlign='center' style={{ margin: '5%' }}>No Items In Cart</Header>
-          <div>
-            <Button disabled style={style.buttonDisabled}>Checkout</Button>
+          <div >
+            <Button disabled style={style.buttonDisabled} >Checkout</Button>
           </div>
         </div>)
     }
@@ -114,6 +115,7 @@ class Cart extends React.Component {
     return (
       <div>
         <div style={style.headerContainer}>
+
           <Link to='/'><Button style={style.headerButton}>Continue Shopping</Button></Link>
           <h1 style={style.header}>My Cart</h1>
         </div>
@@ -129,10 +131,12 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     width: '100%',
+    align: 'center',
   },
   buttonDisabled: {
     borderRadius: '30px',
     width: '100%',
+    align: 'center',
   },
   headerContainer: {
     backgroundColor: '#4901DB',
@@ -144,7 +148,8 @@ const style = {
   headerButton: {
     backgroundColor: 'rgba(0,0,0, 0.13)',
     fontSize: '12px',
-    color: 'rgba(255,255,255, 0.7)'
+    color: 'rgba(255,255,255, 0.7)',
+    align: 'center',
   },
   header: {
     margin: '0px'
