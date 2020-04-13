@@ -54,6 +54,7 @@ const StyledFooter= styled.div` {
     z-index: -1;
     border-top-right-radius: 25px;
   }
+
   &:before {
     top: 0;
     transform: skewY(-1deg);
@@ -67,6 +68,7 @@ const StyledFooter= styled.div` {
   }
 }
 `;
+
 
 
 export default Footer;
