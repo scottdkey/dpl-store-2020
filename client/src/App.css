@@ -38,8 +38,6 @@
   height: 2.5rem;            /* Footer height */
 }
 
-
-
 .button {
   display: block;
   max-width: 300px;
@@ -61,7 +59,7 @@
 }
 
 .dpl-blue {
-  background-color: #4901DB !important
+  background-color: #4901DB !important;
 }
 
 .segment-size {

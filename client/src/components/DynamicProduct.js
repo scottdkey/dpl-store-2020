@@ -66,14 +66,20 @@ const DynamicProduct = ({category_id, product_id, match}) => {
           <Link to='/'><Button style={style.headerButton}>Hats</Button></Link>
         </div>
       <Container>
-      <Card key={product.id} style= {style.card} >
+      <Card key={product.id} style= {style.card}>
       <Card.Header>
         <Grid >
-          <Grid.Column width={8}>   
-            <Image src={product.main_image} style= {style.roundedImage} />
-            {/* main_image
-            image.group itemsPerRow={4} all alt_images */}
+        <div align="center">
+          <Grid.Column width={8}  kvb>   
+            <Image src={Featured} style= {style.roundedImage} />
+            <Image.Group >
+              <Image style={style.altImage} src={Featured} />
+              <Image style={style.altImage} src={Featured} />
+              <Image style={style.altImage} src={Featured} />
+              <Image style={style.altImage} src={Featured} />
+          </Image.Group>
           </Grid.Column>
+          </div>
           <Grid.Column width={7}>
             <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
             <br/>
@@ -97,6 +103,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
                 </option>
               ))}
             </select> */}
+            <div>
             <Grid.Row>
             <Form style={{paddingRight: "40px"}} >
             <Form.Select 
@@ -109,12 +116,10 @@ const DynamicProduct = ({category_id, product_id, match}) => {
                 </Form>
                 </Grid.Row>
                 <br/> 
-            <Grid.Row fluid>
-            <Button fluid as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" onClick={() => putItemInCart(product, size, 1)} />
+            <Grid.Row >
+            <Button as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" onClick={() => putItemInCart(product, size, 1)} />
             </Grid.Row>
-            {console.log(product)}
-            {console.log(size)}
-           
+            </div>
           </Grid.Column>
         </Grid>
       </Card.Header>
@@ -135,16 +140,13 @@ const sizeSelection = [
 
 export default DynamicProduct;
 
-const buttonStyle= {
- 
-};
-
 const style = {
   button: {
     color: 'white',
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     padding: '20px',
+    width: '700px',
   },
   headerContainer: {
     backgroundColor: '#4901DB',
@@ -161,9 +163,9 @@ const style = {
     width: '100px',
   },
   roundedImage: {
-    borderRadius: '25px',
-    width: '400px',
-    height: '450px',
+    borderRadius: '50px',
+    width: '500px',
+    height: '500px',
     padding: '40px',
   },
   card: {
@@ -171,8 +173,17 @@ const style = {
     width: '1100px', 
     borderRadius: '12px',
     marginBottom: '20%',
+    marginTop: '-100px',
   },
   rounded: {
     borderRadius: '25px',
+    padding: '40px',
+  },
+  altImage: {
+    borderRadius: '20px',
+    height: '100px',
+    width: '100px',
+    marginTop: '-25px',
+    
   }
 };

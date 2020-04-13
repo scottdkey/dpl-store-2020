@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Container, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
+import { Container, Icon, Image, Menu, Responsive, Sidebar, Visibility,} from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import Beaker from "../images/logo_black.svg";
 import Links from '../components/SharedComponents/Links';
@@ -58,7 +58,7 @@ class DesktopContainer extends Component {
                 </Menu.Item></Link>
                 <Menu.Item position='right'>
                 <Links />
-                <Menu.Item >More<Icon name="dropdown"/></Menu.Item>
+                {/* <Menu.Item >More<Icon name="dropdown"/></Menu.Item> */}
                 <Link to="/cart"><Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item></Link> 
                 </Menu.Item>
               </Container>
@@ -101,10 +101,9 @@ class MobileContainer extends Component {
           vertical
           visible={sidebarOpened}
         >
-          <Menu.Item as='a' active>
-            .Shop
-          </Menu.Item>
-          <Links />
+          <Link to="/" ><Menu.Item>
+                  <Image src={Beaker} size="tiny" className="filter-white"></Image>
+                </Menu.Item></Link>
           <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
         </Sidebar>
 

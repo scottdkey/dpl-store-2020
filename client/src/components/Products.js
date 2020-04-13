@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Image, Container  } from "semantic-ui-react";
+import { Card, Image, Container, Grid  } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
-import BlueHeader from "../images/BlueHeader.svg"
+import BlueHeader from "../images/BlueHeader2.svg"
 
 export default class Products extends Component {
   state = { categories: [] };
@@ -39,15 +39,19 @@ export default class Products extends Component {
           </div>
         </div>
         <Container>
-          <div style = {{justifyContent: 'space-between', alignContent: 'center', padding: '20px'}}>
-        {this.state.categories.length === 0
-          ? "No Products"
-          : this.renderCategories()}
-          </div>
+          <Grid>
+            <Grid.Row columns={3}>
+              <Grid.Column>
+              {this.state.categories.length === 0
+              ? "No Products"
+              : this.renderCategories()}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
           </Container>
           <br/>
         <div align="center">
-          <button class="ui button" style={{ align: "center" }}>
+          <button style={style.button}>
             See More
           </button>
         </div>
@@ -57,3 +61,14 @@ export default class Products extends Component {
   }
 }
 
+const style = {
+  button: {
+    backgroundColor: '#F5F5F5',
+    color: '#4901DB',
+    borderRadius: '30px',
+    padding: '20px',
+    align: 'center',
+    border: 'none',
+    width: '125px',
+  },
+};
