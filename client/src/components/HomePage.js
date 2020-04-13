@@ -10,6 +10,7 @@ import LargeLogo from '../images/logo_black.svg'
 
 const HomepageLayout = () => (
     <>
+    
     <div class="image-container">
     <Image src={BlueHeader} fluid />
     {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
