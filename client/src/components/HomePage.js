@@ -9,14 +9,14 @@ import LargeLogo from '../images/logo_black.svg'
 
 
 const HomepageLayout = () => (
-  <>
+    <>
     <div class="image-container" style={{ marginTop:'-.09%'}}>
-      <Image src={BlueHeader} fluid/>
-      {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-      <div class="centered"><h1>DevPoint Store</h1>
-        <h3>Find something you'll love.</h3></div>
+    <Image src={BlueHeader} fluid />
+    {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
+    <div class="centered"><h1>DevPoint Store</h1>
+    <h3>Find something you'll love.</h3></div> 
     </div>
-    <Container>
+    <Container> 
       <Grid >
         <Header as='h3'>CATEGORIES</Header>
         <Grid.Row columns={4}>
@@ -38,16 +38,16 @@ const HomepageLayout = () => (
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Container>
-    <br />
-    <div align="center">
-      <button class="ui button" style={{ align: "center" }}>See More</button></div>
-    <br />
+      </Container>
+      <br/>
+      <div align="center">
+          <button class="ui button" style={{ align: "center" }}>See More</button></div>
+      <br />
   </>
 );
 
 
-const RoundedImage = styled.div`
+const RoundedImage= styled.div `
     border-radius: 25px;
     width: 250px;
     height: 250px;
