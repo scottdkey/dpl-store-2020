@@ -1,16 +1,19 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const FeaturedCard = ({ product, pictureHeight }) => {
+  const cat_id = product.category_id
   return (
     <div>
-
-      <div style={{ ...style.photoHolder, height: pictureHeight }} >
-        <div style={style.crop}>
-          <Image style={style.photo} src={`${product.main_image}`} />
+      <Link to={`/categories/${cat_id}/products/${product.id}`}>
+        <div style={{ ...style.photoHolder, height: pictureHeight }} >
+          <div style={style.crop}>
+            <Image style={style.photo} src={`${product.main_image}`} />
+          </div>
         </div>
-      </div>
-      <div style={{textAlign:'left'}}>
+      </Link>
+      <div style={{ textAlign: 'left' }}>
         <div style={style.infoHolder}>
           <h4>${product.price}</h4>
         </div>
@@ -55,7 +58,7 @@ const style = {
   },
   infoHolder: {
     display: 'inline-block',
-    marginRight:'.5%',
-    marginTop:'2%'
+    marginRight: '.5%',
+    marginTop: '2%'
   }
 }
