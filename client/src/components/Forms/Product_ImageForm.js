@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import {Form, Select, Icon} from 'semantic-ui-react'
 import Dropzone from "react-dropzone";
+import Axios from "axios";
 
 class ImageForm extends Component {
 
   state = {
     main_image: this.props.main_image,
-    alt_image: this.props.alt_image
+    alt_image: this.props.alt_image,
+    category: this.props.category,
+  }
+
+  componentDidMount(){
+    console.log(this.props)
   }
 
 
@@ -45,18 +51,14 @@ class ImageForm extends Component {
       </div>
     );
   }
-  onDrop = (File, index) =>{
-    const image = File[0].path
-    
-    if(index === undefined){
-      this.setState({
-        main_image: image
-      })
-    }else{
-      this.state.alt_image[index].url = image
-      this.forceUpdate()
-    }
-    console.log(this.state)
+  onDrop = (Files) =>{
+    let data = new FormData() 
+    data.append("file", Files[0])
+    Axios.put(`/api/categories/${this.props.product.category_id}/products/${this.props.product.id}/images`, data)
+    .then(res =>
+      console.log(res)
+      )
+    .catch( e => console.log(e))
 
   }
 

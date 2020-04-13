@@ -8,13 +8,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :categories do
-      resources :products
+      resources :products 
     end
-
   end
   
   namespace :api do
     get '/products', to: 'products#all_products', as: '/products'
+    put '/categories/:category_id/products/:id/images', to: 'products#update_image'
   end
 
   namespace :api do

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_category, only: %i[index show create update destory]
-  before_action :set_product, only: %i[show update destroy]
+  before_action :set_category, only: %i[index show create update destory update_image]
+  before_action :set_product, only: %i[show update destroy update_image]
 
   def index
     render json: @category.products.all
@@ -32,35 +32,23 @@ class Api::ProductsController < ApplicationController
       render json: product.errors, status: 422
     end
   end
-  # def update
-  #   if @product.update(product_params)
-  #     main_image = params[:main_image]
-  #     alt_image = params[:alt_image]
-  #     if main_image
-  #       begin
-  #         ext = File.extname(file.tempfile)
-  #         cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
-  #         product.main_image = cloud_image['secure_url']
-  #       rescue StandardError => e
-  #         render json: { errors: e }, status: 422
-  #       end
-  #     end
-  #     if alt_image
-  #       begin
-  #         ext = File.extname(file.tempfile)
-  #         cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
-  #         product.alt_image = cloud_image['secure_url']
-  #       rescue StandardError => e
-  #         render json: { errors: e }, status: 422
-  #       end
-  #     end
-  #     if user.save
-  #       render json: user
-  #     else
-  #       render json: { errors: user.errors.full_messages }, status: 422
-  #     end
-  #   end
-  # end
+
+  def update_image
+    file = params[:file]
+    if file
+      ext = File.extname(file.tempfile)
+      cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+      @product.main_image = cloud_image['secure_url']
+    end
+    if @product.save
+      render json: @product
+    else
+      render json: { errors: @product.errors.full_messages }, status: 422
+    end
+    rescue => e
+      render json: { errors: e }, status: 422
+  end
+  
 
   def destroy
     @product.destroy

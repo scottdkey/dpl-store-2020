@@ -62,7 +62,7 @@ class CategoryForm extends Component {
               value={name}
               onChange={this.handleChange}
             />
-            <Dropzone onDrop={file => this.onDrop(file, id)} multiple={false}>
+            <Dropzone onDrop={this.onDrop} multiple={false}>
               {({ getRootProps, getInputProps, isDragActive }) => {
                 return (
                   <div {...getRootProps()} style={styles.dropzone}>
@@ -83,13 +83,15 @@ class CategoryForm extends Component {
       </Modal.Content>
     );
   };
-  onDrop = (File, id) => {
-    const image = File[0].path;
-    this.setState({
-      image
-    });
-    console.log(image)
-    console.log(id)
+  onDrop = (Files) => {
+    let data = new FormData()
+    data.append("file", Files[0])
+    axios.put(`/api/categories/${this.state.id}`, data).then(res => {
+      this.setState({
+        image: Files[0].url
+      })
+      console.log(res)
+    }).catch(e => console.log(e))
   };
 
   render() {

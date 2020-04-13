@@ -130,7 +130,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-            <ImageForm alt_image={alt_image} main_image={main_image} />
+            <ImageForm alt_image={alt_image} main_image={main_image}{...this.props}/>
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
           <Form.Button color="red" onClick={this.props.toggleForm}>
