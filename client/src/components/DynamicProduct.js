@@ -3,8 +3,7 @@ import axios from 'axios';
 import { Card, Grid, Button, Image, Form, Dropdown, Container, Segment } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
-
+import Featured from '../images/blank.png' 
 
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
@@ -74,10 +73,8 @@ const DynamicProduct = ({category_id, product_id, match}) => {
             <Image src={product.main_image} style= {style.roundedImage} />
             {/* main_image
             image.group itemsPerRow={4} all alt_images */}
-            
           </Grid.Column>
           <Grid.Column width={7}>
-            
             <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
             <br/>
             <Grid.Row><h4>{product.description}</h4></Grid.Row>
@@ -166,7 +163,7 @@ const style = {
   roundedImage: {
     borderRadius: '25px',
     width: '400px',
-    height: '500px',
+    height: '450px',
     padding: '40px',
   },
   card: {
@@ -174,5 +171,8 @@ const style = {
     width: '1100px', 
     borderRadius: '12px',
     marginBottom: '20%',
+  },
+  rounded: {
+    borderRadius: '25px',
   }
-}
+};
