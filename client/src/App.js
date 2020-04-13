@@ -16,9 +16,7 @@ import DynamicProduct from './components/DynamicProduct';
 import Links from './components/SharedComponents/Links';
 import StyledCard from './components/SharedComponents/StyledCard';
 import Cart from './components/Cart';
-import SearchAll from './components/SharedComponents/SearchAll';
 
-// import Header from './components/Header'
  
 const App = () => (
   <Fragment>
@@ -36,7 +34,6 @@ const App = () => (
           <Route exact path='/styled' component={StyledCard} />
           <Route exact path='/links' component={Links} />
           <Route exact path='/cart' component={Cart} />
-          <Route exact path='/searchall' component={SearchAll} />
         </Switch>
         </Container>
       <Footer />

@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import BlueHeader from '../images/BlueHeader.svg';
 import Featured from '../images/blank.png'
 import LargeLogo from '../images/logo_black.svg'
+import SearchAll from './SharedComponents/SearchAll';
 
 
 const HomepageLayout = () => (
@@ -15,6 +16,7 @@ const HomepageLayout = () => (
     {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
     <div class="centered"><h1>DevPoint Store</h1>
     <h3>Find something you'll love.</h3></div> 
+    <div><SearchAll /></div>
     </div>
     <Container> 
       <Grid >

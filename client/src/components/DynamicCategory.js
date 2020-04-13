@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button, } from "semantic-ui-react";
+import { Card, Image, Button, SearchCategory, } from "semantic-ui-react";
 import axios from "axios";
 import { Link, } from "react-router-dom";
 
@@ -15,7 +15,6 @@ const DynamicCategory = ({category_id, match}) => {
   // call to get both of them
 
   useEffect(() => {
-    console.log(match)
     const cat_id = category_id || match.params.category_id
     axios
       .get(`/api/categories/${cat_id}/products`)
@@ -44,6 +43,7 @@ const DynamicCategory = ({category_id, match}) => {
 
   return (
     <>
+    <SearchCategory category_id={cat_id} /><br />
     {renderItems()}
     </>
   );
