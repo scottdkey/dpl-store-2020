@@ -15,8 +15,9 @@ const HomepageLayout = () => (
     <Image src={BlueHeader} fluid />
     {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
     <div class="centered"><h1>DevPoint Store</h1>
-    <h3>Find something you'll love.</h3></div> 
-    <div><SearchAll /></div>
+    <h3>Find something you'll love.</h3>
+    <SearchAll /></div> 
+    {/* <div><SearchAll /></div> */}
     </div>
     <Container> 
       <Grid >

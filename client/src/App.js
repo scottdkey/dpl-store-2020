@@ -2,7 +2,7 @@ import React, { Fragment, } from 'react';
 import './App.css';
 import Login from './components/Login';
 import { Switch, Route, } from 'react-router-dom';
-import { Container, Menu, } from "semantic-ui-react";
+import { Container, Menu,} from "semantic-ui-react";
 import FetchAdmin from './components/FetchAdmin';
 import AdminPanel from './components/AdminPanel';
 import ProtectedRoute from './components/ProtectedRoute';

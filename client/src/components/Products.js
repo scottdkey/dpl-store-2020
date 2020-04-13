@@ -3,6 +3,7 @@ import axios from "axios";
 import { Card, Image  } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from "../images/BlueHeader.svg"
+import SearchAll from "./SharedComponents/SearchAll";
 
 export default class Products extends Component {
   state = { categories: [] };
@@ -35,7 +36,8 @@ export default class Products extends Component {
           <Image src={BlueHeader} fluid />
           <div class="centered">
             <h1>All Merchandise</h1>
-            <h3>Find something you''ll love.</h3>
+            <h3>Find something you'll love.</h3>
+            <SearchAll />
           </div>
         </div>
         {this.state.categories.length === 0
