@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import BlueHeader from '../images/BlueHeader.svg';
 import Featured from '../images/blank.png'
 import LargeLogo from '../images/logo_black.svg'
+import FeaturedProducts from '../components/FeaturedProducts'
 
 
 const HomepageLayout = () => (
@@ -41,7 +42,8 @@ const HomepageLayout = () => (
       </Container>
       <br/>
       <div align="center">
-          <button class="ui button" style={{ align: "center" }}>See More</button></div>
+        <FeaturedProducts />
+      </div>
       <br />
   </>
 );
