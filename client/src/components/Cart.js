@@ -3,7 +3,7 @@ import { getAllCartItems, deleteItemFromCart, putItemInCart } from '../modules/C
 import { Button, Header, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-// var product1 = { title: 'Hat', price:20 , id:13, main_image:'https://i.pinimg.com/originals/33/cd/6b/33cd6bc701673e86aadc54e47d2d65ea.jpg'}
+// var product1 = { title: 'Hat', price:20 , id:13, main_image:'gs://media-socialmedia.appspot.com/Screen Shot 2020-03-31 at 11.10.43 AM.png'}
 // var product2 = { title: 'Shirt' , price:10, id:4, main_image:'https://ae01.alicdn.com/kf/HTB1ClpxqkKWBuNjy1zjq6AOypXa5/Liseaven-T-Shirt-Men-Cotton-T-Shirt-Full-Sleeve-tshirt-Men-Solid-Color-T-shirts-tops.jpg_640x640.jpg'}
 // var product3 = { title: 'Hoodie' , price:30, id:10, main_image:'https://shopproclub.com/media/catalog/product/cache/9537d43b9bc5b6785a205b28a3ee3fc1/1/4/143.NAVY.PT04.jpg'}
 // var product4 = { title: 'Hat2', price:20 , id:13, main_image:'https://assets.adidas.com/images/w_600,f_auto,q_auto:sensitive,fl_lossy/03a55f74c710453a8699a724016dad6c_9366/Saturday_Hat_Black_BH9346_04_standard.jpg'}
@@ -85,7 +85,7 @@ class Cart extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
+                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</Button>
                   </div>
                 </div>
               )
@@ -155,7 +155,7 @@ const style = {
   },
   itemsContainer: {
     margin: '3% 20%',
-    marginBottom:'15%'
+    marginBottom:'10%'
   },
   cartContainer: {
     display: 'flex',

@@ -31,7 +31,7 @@ export default class Products extends Component {
   render() {
     return (
       <>
-        <div class="image-container">
+        <div class="image-container" style={{ marginTop:'-.09%'}}>
           <Image src={BlueHeader} fluid />
           <div class="centered">
             <h1>All Merchandise</h1>
