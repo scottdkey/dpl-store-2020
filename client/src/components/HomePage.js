@@ -11,7 +11,7 @@ import FeaturedProducts from '../components/FeaturedProducts'
 
 const HomepageLayout = () => (
     <>
-    <div class="image-container" style={{ marginTop:'-.09%'}}>
+    <div class="image-container">
     <Image src={BlueHeader} fluid />
     {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
     <div class="centered"><h1>DevPoint Store</h1>
@@ -38,9 +38,9 @@ const HomepageLayout = () => (
             <h4 align="center">Stickers</h4>
           </Grid.Column>
         </Grid.Row>
-      </Grid>
+      </Grid> 
       </Container>
-      <br/>
+      <br/> 
       <div align="center">
         <FeaturedProducts />
       </div>

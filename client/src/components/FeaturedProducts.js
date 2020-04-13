@@ -75,7 +75,7 @@ const style = {
   },
   product: {
     width: '49%',
-    margin: '1% 0'
+    margin: '1% 0',
   }
 }
 

@@ -5,14 +5,14 @@ import Logo from '../images/dpl_logo.svg';
 import Pin from '../images/Pin.svg';
 
 const Footer = () => (
-
+  
   <>
     <StyledFooter as={Segment} inverted className="dpl-blue" >
       <Grid>
         <Grid.Column width={9}>
           <Grid.Row></Grid.Row>
-          <Grid.Row><h4 style={{ marginTop: "100px", marginLeft: "300px"}}>Any Questions? </h4></Grid.Row>
-          <Grid.Row><h1 style={{ marginLeft: "300px"}}>We're here to help.</h1> </Grid.Row>
+          <Grid.Row><h4 style={{marginTop: "100px", marginLeft: "300px"}}>Any Questions? </h4></Grid.Row>
+          <Grid.Row><h1 style={{marginLeft: "300px"}}>We're here to help.</h1> </Grid.Row>
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
           <div class = "ui vertical segment">
@@ -23,17 +23,17 @@ const Footer = () => (
                 370 South 300 East<br />
                 Salt Lake City, Utah<br/>
                 84111
-            </div>
+              </div>
             </Segment>
             <Segment floated='right' className= "segment-size" color='white'><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
-         </div>
+            </div>
         </Grid.Column>
-      </Grid> 
+      </Grid>  
     </StyledFooter>
     <Segment inverted className="dpl-blue" align="right">
-      <p><Image align="left" size="small" src={Logo} className="filter-white"></Image>2020 DevPoint Labs Terms Policy</p>
+    <p><Image align="left" size="small" src={Logo} className="filter-white"></Image>2020 DevPoint Labs Terms Policy</p>
     </Segment>
-   </>
+    </>
 );
 
 
@@ -54,7 +54,6 @@ const StyledFooter= styled.div` {
     z-index: -1;
     border-top-right-radius: 25px;
   }
-
   &:before {
     top: 0;
     transform: skewY(-1deg);
