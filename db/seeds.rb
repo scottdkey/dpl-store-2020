@@ -18,6 +18,7 @@
       has_size: true,
       sizes: {small:1,medium:1,large:1},
       main_image: Faker::Avatar.image(set: "set4"),
+      featured: true,
     )
   end
   
@@ -31,6 +32,7 @@
       has_size: true,
       sizes: {small:1,medium:1,large:1},
       main_image: Faker::Avatar.image(set: "set4"),
+      featured: false,
     )
   end
   category3 = Category.create(name:'Hats')
@@ -43,6 +45,7 @@
       has_size: true,
       sizes: {small:1,medium:1,large:1},
       main_image: Faker::Avatar.image(set: "set4"),
+      featured: false,
     )
   end
   category4 = Category.create(name:'Stickers')
@@ -55,6 +58,7 @@
       has_size: true,
       sizes: {no_size:3},
       main_image: Faker::Avatar.image(set: "set4"),
+      featured: false,
     )
   end
 
