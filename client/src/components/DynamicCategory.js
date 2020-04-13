@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button, } from "semantic-ui-react";
+import { Card, Image, Button, Container, Grid,  } from "semantic-ui-react";
 import axios from "axios";
 import { Link, } from "react-router-dom";
+import BlueHeader from '../images/BlueHeader2.svg'
 
 const DynamicCategory = ({category_id, match, category_name }) => {
   const [items, setItems] = useState([]);
@@ -49,7 +50,29 @@ const DynamicCategory = ({category_id, match, category_name }) => {
     
   return (
     <>
+    <div class="image-container">
+    <Image src={BlueHeader} style={{width:"100%"}} />
+    {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
+    <div class="centered"><h1>Category Name goes here</h1>
+    <h3>Find something you'll love.</h3></div> 
+    </div>
+    <Container>
+    <Grid>
+        <Grid.Row columns={3}>
+          <Grid.Column>
     {renderItems()}
+    </Grid.Column>
+            </Grid.Row>
+          </Grid>
+    </Container>
+    <br/>
+    <div align="center">
+          <button style={style.button}>
+            See More
+          </button>
+        </div>
+        <br/> 
+    
     </>
   );
 };
@@ -66,7 +89,6 @@ const style = {
     background: '#fff',
     display: 'inline-block',
     verticalAlign: 'top',
-    width: '100%',
     marginRight: '.5em',
     marginBottom: '.3em',
     borderRadius: '5px',
@@ -82,4 +104,13 @@ const style = {
     width: '30%',
     margin:'1%'
   },
-};
+    button: {
+      backgroundColor: '#F5F5F5',
+      color: '#4901DB',
+      borderRadius: '30px',
+      padding: '20px',
+      align: 'center',
+      border: 'none',
+      width: '125px',
+    },
+  };

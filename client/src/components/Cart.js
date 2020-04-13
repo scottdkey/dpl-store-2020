@@ -92,10 +92,9 @@ class Cart extends React.Component {
             })}
           </div>
 
-          <div style={style.itemsContainer}>
+          <div style={{textAlign:'center'}}>
             <Header as='h1' textAlign='center'>Total: ${total}</Header>
-            
-              <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
+              <Link to='purchase-record' style={{color: 'white' }}><div style={style.button}>Checkout</div></Link>
           </div>
         </div>
       )
@@ -104,8 +103,8 @@ class Cart extends React.Component {
       return (
         <div style={style.itemsContainer}>
           <Header as='h1' textAlign='center' style={{ margin: '5%' }}>No Items In Cart</Header>
-          <div >
-            <Button disabled style={style.buttonDisabled} >Checkout</Button>
+          <div style={{textAlign:'center'}}>
+            <div style={style.buttonDisabled}>Checkout</div>
           </div>
         </div>)
     }
@@ -131,12 +130,14 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     width: '100%',
-    align: 'center',
+    padding:'2%'
   },
   buttonDisabled: {
+    color: 'grey',
+    backgroundColor: 'lightgrey',
     borderRadius: '30px',
     width: '100%',
-    align: 'center',
+    padding:'2%'
   },
   headerContainer: {
     backgroundColor: '#4901DB',
@@ -155,7 +156,8 @@ const style = {
     margin: '0px'
   },
   itemsContainer: {
-    margin: '2% 20%',
+    margin: '3% 20%',
+    marginBottom:'15%'
   },
   cartContainer: {
     display: 'flex',
