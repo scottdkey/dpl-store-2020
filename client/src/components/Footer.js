@@ -70,5 +70,4 @@ const StyledFooter= styled.div` {
 `;
 
 
-
 export default Footer;
