@@ -9,7 +9,6 @@ class FeaturedProducts extends React.Component {
   componentDidMount() {
     axios.get('/api/featured_products')
       .then(res => {
-        console.log(res.data.length)
         if(res.data.length > 3){
           this.setState({
             featuredProducts:res.data,
