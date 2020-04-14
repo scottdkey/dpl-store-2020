@@ -1,82 +1,105 @@
 import React, { Component } from "react";
-import { Form, Modal} from "semantic-ui-react";
+import { Form, Modal } from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
 import MainImageForm from "./Product_main_ImageForm";
 import AltImageForm from "./Product_altImageForm";
-// import CategoryForm from "./CategoryForm";
-// import axios from 'axios'
-
 export default class AdminProduct extends Component {
-  constructor(props) {
-    super(props);
-    const {product}  = this.props;
-    this.getCategoryOptions()
-    if (product === undefined) {
-      this.state = {
-        title: "",
-        description: "",
-        price: 0.0,
-        category_id: "",
-        main_image: "",
-        sizes: {},
-        options: []
-      };
-    } else {
-      this.state = {
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        category_id: product.category_id,
-        main_image: product.main_image,
-        sizes: product.sizes,
-        options: []
-      };
-    }
+  state = {
+    title: "",
+    description: "",
+    price: 0.0,
+    category_id: "",
+    main_image: "",
+    sizes: {},
+    options: []
+  };
+
+  componentDidMount() {
+    this.getCategoryOptions();
+    this.getProduct();
   }
 
-    getCategoryOptions = async() =>{
-    const res = await axios.get(`/api/categories/`)
-    const options = res.data.map( c => (
-      {key: c.name, text: c.name, value: c.id}
-    ))
+  getProduct = async () => {
+    const { product } = this.props;
+    if (product === undefined) {
+      //do nothing
+      console.log('in the if')
+    } else {
+      const res = await axios.get(`/api/categories/${product.category_id}/products/${product.id}`)
+      console.log(res)
+      this.setState({
+        title: res.data.title,
+        description: res.data.description,
+        price: res.data.price,
+        category_id: res.data.category_id,
+        main_image: res.data.main_image,
+      })
+      console.log('in the else')
+    }
+
+  };
+
+  getCategoryOptions = async () => {
+    const res = await axios.get(`/api/categories/`);
+    const options = res.data.map(c => ({
+      key: c.name,
+      text: c.name,
+      value: c.id
+    }));
     this.setState({
       options
-    })
-  }
-
-
+    });
+  };
 
   handleSubmit = () => {
-    const {title, description, price, category_id, main_image, sizes} = this.state
-    const currentState = {title, description, price, main_image, sizes}
+    const {
+      title,
+      description,
+      price,
+      category_id,
+      main_image,
+      sizes
+    } = this.state;
+    const currentState = {
+      title,
+      description,
+      price,
+      main_image,
+      sizes
+    };
     if (this.props.product === undefined) {
       axios
         .post(`/api/categories/${category_id}/products`, currentState)
-        .then((res) => {
+        .then(res => {
           this.props.toggleForm();
           this.props.getProducts();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     } else {
       axios
-        .put(`/api/categories/${category_id}/products/${this.props.product.id}`, currentState)
-        .then((res) => {
+        .put(
+          `/api/categories/${category_id}/products/${this.props.product.id}`,
+          currentState
+        )
+        .then(res => {
           this.props.toggleForm();
-          this.props.getProducts()
+          this.props.getProducts();
         })
-        .catch((e) => {
+        .catch(e => {
           console.log(e);
         });
     }
   };
 
-  setSizes = (array) => {
+  setSizes = array => {
     const sizes = array.reduce(
       (obj, item) =>
-        Object.assign(obj, { [item.size]: parseInt(item.quantity) }),
+        Object.assign(obj, {
+          [item.size]: parseInt(item.quantity)
+        }),
       {}
     );
     this.setState({ sizes });
@@ -86,14 +109,21 @@ export default class AdminProduct extends Component {
     this.setState({ ...this.state, [name]: value });
   };
 
-  setMainImage = (newURL) => {
+  setMainImage = newURL => {
     this.setState({
       main_image: newURL
-    })
-  }
+    });
+  };
 
   render() {
-    const { title, description, price, category_id, main_image, alt_image, options } = this.state;
+    const {
+      title,
+      description,
+      price,
+      category_id,
+      main_image,
+      options
+    } = this.state;
     return (
       <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
@@ -128,15 +158,21 @@ export default class AdminProduct extends Component {
             <SizeForm sizes={this.state.sizes} setSizes={this.setSizes} />
             <Form.Select
               label="category"
-              name="category"
-              placeholder="category"
+              name="category_id"
+              placeholder="Pick a category"
               options={options}
               value={category_id}
               onChange={this.handleChange}
               required
             />
-            <MainImageForm main_image={main_image}{...this.props} setMainImage={this.setMainImage}/>
-            <AltImageForm {...this.props} />
+            <div style={styles.imageArea}>
+              <MainImageForm
+                main_image={main_image}
+                {...this.props}
+                setMainImage={this.setMainImage}
+              />
+              <AltImageForm {...this.props} />
+            </div>
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
           <Form.Button color="red" onClick={this.props.toggleForm}>
@@ -147,3 +183,12 @@ export default class AdminProduct extends Component {
     );
   }
 }
+
+const styles = {
+  imageArea: {
+    width: "80%",
+    margin: "20px",
+    paddingTop: "10px",
+    display: "flex"
+  }
+};

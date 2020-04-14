@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Form, Icon, Image, Button } from "semantic-ui-react";
+import { Icon, Image, Button } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
 import ImageIcon from "../../images/Image_Icon.png";
 
@@ -43,12 +43,12 @@ class AltImageForm extends Component {
                 <input {...getInputProps()} />
                 {isDragActive ? (
                   <p>
-                    <img src={ImageIcon} style={styles.image} />
+                    <img src={ImageIcon} style={styles.image} alt="thumbnail" />
                     drop files here!
                   </p>
                 ) : (
                   <p>
-                    <img src={ImageIcon} style={styles.image} />
+                    <img src={ImageIcon} style={styles.image} alt="thumbnail"/>
                     Click to add a picture or drag here
                   </p>
                 )}
@@ -115,13 +115,20 @@ class AltImageForm extends Component {
   };
 
   render() {
+    if(this.props.product && this.props.product.id){
     return (
       <>
         {this.newAltImageFormat(ImageIcon)}
 
         {this.renderAltImages()}
       </>
-    );
+    )}else {
+      return(
+        <>
+        {/* <p>please add images after product creation</p> */}
+        </>
+      )
+    }
   }
 }
 

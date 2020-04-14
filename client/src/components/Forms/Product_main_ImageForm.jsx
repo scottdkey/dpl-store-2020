@@ -1,27 +1,32 @@
 import React, { Component } from "react";
-import {Form, Icon} from 'semantic-ui-react'
 import Dropzone from "react-dropzone";
 import Axios from "axios";
-import ImageIcon from '../../images/Image_Icon.png'
+// import ImageIcon from '../../images/Image_Icon.png'
 
 class ImageForm extends Component {
 
-  imagesFormat = (image) =>{
+  state = {
+    image: this.props.product.main_image
+  }
+
+  renderMainImage = () =>{
+    const {image} = this.state
     return (
-      <div key={image}>
+      <div key={image} style={styles.mainImageArea}>
+        <h2>Main Image</h2>
         <Dropzone onDrop={file => this.onDrop(file)} multiple={false}>
           {({ getRootProps, getInputProps, isDragActive }) => {
             return (
-              <div {...getRootProps()} style={styles.dropzone} >
+              <div {...getRootProps()} style={styles.dropzone}>
                 <input {...getInputProps()} />
                 {isDragActive ? (
                   <p>
-                    <img src={image} style={styles.image} />
+                    <img src={image} style={styles.image} alt="mainProduct" />
                     drop files here!
                   </p>
                 ) : (
                   <p>
-                    <img src={image} style={styles.image}/>
+                    <img src={image} style={styles.image} alt="mainProduct" />
                     Click to add a picture or drag here
                   </p>
                 )}
@@ -37,19 +42,21 @@ class ImageForm extends Component {
     data.append("file", Files[0])
     Axios.put(`/api/categories/${this.props.product.category_id}/products/${this.props.product.id}/main_image`, data)
     .then(res =>{
-      this.props.setMainImage(res.data)
+      console.log(res)
+      this.setState({
+        image: res.data.main_image
+      })
       this.renderMainImage()
     })
     .catch( e => console.log(e))
   }
 
-  renderMainImage = () =>{
-    return (this.imagesFormat(this.props.product.main_image))
-  }
+
 
   render() {
     return (
       <>
+      
       {this.props.product ? this.renderMainImage() : <p>Please Add images after creating product</p>}
         
       </>
@@ -74,6 +81,9 @@ const styles = {
     height: "150px",
     width: "150px",
     display: "flex"
+  }, mainImageArea: {
+    width: "100%",
+    height: "200px"
   }
 };
 
