@@ -41,6 +41,7 @@ export default class SizeForm extends Component {
   sizeDropDownFormat = ({ size, index }) => {
 
     return (
+      
       <Form.Group key={size}>
         <Select
           selection
