@@ -9,12 +9,22 @@ class FeaturedProducts extends React.Component {
   componentDidMount() {
     axios.get('/api/featured_products')
       .then(res => {
-        this.setState({
-          featuredProducts: res.data,
-          someFeatured: [res.data[0], res.data[1], res.data[2], res.data[3]]
-        })
+        if(res.data.length > 3){
+          this.setState({
+            featuredProducts:res.data,
+            someFeatured: [res.data[0],res.data[1],res.data[2],res.data[3]]
+          })
+        }
+        else{
+          this.setState({
+            featuredProducts:res.data,
+            someFeatured: res.data
+          })
+        }
       }).catch(e => console.log(e))
+
     window.addEventListener('resize', this.handleResize)
+
   }
 
   handleResize = () => {
