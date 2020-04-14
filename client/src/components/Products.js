@@ -1,40 +1,53 @@
-import React, { Component, } from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import { Card, } from "semantic-ui-react";
-import DynamicCategory from './DynamicCategory';
+import { Card, Image  } from "semantic-ui-react";
+import DynamicCategory from "./DynamicCategory";
+import BlueHeader from "../images/BlueHeader.svg"
 
 export default class Products extends Component {
-  state = { categories: []}
+  state = { categories: [] };
 
   componentDidMount() {
-      this.getCategories();
+    this.getCategories();
   }
 
   getCategories = () => {
-    axios
-      .get('/api/categories')
-      .then(res => {
-        this.setState({categories:res.data})
-      })
-  }
+    axios.get("/api/categories").then((res) => {
+      this.setState({ categories: res.data });
+    });
+  };
 
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.name;
-      console.log(c)
+      console.log(c);
       return (
-        <Card.Group key={category} >
+        <Card.Group key={category}>
           <DynamicCategory category_id={c.id} />
         </Card.Group>
       );
     });
 
-  render(){
-    return(
+  render() {
+    return (
       <>
-      All Merchandise
-      {this.state.categories.length === 0 ? "No Products" : this.renderCategories()}
+        <div class="image-container">
+          <Image src={BlueHeader} fluid />
+          <div class="centered">
+            <h1>All Merchandise</h1>
+            <h3>Find something you''ll love.</h3>
+          </div>
+        </div>
+        {this.state.categories.length === 0
+          ? "No Products"
+          : this.renderCategories()}
+        <div align="center">
+          <button class="ui button" style={{ align: "center" }}>
+            See More
+          </button>
+        </div>
+        <br />
       </>
-    )
+    );
   }
-};
+}

@@ -54,7 +54,7 @@ class Cart extends React.Component {
     cart.forEach(item => {
       total += item.object.price
     })
-    this.setState({ total: total })
+    this.setState({ total: total.toFixed(2) })
   }
 
   renderCartItems = () => {
@@ -85,16 +85,16 @@ class Cart extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
+                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</Button>
                   </div>
                 </div>
               )
             })}
           </div>
 
-          <div>
-            <Header as='h1' textAlign='center'>Total: ${total}.00</Header>
-              <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
+          <div style={{textAlign:'center'}}>
+            <Header as='h1' textAlign='center'>Total: ${total}</Header>
+              <Link to='purchase-record' style={{color: 'white' }}><div style={style.button}>Checkout</div></Link>
           </div>
         </div>
       )
@@ -103,8 +103,8 @@ class Cart extends React.Component {
       return (
         <div style={style.itemsContainer}>
           <Header as='h1' textAlign='center' style={{ margin: '5%' }}>No Items In Cart</Header>
-          <div>
-            <Button disabled style={style.buttonDisabled}>Checkout</Button>
+          <div style={{textAlign:'center'}}>
+            <div style={style.buttonDisabled}>Checkout</div>
           </div>
         </div>)
     }
@@ -129,10 +129,14 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     width: '100%',
+    padding:'2%'
   },
   buttonDisabled: {
+    color: 'grey',
+    backgroundColor: 'lightgrey',
     borderRadius: '30px',
     width: '100%',
+    padding:'2%'
   },
   headerContainer: {
     backgroundColor: '#4901DB',
@@ -150,7 +154,8 @@ const style = {
     margin: '0px'
   },
   itemsContainer: {
-    margin: '2% 20%',
+    margin: '3% 20%',
+    marginBottom:'10%'
   },
   cartContainer: {
     display: 'flex',

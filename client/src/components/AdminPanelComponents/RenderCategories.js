@@ -3,6 +3,7 @@ import { Table } from "semantic-ui-react";
 import RenderProduct from "./RenderProduct";
 import CategoryForm from "../Forms/CategoryForm";
 import Axios from "axios";
+import AdminCard from '../AdminCard'
 
 class RenderCategories extends Component {
   notFoundMessage = () => (
@@ -15,6 +16,8 @@ class RenderCategories extends Component {
     </>
   );
 
+  
+
   //need way to sperate products if there are all products
   //working on this later
   render() {
@@ -22,7 +25,7 @@ class RenderCategories extends Component {
     return (
       <>
         <div key={category}>
-        <Table celled striped>
+          {/* <Table celled striped>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell colSpan="4">{category}</Table.HeaderCell>
@@ -41,10 +44,41 @@ class RenderCategories extends Component {
               </Table.Row>
             ))}
           </Table.Body>
-        </Table>
-      </div>
+        </Table> */}
+        <div style={style.productContainer}>
+          {products.map(product => (
+            <div style={style.product} key={product.id}>
+              <AdminCard
+                toggleForm={this.props.toggleForm}
+                getProducts={this.props.getProducts}
+                product={product}
+                deleteProduct={this.props.deleteProduct}
+              />
+            </div>
+          ))}
+        </div>
+        </div>
       </>
     );
+  }
+}
+const style={
+  productContainer:{
+    display:'flex',
+    flexWrap:'wrap',
+    margin:'1% 5%',
+    justifyContent:'center',
+    marginBottom:'5%'
+  },
+  product:{
+    width:'24%',
+    boxShadow: '0px 3px 10px #cccccc',
+    borderRadius: '10px',
+    padding:'1%',
+    margin:'.5%',
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-between'
   }
 }
 

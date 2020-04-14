@@ -91,10 +91,10 @@ class PurchaseRecordForm extends React.Component {
           </Form>
           <div style={style.buttonHolder}>
             <div style={{width:"45%"}}>
-            <Link to='/'><Button style={style.cancelBtn}>Cancel</Button></Link>
+            <Link to='/'><div style={style.cancelBtn}>Cancel</div></Link>
             </div>
             <div style={{width:"45%"}}>
-            <Button style={style.submitBtn} onClick={this.props.handleSubmit}>Place My Order</Button>
+            <div style={style.submitBtn} onClick={this.props.handleSubmit}>Place My Order</div>
             </div>
           </div>
         </div>
@@ -126,17 +126,24 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     marginTop: '3%',
-    width:'100%'
+    width:'100%',
+    padding:'2%',
+    cursor:'pointer'
   },
   cancelBtn: {
     color: '#990000',
+    backgroundColor:'lightgrey',
     borderRadius: '30px',
     marginTop: '3%',
-    width:'100%'
+    width:'100%',
+    padding:'2%',
+    cursor:'pointer'
+
   },
   buttonHolder: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    textAlign:'center'
   }
 }
 
