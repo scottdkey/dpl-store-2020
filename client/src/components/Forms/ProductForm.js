@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Form, Modal} from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
-import ImageForm from "./Product_ImageForm";
+import ImageForm from "./Product_main_ImageForm";
+import AltImageForm from "./Product_altImageForm";
 // import CategoryForm from "./CategoryForm";
 // import axios from 'axios'
 
@@ -16,7 +17,7 @@ export default class AdminProduct extends Component {
         title: "",
         description: "",
         price: 0.0,
-        category: "",
+        category_id: "",
         main_image: "",
         alt_image: [],
         sizes: {},
@@ -27,7 +28,7 @@ export default class AdminProduct extends Component {
         title: product.title,
         description: product.description,
         price: product.price,
-        category: product.category_id,
+        category_id: product.category_id,
         main_image: product.main_image,
         sizes: product.sizes,
         alt_image: product.alt_image,
@@ -49,11 +50,11 @@ export default class AdminProduct extends Component {
 
 
   handleSubmit = () => {
-    const {title, description, price, category, main_image, alt_image, sizes} = this.state
+    const {title, description, price, category_id, main_image, alt_image, sizes} = this.state
     const currentState = {title, description, price, main_image, alt_image, sizes}
     if (this.props.product === undefined) {
       axios
-        .post(`/api/categories/${category}/products`, currentState)
+        .post(`/api/categories/${category_id}/products`, currentState)
         .then((res) => {
           this.props.toggleForm();
           this.props.getProducts();
@@ -63,7 +64,7 @@ export default class AdminProduct extends Component {
         });
     } else {
       axios
-        .put(`/api/categories/${category}/products/${this.props.product.id}`, currentState)
+        .put(`/api/categories/${category_id}/products/${this.props.product.id}`, currentState)
         .then((res) => {
           this.props.toggleForm();
           this.props.getProducts()
@@ -88,7 +89,7 @@ export default class AdminProduct extends Component {
   };
 
   render() {
-    const { title, description, price, category, main_image, alt_image, options } = this.state;
+    const { title, description, price, category_id, main_image, alt_image, options } = this.state;
     return (
       <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
@@ -126,11 +127,12 @@ export default class AdminProduct extends Component {
               name="category"
               placeholder="category"
               options={options}
-              value={category}
+              value={category_id}
               onChange={this.handleChange}
               required
             />
-            <ImageForm alt_image={alt_image} main_image={main_image}{...this.props}/>
+            <ImageForm main_image={main_image}{...this.props}/>
+            <AltImageForm {...this.props} />
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
           <Form.Button color="red" onClick={this.props.toggleForm}>

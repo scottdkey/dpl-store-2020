@@ -6,5 +6,6 @@ class Product < ApplicationRecord
   belongs_to :category
 
   has_many :purchase_products
+  has_many :images
   has_many :purchase_records, through: :purchase_products
 end

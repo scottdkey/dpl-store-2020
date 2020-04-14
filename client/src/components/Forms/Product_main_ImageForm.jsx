@@ -1,34 +1,15 @@
 import React, { Component } from "react";
-import {Form, Select, Icon} from 'semantic-ui-react'
+import {Form, Icon} from 'semantic-ui-react'
 import Dropzone from "react-dropzone";
 import Axios from "axios";
+import ImageIcon from '../../images/Image_Icon.png'
 
 class ImageForm extends Component {
 
-  state = {
-    main_image: this.props.main_image,
-    alt_image: this.props.alt_image,
-    category: this.props.category,
-  }
-
-  componentDidMount(){
-    console.log(this.props)
-  }
-
-
-  addImage = () => {
-    const alt_image = [...this.state.alt_image, {url: ''}];
-    this.setState({alt_image});
-    console.log(this.state)
-  };
-
-  renderImages = () => {
-  }
-
-  imagesFormat = (image, index, label) =>{
+  imagesFormat = (image) =>{
     return (
-      <div key={index}>
-        <Dropzone onDrop={file => this.onDrop(file, index)} multiple={false}>
+      <div key={image}>
+        <Dropzone onDrop={file => this.onDrop(file)} multiple={false}>
           {({ getRootProps, getInputProps, isDragActive }) => {
             return (
               <div {...getRootProps()} style={styles.dropzone} >
@@ -54,31 +35,27 @@ class ImageForm extends Component {
   onDrop = (Files) =>{
     let data = new FormData() 
     data.append("file", Files[0])
-    Axios.put(`/api/categories/${this.props.product.category_id}/products/${this.props.product.id}/images`, data)
-    .then(res =>
-      console.log(res)
-      )
+    Axios.put(`/api/categories/${this.props.product.category_id}/products/${this.props.product.id}/main_image`, data)
+    .then(res =>{
+      console.log(res.data)
+        this.props.set_mainImage(res.data)
+    })
     .catch( e => console.log(e))
   }
 
-  renderMainImage = () =>(
-    this.imagesFormat(this.state.main_image,)
-  )
-
-  // renderAltImage = () => (
-  // this.state.alt_image.map((image, index) => {
-  //     return this.imagesFormat(image.url, index);
-  //   })
-  // )
+  renderMainImage = () =>{
+    if(this.props.product && this.props.product.main_image){
+    return (this.imagesFormat(this.props.product.main_image))
+    } else{
+      return (this.imagesFormat(ImageIcon))
+    }
+  }
 
   render() {
     return (
       <>
-        {this.renderMainImage()}
-        {/* {this.renderAltImage()} */}
-        <Form.Button onClick={this.addImage}>
-          <Icon name="plus" />
-        </Form.Button>
+      {this.props.product ? this.renderMainImage() : <p>Please Add images after creating product</p>}
+        
       </>
     );
   }
@@ -103,3 +80,5 @@ const styles = {
     display: "flex"
   }
 };
+
+const unmodifiedURL = '<Icon name="image" />'
