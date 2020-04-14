@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Modal} from "semantic-ui-react";
 import SizeForm from "./Product_size_form";
 import axios from "axios";
-import ImageForm from "./Product_main_ImageForm";
+import MainImageForm from "./Product_main_ImageForm";
 import AltImageForm from "./Product_altImageForm";
 // import CategoryForm from "./CategoryForm";
 // import axios from 'axios'
@@ -19,7 +19,6 @@ export default class AdminProduct extends Component {
         price: 0.0,
         category_id: "",
         main_image: "",
-        alt_image: [],
         sizes: {},
         options: []
       };
@@ -31,7 +30,6 @@ export default class AdminProduct extends Component {
         category_id: product.category_id,
         main_image: product.main_image,
         sizes: product.sizes,
-        alt_image: product.alt_image,
         options: []
       };
     }
@@ -50,8 +48,8 @@ export default class AdminProduct extends Component {
 
 
   handleSubmit = () => {
-    const {title, description, price, category_id, main_image, alt_image, sizes} = this.state
-    const currentState = {title, description, price, main_image, alt_image, sizes}
+    const {title, description, price, category_id, main_image, sizes} = this.state
+    const currentState = {title, description, price, main_image, sizes}
     if (this.props.product === undefined) {
       axios
         .post(`/api/categories/${category_id}/products`, currentState)
@@ -87,6 +85,12 @@ export default class AdminProduct extends Component {
   handleChange = (e, { name, value }) => {
     this.setState({ ...this.state, [name]: value });
   };
+
+  setMainImage = (newURL) => {
+    this.setState({
+      main_image: newURL
+    })
+  }
 
   render() {
     const { title, description, price, category_id, main_image, alt_image, options } = this.state;
@@ -131,7 +135,7 @@ export default class AdminProduct extends Component {
               onChange={this.handleChange}
               required
             />
-            <ImageForm main_image={main_image}{...this.props}/>
+            <MainImageForm main_image={main_image}{...this.props} setMainImage={this.setMainImage}/>
             <AltImageForm {...this.props} />
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>

@@ -62,14 +62,15 @@ class AltImageForm extends Component {
 
   deleteAltImage = image => {
     axios
-      .delete(`/api/products/${image.product_id}/image/${image.id}`)
+      .delete(`/api/products/${image.product_id}/images/${image.id}`)
       .then(res => {
-        console.log(res.data);
-        const newImages = this.state.images.filter(image => {
-          if (image.url != res.data) {
-            return image;
+        const newImages = this.state.images.filter(i => {
+          if (i.url != image.url) {
+            return i;
           }
-          this.setState({ images: newImages });
+        });
+        this.setState({
+          images: newImages
         });
       })
       .catch(e => console.log(e));

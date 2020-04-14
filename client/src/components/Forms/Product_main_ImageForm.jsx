@@ -37,18 +37,14 @@ class ImageForm extends Component {
     data.append("file", Files[0])
     Axios.put(`/api/categories/${this.props.product.category_id}/products/${this.props.product.id}/main_image`, data)
     .then(res =>{
-      console.log(res.data)
-        this.props.set_mainImage(res.data)
+      this.props.setMainImage(res.data)
+      this.renderMainImage()
     })
     .catch( e => console.log(e))
   }
 
   renderMainImage = () =>{
-    if(this.props.product && this.props.product.main_image){
     return (this.imagesFormat(this.props.product.main_image))
-    } else{
-      return (this.imagesFormat(ImageIcon))
-    }
   }
 
   render() {
