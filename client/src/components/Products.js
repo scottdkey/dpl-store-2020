@@ -3,11 +3,11 @@ import axios from "axios";
 import { Card, Image  } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from "../images/BlueHeader.svg"
-import ProductsByCategory from './ProductsByCategory';
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 
 export default class Products extends Component {
   state = { categories: [] };
+  
 
   componentDidMount() {
     this.getCategories();

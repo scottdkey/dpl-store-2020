@@ -12,7 +12,6 @@ const Links = () => {
     .get(`/api/categories`)
     .then( (res) => {
       setCategories(res.data)
-      // console.log(res.data)
     })
     .catch(console.log);
   }, []);

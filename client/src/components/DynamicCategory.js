@@ -18,6 +18,15 @@ const DynamicCategory = ({category_name, category_id, match}) => {
   // when the controller exists (see Brianna)
   // /categories/:category_id/products/:product_id
   // call to get both of them
+  const [results, setResults] = useState([]);
+
+  const afterSearch = (results) => setResults(results);
+
+  const renderResults = () => results.map((result) => (
+    <div key={result.id}>
+      {result.title}
+    </div> 
+  ));
 
   useEffect(() => {
     const cat_id = category_id || match.params.category_id
@@ -55,10 +64,10 @@ const DynamicCategory = ({category_name, category_id, match}) => {
         <Image src={BlueHeader} fluid />
         <div class="centered">
           <h1>{ category && category.name }</h1>
-          <FunctionalSearch category_id={cat_id} />
+          <FunctionalSearch afterSearch={afterSearch}/>
         </div>
       </div>
-
+      { results.length > 0 && renderResults() }
       {renderItems()}
       </>
     );
