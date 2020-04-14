@@ -7,4 +7,13 @@ class Product < ApplicationRecord
 
   has_many :purchase_products
   has_many :purchase_records, through: :purchase_products
+
+  def self.search(params)
+    category_validated = params[:category_id] && params[:category_id] != ""
+
+    products = Product.where("title ILIKE ?", "%#{params[:term]}%")
+    products = products.where(category_id: params[:category_id]) if category_validated
+
+    products
+  end
 end

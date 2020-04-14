@@ -17,12 +17,16 @@ const FunctionalSearch = (props) => {
   const [value, setValue] = useState("");
   const [products, setProducts] = useState([]);
   const [category_id, setCategory_id] = useState(props.category_id);
+  const [searchState, setSearchState] = useState({
+    term: "", 
+    category_id: props.category_id || ""
+  });
 
   const initialState = {isLoading, results, value, products, category_id}
 
   useEffect( () => {
     // const cat_id = this.props.category_id
-    axios.get(`api/categories/${category_id}/products`)
+    axios.get(`/api/categories/${category_id}/products`)
       .then( res => {
         setProducts(res.data)
         console.log(products)
@@ -35,33 +39,45 @@ const FunctionalSearch = (props) => {
 
   const handleSearchChange = (e, { value }) => {
     setIsLoading(true)
+    setValue(value)
 
     setTimeout(() => {
       if (value.length < 1) return initialState
 
       const re = new RegExp(_.escapeRegExp(value), 'i')
-      const isMatch = (result) => re.test(result.title)
+      const isMatch = (result) => re.test(result.title);
 
       setIsLoading(false)
       setResults(_.filter(products, isMatch))
     }, 300)
   }
 
-    // const { isLoading, value, results, products: [] } = this.state
+  const searchChange = (event) => {
+    setSearchState({ 
+      ...searchState, 
+      [event.target.name]: event.target.value 
+    });
+  }
+
+  const searchSubmit = () => {
+    axios.get(`/api/products/search?term=${searchState.term}&category_id=${searchState.category_id}`)
+      .then((res) => {
+       console.log(res.data);
+       if(props.afterSearch) props.afterSearch(res.data);
+      })
+      .catch(console.log);
+  }
+
+    // const { isLoading: boolean, value: string, results: [], products: [] } = this.state
     return(
       <Grid>
-        <Grid.Column width={6}>
-          <Search
-            loading={isLoading}
-            onResultSelect={handleResultSelect}
-            onSearchChange={_.debounce(handleSearchChange, 500, {
-              leading: true,
-            })}
-            results={results}
-            value={value}
-            resultRenderer={resultRenderer}
-            {...props}
+        <Grid.Column>
+          <input 
+            name="term"
+            value={searchState.term}
+            onChange={searchChange}
           />
+          <button onClick={searchSubmit} >Submit</button>
         </Grid.Column>
       </Grid>
     )
