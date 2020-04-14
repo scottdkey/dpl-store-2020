@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
-import { Card, Grid, Button, Image, Form, Dropdown, Container, Segment } from 'semantic-ui-react';
+import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import Featured from '../images/blank.png' 

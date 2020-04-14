@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Container, Grid, Header, Image, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
 import Featured from '../images/blank.png'
-import LargeLogo from '../images/logo_black.svg'
-import FeaturedProducts from '../components/FeaturedProducts'
+import FeaturedCard from './FeaturedCard';
 
 
 const HomepageLayout = () => (
@@ -43,6 +42,7 @@ const HomepageLayout = () => (
       <Header as="h3">FEATURED PRODUCTS</Header>
       <Grid >
       <Grid.Row columns={2} >
+        <FeaturedCard/>
         <Grid.Column>
           <RoundedImage as={Image}  src={Featured}/>
           <h4 align="left">$ Product Name</h4>
