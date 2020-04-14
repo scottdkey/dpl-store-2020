@@ -6,9 +6,10 @@ import BlueHeader from '../images/BlueHeader.svg';
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
 import Products from './Products';
 
-const DynamicCategory = ({category_name, category_id, match}) => {
+const DynamicCategory = ({category_name, category_id, noHeader, match}) => {
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState(null);
+  // const [noHeader, setNoHeader] = useState(null);
   // const [catName, setCatName] = useState('');
   const cat_id = category_id || match.params.category_id
   // make another useEffect to get the category
@@ -32,7 +33,9 @@ const DynamicCategory = ({category_name, category_id, match}) => {
     const cat_id = category_id || match.params.category_id
     axios
       .get(`/api/categories/${cat_id}/products`)
-      .then((res) => setItems(res.data))
+      .then((res) => {
+        setItems(res.data)
+      })
       .catch(console.log);
   }, []);
 
@@ -58,19 +61,46 @@ const DynamicCategory = ({category_name, category_id, match}) => {
       </div>
     ));
 
-    return(
-      <>
-      <div class="image-container">
-        <Image src={BlueHeader} fluid />
-        <div class="centered">
-          <h1>{ category && category.name }</h1>
-          <FunctionalSearch afterSearch={afterSearch}/>
-        </div>
-      </div>
-      { results.length > 0 && renderResults() }
-      {renderItems()}
-      </>
-    );
+    
+  if(noHeader) {
+      return(
+        <>
+        {renderItems()}
+        {console.log(items)}
+        </>
+      )
+    } else {
+      return(
+        <>
+          <div class="image-container">
+            <Image src={BlueHeader} fluid />
+            <div class="centered">
+              <h1>{ category && category.name }</h1>
+              <FunctionalSearch afterSearch={afterSearch} category_id={cat_id} />
+            </div>
+          </div>
+        { results.length > 0 && renderResults() }
+        {renderItems()}
+        </>
+      )
+    }
+
+
+
+    // return(
+    //   <>
+    //   <div class="image-container">
+    //     <Image src={BlueHeader} fluid />
+    //     <div class="centered">
+    //       <h1>{ category && category.name }</h1>
+    //       <FunctionalSearch afterSearch={afterSearch}/>
+    //     </div>
+    //   </div>
+    //   { results.length > 0 && renderResults() }
+    //   {renderItems()}
+    //   </>
+    // );
 };
 
 export default DynamicCategory;
+

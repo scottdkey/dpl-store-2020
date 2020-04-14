@@ -6,7 +6,7 @@ import BlueHeader from "../images/BlueHeader.svg"
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 
 export default class Products extends Component {
-  state = { categories: [] };
+  state = { categories: [], noHeader:true };
   
 
   componentDidMount() {
@@ -25,7 +25,7 @@ export default class Products extends Component {
       console.log(c);
       return (
         <Card.Group key={c.id}>
-          <DynamicCategory category_id={c.id} category_name={c.name} />
+          <DynamicCategory category_id={c.id} category_name={c.name} noHeader={true}/>
         </Card.Group>
       );
     });
