@@ -4,6 +4,7 @@ import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import Featured from '../images/blank.png' 
+import Links from './SharedComponents/Links';
 
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
@@ -52,11 +53,11 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       .catch(console.log);
   }, []);
 
-    // const handleChange = (e) => {
-    //   return(
-    //     setSize(e)
-    //   )
-    // };
+    const handleChange = (e) => {
+      return(
+        setSize(e)
+      )
+    };
 
     
 

@@ -42,7 +42,7 @@ const HomepageLayout = () => (
       <Header as="h3">FEATURED PRODUCTS</Header>
       <Grid >
       <Grid.Row columns={2} >
-        <FeaturedCard/>
+        {/* <FeaturedCard/> */}
         <Grid.Column>
           <RoundedImage as={Image}  src={Featured}/>
           <h4 align="left">$ Product Name</h4>

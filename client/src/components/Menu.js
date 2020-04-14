@@ -100,6 +100,7 @@ class MobileContainer extends Component {
           onHide={this.handleSidebarHide}
           vertical
           visible={sidebarOpened}
+          style={{margin: 0, border: "none"}}
         >
           <Link to="/" ><Menu.Item>
                   <Image src={Beaker} size="tiny" className="filter-white"></Image>
@@ -109,7 +110,7 @@ class MobileContainer extends Component {
 
         <Sidebar.Pusher dimmed={sidebarOpened} >
             <Container fluid >
-              <Menu 
+              <Menu style={{margin: 0, border: "none"}}
                 className="dpl-blue" 
                 inverted 
                 pointing 
