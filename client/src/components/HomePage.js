@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
 import Featured from '../images/blank.png'
 import LargeLogo from '../images/logo_black.svg'
+import FeaturedProducts from '../components/FeaturedProducts'
 
 
 const HomepageLayout = () => (
