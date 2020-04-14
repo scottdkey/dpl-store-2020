@@ -19,30 +19,31 @@ import Parent from './components/SharedComponents/Parent';
 import Cart from './components/Cart'
 
 // import Header from './components/Header'
- 
+
+
+
 const App = () => (
   <Fragment>
     <FetchAdmin>
-    <Navbar/> 
-     <Container fluid>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path='/purchase-record' component={PurchaseRecord} />
-          <Route exact path="/allmerchandise" component={Products} />
-          <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
-          <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
-          <Route exact path='/styled' component={StyledCard} />
-          <Route exact path='/parent' component={Parent} />
-          <Route exact path='/links' component={Links} />
-          <Route exact path='/cart' component={Cart} />
-        </Switch>
+        <Navbar />
+        <Container fluid>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path='/purchase-record' component={PurchaseRecord} />
+            <Route exact path="/allmerchandise" component={Products} />
+            <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
+            <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
+            <Route exact path='/styled' component={StyledCard} />
+            <Route exact path='/parent' component={Parent} />
+            <Route exact path='/links' component={Links} />
+            <Route exact path='/cart' component={Cart} />
+          </Switch>
         </Container>
-      <Footer />
+        <Footer />
     </FetchAdmin>
-   </Fragment>
+  </Fragment>
 );
-
 
 export default App;

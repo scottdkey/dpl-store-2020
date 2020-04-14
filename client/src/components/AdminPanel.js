@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Header, Button, Modal } from "semantic-ui-react";
+import { Header, Button, Modal, Icon } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderCategories from "./AdminPanelComponents/RenderCategories";
 // import CategoryForm from "./Forms/CategoryForm";
 import CategorySelector from "./Selectors/CategorySelector";
+import CategoryForm from "./Forms/CategoryForm";
 
 export default class AdminPanel extends Component {
   state = {
@@ -89,7 +90,7 @@ export default class AdminPanel extends Component {
         <div style={style.headerContainer}>
           <h1 style={style.header}>Admin Panel</h1>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' , margin:'1% 5%'}}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '1% 5%' }}>
           <div>
             <CategorySelector
               products={products}
@@ -101,7 +102,15 @@ export default class AdminPanel extends Component {
             />
           </div>
           <div>
-            <h1>{category}</h1>
+            <div style={{display:'inline-block'}}>
+            <h1 >{category}</h1>
+            </div>
+            {category === 'All Categories' ||category === 'Featured' ? <></> : 
+            <div style={{color:'#4575c4',display:'inline-block', cursor:'pointer'}}>
+              <CategoryForm category={category} />
+            </div>
+            }
+            
           </div>
           <div>
             <Button style={style.button} onClick={this.toggleForm}>New Product</Button>

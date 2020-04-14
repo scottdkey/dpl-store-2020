@@ -77,7 +77,7 @@ class Cart extends React.Component {
 
                   <div style={style.informationContainer}>
                     <div>
-                      <h3 style={{ margin: '0px' }}>{item.object.title}</h3>
+                      <h3 style={{ margin: '0px',}}>{item.object.title}</h3>
                       <h6 style={{ margin: '0px', color: sizeColor }}>{item.size}</h6>
                     </div>
                     <div>
@@ -141,21 +141,22 @@ const style = {
   headerContainer: {
     backgroundColor: '#4901DB',
     color: 'white',
-    padding: '20px 50px',
+    padding: '2% 2%',
     display: 'flex',
     justifyContent: 'space-between'
   },
   headerButton: {
     backgroundColor: 'rgba(0,0,0, 0.13)',
-    fontSize: '12px',
-    color: 'rgba(255,255,255, 0.7)'
+    color: 'rgba(255,255,255, 0.7)',
+    fontSize: '1em'
   },
   header: {
-    margin: '0px'
+    margin: '0px',
+    fontSize: '2em'
   },
   itemsContainer: {
     margin: '3% 20%',
-    marginBottom:'10%'
+    marginBottom:'10%',
   },
   cartContainer: {
     display: 'flex',
@@ -209,5 +210,6 @@ const style = {
     margin:'1%'
   }
 }
+
 
 export default Cart
