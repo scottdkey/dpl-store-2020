@@ -96,5 +96,3 @@ const styles = {
     height: "200px"
   }
 };
-
-const unmodifiedURL = '<Icon name="image" />'

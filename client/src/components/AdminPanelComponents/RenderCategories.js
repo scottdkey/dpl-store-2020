@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { Table } from "semantic-ui-react";
 import RenderProduct from "./RenderProduct";
-import CategoryForm from "../Forms/CategoryForm";
-import Axios from "axios";
 
 class RenderCategories extends Component {
   notFoundMessage = () => (

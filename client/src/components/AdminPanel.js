@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Button, Modal, Icon } from "semantic-ui-react";
+import { Button, Modal} from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderCategories from "./AdminPanelComponents/RenderCategories";
@@ -56,7 +56,7 @@ export default class AdminPanel extends Component {
     });
     axios
       .delete(`/api/categories/${category_id}/products/${id}`)
-      .then(res => this.searchUpdate(products))
+      .then(res => this.getProducts())
       .catch(error => console.log(error));
   };
   updateProducts = async () => {
