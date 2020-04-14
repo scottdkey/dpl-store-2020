@@ -35,7 +35,6 @@ class CategorySelector extends Component {
       onChange={this.handleChange}
       placeholder="Select Category"
       options={CategoryOptions}
-      value={value}
       />
       </>
     )

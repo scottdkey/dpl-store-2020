@@ -54,7 +54,7 @@ class Cart extends React.Component {
     cart.forEach(item => {
       total += item.object.price
     })
-    this.setState({ total: total })
+    this.setState({ total: total.toFixed(2) })
   }
 
   renderCartItems = () => {
@@ -77,7 +77,7 @@ class Cart extends React.Component {
 
                   <div style={style.informationContainer}>
                     <div>
-                      <h3 style={{ margin: '0px' }}>{item.object.title}</h3>
+                      <h3 style={{ margin: '0px',}}>{item.object.title}</h3>
                       <h6 style={{ margin: '0px', color: sizeColor }}>{item.size}</h6>
                     </div>
                     <div>
@@ -85,16 +85,16 @@ class Cart extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
+                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</Button>
                   </div>
                 </div>
               )
             })}
           </div>
 
-          <div>
-            <Header as='h1' textAlign='center'>Total: ${total}.00</Header>
-              <Link to='purchase-record' style={{ color: 'white' }}><Button style={style.button}>Checkout</Button></Link>
+          <div style={{textAlign:'center'}}>
+            <Header as='h1' textAlign='center'>Total: ${total}</Header>
+              <Link to='purchase-record' style={{color: 'white' }}><div style={style.button}>Checkout</div></Link>
           </div>
         </div>
       )
@@ -103,8 +103,8 @@ class Cart extends React.Component {
       return (
         <div style={style.itemsContainer}>
           <Header as='h1' textAlign='center' style={{ margin: '5%' }}>No Items In Cart</Header>
-          <div>
-            <Button disabled style={style.buttonDisabled}>Checkout</Button>
+          <div style={{textAlign:'center'}}>
+            <div style={style.buttonDisabled}>Checkout</div>
           </div>
         </div>)
     }
@@ -129,28 +129,34 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     width: '100%',
+    padding:'2%'
   },
   buttonDisabled: {
+    color: 'grey',
+    backgroundColor: 'lightgrey',
     borderRadius: '30px',
     width: '100%',
+    padding:'2%'
   },
   headerContainer: {
     backgroundColor: '#4901DB',
     color: 'white',
-    padding: '20px 50px',
+    padding: '2% 2%',
     display: 'flex',
     justifyContent: 'space-between'
   },
   headerButton: {
     backgroundColor: 'rgba(0,0,0, 0.13)',
-    fontSize: '12px',
-    color: 'rgba(255,255,255, 0.7)'
+    color: 'rgba(255,255,255, 0.7)',
+    fontSize: '1em'
   },
   header: {
-    margin: '0px'
+    margin: '0px',
+    fontSize: '2em'
   },
   itemsContainer: {
-    margin: '2% 20%',
+    margin: '3% 20%',
+    marginBottom:'10%',
   },
   cartContainer: {
     display: 'flex',
@@ -204,5 +210,6 @@ const style = {
     margin:'1%'
   }
 }
+
 
 export default Cart

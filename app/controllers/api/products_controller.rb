@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_category, only: %i[index show create update destory update_image]
+  before_action :set_category, except: [:all_products, :featured_products]
   before_action :set_product, only: %i[show update destroy update_image]
 
   def index
@@ -10,6 +10,10 @@ class Api::ProductsController < ApplicationController
 
   def all_products
     render json: Product.all
+  end
+
+  def featured_products
+    render json: Product.get_all_featured()
   end
 
   def show
@@ -64,7 +68,8 @@ class Api::ProductsController < ApplicationController
       :category_id,
       :main_image,
       :alt_image,
-      sizes: %i[small medium large noSize]
+      :featured,
+      sizes: %i[small medium large noSize],
     )
   end
 

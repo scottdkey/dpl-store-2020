@@ -93,7 +93,7 @@ class PurchaseRecord extends React.Component {
     return(
       <div style={{...style.itemsContainer, padding:'3%'}}>
         <Header as='h3' textAlign='center'>Thank You For Your Purchase</Header>
-        <Link to='/'><Button onClick={()=>clearCart()} style={style.doneBtn}>Done</Button></Link>
+        <Link to='/'><div onClick={()=>clearCart()} style={style.doneBtn}>Done</div></Link>
       </div>
     )
   }
@@ -180,7 +180,9 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     width:'100%',
-    marginTop:'3%'
+    marginTop:'3%',
+    padding:'2%',
+    textAlign:'center'
   }
 }
 

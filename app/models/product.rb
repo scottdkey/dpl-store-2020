@@ -8,4 +8,10 @@ class Product < ApplicationRecord
   has_many :purchase_products
   has_many :images
   has_many :purchase_records, through: :purchase_products
+
+  def self.get_all_featured
+    Product.find_by_sql(
+      "SELECT * FROM products WHERE featured=true"
+    )
+  end
 end

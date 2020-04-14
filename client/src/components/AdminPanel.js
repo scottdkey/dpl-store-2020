@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Header, Button, Modal } from "semantic-ui-react";
+import { Header, Button, Modal, Icon } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderCategories from "./AdminPanelComponents/RenderCategories";
 // import CategoryForm from "./Forms/CategoryForm";
 import CategorySelector from "./Selectors/CategorySelector";
+import CategoryForm from "./Forms/CategoryForm";
 
 export default class AdminPanel extends Component {
   state = {
@@ -12,7 +13,7 @@ export default class AdminPanel extends Component {
     categories: [],
     openForm: false,
     load: true,
-    category: "All Categories",
+    category: 'All Categories',
     categoryOptions: []
   };
 
@@ -47,14 +48,14 @@ export default class AdminPanel extends Component {
     });
   };
 
-  deleteProduct = id => {
+  deleteProduct = (id, category_id) => {
     const products = this.state.products.filter(product => {
       if (product.id !== id) {
         return product;
       }
     });
     axios
-      .delete(`/api/products/${id}`)
+      .delete(`/api/categories/${category_id}/products/${id}`)
       .then(res => this.searchUpdate(products))
       .catch(error => console.log(error));
   };
@@ -94,19 +95,36 @@ export default class AdminPanel extends Component {
     } = this.state;
     return (
       <>
-        <Header as="h1" textAlign="center">
-          Admin panel
-        </Header>
-        <CategorySelector
-          products={products}
-          getProducts={this.getProducts}
-          getCategories={this.getCategories}
-          setCategory={this.setCategory}
-          updateProducts={this.updateProducts}
-          categories={categories}
-        />
-        <Button onClick={this.toggleForm}>New Product</Button>
-        <Modal open={openForm} onClose={this.toggleForm}>
+        <div style={style.headerContainer}>
+          <h1 style={style.header}>Admin Panel</h1>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '1% 5%' }}>
+          <div>
+            <CategorySelector
+              products={products}
+              getProducts={this.getProducts}
+              getCategories={this.getCategories}
+              setCategory={this.setCategory}
+              updateProducts={this.updateProducts}
+              categories={categories}
+            />
+          </div>
+          <div>
+            <div style={{display:'inline-block'}}>
+            <h1 >{category}</h1>
+            </div>
+            {category === 'All Categories' ||category === 'Featured' ? <></> : 
+            <div style={{color:'#4575c4',display:'inline-block', cursor:'pointer'}}>
+              <CategoryForm category={category} />
+            </div>
+            }
+            
+          </div>
+          <div>
+            <Button style={style.button} onClick={this.toggleForm}>New Product</Button>
+          </div>
+        </div>
+        <Modal open={openForm}>
           <ProductForm
             toggleForm={this.toggleForm}
             getProducts={this.getProducts}
@@ -125,4 +143,21 @@ export default class AdminPanel extends Component {
       </>
     );
   }
+}
+
+const style = {
+  headerContainer: {
+    backgroundColor: '#4901DB',
+    color: 'white',
+    padding: '20px 50px',
+    textAlign: 'right'
+  },
+  header: {
+    margin: '0px'
+  },
+  button: {
+    borderRadius: '30px',
+    color: '#4901DB',
+    backgroundColor: 'rgba(74,1,219, .03)'
+  },
 }
