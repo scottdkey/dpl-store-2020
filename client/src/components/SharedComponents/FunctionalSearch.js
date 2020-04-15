@@ -4,12 +4,12 @@ import _ from 'lodash';
 import React, { useState, useEffect, } from 'react';
 import { Search, Grid, Header, Segment, Label, } from 'semantic-ui-react';
 
-const resultRenderer = ({ title }) => <Label content={title} />
+// const resultRenderer = ({ title }) => <Label content={title} />
 
-resultRenderer.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-};
+// resultRenderer.propTypes = {
+//   title: PropTypes.string,
+//   description: PropTypes.string,
+// };
 
 const FunctionalSearch = (props) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -35,22 +35,22 @@ const FunctionalSearch = (props) => {
       .catch(console.log)
   }, []);
 
-  const handleResultSelect = (e, { result }) => setValue(result.title)
+  // const handleResultSelect = (e, { result }) => setValue(result.title)
 
-  const handleSearchChange = (e, { value }) => {
-    setIsLoading(true)
-    setValue(value)
+  // const handleSearchChange = (e, { value }) => {
+  //   setIsLoading(true)
+  //   setValue(value)
 
-    setTimeout(() => {
-      if (value.length < 1) return initialState
+  //   setTimeout(() => {
+  //     if (value.length < 1) return initialState
 
-      const re = new RegExp(_.escapeRegExp(value), 'i')
-      const isMatch = (result) => re.test(result.title);
+  //     const re = new RegExp(_.escapeRegExp(value), 'i')
+  //     const isMatch = (result) => re.test(result.title);
 
-      setIsLoading(false)
-      setResults(_.filter(products, isMatch))
-    }, 300)
-  }
+  //     setIsLoading(false)
+  //     setResults(_.filter(products, isMatch))
+  //   }, 300)
+  // }
 
   const searchChange = (event) => {
     setSearchState({ 
