@@ -15,6 +15,8 @@ class Product < ApplicationRecord
     products = products.where(category_id: params[:category_id]) if category_validated
 
     products
+  end
+  
   def self.get_all_featured
     Product.find_by_sql(
       "SELECT * FROM products WHERE featured=true"
