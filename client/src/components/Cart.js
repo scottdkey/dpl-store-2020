@@ -38,9 +38,6 @@ class Cart extends React.Component {
     })
   }
 
-
-
-
   putItemsInCart() {
     let cart = getAllCartItems()
     this.setState({ cart: cart })

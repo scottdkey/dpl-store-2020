@@ -94,7 +94,7 @@ class PurchaseRecordForm extends React.Component {
             <Link to='/'><div style={style.cancelBtn}>Cancel</div></Link>
             </div>
             <div style={{width:"45%"}}>
-            <div style={style.submitBtn} onClick={this.handleSubmit}>Place My Order</div>
+            <div style={style.submitBtn} onClick={this.props.handleSubmit}>Place My Order</div>
             </div>
           </div>
         </div>
