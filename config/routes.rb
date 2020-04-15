@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   namespace :api do
     get '/products', to: 'products#all_products', as: '/products'
     get '/products/search', to: 'products#search'
+    get '/featured_products', to: 'products#featured_products'
   end
 
   namespace :api do
