@@ -1,23 +1,38 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Container, Grid, Header, Image, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import styled, { keyframes } from 'styled-components';
 import BlueHeader from '../images/BlueHeader.svg';
 import Featured from '../images/blank.png'
 import LargeLogo from '../images/logo_black.svg'
-import FeaturedProducts from '../components/FeaturedProducts'
+import FunctionalSearch from './SharedComponents/FunctionalSearch';
 
 
-const HomepageLayout = () => (
+
+const HomepageLayout = () => {
+  const [results, setResults] = useState([]);
+
+  const afterSearch = (results) => setResults(results);
+
+  const renderResults = () => results.map((result) => (
+    <div key={result.id}>
+      {result.title}
+    </div> 
+  ));
+
+  return (
     <>
     <div class="image-container">
     <Image src={BlueHeader} fluid />
     {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
     <div class="centered"><h1>DevPoint Store</h1>
-    <h3>Find something you'll love.</h3></div> 
+    <h3>Find something you'll love.</h3>
+    <FunctionalSearch afterSearch={afterSearch}/></div> 
     </div>
-    <Container> 
+    
+    <Container>
+      { results.length > 0 && renderResults() }
       <Grid >
         <Header as='h3'>CATEGORIES</Header>
         <Grid.Row columns={4}>
@@ -46,7 +61,8 @@ const HomepageLayout = () => (
       </div>
       <br />
   </>
-);
+  )
+};
 
 
 const RoundedImage= styled.div `

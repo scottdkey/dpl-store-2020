@@ -97,6 +97,9 @@ const DynamicProduct = ({category_id, product_id, match}) => {
           </Grid.Column>
         </Grid>
       </Card.Header>
+      <Card.Description>
+        // put the button here temporarily
+      </Card.Description>
       </Card>
       </>
     )

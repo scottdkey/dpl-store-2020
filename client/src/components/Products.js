@@ -3,9 +3,11 @@ import axios from "axios";
 import { Card, Image  } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from "../images/BlueHeader.svg"
+import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 
 export default class Products extends Component {
-  state = { categories: [] };
+  state = { categories: [], noHeader:true };
+  
 
   componentDidMount() {
     this.getCategories();
@@ -22,11 +24,13 @@ export default class Products extends Component {
       const category = c.name;
       console.log(c);
       return (
-        <Card.Group key={category}>
-          <DynamicCategory category_id={c.id} />
+        <Card.Group key={c.id}>
+          <DynamicCategory category_id={c.id} category_name={c.name} noHeader={true}/>
         </Card.Group>
       );
     });
+
+
 
   render() {
     return (
@@ -35,9 +39,11 @@ export default class Products extends Component {
           <Image src={BlueHeader} fluid />
           <div class="centered">
             <h1>All Merchandise</h1>
-            <h3>Find something you''ll love.</h3>
+            <h3>Find something you'll love.</h3>
+            <FunctionalSearch />
           </div>
         </div>
+
         {this.state.categories.length === 0
           ? "No Products"
           : this.renderCategories()}
