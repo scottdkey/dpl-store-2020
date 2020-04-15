@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get '/featured_products', to: 'products#featured_products'
     put '/categories/:category_id/products/:id/main_image', to: 'products#update_image'
     get '/products/search', to: 'products#search'
+    get '/featured_products', to: 'products#featured_products'
   end
 
   namespace :api do

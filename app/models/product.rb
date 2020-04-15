@@ -17,7 +17,7 @@ class Product < ApplicationRecord
 
     products
   end
-
+  
   def self.get_all_featured
     Product.find_by_sql(
       "SELECT * FROM products WHERE featured=true"

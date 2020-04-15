@@ -12,7 +12,7 @@ class Api::ProductsController < ApplicationController
     render json: Product.all
   end
 
-  def featured_products
+  def featured_products   
     render json: Product.get_all_featured()
   end
 
