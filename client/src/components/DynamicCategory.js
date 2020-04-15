@@ -4,10 +4,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
+import Products from './Products'
 
-const DynamicCategory = ({ category_id, match, category_name }) => {
+const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const [items, setItems] = useState([]);
+  const [category, setCategory] = useState(null);
   const cat_id = category_id || match.params.category_id;
+  const [results, setResults] = useState([]);
   // make another useEffect to get the category
   // /categories/:category_id/
 
@@ -15,9 +18,7 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
   // when the controller exists (see Brianna)
   // /categories/:category_id/products/:product_id
   // call to get both of them
-  const [results, setResults] = useState([]);
-  const [category, setCategory] = useState([])
-
+  
   const afterSearch = (results) => setResults(results);
 
   const renderResults = () => results.map((result) => (
@@ -76,29 +77,34 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
             </div>
         ))}
     </div>
-
+if(noHeader){
   return (
     <>
-      <div class="image-container">
+      {renderItems()}
+      {console.log(items)}
+      </>
+  )
+} else {
+  return(
+    <>
+    <div class="image-container">
         <Image src={BlueHeader} style={{ width: "100%" }} />
         <div class= "centered">
-          <h1 class="large-header">Category Name</h1>
-          <h3 class="small-header">Find something you'll love.</h3>
-          <FunctionalSearch/>
-        </div>
-      </div>
-      <Container>{renderItems()}</Container>
-      <br />
-      <div align="center">
+          <h1 class="large-header">{category && category.name}</h1>
+          <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
+          </div>
+          </div>
+          {results.length > 0 && renderResults()}
+          {renderItems()}
+          <br />
+        <div align="center">
         <button style={style.button}>See More</button>
-      </div>
-      <br />
-    </>
-  );
-
-  }
-export default DynamicCategory;
-
+        </div>
+        <br />
+          </>
+  )
+};
+};
 const style = {
   crop: {
     height: "100%",
@@ -141,3 +147,4 @@ const style = {
   },
 };
 
+export default DynamicCategory; 

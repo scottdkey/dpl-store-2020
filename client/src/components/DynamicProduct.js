@@ -143,7 +143,7 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     padding: '20px',
-    width: '100%',
+    width: '460px',
   },
   headerContainer: {
     backgroundColor: '#4901DB',

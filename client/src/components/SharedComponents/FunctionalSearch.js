@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import _ from 'lodash';
 import React, { useState, useEffect, } from 'react';
-import { Image, Button } from 'semantic-ui-react';
+import { Image, Form, Button, } from 'semantic-ui-react';
 import Search from './search.svg'
 
 // const resultRenderer = ({ title }) => <Label content={title} />
@@ -72,16 +72,19 @@ const FunctionalSearch = (props) => {
     // const { isLoading: boolean, value: string, results: [], products: [] } = this.state
     return(
         <>
-          {/* <Button onClick={searchSubmit}></Button> */}
+        <Button onClick={searchSubmit}>
+        </Button>
           <div class="fitted-icon">
           <Image src={Search} style={style.spyglass} ></Image>
           <input 
-            type="term"
             name="term"
             value={searchState.term}
             onChange={searchChange}
+            // onSubmit={searchSubmit}
           />
+      
           </div>
+         
         </>
     )
 };
@@ -94,7 +97,11 @@ const style = {
     width: '20px',
     position: 'absolute',
     display: 'inline-block',
-    left: '25px',
+    left: '20px',
     top: '6px',
   },
+  button: {
+    border: 'none',
+    backgroundColor: '#FFFFFF'
+  }
 }

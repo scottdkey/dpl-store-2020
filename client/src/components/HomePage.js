@@ -23,10 +23,11 @@ const HomepageLayout = () => {
         <div class="centered">
           <h1 class="large-header" >DevPoint Store</h1>
           <h3 class="small-header" >Find something you'll love.</h3>
-          <FunctionalSearch/>
+          <FunctionalSearch afterSearch={afterSearch}/>
         </div>
       </div>
       <Container>
+      { results.length > 0 && renderResults() }
         <Grid>
           <Header as="h3">CATEGORIES</Header>
           <Grid.Row columns={4}>
