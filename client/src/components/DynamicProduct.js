@@ -10,7 +10,6 @@ import Arrow from '../images/LineArrowDown.svg';
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
   const [size, setSize] = useState('')
-
   // const options = [
   //   { key: 1, text: 'Extra Small', value: 1 },
   //   { key: 2, text: 'Small', value: 2 },
@@ -18,7 +17,6 @@ const DynamicProduct = ({category_id, product_id, match}) => {
   //   { key: 4, text: 'Large', value: 4 },
   //   { key: 5, text: 'Extra Large', value: 5 },
   // ]
-
   const [items] = useState([
     {
       label: "",
@@ -49,7 +47,6 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       value: "XXL"
     }
   ])
-
   useEffect( () => {
     const cat_id = match.params.category_id
     const prod_id = match.params.id
@@ -61,15 +58,11 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       })
       .catch(console.log);
   }, []);
-
     const handleChange = (e) => {
       return(
         setSize(e)
       )
     };
-
-    
-
     return(
       <>
       <div style={style.headerContainer}>
@@ -127,15 +120,12 @@ const DynamicProduct = ({category_id, product_id, match}) => {
         </Grid>
       </Card.Header>
       <Card.Description>
-        
       </Card.Description>
       </Card>
       </Container>
       </>
     )
 };
-
-export default DynamicProduct;
 
 const style = {
   button: {
@@ -202,3 +192,5 @@ const style = {
       top: '42px',
     },
 };
+
+export default DynamicProduct;

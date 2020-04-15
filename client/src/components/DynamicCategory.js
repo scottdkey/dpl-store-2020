@@ -13,19 +13,17 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const [results, setResults] = useState([]);
   // make another useEffect to get the category
   // /categories/:category_id/
-
   // refactor component to get products by category
   // when the controller exists (see Brianna)
   // /categories/:category_id/products/:product_id
   // call to get both of them
-  
   const afterSearch = (results) => setResults(results);
-
   const renderResults = () => results.map((result) => (
     <div key={result.id}>
       {result.title}
     </div> 
   ));
+
 
   useEffect(() => {
     console.log(match);
@@ -38,6 +36,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .catch(console.log);
   }, []);
 
+
   // gets category on initial render
   useEffect(() => {
     const cat_id = category_id || match.params.category_id
@@ -47,11 +46,11 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .catch(console.log);
   }, []);
 
+
   const renderItems = () =>
   <div style={style.productContainer}>
         { items.map((product) => (
             <div  key={product.id}>
-              <h1>{category_name}</h1>
               <div style={{ ...style.photoHolder }}>
                 <div style={style.crop}>
                   <Image
@@ -76,35 +75,37 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
               </div>  
             </div>
         ))}
-    </div>
-if(noHeader){
-  return (
-    <>
-      {renderItems()}
-      {console.log(items)}
+  </div>
+
+  if(noHeader){
+    return (
+      <>
+        {renderItems()}
       </>
-  )
-} else {
-  return(
-    <>
-    <div class="image-container">
-        <Image src={BlueHeader} style={{ width: "100%" }} />
-        <div class= "centered">
-          <h1 class="large-header">{category && category.name}</h1>
-          <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
-          </div>
-          </div>
-          {results.length > 0 && renderResults()}
-          {renderItems()}
-          <br />
-        <div align="center">
-        <button style={style.button}>See More</button>
-        </div>
-        <br />
-          </>
-  )
+    )
+  } else {
+    return(
+      <>
+      <div class="image-container">
+          <Image src={BlueHeader} style={{ width: "100%" }} />
+          <div class= "centered">
+            <h1 class="large-header">{category && category.name}</h1>
+            <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
+            </div>
+            </div>
+            {results.length > 0 && renderResults()}
+            {renderItems()}
+            <br />
+          <div align="center">
+          <button style={style.button}>See More</button>
+      </div>
+      <br />
+      </>
+    )
+  };
 };
-};
+
+
 const style = {
   crop: {
     height: "100%",
