@@ -21,7 +21,6 @@ const DynamicCategory = ({ category_name, category_id, noHeader, match }) => {
   // /categories/:category_id/products/:product_id
   // call to get both of them
   const [results, setResults] = useState([]);
-  const [category, setCategory] = useState([])
 
   const afterSearch = results => setResults(results);
 
