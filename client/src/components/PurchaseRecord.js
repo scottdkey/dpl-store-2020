@@ -61,7 +61,7 @@ class PurchaseRecord extends React.Component {
     cart.forEach(item => {
       total += item.object.price
     })
-    this.setState({total: total})
+    this.setState({total: total.toFixed(2) })
   }
 
 
