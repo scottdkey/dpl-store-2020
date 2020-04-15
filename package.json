@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/devpointlabs/dpl-store-2020#readme",
   "dependencies": {
-    "prop-types": "^15.7.2"
+  "prop-types": "^15.7.2"
   }
 }

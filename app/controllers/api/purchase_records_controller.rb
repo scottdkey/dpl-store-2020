@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Api::PurchaseRecordsController < ApplicationController
-  before_action :set_purchase_record, only: [:show, :update, :destroy]
+  before_action :set_purchase_record, only: %i[show update destroy]
 
   def index
-    render json: PurchaseRecord.All
+    render json: PurchaseRecord.all
   end
 
   def show
@@ -33,7 +35,7 @@ class Api::PurchaseRecordsController < ApplicationController
   private
 
   def purchase_record_paramas
-    params.require(:purchase_record).permit(:order_total, :email_address, :first_name, :last_name, :address_one, :address_two, :city, :state, :zip_code, :fulfilled)
+    params.require(:purchase_record).permit(:order_total, :email_address, :first_name, :last_name, :address_one, :address_two, :city, :state, :zip_code, :fufilled)
   end
 
   def set_purchase_record

@@ -1,39 +1,48 @@
 import React, { Fragment, } from 'react';
-import NavBar from './components/NavBar';
+import './App.css';
 import Login from './components/Login';
 import { Switch, Route, } from 'react-router-dom';
-import { Container, } from "semantic-ui-react";
+import { Container, Menu, } from "semantic-ui-react";
 import FetchAdmin from './components/FetchAdmin';
 import AdminPanel from './components/AdminPanel';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './components/HomePage';
-import Tshirts from './components/Tshirts';
-import Hoodies from './components/Hoodies';
-import Hats from './components/Hats';
-import Stickers from './components/Stickers';
 import PurchaseRecord from './components/PurchaseRecord'
 import Products from './components/Products';
+import Footer from './components/Footer';
+import Navbar from './components/Menu';
+import DynamicCategory from './components/DynamicCategory';
+import DynamicProduct from './components/DynamicProduct';
+import Links from './components/SharedComponents/Links';
+import StyledCard from './components/SharedComponents/StyledCard';
+import Parent from './components/SharedComponents/Parent';
+import Cart from './components/Cart'
 
+// import Header from './components/Header'
+ 
 const App = () => (
-  // <Fragment>
-  //   <NavBar />
+  <Fragment>
     <FetchAdmin>
-      <Container>
+    <Navbar/> 
+     <Container fluid>
         <Switch>
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
           <Route exact path="/login" component={Login} />
           <Route exact path='/purchase-record' component={PurchaseRecord} />
-          <Route exact path="/tshirts" component={Tshirts} />
-          <Route exact path="/hoodies" component={Hoodies} />
-          <Route exact path="/hats" component={Hats} />
-          <Route exact path="/stickers" component={Stickers} />
           <Route exact path="/allmerchandise" component={Products} />
+          <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
+          <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
+          <Route exact path='/styled' component={StyledCard} />
+          <Route exact path='/parent' component={Parent} />
+          <Route exact path='/links' component={Links} />
+          <Route exact path='/cart' component={Cart} />
         </Switch>
-      </Container>
-      {/* <Footer /> */}
+        </Container>
+      <Footer />
     </FetchAdmin>
-  // </Fragment>
+   </Fragment>
 );
+
 
 export default App;

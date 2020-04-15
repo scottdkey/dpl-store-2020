@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_06_194630) do
+ActiveRecord::Schema.define(version: 2020_03_30_233125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,22 +58,24 @@ ActiveRecord::Schema.define(version: 2020_04_06_194630) do
     t.float "price"
     t.boolean "has_size"
     t.text "sizes"
-    t.string "category"
     t.text "main_image"
     t.text "alt_image"
+    t.boolean "featured"
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "purchase_products", force: :cascade do |t|
     t.integer "quantity"
     t.string "size_choice"
-    t.bigint "purchase_records_id", null: false
+    t.bigint "purchase_record_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_purchase_products_on_product_id"
-    t.index ["purchase_records_id"], name: "index_purchase_products_on_purchase_records_id"
+    t.index ["purchase_record_id"], name: "index_purchase_products_on_purchase_record_id"
   end
 
   create_table "purchase_records", force: :cascade do |t|
@@ -91,6 +93,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_194630) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "products", "categories"
   add_foreign_key "purchase_products", "products"
-  add_foreign_key "purchase_products", "purchase_records", column: "purchase_records_id"
+  add_foreign_key "purchase_products", "purchase_records"
 end
