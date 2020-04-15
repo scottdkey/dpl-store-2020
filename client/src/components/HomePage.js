@@ -1,12 +1,11 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { Container, Grid, Header, Image } from "semantic-ui-react";
+import PropTypes from 'prop-types';
+import React, { Component, useState } from 'react';
+import { Container, Grid, Header, Image, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import BlueHeader from "../images/BlueHeader.svg";
-import Featured from "../images/blank.png";
-import LargeLogo from "../images/logo_black.svg";
-import FeaturedProducts from "../components/FeaturedProducts";
+import styled from 'styled-components';
+import BlueHeader from '../images/BlueHeader2.svg';
+import Featured from '../images/blank.png'
+import FeaturedCard from './FeaturedCard';
 
 const HomepageLayout = () => {
   const [results, setResults] = useState([]);

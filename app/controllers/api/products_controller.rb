@@ -38,6 +38,10 @@ class Api::ProductsController < ApplicationController
     @product.destroy
   end
 
+  def search
+    render json: Product.search(params)
+  end
+
   private
 
   def product_params
