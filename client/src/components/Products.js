@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Image  } from "semantic-ui-react";
+import { Card, Image, } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
-import BlueHeader from "../images/BlueHeader.svg"
-import FunctionalSearch from "./SharedComponents/FunctionalSearch";
+import BlueHeader from '../images/BlueHeader2.svg';
+import FunctionalSearch from './SharedComponents/FunctionalSearch';
 
 
 
 export default class Products extends Component {
-  state = { categories: [], noHeader:true , results: [] };
+  state = { categories: [] , results: [] };
   
 
   componentDidMount() {
@@ -24,10 +24,10 @@ export default class Products extends Component {
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.name;
-      console.log(c);
       return (
         <Card.Group key={c.id}>
-          <DynamicCategory category_id={c.id} category_name={c.name} noHeader={true}/>
+          <h4>{category}</h4>
+          <DynamicCategory category_id={c.id} category_name={c.name} noHeader />
         </Card.Group>
       );
     });
@@ -77,3 +77,5 @@ export default class Products extends Component {
     );
   }
 }
+
+

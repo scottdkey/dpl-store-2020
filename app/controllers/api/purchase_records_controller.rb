@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::PurchaseRecordsController < ApplicationController
-  before_action :set_purchase_record, only: [:show, :update, :destroy]
+  before_action :set_purchase_record, only: %i[show update destroy]
 
   def index
     render json: PurchaseRecord.all
