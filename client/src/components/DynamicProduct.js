@@ -1,9 +1,10 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
-import { Card, Grid, Button, Image, Form, Dropdown, } from 'semantic-ui-react';
+import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
-
+import Featured from '../images/blank.png' 
+import Links from './SharedComponents/Links';
 
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
@@ -52,29 +53,41 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       .catch(console.log);
   }, []);
 
-    // const handleChange = (e) => {
-    //   return(
-    //     setSize(e)
-    //   )
-    // };
+    const handleChange = (e) => {
+      return(
+        setSize(e)
+      )
+    };
 
     
 
     return(
       <>
-      <Card key={product.id}>
+      <div style={style.headerContainer}>
+          <Link to='/'><Button style={style.headerButton}>Hats</Button></Link>
+        </div>
+      <Container>
+      <Card key={product.id} style= {style.card}>
       <Card.Header>
-        <Grid>
-          <Grid.Column width={8}>   
-            <Image src={product.main_image} />
-            {/* main_image
-            image.group itemsPerRow={4} all alt_images */}
-            This is where the Image Goes
+        <Grid >
+        <div align="center">
+          <Grid.Column width={8}  kvb>   
+            <Image src={Featured} style= {style.roundedImage} />
+            <Image.Group >
+              <Image style={style.altImage} src={Featured} />
+              <Image style={style.altImage} src={Featured} />
+              <Image style={style.altImage} src={Featured} />
+              <Image style={style.altImage} src={Featured} />
+          </Image.Group>
           </Grid.Column>
-          <Grid.Column width={8}>
-            <Grid.Row>{product.title}</Grid.Row>
-              <Grid.Row>{"$" + product.price}</Grid.Row>
-              <Grid.Row>{product.description}</Grid.Row>
+          </div>
+          <Grid.Column width={7}>
+            <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
+            <br/>
+            <Grid.Row><h4>{product.description}</h4></Grid.Row>
+            <br/> 
+            <Grid.Row><h1>{"$" + product.price}</h1></Grid.Row>
+            <br/> 
             {/* Header
             meta
             description
@@ -84,16 +97,30 @@ const DynamicProduct = ({category_id, product_id, match}) => {
             {/* <Form id="selectedSize">
             <Form.Dropdown clearable search options={options} selection onChange={e => setSize(e.currentTarget.text)} />
             </Form> */}
-            <select onChange={e => setSize(e.currentTarget.value)}>
+            {/* <select onChange={e => setSize(e.currentTarget.value)}>
               {items.map(({ label, value }) => (
                 <option key={value} value={value}>
                 {label}
                 </option>
               ))}
-            </select>
-            <Button as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" className="pillButton" onClick={() => putItemInCart(product, size, 1)} />
-            {console.log(product)}
-            {console.log(size)}
+            </select> */}
+            <div>
+            <Grid.Row>
+            <Form style={{paddingRight: "40px"}} >
+            <Form.Select 
+                  label="Size"
+                  name="sizeSelection"
+                  value={sizeSelection}
+                  // onChange={this.handleChange}
+                  options={sizeSelection}
+                />
+                </Form>
+                </Grid.Row>
+                <br/> 
+            <Grid.Row >
+            <Button as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" onClick={() => putItemInCart(product, size, 1)} />
+            </Grid.Row>
+            </div>
           </Grid.Column>
         </Grid>
       </Card.Header>
@@ -101,16 +128,66 @@ const DynamicProduct = ({category_id, product_id, match}) => {
         // put the button here temporarily
       </Card.Description>
       </Card>
+      </Container>
       </>
     )
 };
 
+const sizeSelection = [
+  { key: "xs", text: "X-Small", value: "X-Small", },
+  { key: "s", text: "Small", value: "Small", },
+  { key: "m", text: "Medium", value: "Medium", },
+  { key: "l", text: "Large", value: "Large", },
+  { key: "xl", text: "X-Large", value: "X-Large", },
+];
+
+
 export default DynamicProduct;
 
-const style= {
+const style = {
   button: {
     color: 'white',
     backgroundColor: '#4901DB',
     borderRadius: '30px',
+    padding: '20px',
+    width: '700px',
+  },
+  headerContainer: {
+    backgroundColor: '#4901DB',
+    color: 'white',
+    padding: '20px 100px',
+    height: '200px',
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  headerButton: {
+    backgroundColor: 'rgba(0,0,0, 0.13)',
+    fontSize: '12px',
+    color: 'rgba(255,255,255, 0.7)',
+    width: '100px',
+  },
+  roundedImage: {
+    borderRadius: '50px',
+    width: '500px',
+    height: '500px',
+    padding: '40px',
+  },
+  card: {
+    height: '600px', 
+    width: '1100px', 
+    borderRadius: '12px',
+    marginBottom: '20%',
+    marginTop: '-100px',
+  },
+  rounded: {
+    borderRadius: '25px',
+    padding: '40px',
+  },
+  altImage: {
+    borderRadius: '20px',
+    height: '100px',
+    width: '100px',
+    marginTop: '-25px',
+    
   }
-}
+};

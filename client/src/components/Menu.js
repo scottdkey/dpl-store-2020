@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Container, Icon, Image, Menu, Responsive, Segment, Sidebar, Visibility,} from 'semantic-ui-react';
+import { Container, Icon, Image, Menu, Responsive, Sidebar, Visibility,} from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import Beaker from "../images/logo_black.svg";
 import Links from '../components/SharedComponents/Links';
@@ -100,17 +100,17 @@ class MobileContainer extends Component {
           onHide={this.handleSidebarHide}
           vertical
           visible={sidebarOpened}
+          style={{margin: 0, border: "none"}}
         >
-          <Menu.Item as='a' active>
-            .Shop
-          </Menu.Item>
-          <Links />
+          <Link to="/" ><Menu.Item>
+                  <Image src={Beaker} size="tiny" className="filter-white"></Image>
+                </Menu.Item></Link>
           <Menu.Item as='a'>More<Icon name="dropdown"/></Menu.Item>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened} >
             <Container fluid >
-              <Menu 
+              <Menu style={{margin: 0, border: "none"}}
                 className="dpl-blue" 
                 inverted 
                 pointing 
