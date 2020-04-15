@@ -114,6 +114,7 @@ class Cart extends React.Component {
     return (
       <div>
         <div style={style.headerContainer}>
+
           <Link to='/'><Button style={style.headerButton}>Continue Shopping</Button></Link>
           <h1 style={style.header}>My Cart</h1>
         </div>
@@ -147,8 +148,9 @@ const style = {
   },
   headerButton: {
     backgroundColor: 'rgba(0,0,0, 0.13)',
+    fontSize: '12px',
     color: 'rgba(255,255,255, 0.7)',
-    fontSize: '1em'
+    align: 'center',
   },
   header: {
     margin: '0px',

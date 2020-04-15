@@ -54,6 +54,7 @@ class PurchaseRecord extends React.Component {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email)) { this.setState({ validEmail: true, }) }
   }
+  
   addTotal = () => {
     let cart = getAllCartItems()
     let total = 0
