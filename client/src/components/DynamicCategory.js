@@ -14,6 +14,15 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
   // when the controller exists (see Brianna)
   // /categories/:category_id/products/:product_id
   // call to get both of them
+  const [results, setResults] = useState([]);
+
+  const afterSearch = (results) => setResults(results);
+
+  const renderResults = () => results.map((result) => (
+    <div key={result.id}>
+      {result.title}
+    </div> 
+  ));
 
   useEffect(() => {
     console.log(match);
@@ -21,8 +30,17 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
     axios
       .get(`/api/categories/${cat_id}/products`)
       .then((res) => {
-        setItems(res.data);
+        setItems(res.data)
       })
+      .catch(console.log);
+  }, []);
+
+  // gets category on initial render
+  useEffect(() => {
+    const cat_id = category_id || match.params.category_id
+    axios
+      .get(`/api/categories/${cat_id}`)
+      .then((res) => setCategory(res.data))
       .catch(console.log);
   }, []);
 
@@ -75,7 +93,7 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
       <br />
     </>
   );
-};
+
 
 export default DynamicCategory;
 

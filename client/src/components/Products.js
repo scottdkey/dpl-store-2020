@@ -3,9 +3,9 @@ import axios from "axios";
 import { Card, } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 
-
 export default class Products extends Component {
-  state = { categories: [] };
+  state = { categories: [], noHeader:true };
+  
 
   componentDidMount() {
     this.getCategories();
@@ -22,11 +22,12 @@ export default class Products extends Component {
       const category = c.name;
       console.log(c);
       return (
-         
           <DynamicCategory category_id={c.id} />
          
       );
     });
+
+
 
   render() {
     return (
@@ -38,4 +39,5 @@ export default class Products extends Component {
     );
   }
 }
+
 

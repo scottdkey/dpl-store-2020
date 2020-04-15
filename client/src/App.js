@@ -15,10 +15,8 @@ import DynamicCategory from './components/DynamicCategory';
 import DynamicProduct from './components/DynamicProduct';
 import Links from './components/SharedComponents/Links';
 import StyledCard from './components/SharedComponents/StyledCard';
-import Parent from './components/SharedComponents/Parent';
-import Cart from './components/Cart'
+import Cart from './components/Cart';
 
-// import Header from './components/Header'
  
 const App = () => (
   <Fragment>
@@ -34,7 +32,6 @@ const App = () => (
           <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
           <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
           <Route exact path='/styled' component={StyledCard} />
-          <Route exact path='/parent' component={Parent} />
           <Route exact path='/links' component={Links} />
           <Route exact path='/cart' component={Cart} />
         </Switch>

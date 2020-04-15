@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Container, Grid, Header, Image, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
@@ -8,7 +8,19 @@ import Featured from '../images/blank.png'
 import FeaturedCard from './FeaturedCard';
 
 
-const HomepageLayout = () => (
+
+const HomepageLayout = () => {
+  const [results, setResults] = useState([]);
+
+  const afterSearch = (results) => setResults(results);
+
+  const renderResults = () => results.map((result) => (
+    <div key={result.id}>
+      {result.title}
+    </div> 
+  ));
+
+  return (
     <>
     <div class="image-container">
     <Image src={BlueHeader} style={{width:"100%"}} />
@@ -68,7 +80,8 @@ const HomepageLayout = () => (
             <button style={style.button}>See More</button></div>     
     </Container>
   </>
-);
+  )
+};
 
 const style = {
   button: {
