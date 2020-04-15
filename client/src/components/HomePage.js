@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
 import Featured from '../images/blank.png'
+import FeaturedProduct from './FeaturedProducts'
 
 const HomepageLayout = () => {
   const [results, setResults] = useState([]);
@@ -58,9 +59,7 @@ const HomepageLayout = () => {
       </Container>
       <br />
       <div align="center">
-        <button class="ui button" style={{ align: "center" }}>
-          See More
-        </button>
+        <FeaturedProduct />
       </div>
       <br />
     </>

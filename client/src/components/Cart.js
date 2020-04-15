@@ -85,7 +85,7 @@ class Cart extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
+                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</Button>
                   </div>
                 </div>
               )

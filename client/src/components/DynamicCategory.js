@@ -6,7 +6,6 @@ import BlueHeader from "../images/BlueHeader2.svg";
 
 const DynamicCategory = ({ category_id, match, category_name }) => {
   const [items, setItems] = useState([]);
-  const [category, setCategory] = useState([]);
 
   const cat_id = category_id || match.params.category_id;
   // make another useEffect to get the category
@@ -17,6 +16,7 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
   // /categories/:category_id/products/:product_id
   // call to get both of them
   const [results, setResults] = useState([]);
+  const [category, setCategory] = useState([])
 
   const afterSearch = (results) => setResults(results);
 
@@ -95,8 +95,8 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
       <br />
     </>
   );
-}
 
+  }
 export default DynamicCategory;
 
 const style = {
