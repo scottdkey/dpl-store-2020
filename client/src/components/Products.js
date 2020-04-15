@@ -5,8 +5,10 @@ import DynamicCategory from "./DynamicCategory";
 import BlueHeader from "../images/BlueHeader.svg"
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 
+
+
 export default class Products extends Component {
-  state = { categories: [], noHeader:true };
+  state = { categories: [], noHeader:true , results: [] };
   
 
   componentDidMount() {
@@ -30,6 +32,23 @@ export default class Products extends Component {
       );
     });
 
+  afterSearch = (results) => {this.setState({ results: results })};
+
+  renderResults = () => (
+    <div>
+      <h1>Search Results</h1>
+      {this.state.results.map((result) => (
+        <div key={result.id}>
+          <Card>
+            <Image src={result.main_image} alt={result.title} size="small" />
+            <Card.Header>{result.title}</Card.Header>
+            <Card.Meta>${result.price}</Card.Meta>
+          </Card><br />
+        </div> 
+      ))}
+    </div> 
+  );
+
 
 
   render() {
@@ -40,10 +59,11 @@ export default class Products extends Component {
           <div class="centered">
             <h1>All Merchandise</h1>
             <h3>Find something you'll love.</h3>
-            <FunctionalSearch />
+            <FunctionalSearch afterSearch={this.afterSearch} />
           </div>
         </div>
 
+        { this.state.results.length > 0 && this.renderResults() }
         {this.state.categories.length === 0
           ? "No Products"
           : this.renderCategories()}

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component, useState } from 'react';
-import { Container, Grid, Header, Image, } from 'semantic-ui-react';
+import { Container, Grid, Header, Image, Card, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import styled, { keyframes } from 'styled-components';
 import BlueHeader from '../images/BlueHeader.svg';
@@ -16,19 +16,24 @@ const HomepageLayout = () => {
 
   const renderResults = () => results.map((result) => (
     <div key={result.id}>
-      {result.title}
+      <Card>
+        <Image src={result.main_image} alt={result.title} size="small" />
+        <Card.Header>{result.title}</Card.Header>
+        <Card.Meta>${result.price}</Card.Meta>
+      </Card><br />
     </div> 
   ));
 
   return (
     <>
-    <div class="image-container">
-    <Image src={BlueHeader} fluid />
-    {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-    <div class="centered"><h1>DevPoint Store</h1>
-    <h3>Find something you'll love.</h3>
-    <FunctionalSearch afterSearch={afterSearch}/></div> 
-    </div>
+      <div class="image-container">
+        <Image src={BlueHeader} fluid />
+        {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
+        <div class="centered"><h1>DevPoint Store</h1>
+          <h3>Find something you'll love.</h3>
+          <FunctionalSearch afterSearch={afterSearch}/>
+        </div> 
+      </div>
     
     <Container>
       { results.length > 0 && renderResults() }

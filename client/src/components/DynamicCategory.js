@@ -23,11 +23,20 @@ const DynamicCategory = ({category_name, category_id, noHeader, match}) => {
 
   const afterSearch = (results) => setResults(results);
 
-  const renderResults = () => results.map((result) => (
-    <div key={result.id}>
-      {result.title}
-    </div> 
-  ));
+  const renderResults = () => (
+    <>
+      <h1>Search Results</h1>
+      {results.map((result) => (
+        <div key={result.id}>
+          <Card>
+            <Image src={result.main_image} alt={result.title} size="small" />
+            <Card.Header>{result.title}</Card.Header>
+            <Card.Meta>${result.price}</Card.Meta>
+          </Card><br />
+        </div> 
+      ))}
+    </>
+  );
 
   useEffect(() => {
     const cat_id = category_id || match.params.category_id
@@ -48,25 +57,28 @@ const DynamicCategory = ({category_name, category_id, noHeader, match}) => {
       .catch(console.log);
   }, []);
 
-  const renderItems = () =>
-    items.map((product) => (
-      <div key={product.id}>
-        <Image src={product.main_image} as={Link} to={{pathname:`/categories/${cat_id}/products/${product.id}`, state:{...product} }} />
-        <Card >
-          <Card.Content>
-            <Card.Header>{product.title}</Card.Header>
-            <Card.Meta>{"$" + product.price}</Card.Meta>
-          </Card.Content>
-        </Card>
-      </div>
-    ));
+  const renderItems = () => (
+    <>
+      <h1>SHOP</h1>
+      {items.map((product) => (
+        <div key={product.id}>
+          <Image src={product.main_image} as={Link} to={{pathname:`/categories/${cat_id}/products/${product.id}`, state:{...product} }} />
+          <Card >
+            <Card.Content>
+              <Card.Header>{product.title}</Card.Header>
+              <Card.Meta>{"$" + product.price}</Card.Meta>
+            </Card.Content>
+          </Card>
+        </div>
+      ))}
+    </>
+  );
 
     
   if(noHeader) {
       return(
         <>
         {renderItems()}
-        {console.log(items)}
         </>
       )
     } else {
