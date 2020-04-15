@@ -58,6 +58,10 @@
   filter: invert(100%) sepia(0%) saturate(7475%) hue-rotate(56deg) brightness(98%) contrast(105%);
 }
 
+.filter-grey {
+  filter: invert(100%) sepia(0%) saturate(7475%) hue-rotate(56deg) brightness(98%) contrast(105%);
+}
+
 .dpl-blue {
   background-color: #4901DB !important;
 }
@@ -125,11 +129,14 @@
     height: 30px;
     
   }
-  /* .spy {
-    position:absolute;
-    display:inline-block;
-    width: 40px;
-    height: 40px;
-    left:265px;
-    top:2px;
-  } */
+  
+  select::-ms-expand {
+    display: none;
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}

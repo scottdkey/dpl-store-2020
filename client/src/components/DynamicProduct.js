@@ -5,6 +5,7 @@ import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import Featured from '../images/blank.png' 
 import Links from './SharedComponents/Links';
+import Arrow from '../images/LineArrowDown.svg';
 
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
@@ -105,6 +106,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
             {/* <Form id="selectedSize">
             <Form.Dropdown clearable search options={options} selection onChange={e => setSize(e.currentTarget.text)} />
             </Form> */}
+              <div class="fitted-icon">
             <p>Size</p>
             <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
               {items.map(({ label, value }) => (
@@ -113,6 +115,8 @@ const DynamicProduct = ({category_id, product_id, match}) => {
                 </option>
               ))}
             </select>
+            <Image src={Arrow} style={style.arrow}  ></Image>
+            </div>
             <div>
                 <br/> 
             <Grid.Row >
@@ -183,5 +187,18 @@ const style = {
     height: '40px',
     backgroundColor: '#FFFFFF',
     borderColor: 'lightgrey',
-  }
+    textDecoration: 'none',
+    webkitAppearance: 'none',
+    mozAppearance: 'none',
+    textIndent: '1px',
+    textOverflow: '',
+  },
+    arrow: {
+      backgroundColor: '#FFFFFF',
+      width: '20px',
+      position: 'absolute',
+      display: 'inline-block',
+      left: '425px',
+      top: '42px',
+    },
 };
