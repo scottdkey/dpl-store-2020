@@ -15,6 +15,7 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
   // /categories/:category_id/products/:product_id
   // call to get both of them
   const [results, setResults] = useState([]);
+  const [category, setCategory] = useState([])
 
   const afterSearch = (results) => setResults(results);
 
@@ -94,7 +95,7 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
     </>
   );
 
-
+  }
 export default DynamicCategory;
 
 const style = {
