@@ -85,7 +85,7 @@ class Cart extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</Button>
+                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
                   </div>
                 </div>
               )
@@ -114,6 +114,7 @@ class Cart extends React.Component {
     return (
       <div>
         <div style={style.headerContainer}>
+
           <Link to='/'><Button style={style.headerButton}>Continue Shopping</Button></Link>
           <h1 style={style.header}>My Cart</h1>
         </div>
@@ -148,14 +149,15 @@ const style = {
   headerButton: {
     backgroundColor: 'rgba(0,0,0, 0.13)',
     fontSize: '12px',
-    color: 'rgba(255,255,255, 0.7)'
+    color: 'rgba(255,255,255, 0.7)',
+    align: 'center',
   },
   header: {
     margin: '0px'
   },
   itemsContainer: {
     margin: '3% 20%',
-    marginBottom:'10%'
+    marginBottom:'15%'
   },
   cartContainer: {
     display: 'flex',

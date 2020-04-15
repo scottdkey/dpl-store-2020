@@ -12,18 +12,16 @@ const Links = () => {
     .get(`/api/categories`)
     .then( (res) => {
       setCategories(res.data)
-      // console.log(res.data)
     })
     .catch(console.log);
   }, []);
 
-  const renderLinks = () => 
+  const renderLinks = () =>
     categories.map( (category) => (
       <div key={`link${category.id}`}>
-      <Menu.Item as={Link} to={{pathname:`/categories/${category.id}/products`}}>{category.name}</Menu.Item>
+      <Menu.Item as={Link} to={{pathname:`/categories/${category.id}/products`,}}>{category.name}</Menu.Item>
       </div>
     ))
-  
 
   return(
     <>
@@ -31,6 +29,6 @@ const Links = () => {
     {renderLinks()}
     </>
   )
-}
+};
 
 export default Links;

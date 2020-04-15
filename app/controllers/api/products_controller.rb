@@ -13,10 +13,6 @@ class Api::ProductsController < ApplicationController
     render json: Product.all
   end
 
-  def featured_products
-    render json: Product.get_all_featured()
-  end
-
   def show
     render json: @product
   end
@@ -40,6 +36,10 @@ class Api::ProductsController < ApplicationController
 
   def destroy
     @product.destroy
+  end
+
+  def search
+    render json: Product.search(params)
   end
 
   private
