@@ -137,8 +137,6 @@ const style = {
     marginTop: '3%',
     width:'100%',
     padding:'2%',
-    cursor:'pointer'
-
   },
   buttonHolder: {
     display: 'flex',
