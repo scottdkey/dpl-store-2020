@@ -17,37 +17,6 @@ const HomepageLayout = () => {
 
   return (
     <>
-<<<<<<< HEAD
-    
-    <div class="image-container">
-    <Image src={BlueHeader} fluid />
-    {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-    <div class="centered"><h1>DevPoint Store</h1>
-    <h3>Find something you'll love.</h3></div> 
-    </div>
-    <Container> 
-      <Grid >
-        <Header as='h3'>CATEGORIES</Header>
-        <Grid.Row columns={4}>
-          <Grid.Column>
-            <Link to="/categories/1/products" ><RoundedImage as={Image} size="medium" src={Featured} fluid /></Link>
-            <h4 align="center">T Shirts</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/categories/2/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
-            <h4 align="center">Jackets & Hoodies </h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/categories/3/products" > <RoundedImage as={Image} size="medium" src={Featured} /></Link>
-            <h4 align="center">Hats</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/categories/4/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
-            <h4 align="center">Stickers</h4>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid> 
-=======
       <div class="image-container">
         <Image src={BlueHeader} fluid />
         {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
@@ -87,7 +56,6 @@ const HomepageLayout = () => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
->>>>>>> 09a07f7d1bfbefa635d227cdfc152284deece669
       </Container>
       <br />
       <div align="center">
