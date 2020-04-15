@@ -25,10 +25,8 @@ class RenderCategories extends Component {
             {products.map(product => (
               <div style={style.product} key={product.id}>
                 <RenderProduct
-                  toggleForm={this.props.toggleForm}
-                  getProducts={this.props.getProducts}
                   product={product}
-                  deleteProduct={this.props.deleteProduct}
+                  {...this.props}
                 />
               </div>
             ))}

@@ -12,6 +12,7 @@ export default class AdminPanel extends Component {
     products: [],
     categories: [],
     openForm: false,
+    openCategoryForm: false,
     load: true,
     category: 'All Categories',
     categoryOptions: []
@@ -84,6 +85,7 @@ export default class AdminPanel extends Component {
     this.setState({ openForm: !this.state.openForm });
   };
 
+
   render() {
     const {
       openForm,
@@ -91,14 +93,21 @@ export default class AdminPanel extends Component {
       load,
       products,
       category,
-      categoryOptions
+      categoryOptions,
+      openCategoryForm
     } = this.state;
     return (
       <>
         <div style={style.headerContainer}>
           <h1 style={style.header}>Admin Panel</h1>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '1% 5%' }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "1% 5%"
+          }}
+        >
           <div>
             <CategorySelector
               products={products}
@@ -110,18 +119,28 @@ export default class AdminPanel extends Component {
             />
           </div>
           <div>
-            <div style={{display:'inline-block'}}>
-            <h1 >{category}</h1>
+            <div style={{ display: "inline-block" }}>
+              <h1>{category}</h1>
             </div>
-            {category === 'All Categories' ||category === 'Featured' ? <></> : 
-            <div style={{color:'#4575c4',display:'inline-block', cursor:'pointer'}}>
-              <CategoryForm category={category} />
-            </div>
-            }
-            
+            {category === "All Categories" || category === "Featured" ? (
+              <></>
+            ) : (
+              <div
+                style={{
+                  color: "#4575c4",
+                  display: "inline-block",
+                  cursor: "pointer"
+                }}
+              >
+                <CategoryForm category={category} />
+              </div>
+            )}
           </div>
           <div>
-            <Button style={style.button} onClick={this.toggleForm}>New Product</Button>
+            <Button style={style.button} onClick={this.toggleForm}>
+              New Product
+            </Button>
+            <CategoryForm />
           </div>
         </div>
         <Modal open={openForm}>
@@ -131,6 +150,7 @@ export default class AdminPanel extends Component {
             openForm={openForm}
           />
         </Modal>
+
         <RenderCategories
           toggleForm={this.toggleForm}
           categories={categories}
