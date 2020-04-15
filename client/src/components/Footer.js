@@ -12,7 +12,7 @@ const Footer = () => (
         <Grid.Column width={9}>
           <Grid.Row></Grid.Row>
           <Grid.Row><h4 class="small-header" style={{marginTop: "100px", marginLeft: "300px"}}>Any Questions? </h4></Grid.Row>
-          <Grid.Row><h1 class="large-header" style={{marginLeft: "300px"}}>We're here to help.</h1> </Grid.Row>
+          <Grid.Row><h1 class="large-header-footer" style={{marginLeft: "300px"}}>We're here to help.</h1> </Grid.Row>
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
           <div class = "ui vertical segment" >
