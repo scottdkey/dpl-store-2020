@@ -10,7 +10,6 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.text :sizes
       t.text :main_image
       t.text :alt_image
-      t.boolean :featured
       t.belongs_to :category, null: false, foreign_key: true
 
       t.timestamps

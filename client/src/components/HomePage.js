@@ -9,7 +9,18 @@ import LargeLogo from '../images/logo_black.svg'
 import FeaturedProducts from '../components/FeaturedProducts'
 
 
-const HomepageLayout = () => (
+const HomepageLayout = () => {
+  const [results, setResults] = useState([]);
+
+  const afterSearch = (results) => setResults(results);
+
+  const renderResults = () => results.map((result) => (
+    <div key={result.id}>
+      {result.title}
+    </div> 
+  ));
+
+  return (
     <>
     <div class="image-container">
     <Image src={BlueHeader} fluid />
@@ -42,9 +53,8 @@ const HomepageLayout = () => (
       </Container>
       <br/> 
       <div align="center">
-        <FeaturedProducts />
-      </div>
-      <br />
+            <button class="ui button" style={{align:"center"}}>See More</button></div>
+       <br />
   </>
 );
 
