@@ -85,7 +85,7 @@ class Cart extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</Button>
+                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove Item</Button>
                   </div>
                 </div>
               )
@@ -158,7 +158,7 @@ const style = {
   },
   itemsContainer: {
     margin: '3% 20%',
-    marginBottom:'10%',
+    marginBottom:'15%'
   },
   cartContainer: {
     display: 'flex',
