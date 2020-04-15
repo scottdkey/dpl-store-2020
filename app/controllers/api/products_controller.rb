@@ -71,9 +71,8 @@ class Api::ProductsController < ApplicationController
       :price,
       :category_id,
       :main_image,
-      :alt_image,
       :featured,
-      sizes: %i[small medium large noSize],
+      sizes: %i[Small Medium Large noSize X-Small X-Large],
     )
   end
 
