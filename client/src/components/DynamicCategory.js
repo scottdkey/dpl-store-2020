@@ -21,6 +21,7 @@ const DynamicCategory = ({ category_name, category_id, noHeader, match }) => {
   // /categories/:category_id/products/:product_id
   // call to get both of them
   const [results, setResults] = useState([]);
+  const [category, setCategory] = useState([])
 
   const afterSearch = results => setResults(results);
 
@@ -89,21 +90,7 @@ const DynamicCategory = ({ category_name, category_id, noHeader, match }) => {
     );
   }
 
-  // return(
-  //   <>
-  //   <div class="image-container">
-  //     <Image src={BlueHeader} fluid />
-  //     <div class="centered">
-  //       <h1>{ category && category.name }</h1>
-  //       <FunctionalSearch afterSearch={afterSearch}/>
-  //     </div>
-  //   </div>
-  //   { results.length > 0 && renderResults() }
-  //   {renderItems()}
-  //   </>
-  // );
-};
-
+  }
 export default DynamicCategory;
 
 const style = {
