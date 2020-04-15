@@ -7,7 +7,6 @@ import BlueHeader from "../images/BlueHeader2.svg";
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 import Products from './Products'
 
-
 const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState(null);
@@ -148,6 +147,5 @@ const style = {
     flexWrap: 'wrap',
   },
 };
-
 
 export default DynamicCategory; 

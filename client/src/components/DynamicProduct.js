@@ -5,7 +5,8 @@ import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import Featured from '../images/blank.png' 
 import Links from './SharedComponents/Links';
-// import Arrow from '../images/LineArrowDown.svg';
+import Arrow from '../images/LineArrowDown.svg';
+
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
   const [size, setSize] = useState('')
@@ -107,7 +108,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
                 </option>
               ))}
             </select>
-            {/* <Image src={Arrow} style={style.arrow}  ></Image> */}
+            <Image src={Arrow} style={style.arrow}  ></Image>
             </div>
             <div>
                 <br/> 
@@ -125,7 +126,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       </>
     )
 };
-export default DynamicProduct;
+
 const style = {
   button: {
     color: 'white',
@@ -191,3 +192,5 @@ const style = {
       top: '42px',
     },
 };
+
+export default DynamicProduct;

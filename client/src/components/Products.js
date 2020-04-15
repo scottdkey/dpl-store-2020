@@ -14,13 +14,11 @@ export default class Products extends Component {
   componentDidMount() {
     this.getCategories();
   }
-
   getCategories = () => {
     axios.get("/api/categories").then((res) => {
       this.setState({ categories: res.data });
     });
   };
-
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.name;
@@ -57,8 +55,8 @@ export default class Products extends Component {
         <div class="image-container">
           <Image src={BlueHeader} fluid />
           <div class="centered">
-            <h1>All Merchandise</h1>
-            <h3>Find something you'll love.</h3>
+            <h1 class="large-header">All Merchandise</h1>
+            <h3 class="small-header">Find something you'll love.</h3>
             <FunctionalSearch afterSearch={this.afterSearch} />
           </div>
         </div>
@@ -77,5 +75,3 @@ export default class Products extends Component {
     );
   }
 }
-
-

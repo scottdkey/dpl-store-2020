@@ -7,11 +7,14 @@ import BlueHeader from '../images/BlueHeader2.svg';
 import Featured from '../images/blank.png'
 import LargeLogo from '../images/logo_black.svg'
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
-import FeaturedProducts from '../components/FeaturedProducts'
+import FeaturedProducts from './FeaturedProducts'
 import FeaturedCard from './FeaturedCard';
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 716e7c8b8e6e2e3c68d40139869ae396c121ed05
 const HomepageLayout = () => {
   const [results, setResults] = useState([]);
 
@@ -70,22 +73,21 @@ const HomepageLayout = () => {
   )
 };
 
-const style = {
-  button: {
-    backgroundColor: '#F5F5F5',
-    color: '#4901DB',
-    borderRadius: '30px',
-    padding: '20px',
-    align: 'center',
-    border: 'none',
-    width: '125px',
-  },
-};
-
 const RoundedImage = styled.div`
   border-radius: 25px;
   width: 250px;
   height: 250px;
 `;
 
+const style = {
+  button: {
+    backgroundColor: "#F5F5F5",
+    color: "#4901DB",
+    borderRadius: "30px",
+    padding: "20px",
+    align: "center",
+    border: "none",
+    width: "125px",
+  },
+}
 export default HomepageLayout;
