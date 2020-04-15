@@ -13,12 +13,12 @@ const HomepageLayout = () => (
     <div class="image-container">
     <Image src={BlueHeader} style={{width:"100%"}} />
     {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-    <div class="centered"><h1>DevPoint Store</h1>
-    <h3>Find something you'll love.</h3></div> 
+    <div class="centered"><h1 class="large=header">DevPoint Store</h1>
+    <h3 class="small-header">Find something you'll love.</h3></div> 
     </div>
     <Container style={{marginBottom: '10%'}}> 
       <Grid >
-        <Header as='h3'>CATEGORIES</Header>
+        <Header as='h3' class='heading'>CATEGORIES</Header>
         <Grid.Row columns={4}>
           <Grid.Column centered>
             <Link to="/categories/1/products" ><RoundedImage as={Image} size="medium" src={Featured} fluid /></Link>
@@ -39,7 +39,7 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid> 
       <br/> 
-      <Header as="h3">FEATURED PRODUCTS</Header>
+      <Header as="h3" class="heading">FEATURED PRODUCTS</Header>
       <Grid >
       <Grid.Row columns={2} >
         {/* <FeaturedCard/> */}

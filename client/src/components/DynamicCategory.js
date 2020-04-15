@@ -62,9 +62,9 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
       <div class="image-container">
         <Image src={BlueHeader} style={{ width: "100%" }} />
         {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-        <div class="centered">
-          <h1>Category Name goes here</h1>
-          <h3>Find something you'll love.</h3>
+        <div class= "centered">
+          <h1 class="large-header">Category Name goes here</h1>
+          <h3 class="small-header">Find something you'll love.</h3>
         </div>
       </div>
       <Container>{renderItems()}</Container>
@@ -116,7 +116,7 @@ const style = {
   productContainer: {
     display: 'flex',
     alignItems: 'stretch',
-    justifyContent: 'center',
+    marginLeft: '100px',
     flexWrap: 'wrap',
   },
 };

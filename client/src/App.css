@@ -82,3 +82,20 @@
 .Menu {
   border: none
 }
+
+.large-header {
+  font-size: 60 !important;
+  font-weight: 700;  
+  font-family: 'Karla', sans-serif;
+}
+
+.small-header {
+  font-weight: 400;
+  font-family: 'Karla', sans-serif;
+}
+
+.heading {
+  font-weight: 700;  
+  font-family: 'Karla', sans-serif;
+  font-size: 18pt;
+}
