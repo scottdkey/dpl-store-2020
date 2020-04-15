@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import _ from 'lodash';
 import React, { useState, useEffect, } from 'react';
-import { Search, Grid, Header, Segment, Label, } from 'semantic-ui-react';
+import { Image, Button } from 'semantic-ui-react';
+import Search from './search.svg'
 
 // const resultRenderer = ({ title }) => <Label content={title} />
 
@@ -70,17 +71,30 @@ const FunctionalSearch = (props) => {
 
     // const { isLoading: boolean, value: string, results: [], products: [] } = this.state
     return(
-      <Grid>
-        <Grid.Column>
+        <>
+          {/* <Button onClick={searchSubmit}></Button> */}
+          <div class="fitted-icon">
+          <Image src={Search} style={style.spyglass} ></Image>
           <input 
+            type="term"
             name="term"
             value={searchState.term}
             onChange={searchChange}
           />
-          <button onClick={searchSubmit} >Submit</button>
-        </Grid.Column>
-      </Grid>
+          </div>
+        </>
     )
 };
 
 export default FunctionalSearch;
+
+const style = {
+  spyglass: {
+    backgroundColor: '#FFFFFF',
+    width: '20px',
+    position: 'absolute',
+    display: 'inline-block',
+    left: '25px',
+    top: '6px',
+  },
+}

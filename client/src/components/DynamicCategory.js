@@ -3,6 +3,7 @@ import { Card, Image, Button, Container, Grid } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
+import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 
 const DynamicCategory = ({ category_id, match, category_name }) => {
   const [items, setItems] = useState([]);
@@ -80,10 +81,10 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
     <>
       <div class="image-container">
         <Image src={BlueHeader} style={{ width: "100%" }} />
-        {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
         <div class= "centered">
-          <h1 class="large-header">Category Name goes here</h1>
+          <h1 class="large-header">Category Name</h1>
           <h3 class="small-header">Find something you'll love.</h3>
+          <FunctionalSearch/>
         </div>
       </div>
       <Container>{renderItems()}</Container>
@@ -110,7 +111,7 @@ const style = {
     verticalAlign: "top",
     marginRight: ".5em",
     marginBottom: ".3em",
-    borderRadius: "5px",
+    borderRadius: "15px",
     overflow: "hidden",
     boxShadow: "0px 3px 10px #cccccc",
   },

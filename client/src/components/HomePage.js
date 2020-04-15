@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
 import Featured from '../images/blank.png'
 import FeaturedCard from './FeaturedCard';
+import FunctionalSearch from './SharedComponents/FunctionalSearch';
 
 const HomepageLayout = () => {
   const [results, setResults] = useState([]);
@@ -19,10 +20,10 @@ const HomepageLayout = () => {
     <>
       <div class="image-container">
         <Image src={BlueHeader} fluid />
-        {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
         <div class="centered">
-          <h1>DevPoint Store</h1>
-          <h3>Find something you'll love.</h3>
+          <h1 class="large-header" >DevPoint Store</h1>
+          <h3 class="small-header" >Find something you'll love.</h3>
+          <FunctionalSearch/>
         </div>
       </div>
       <Container>
@@ -59,7 +60,7 @@ const HomepageLayout = () => {
       </Container>
       <br />
       <div align="center">
-        <button class="ui button" style={{ align: "center" }}>
+        <button class="ui button" style={style.button}>
           See More
         </button>
       </div>
@@ -74,4 +75,15 @@ const RoundedImage = styled.div`
   height: 250px;
 `;
 
+const style = {
+  button: {
+    backgroundColor: "#F5F5F5",
+    color: "#4901DB",
+    borderRadius: "30px",
+    padding: "20px",
+    align: "center",
+    border: "none",
+    width: "125px",
+  },
+}
 export default HomepageLayout;

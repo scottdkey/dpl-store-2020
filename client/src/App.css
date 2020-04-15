@@ -74,9 +74,10 @@
 
 .centered {
   position: absolute;
-  top: 50%;
-  left: 25%;
+  top: 40%;
+  left: 20%;
   transform: translate(-50%, -50%);
+  margin-left: 150px;
 }
 
 .Menu {
@@ -87,15 +88,48 @@
   font-size: 60 !important;
   font-weight: 700;  
   font-family: 'Karla', sans-serif;
+  font-size: 60px;
 }
 
 .small-header {
   font-weight: 400;
   font-family: 'Karla', sans-serif;
+  font-size: 24px;
+}
+
+.large-header-footer {
+  font-size: 60 !important;
+  font-weight: 700;  
+  font-family: 'Karla', sans-serif;
+  font-size: 48px;
 }
 
 .heading {
   font-weight: 700;  
   font-family: 'Karla', sans-serif;
-  font-size: 18pt;
+  font-size: 40px;
 }
+
+.fitted-icon {
+    position:relative;
+    margin:5px;
+  }
+  input {
+    display:inline-block;
+    background-color: #FFFFFF;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 400px;
+    height: 30px;
+    
+  }
+  /* .spy {
+    position:absolute;
+    display:inline-block;
+    width: 40px;
+    height: 40px;
+    left:265px;
+    top:2px;
+  } */

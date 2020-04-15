@@ -20,6 +20,10 @@ const DynamicProduct = ({category_id, product_id, match}) => {
 
   const [items] = useState([
     {
+      label: "",
+      value: ""
+    },
+    {
       label: "X-Small",
       value: "X-Small"
     },
@@ -38,6 +42,10 @@ const DynamicProduct = ({category_id, product_id, match}) => {
     {
       label: "X-Large",
       value: "X-Large"
+    },
+    {
+      label: "XXL",
+      value: "XXL"
     }
   ])
 
@@ -97,25 +105,15 @@ const DynamicProduct = ({category_id, product_id, match}) => {
             {/* <Form id="selectedSize">
             <Form.Dropdown clearable search options={options} selection onChange={e => setSize(e.currentTarget.text)} />
             </Form> */}
-            {/* <select onChange={e => setSize(e.currentTarget.value)}>
+            <p>Size</p>
+            <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
               {items.map(({ label, value }) => (
                 <option key={value} value={value}>
                 {label}
                 </option>
               ))}
-            </select> */}
+            </select>
             <div>
-            <Grid.Row>
-            <Form style={{paddingRight: "40px"}} >
-            <Form.Select 
-                  label="Size"
-                  name="sizeSelection"
-                  value={sizeSelection}
-                  // onChange={this.handleChange}
-                  options={sizeSelection}
-                />
-                </Form>
-                </Grid.Row>
                 <br/> 
             <Grid.Row >
             <Button as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" onClick={() => putItemInCart(product, size, 1)} />
@@ -125,22 +123,13 @@ const DynamicProduct = ({category_id, product_id, match}) => {
         </Grid>
       </Card.Header>
       <Card.Description>
-        // put the button here temporarily
+        
       </Card.Description>
       </Card>
       </Container>
       </>
     )
 };
-
-const sizeSelection = [
-  { key: "xs", text: "X-Small", value: "X-Small", },
-  { key: "s", text: "Small", value: "Small", },
-  { key: "m", text: "Medium", value: "Medium", },
-  { key: "l", text: "Large", value: "Large", },
-  { key: "xl", text: "X-Large", value: "X-Large", },
-];
-
 
 export default DynamicProduct;
 
@@ -150,7 +139,7 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     padding: '20px',
-    width: '700px',
+    width: '100%',
   },
   headerContainer: {
     backgroundColor: '#4901DB',
@@ -188,6 +177,11 @@ const style = {
     height: '100px',
     width: '100px',
     marginTop: '-25px',
-    
+  },
+  dropdown: {
+    width: '460px',
+    height: '40px',
+    backgroundColor: '#FFFFFF',
+    borderColor: 'lightgrey',
   }
 };
