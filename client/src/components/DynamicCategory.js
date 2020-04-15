@@ -9,6 +9,8 @@ import Products from "./Products";
 
 const DynamicCategory = ({ category_name, category_id, noHeader, match }) => {
   const [items, setItems] = useState([]);
+  const [category, setCategory] = useState([]);
+
   const cat_id = category_id || match.params.category_id;
   // make another useEffect to get the category
   // /categories/:category_id/
