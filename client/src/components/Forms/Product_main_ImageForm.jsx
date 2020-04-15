@@ -6,7 +6,17 @@ import Axios from "axios";
 class ImageForm extends Component {
 
   state = {
-    image: this.props.product.main_image
+    image: ''
+  }
+
+  componentDidMount(){
+    if(this.props.product === undefined){
+      //do nothing
+    } else {
+      this.setState({
+        image : this.props.product.main_image
+      })
+    }
   }
 
   renderMainImage = () =>{
@@ -86,5 +96,3 @@ const styles = {
     height: "200px"
   }
 };
-
-const unmodifiedURL = '<Icon name="image" />'

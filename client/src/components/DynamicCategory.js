@@ -1,12 +1,14 @@
+  
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button, Container, Grid } from "semantic-ui-react";
+import { Card, Image, Button } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import BlueHeader from "../images/BlueHeader2.svg";
+import BlueHeader from "../images/BlueHeader.svg";
+import FunctionalSearch from "./SharedComponents/FunctionalSearch";
+import Products from "./Products";
 
-const DynamicCategory = ({ category_id, match, category_name }) => {
+const DynamicCategory = ({ category_name, category_id, noHeader, match }) => {
   const [items, setItems] = useState([]);
-
   const cat_id = category_id || match.params.category_id;
   // make another useEffect to get the category
   // /categories/:category_id/
@@ -16,9 +18,8 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
   // /categories/:category_id/products/:product_id
   // call to get both of them
   const [results, setResults] = useState([]);
-  const [category, setCategory] = useState([])
 
-  const afterSearch = (results) => setResults(results);
+  const afterSearch = results => setResults(results);
 
   const renderResults = () => results.map((result) => (
     <div key={result.id}>
@@ -27,74 +28,66 @@ const DynamicCategory = ({ category_id, match, category_name }) => {
   ));
 
   useEffect(() => {
-    console.log(match);
     const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}/products`)
-      .then((res) => {
-        setItems(res.data)
+      .then(res => {
+        setItems(res.data);
       })
       .catch(console.log);
   }, []);
 
   // gets category on initial render
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id
+    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}`)
-      .then((res) => setCategory(res.data))
+      .then(res => setCategory(res.data))
       .catch(console.log);
   }, []);
 
   const renderItems = () =>
-    <div style={style.productContainer}>
-      {items.map((product) => (
-        <div key={product.id}>
-          <h1>{category_name}</h1>
-          <div style={{ ...style.photoHolder }}>
-            <div style={style.crop}>
-              <Image
-                src={product.main_image}
-                as={Link}
-                to={{
-                  pathname: `/categories/${cat_id}/products/${product.id}`,
-                  state: { ...product },
-                }}
-              />
-            </div>
-          </div>
-          <div style={style.informationContainer}>
-            <div>
-              <h3 style={{ margin: "5px", display: "inline" }}>
-                {"$" + product.price}
-              </h3>
-              <h5 style={{ margin: "5px", display: "inline" }}>
-                {product.title}
-              </h5>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+    items.map(product => (
+      <div key={product.id}>
+        <Image
+          src={product.main_image}
+          as={Link}
+          to={{
+            pathname: `/categories/${cat_id}/products/${product.id}`,
+            state: { ...product }
+          }}
+        />
+        <Card>
+          <Card.Content>
+            <Card.Header>{product.title}</Card.Header>
+            <Card.Meta>{"$" + product.price}</Card.Meta>
+          </Card.Content>
+        </Card>
+      </div>
+    ));
 
-  return (
-    <>
-      <div class="image-container">
-        <Image src={BlueHeader} style={{ width: "100%" }} />
-        {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-        <div class="centered">
-          <h1 class="large-header">Category Name goes here</h1>
-          <h3 class="small-header">Find something you'll love.</h3>
+  if (noHeader) {
+    return (
+      <>
+        {renderItems()}
+        {console.log(items)}
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div class="image-container">
+          <Image src={BlueHeader} fluid />
+          <div class="centered">
+            <h1>{category && category.name}</h1>
+            <FunctionalSearch afterSearch={afterSearch} category_id={cat_id} />
+          </div>
         </div>
-      </div>
-      <Container>{renderItems()}</Container>
-      <br />
-      <div align="center">
-        <button style={style.button}>See More</button>
-      </div>
-      <br />
-    </>
-  );
+        {results.length > 0 && renderResults()}
+        {renderItems()}
+      </>
+    );
+  }
 
   }
 export default DynamicCategory;

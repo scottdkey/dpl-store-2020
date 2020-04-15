@@ -26,7 +26,7 @@ class CategorySelector extends Component {
   }
 
   render(){
-    const { CategoryOptions, value } = this.state
+    const { CategoryOptions} = this.state
     return(
       <>
       <Select

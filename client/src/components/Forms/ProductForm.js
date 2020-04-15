@@ -24,10 +24,8 @@ export default class AdminProduct extends Component {
     const { product } = this.props;
     if (product === undefined) {
       //do nothing
-      console.log('in the if')
     } else {
       const res = await axios.get(`/api/categories/${product.category_id}/products/${product.id}`)
-      console.log(res)
       this.setState({
         title: res.data.title,
         description: res.data.description,
@@ -35,7 +33,6 @@ export default class AdminProduct extends Component {
         category_id: res.data.category_id,
         main_image: res.data.main_image,
       })
-      console.log('in the else')
     }
 
   };
