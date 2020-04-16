@@ -7,7 +7,6 @@ import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 import Products from "./Products";
 // import { useGetProducts } from '../hooks/useGetProducts'
 
-//we could start using a hook folder
 
 
 const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
