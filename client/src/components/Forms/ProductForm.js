@@ -1,67 +1,103 @@
 import React, { Component } from "react";
-import { Form, Modal, Button, Icon } from "semantic-ui-react";
-import SizeForm from "./Product_size_form";
+import { Form, Modal } from "semantic-ui-react";
+import SizeForm from "./ProductSizeForm";
 import axios from "axios";
-import AltImageForm from "./Product_AltImage_Form";
-// import axios from 'axios'
+import MainImageForm from "./ProductMainImageForm";
+import AltImageForm from "./ProductAltImageForm";
 
-export default class AdminProduct extends Component {
-  constructor(props) {
-    super(props);
-    const product = this.props.product;
-    if (product === undefined) {
-      this.state = {
-        title: "",
-        description: "",
-        price: 0.0,
-        category: "",
-        main_image: "",
-        // alt_image: {},
-        sizes: "",
-        // numAltImages: [],
-      };
-    } else {
-      this.state = {
-        title: props.product.title,
-        description: props.product.description,
-        price: props.product.price,
-        category: props.product.category,
-        main_image: props.product.main_image,
-        sizes: props.product.sizes,
-      };
-    }
+class ProductForm extends Component {
+  state = {
+    title: "",
+    description: "",
+    price: 0.0,
+    category_id: "",
+    main_image: "",
+    sizes: {},
+    options: []
+  };
+
+  componentDidMount() {
+    this.getCategoryOptions();
+    this.getProduct();
   }
 
+  getProduct = async () => {
+    const { product } = this.props;
+    if (product === undefined) {
+      //do nothing
+    } else {
+      const res = await axios.get(`/api/categories/${product.category_id}/products/${product.id}`)
+      this.setState({
+        title: res.data.title,
+        description: res.data.description,
+        price: res.data.price,
+        category_id: res.data.category_id,
+        main_image: res.data.main_image,
+      })
+    }
+
+  };
+
+  getCategoryOptions = async () => {
+    const res = await axios.get(`/api/categories/`);
+    const options = res.data.map(c => ({
+      key: c.name,
+      text: c.name,
+      value: c.id
+    }));
+    this.setState({
+      options
+    });
+  };
+
   handleSubmit = () => {
+    const {
+      title,
+      description,
+      price,
+      category_id,
+      main_image,
+      sizes
+    } = this.state;
+    const currentState = {
+      title,
+      description,
+      price,
+      main_image,
+      sizes
+    };
     if (this.props.product === undefined) {
       axios
-        .post(`/api/products`, this.state)
-        .then((res) => {
-                this.props.toggleForm();
+        .post(`/api/categories/${category_id}/products`, currentState)
+        .then(res => {
+          this.props.toggleForm();
           this.props.getProducts();
-    
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     } else {
       axios
-        .put(`/api/products/${this.props.product.id}`, this.state)
-        .then((res) => {
-          this.props.toggleEdit();
+        .put(
+          `/api/categories/${category_id}/products/${this.props.product.id}`,
+          currentState
+        )
+        .then(res => {
+          this.props.toggleForm();
           this.props.getProducts();
-
         })
-        .catch((e) => {
+        .catch(e => {
           console.log(e);
         });
     }
   };
 
-  setSizes = (array) => {
+  setSizes = array => {
     const sizes = array.reduce(
       (obj, item) =>
-        Object.assign(obj, { [item.size]: parseInt(item.quantity) }),
+        Object.assign(obj, {
+          [item.size]: parseInt(item.quantity)
+        }),
       {}
     );
     this.setState({ sizes });
@@ -70,18 +106,22 @@ export default class AdminProduct extends Component {
   handleChange = (e, { name, value }) => {
     this.setState({ ...this.state, [name]: value });
   };
-  trigger(){
-    if(this.props.product === undefined){
-      return(<Button>New</Button>)
-    }else {
-      return(
-        <Icon name="edit" />
-      )
-    }
-  }
+
+  setMainImage = newURL => {
+    this.setState({
+      main_image: newURL
+    });
+  };
 
   render() {
-    const { title, description, price, category, main_image } = this.state;
+    const {
+      title,
+      description,
+      price,
+      category_id,
+      main_image,
+      options
+    } = this.state;
     return (
       <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
@@ -116,35 +156,39 @@ export default class AdminProduct extends Component {
             <SizeForm sizes={this.state.sizes} setSizes={this.setSizes} />
             <Form.Select
               label="category"
-              name="category"
-              placeholder="category"
+              name="category_id"
+              placeholder="Pick a category"
               options={options}
-              value={category}
+              value={category_id}
               onChange={this.handleChange}
               required
             />
-
-            <Form.Input
-              label="Main Image"
-              name="main_image"
-              placeholder="Main Image"
-              value={main_image}
-              onChange={this.handleChange}
-              required
-            />
-            <AltImageForm />
+            <div style={styles.imageArea}>
+              <MainImageForm
+                main_image={main_image}
+                {...this.props}
+                setMainImage={this.setMainImage}
+              />
+              <AltImageForm {...this.props} />
+            </div>
           </Form.Group>
           <Form.Button type="submit">Submit</Form.Button>
-          <Form.Button color='red'  onClick={this.props.toggleForm}>Cancel</Form.Button>
+          <Form.Button color="red" onClick={this.props.toggleForm}>
+            Cancel
+          </Form.Button>
         </Form>
       </Modal.Content>
     );
   }
 }
 
-const options = [
-  { key: "t", text: "T-Shirts", value: "T-Shirts" },
-  { key: "ho", text: "Hoodies", value: "Hoodies" },
-  { key: "ha", text: "Hats", value: "Hats" },
-  { key: "s", text: "Stickers", value: "Stickers" },
-];
+export default ProductForm
+
+const styles = {
+  imageArea: {
+    width: "80%",
+    margin: "20px",
+    paddingTop: "10px",
+    display: "flex"
+  }
+};

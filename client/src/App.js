@@ -36,10 +36,9 @@ const App = () => (
           <Route exact path='/cart' component={Cart} />
         </Switch>
         </Container>
-      <Footer />
+        <Footer />
     </FetchAdmin>
-   </Fragment>
+  </Fragment>
 );
-
 
 export default App;

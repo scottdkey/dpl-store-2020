@@ -121,7 +121,7 @@ class MobileContainer extends Component {
                   <Icon name='sidebar' />
                 </Menu.Item>
                 <Menu.Item position='right'>
-                <Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item>
+                 <Link to="/cart"><Menu.Item as='a'><Icon name="shopping cart" />Cart </Menu.Item></Link> 
                 </Menu.Item>
               </Menu>
             </Container>

@@ -1,5 +1,6 @@
+  
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button, Container, Grid } from "semantic-ui-react";
+import { Card, Image, Button } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
@@ -21,17 +22,16 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const renderResults = () => results.map((result) => (
     <div key={result.id}>
       {result.title}
-    </div> 
+    </div>
   ));
 
 
   useEffect(() => {
-    console.log(match);
     const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}/products`)
-      .then((res) => {
-        setItems(res.data)
+      .then(res => {
+        setItems(res.data);
       })
       .catch(console.log);
   }, []);
@@ -39,10 +39,10 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
 
   // gets category on initial render
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id
+    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}`)
-      .then((res) => setCategory(res.data))
+      .then(res => setCategory(res.data))
       .catch(console.log);
   }, []);
 

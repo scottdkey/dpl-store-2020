@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_category, only: [:index, :show, :create, :update, :destory]
-  before_action :set_product, only: [:show,:update, :destroy]
-
+  before_action :set_category, except: [:all_products, :featured_products]
+  before_action :set_product, only: %i[show update destroy update_image]
 
   def index
     render json: @category.products.all
@@ -38,6 +37,23 @@ class Api::ProductsController < ApplicationController
     end
   end
 
+  def update_image
+    file = params[:file]
+    if file
+      ext = File.extname(file.tempfile)
+      cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+      @product.main_image = cloud_image['secure_url']
+    end
+    if @product.save
+      render json: @product
+    else
+      render json: { errors: @product.errors.full_messages }, status: 422
+    end
+    rescue => e
+      render json: { errors: e }, status: 422
+  end
+  
+
   def destroy
     @product.destroy
   end
@@ -53,10 +69,10 @@ class Api::ProductsController < ApplicationController
       :title,
       :description,
       :price,
-      :category,
+      :category_id,
       :main_image,
-      :alt_image,
-      sizes: %i[small medium large noSize]
+      :featured,
+      sizes: %i[Small Medium Large noSize X-Small X-Large],
     )
   end
 
@@ -67,4 +83,5 @@ class Api::ProductsController < ApplicationController
   def set_category
     @category = Category.find(params[:category_id])
   end
+
 end
