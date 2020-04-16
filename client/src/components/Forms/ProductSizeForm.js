@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Select, Button } from "semantic-ui-react";
 
-export default class SizeForm extends Component {
+class SizeForm extends Component {
   state = {
     sizes: []
   };
@@ -9,7 +9,7 @@ export default class SizeForm extends Component {
   componentDidMount(){
     const originalSizes = Object.entries(this.props.sizes)
     const sizes = originalSizes.map(size =>{
-      return({size :size[0], quantity: size [1]})
+      return({size :size[0], quantity: size[1]})
     })
     this.setState({
       sizes
@@ -18,7 +18,7 @@ export default class SizeForm extends Component {
   }
   addSize = () => {
     const sizes = [...this.state.sizes, { size: "noSize", quantity: 0 }];
-    if(sizes.length <= 4){
+    if(sizes.length <= 6){
     this.setState({ sizes });
     } else{
       alert('maximum sizes reached')
@@ -41,6 +41,7 @@ export default class SizeForm extends Component {
   sizeDropDownFormat = ({ size, index }) => {
 
     return (
+      
       <Form.Group key={size}>
         <Select
           selection
@@ -75,10 +76,13 @@ export default class SizeForm extends Component {
   }
 }
 
+export default SizeForm
+
 const sizeOptions = [
   { key: "noSize", value: "noSize", text: "No Size" },
-  { key: "small", value: "small", text: "Small" },
-  { key: "medium", value: "medium", text: "Medium" },
-  { key: "large", value: "large", text: "Large" },
-  
+  { key: "X-Small", value: "X-Small", text: "X-Small" },
+  { key: "Small", value: "Small", text: "Small" },
+  { key: "Medium", value: "Medium", text: "Medium" },
+  { key: "Large", value: "Large", text: "Large" },
+  { key: "X-Large", value: "X-Large", text: "X-Large" }
 ];

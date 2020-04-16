@@ -1,105 +1,182 @@
 import React, { Component } from "react";
-import { Header, Table, Button, Modal } from "semantic-ui-react";
+import { Button, Modal} from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
-import RenderProduct from './RenderProduct'
+import RenderCategories from "./AdminPanelComponents/RenderCategories";
+import CategorySelector from "./Selectors/CategorySelector";
+import CategoryForm from "./Forms/CategoryForm";
 
 export default class AdminPanel extends Component {
-  state = { products: [], categories: [], openForm: false };
-
-  componentDidMount() {
-    if (this.state.products.length === 0) {
-      this.getCategories();
-    } else if (this.state.products[0] === "No Products Found") {
-      console.log("No Products Found");
-    }
-  }
-
-
-  deleteProduct = (id, category_id) => {
-    axios
-      .delete(`/api/categories/${category_id}/products/${id}`)
-      .then((res) => {
-        this.setState({ categories: []})
-        this.getCategories()
-      })
-      .catch((error) => console.log(error));
+  state = {
+    products: [],
+    categories: [],
+    openForm: false,
+    openCategoryForm: false,
+    load: true,
+    category: 'All Categories',
+    categoryOptions: []
   };
 
-  getCategories = () => {
-    axios
-      .get('/api/categories')
-      .then(res => {
-        res.data.forEach(category => {
-          axios.get(`/api/categories/${category.id}/products`)
-            .then(res => {
-              this.setState({
-                categories: [...this.state.categories, { category: category, products: res.data }]
-              })
-            })
-        })
-      })
+  componentDidMount() {
+    this.getCategories();
+    this.getCategoryOptions();
+    this.getProducts();
   }
-
-
-  deleteCategory() { }
-
-  renderCategories = () =>
-    this.state.categories.map((c) => {
-      const category = c.category.name;
-      const products = c.products;
-      return (
-        <div key={category}>
-          <Table celled striped>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell colSpan="4">
-                  {category}
-                  {/* I dont think we need this, since categories wont be dynamic */}
-                  {/* <Icon
-                    name="trash alternate"
-                    onClick={() => this.deleteCategory(category)}
-                  /> */}
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {products.map((product) => (
-                <Table.Row key={product.id}>
-                  <RenderProduct
-                    toggleForm={this.toggleForm}
-                    getProducts={this.getProducts}
-                    deleteProduct={this.deleteProduct}
-                    product={product}
-                  />
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
-      );
+  getCategoryOptions = async () => {
+    const res = await axios.get(`/api/categories/`);
+    const categoryOptions = res.data.map(c => ({
+      key: c.name,
+      text: c.name,
+      value: c.id
+    }));
+    this.setState({
+      categoryOptions
     });
+  };
+
+  getCategories = async () => {
+    const res = await axios.get("/api/categories");
+    this.setState({
+      categories: res.data
+    });
+  };
+
+  getProducts = async () => {
+    const res = await axios.get(`/api/products`);
+    this.setState({
+      products: res.data
+    });
+  };
+
+  deleteProduct = (id, category_id) => {
+    const products = this.state.products.filter(product => {
+      if (product.id !== id) {
+        return product;
+      }
+    });
+    axios
+      .delete(`/api/categories/${category_id}/products/${id}`)
+      .then(res => this.getProducts())
+      .catch(error => console.log(error));
+  };
+  updateProducts = async () => {
+    const res = await axios.get("/api/products");
+    const category_id = this.state.categories.filter(category => {
+      if (category.name === this.state.category) {
+        return category;
+      }
+    })[0].id;
+    if (category_id === 1) {
+      const products = res.data;
+      this.setState({ products });
+    } else {
+      const products = res.data.filter(product => {
+        return category_id === product.category_id;
+      });
+      this.setState({ products });
+    }
+  };
+  setCategory = category => {
+    this.setState({ category });
+  };
+
   toggleForm = () => {
     this.setState({ openForm: !this.state.openForm });
   };
 
+
   render() {
-    const { openForm } = this.state;
+    const {
+      openForm,
+      categories,
+      load,
+      products,
+      category,
+      categoryOptions,
+      openCategoryForm
+    } = this.state;
     return (
       <>
-        <Header as="h1" textAlign="center">
-          Admin panel
-        </Header>
-        <Button onClick={this.toggleForm}>New</Button>
+        <div style={style.headerContainer}>
+          <h1 style={style.header}>Admin Panel</h1>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "1% 5%"
+          }}
+        >
+          <div>
+            <CategorySelector
+              products={products}
+              getProducts={this.getProducts}
+              getCategories={this.getCategories}
+              setCategory={this.setCategory}
+              updateProducts={this.updateProducts}
+              categories={categories}
+            />
+          </div>
+          <div>
+            <div style={{ display: "inline-block" }}>
+              <h1>{category}</h1>
+            </div>
+            {category === "All Categories" || category === "Featured" ? (
+              <></>
+            ) : (
+              <div
+                style={{
+                  color: "#4575c4",
+                  display: "inline-block",
+                  cursor: "pointer"
+                }}
+              >
+                <CategoryForm category={category} />
+              </div>
+            )}
+          </div>
+          <div>
+            <Button style={style.button} onClick={this.toggleForm}>
+              New Product
+            </Button>
+            <CategoryForm />
+          </div>
+        </div>
         <Modal open={openForm}>
           <ProductForm
             toggleForm={this.toggleForm}
             getProducts={this.getProducts}
+            openForm={openForm}
           />
         </Modal>
 
-        {this.renderCategories()}
+        <RenderCategories
+          toggleForm={this.toggleForm}
+          categories={categories}
+          updateProducts={this.updateProducts}
+          deleteProduct={this.deleteProduct}
+          products={products}
+          category={category}
+          load={load}
+        />
       </>
     );
   }
+}
+
+const style = {
+  headerContainer: {
+    backgroundColor: '#4901DB',
+    color: 'white',
+    padding: '20px 50px',
+    textAlign: 'right'
+  },
+  header: {
+    margin: '0px'
+  },
+  button: {
+    borderRadius: '30px',
+    color: '#4901DB',
+    backgroundColor: 'rgba(74,1,219, .03)'
+  },
 }

@@ -127,7 +127,8 @@ const style = {
     borderRadius: '30px',
     marginTop: '3%',
     width:'100%',
-    padding:'2%'
+    padding:'2%',
+    cursor:'pointer'
   },
   cancelBtn: {
     color: '#990000',
@@ -135,7 +136,7 @@ const style = {
     borderRadius: '30px',
     marginTop: '3%',
     width:'100%',
-    padding:'2%'
+    padding:'2%',
   },
   buttonHolder: {
     display: 'flex',
