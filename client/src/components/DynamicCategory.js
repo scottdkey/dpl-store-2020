@@ -33,7 +33,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
         setItems(res.data);
       })
       .catch(console.log);
-  }, []);
+  }, [cat_id]);
 
 
   // gets category on initial render
@@ -43,7 +43,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .get(`/api/categories/${cat_id}`)
       .then(res => setCategory(res.data))
       .catch(console.log);
-  }, []);
+  }, [cat_id]);
 
 
   const renderItems = () =>
