@@ -18,7 +18,7 @@
       description: Faker::Movies::HarryPotter.quote,
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
-      sizes: {small:1,medium:1,large:1},
+      sizes: {Xsmall: 5, Small:5,Medium:5,Large:5,XLarge:5, XXL: 5 },
       main_image: Faker::Avatar.image(set: "set4"),
       featured:'true',
     )
@@ -32,7 +32,7 @@
       description: Faker::Movies::HarryPotter.quote,
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
-      sizes: {small:1,medium:1,large:1},
+      sizes: {Xsmall: 5, Small:5,Medium:5,Large:5,XLarge:5, XXL: 5 },
       main_image: Faker::Avatar.image(set: "set4"),
       featured:'false',
 
@@ -46,7 +46,7 @@
       description: Faker::Movies::HarryPotter.quote,
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
-      sizes: {small:1,medium:1,large:1},
+      sizes: {Xsmall: 5, Small:5,Medium:5,Large:5,XLarge:5, XXL: 5 },
       main_image: Faker::Avatar.image(set: "set4"),
       featured:'false',
 

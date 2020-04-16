@@ -72,7 +72,7 @@ class Api::ProductsController < ApplicationController
       :category_id,
       :main_image,
       :featured,
-      sizes: %i[Small Medium Large noSize X-Small X-Large],
+      sizes: %i[Small Medium Large noSize Xsmall Xlarge XXL],
     )
   end
 

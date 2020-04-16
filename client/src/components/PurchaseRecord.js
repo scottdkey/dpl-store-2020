@@ -45,12 +45,28 @@ class PurchaseRecord extends React.Component {
     else { alert('invalid email') }
   }
 
+  // t.string "title"
+  //   t.text "description"
+  //   t.float "price"
+  //   t.boolean "has_size"
+  //   t.text "sizes"
+  //   t.text "main_image"
+  //   t.text "alt_image"
+  //   t.boolean "featured"
+
   createPurchaseProducts = (id) => {
     let cart = getAllCartItems()
     cart.forEach(item => {
+      var product = item.object
+      var size = takeOutDash(item.size)
+      var newQuantity = product.sizes[size] - 1
+      var newSize = {...product.sizes,[size]:newQuantity}
+      var updatedProduct = {...product, sizes:{...newSize}}
       axios.post(`/api/purchase_records/${id}/purchase_products`, { quantity: item.quantity, size_choice: item.size, product_id: item.object.id })
-        
         .catch(e => console.log(e))
+
+      axios.put(`api/categories/${product.category_id}/products/${product.id}`,updatedProduct )
+      .then(res => console.log(newSize))
     })
   }
 
@@ -193,3 +209,13 @@ const style = {
 }
 
 export default PurchaseRecord
+
+
+const takeOutDash = (string) => {
+  let splitString = string.split(``)
+  let newString = splitString.filter(letter => {
+    return letter !== '-'
+  })
+  let finalString = newString.join('')
+  return finalString
+}
