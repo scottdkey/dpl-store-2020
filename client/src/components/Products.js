@@ -4,6 +4,7 @@ import { Card, Image, } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from '../images/BlueHeader2.svg';
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
+import { Link, } from 'react-router-dom';
 
 
 
@@ -41,7 +42,7 @@ export default class Products extends Component {
       <h1>Search Results</h1>
       {this.state.results.map((result) => (
         <div key={result.id}>
-            <Image src={result.main_image} alt={result.title} size="small" />
+            <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
             <Card.Header>{result.title}</Card.Header>
             <Card.Meta>${result.price}</Card.Meta>
             <br />
