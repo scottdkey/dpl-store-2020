@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Modal, Button, Icon } from "semantic-ui-react";
-import Dropzone from "react-dropzone";
+import Dropzone from 'react-dropzone';
 import axios from "axios";
 
 class CategoryForm extends Component {

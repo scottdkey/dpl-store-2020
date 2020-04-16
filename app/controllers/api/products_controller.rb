@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_category, except: [:all_products, :featured_products]
+  before_action :set_category, except: [:all_products, :featured_products, :search]
   before_action :set_product, only: %i[show update destroy update_image]
 
   def index
