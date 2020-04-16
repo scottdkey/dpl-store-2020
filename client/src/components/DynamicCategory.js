@@ -1,16 +1,28 @@
-  
 import React, { useState, useEffect } from "react";
 import { Card, Image, Button } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
-import Products from './Products'
+import Products from "./Products";
+// import { useGetProducts } from '../hooks/useGetProducts'
+
+
 
 const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
-  const [items, setItems] = useState([]);
-  const [category, setCategory] = useState(null);
   const cat_id = category_id || match.params.category_id;
+  const [category, setCategory] = useState(cat_id);
+  useEffect(() => {
+    axios
+      .get(`/api/categories/${cat_id}/products`)
+      .then((res) => {
+        setItems(res.data);
+      })
+      .catch(console.log);
+  }, [category]);
+
+  const [items, setItems] = useState([]);
+
   const [results, setResults] = useState([]);
   // make another useEffect to get the category
   // /categories/:category_id/
@@ -39,56 +51,52 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
 
   // gets category on initial render
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}`)
-      .then(res => setCategory(res.data))
+      .then((res) => setCategory(res.data))
       .catch(console.log);
   }, [cat_id,results]);
 
 
-  const renderItems = () =>
-  <div style={style.productContainer}>
-        { items.map((product) => (
-            <div  key={product.id}>
-              <div style={{ ...style.photoHolder }}>
-                <div style={style.crop}>
-                  <Image
-                    src={product.main_image}
-                    as={Link}
-                    to={{
-                      pathname: `/categories/${cat_id}/products/${product.id}`,
-                      state: { ...product },
-                    }}
-                  />
-                </div>
-              </div>
-              <div style={style.informationContainer}>
-                <div>
-                  <h3 style={{ margin: "5px", display: "inline" }}>
-                    {"$" + product.price}
-                  </h3>
-                  <h5 style={{ margin: "5px", display: "inline" }}>
-                    {product.title}
-                  </h5>
-                </div>
-              </div>  
+  const renderItems = () => (
+    <div style={style.productContainer}>
+      {items.map((product) => (
+        <div key={product.id}>
+          <div style={{ ...style.photoHolder }}>
+            <div style={style.crop}>
+              <Image
+                src={product.main_image}
+                as={Link}
+                to={{
+                  pathname: `/categories/${cat_id}/products/${product.id}`,
+                  state: { ...product },
+                }}
+              />
             </div>
-        ))}
-  </div>
+          </div>
+          <div style={style.informationContainer}>
+            <div>
+              <h3 style={{ margin: "5px", display: "inline" }}>
+                {"$" + product.price}
+              </h3>
+              <h5 style={{ margin: "5px", display: "inline" }}>
+                {product.title}
+              </h5>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
-  if(noHeader){
+  if (noHeader) {
+    return <>{renderItems()}</>;
+  } else {
     return (
       <>
-        {renderItems()}
-      </>
-    )
-  } else {
-    return(
-      <>
-      <div class="image-container">
+        <div class="image-container">
           <Image src={BlueHeader} style={{ width: "100%" }} />
-          <div class= "centered">
+          <div class="centered">
             <h1 class="large-header">{category && category.name}</h1>
             <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
             </div>
@@ -103,10 +111,9 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       </div>
       <br />
       </>
-    )
-  };
+    );
+  }
 };
-
 
 const style = {
   crop: {
@@ -139,10 +146,10 @@ const style = {
     backgroundColor: "rgba(74,1,219, .03)",
   },
   productContainer: {
-    display: 'flex',
-    alignItems: 'stretch',
-    marginLeft: '100px',
-    flexWrap: 'wrap',
+    display: "flex",
+    alignItems: "stretch",
+    marginLeft: "100px",
+    flexWrap: "wrap",
   },
   container: {
     margin: "2% 11%",
@@ -150,4 +157,4 @@ const style = {
   },
 };
 
-export default DynamicCategory; 
+export default DynamicCategory;

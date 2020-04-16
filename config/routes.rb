@@ -16,6 +16,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    get "/contact", to: "contact#contact"
+  end
+ 
+
+  namespace :api do
     get '/products', to: 'products#all_products', as: '/products'
     put '/categories/:category_id/products/:id/images', to: 'products#update_image'
     get '/featured_products', to: 'products#featured_products'
