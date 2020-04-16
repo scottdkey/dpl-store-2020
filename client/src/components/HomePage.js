@@ -11,10 +11,6 @@ import FeaturedProducts from './FeaturedProducts'
 import FeaturedCard from './FeaturedCard';
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 716e7c8b8e6e2e3c68d40139869ae396c121ed05
 const HomepageLayout = () => {
   const [results, setResults] = useState([]);
 
