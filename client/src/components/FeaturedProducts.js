@@ -53,7 +53,7 @@ class FeaturedProducts extends React.Component {
     return (
       <div style={style.container}>
         <div style={style.header}>
-          <h3>Featured Products</h3>
+          <h3>FEATURED PRODUCTS</h3>
         </div>
         {showAllFeatured ? (
           <div style={style.productHolder}>
@@ -74,7 +74,7 @@ class FeaturedProducts extends React.Component {
         )}
         <div>
           <Button onClick={this.toggleProducts} style={style.button}>
-            {showAllFeatured ? "Show Less" : "Show More"}
+            {showAllFeatured ? "See Less" : "See More"}
           </Button>
         </div>
       </div>
@@ -87,7 +87,7 @@ const style = {
     textAlign: "left"
   },
   container: {
-    margin: "2% 10%",
+    margin: "2% 11%",
     marginTop: "5%"
   },
   button: {

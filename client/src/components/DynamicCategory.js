@@ -34,7 +34,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
         setItems(res.data);
       })
       .catch(console.log);
-  }, []);
+  }, [cat_id,results]);
 
 
   // gets category on initial render
@@ -44,7 +44,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .get(`/api/categories/${cat_id}`)
       .then(res => setCategory(res.data))
       .catch(console.log);
-  }, []);
+  }, [cat_id,results]);
 
 
   const renderItems = () =>
@@ -93,11 +93,13 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
             <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
             </div>
             </div>
+            <div style={style.container}>
             {results.length > 0 && renderResults()}
             {renderItems()}
             <br />
+            </div>
           <div align="center">
-          <button style={style.button}>See More</button>
+          <button class="ui button" style={style.button}>See More</button>
       </div>
       <br />
       </>
@@ -132,19 +134,19 @@ const style = {
     margin: "1%",
   },
   button: {
-    backgroundColor: "#F5F5F5",
-    color: "#4901DB",
     borderRadius: "30px",
-    padding: "20px",
-    align: "center",
-    border: "none",
-    width: "125px",
+    color: "#4901DB",
+    backgroundColor: "rgba(74,1,219, .03)",
   },
   productContainer: {
     display: 'flex',
     alignItems: 'stretch',
     marginLeft: '100px',
     flexWrap: 'wrap',
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%"
   },
 };
 

@@ -23,16 +23,17 @@ const FunctionalSearch = (props) => {
     category_id: props.category_id || ""
   });
 
-  const initialState = {isLoading, results, value, products, category_id}
+  // const initialState = {isLoading, results, value, products, category_id}
 
   useEffect( () => {
-    // const cat_id = this.props.category_id
-    axios.get(`/api/categories/${category_id}/products`)
-      .then( res => {
+      // const cat_id = this.props.category_id
+        axios.get(`/api/categories/${category_id}/products`)
+        .then( res => {
         setProducts(res.data)
+        console.log(products)
       })
       .catch(console.log)
-  }, []);
+    },[])
 
   const searchChange = (event) => {
     setSearchState({ 
@@ -47,7 +48,7 @@ const FunctionalSearch = (props) => {
       .then((res) => {
        if(props.afterSearch) props.afterSearch(res.data);
       })
-      .catch(console.log);
+      .catch(e => console.log(e))
   }
 
     return(

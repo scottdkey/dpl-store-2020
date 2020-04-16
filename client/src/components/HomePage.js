@@ -29,11 +29,11 @@ const HomepageLayout = () => {
 
   return (
     <>
-      <div class="image-container">
-        <Image src={BlueHeader} fluid />
+      <div className="image-container">
+        <Image src={BlueHeader} />
         {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-        <div class="centered"><h1 class="large-header">DevPoint Store</h1>
-          <h3 class="small-header">Find something you'll love.</h3>
+        <div className="centered"><h1 class="large-header">DevPoint Store</h1>
+          <h3 className="small-header">Find something you'll love.</h3>
           <FunctionalSearch afterSearch={afterSearch}/>
         </div> 
       </div>
@@ -41,7 +41,7 @@ const HomepageLayout = () => {
     <Container>
       { results.length > 0 && renderResults() }
       <Grid >
-        <Header as='h3' class='heading'>CATEGORIES</Header>
+        <Header as='h3' className='heading'>CATEGORIES</Header>
         <Grid.Row columns={4}>
           <Grid.Column centered>
             <Link to="/categories/1/products" ><RoundedImage as={Image} size="medium" src={Featured} fluid /></Link>
@@ -61,10 +61,10 @@ const HomepageLayout = () => {
           </Grid.Column>
         </Grid.Row>
       </Grid> 
-      <br/> 
+      </Container>
       <div align="center"><FeaturedProducts /></div>
       <br/>
-    </Container>
+    
   </>
   )
 };

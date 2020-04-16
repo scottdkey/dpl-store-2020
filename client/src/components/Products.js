@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Image, } from "semantic-ui-react";
+import { Card, Image, Container, } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from '../images/BlueHeader2.svg';
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
@@ -24,7 +24,8 @@ export default class Products extends Component {
       const category = c.name;
       return (
         <Card.Group key={c.id}>
-          <h4>{category}</h4>
+          <h2 style={{marginLeft:"100px"}}>{category}</h2>
+          <br/>
           <DynamicCategory category_id={c.id} category_name={c.name} noHeader />
         </Card.Group>
       );
@@ -52,26 +53,39 @@ export default class Products extends Component {
   render() {
     return (
       <>
-        <div class="image-container">
+        <div className="image-container">
           <Image src={BlueHeader} fluid />
-          <div class="centered">
-            <h1 class="large-header">All Merchandise</h1>
-            <h3 class="small-header">Find something you'll love.</h3>
-            <FunctionalSearch afterSearch={this.afterSearch} />
+          <div className="centered">
+            <h1 className="large-header">All Merchandise</h1>
+            <h3 className="small-header">Find something you'll love.</h3>
+            <FunctionalSearch afterSearch={this.afterSearch}  />
           </div>
         </div>
-
+        <div style={style.container}>
+        {/* <Container style={{margin: '2%'}}> */}
         { this.state.results.length > 0 && this.renderResults() }
         {this.state.categories.length === 0
           ? "No Products"
           : this.renderCategories()}
+          </div>
+          <br/>
         <div align="center">
-          <button class="ui button" style={{ align: "center" }}>
-            See More
-          </button>
+          <button class="ui button" style={style.button}>See More</button>
         </div>
         <br />
       </>
     );
   }
+}
+
+const style = {
+  button: {
+    borderRadius: "30px",
+    color: "#4901DB",
+    backgroundColor: "rgba(74,1,219, .03)",
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%"
+  },
 }
