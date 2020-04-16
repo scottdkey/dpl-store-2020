@@ -72,7 +72,8 @@ const style = {
   },
   container: {
     margin: "2% 11%",
-    marginTop: "5%"
+    marginTop: "5%",
+    align: "center",
   },
 }
 
