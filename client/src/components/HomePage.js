@@ -40,6 +40,7 @@ const HomepageLayout = () => {
     
     <Container>
       { results.length > 0 && renderResults() }
+      {console.log(results)}
       <Grid >
         <Header as='h3' class='heading'>CATEGORIES</Header>
         <Grid.Row columns={4}>
