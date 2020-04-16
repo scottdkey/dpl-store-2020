@@ -30,6 +30,7 @@ gem 'devise_token_auth'
 # gem 'rack-cors'
 
 group :development, :test do
+gem "letter_opener"
   gem 'faker'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'better_errors'
