@@ -55,16 +55,11 @@ const DynamicProduct = ({category_id, product_id, match}) => {
     axios
       .get(`/api/categories/${cat_id}/products/${prod_id}`)
       .then( (res) => {
-        setProduct(res.data);
-        // console.log(res);
+        setProduct(res.data)
+        setShowImage(res.data.main_image)
       })
-      .catch(console.log);
-    axios.get(`/api/products/${prod_id}/images`).then( res => {
-      
-      setImages(res.data)
-      
-    }
-      ).catch(e=> console.log(e))
+      .catch(e => console.log(e))
+    axios.get(`/api/products/${prod_id}/images`).then( res => setImages(res.data)).catch(e=> console.log(e))
   }, []);
     const handleChange = (e) => {
       return(
@@ -73,15 +68,22 @@ const DynamicProduct = ({category_id, product_id, match}) => {
     };
 
     const imageGroup = () => {
-      images.unshift({ id: null, url: product.main_image });
       return (
         <>
-          <Image src={product.main_image} style={style.roundedImage} />
+          <Image src={showImage} style={style.roundedImage} />
           <Image.Group>
-            <Image style={style.altImage} src={Featured} />
-            <Image style={style.altImage} src={Featured} />
-            <Image style={style.altImage} src={Featured} />
-            <Image style={style.altImage} src={Featured} />
+            <Image src={product.main_image} style={style.altImage} onClick={() => pickShowImage(product.main_image)} />
+            {images.slice(0, 3).map(image => {
+              if(image.url === null){
+                //return nothing
+              }else {
+              return (
+                <>
+                  <Image style={style.altImage} src={image.url} onClick={() => pickShowImage(image.url)}/>
+                </>
+              )
+              }
+            })}
           </Image.Group>
         </>
       );
