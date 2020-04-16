@@ -20,7 +20,7 @@ export default class Products extends Component {
       this.setState({ categories: res.data });
     });
   };
-  
+
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.name;

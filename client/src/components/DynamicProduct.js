@@ -42,11 +42,8 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       label: "X-Large",
       value: "X-Large"
     },
-    {
-      label: "XXL",
-      value: "XXL"
-    }
   ])
+
   useEffect( () => {
     const cat_id = match.params.category_id
     const prod_id = match.params.id
@@ -58,20 +55,22 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       })
       .catch(console.log);
   }, []);
-    const handleChange = (e) => {
-      return(
-        setSize(e)
-      )
-    };
+
+  const handleChange = (e) => {
     return(
-      <>
+      setSize(e)
+    )
+  };
+    
+  return(
+    <>
       <div style={style.headerContainer}>
           <Link to='/'><Button style={style.headerButton}>Hats</Button></Link>
         </div>
       <Container>
       <Card key={product.id} style= {style.card}>
       <Card.Header>
-        <Grid >
+        <Grid>
         <div align="center">
           <Grid.Column width={8}  kvb>   
             <Image src={Featured} style= {style.roundedImage} />
@@ -82,41 +81,39 @@ const DynamicProduct = ({category_id, product_id, match}) => {
               <Image style={style.altImage} src={Featured} />
           </Image.Group>
           </Grid.Column>
-          </div>
-          <Grid.Column width={7}>
-            <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
-            <br/>
-            <Grid.Row><h4>{product.description}</h4></Grid.Row>
-            <br/> 
-            <Grid.Row><h1>{"$" + product.price}</h1></Grid.Row>
-            <br/> 
+        </div>
+        <Grid.Column width={7}>
+          <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
+          <br/>
+          <Grid.Row><h4>{product.description}</h4></Grid.Row>
+          <br/> 
+          <Grid.Row><h1>{"$" + product.price}</h1></Grid.Row>
+          <br/> 
  
-            <div class="fitted-icon">
-              <p>Size</p>
-              <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
-              {items.map(({ label, value }) => (
-                <option key={value} value={value}>
-                {label}
-                </option>
-              ))}
+          <div class="fitted-icon">
+            <p>Size</p>
+            <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
+            {items.map(({ label, value }) => (
+              <option key={value} value={value}>
+              {label}
+              </option>
+            ))}
             </select>
             <Image src={Arrow} style={style.arrow}  ></Image>
-            </div>
-            <div>
-                <br/> 
+          </div>
+          <div>
+            <br/> 
             <Grid.Row >
             <Button as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" onClick={() => putItemInCart(product, size, 1)} />
             </Grid.Row>
-            </div>
-          </Grid.Column>
+          </div>
+        </Grid.Column>
         </Grid>
       </Card.Header>
-      <Card.Description>
-      </Card.Description>
       </Card>
       </Container>
-      </>
-    )
+    </>
+  )
 };
 
 const style = {

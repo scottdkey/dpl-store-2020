@@ -11,7 +11,6 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState(null);
   const [results, setResults] = useState([]);
-
   const cat_id = category_id || match.params.category_id;
 
   const afterSearch = (results) => setResults(results);
@@ -24,9 +23,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
     </div>
   ));
 
-
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}/products`)
       .then(res => {
@@ -35,16 +32,19 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .catch(console.log);
   }, [cat_id]);
 
-
   // gets category on initial render
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}`)
       .then(res => setCategory(res.data))
       .catch(console.log);
   }, [cat_id]);
 
+  // clears results when category changes
+  useEffect(() => {
+    console.log("results cleared")
+    setResults([]);
+  },[cat_id])
 
   const renderItems = () =>
   <div style={style.productContainer}>

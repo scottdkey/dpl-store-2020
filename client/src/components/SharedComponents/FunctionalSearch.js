@@ -4,36 +4,23 @@ import { Image, Grid, } from 'semantic-ui-react';
 import Search from './search.svg'
 
 const FunctionalSearch = (props) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [results, setResults] = useState([]);
-  const [value, setValue] = useState("");
-  const [products, setProducts] = useState([]);
-  const [category_id, setCategory_id] = useState(props.category_id);
   const [searchState, setSearchState] = useState({
     term: "", 
-    category_id: props.category_id || ""
+    category_id: props.category_id || null
   });
-
-  const initialState = {isLoading, results, value, products, category_id}
-
-  useEffect( () => {
-    axios.get(`/api//categories/${category_id}products`)
-      .then( res => {
-        setProducts(res.data)
-      })
-      .catch(console.log)
-  }, []);
 
   const searchChange = (event) => {
     setSearchState({ 
       ...searchState, 
-      [event.target.name]: event.target.value 
+      [event.target.name]: event.target.value
     });
   };
 
-  const searchSubmit = () => {
+  const searchSubmit = (e) => {
+    e.preventDefault();
     console.log('click')
-    axios.get(`/api/products/search?term=${searchState.term}&category_id=${searchState.category_id}`)
+    const categoryCondition = searchState.category_id ? `&category_id=${searchState.category_id}` : ""
+    axios.get(`/api/products/search?term=${searchState.term}${categoryCondition}`)
       .then((res) => {
        if(props.afterSearch) props.afterSearch(res.data);
       })
@@ -43,16 +30,6 @@ const FunctionalSearch = (props) => {
 
   return(
     <>
-      {/* <Grid>
-        <Grid.Column>
-          <input 
-            name="term"
-            value={searchState.term}
-            onChange={searchChange}
-          />
-          <button onClick={searchSubmit} >Submit</button>
-        </Grid.Column>
-      </Grid> */}
         <form onSubmit={searchSubmit} style={{position: 'relative', display: 'inline-block'}}>
           <div class="fitted-icon">
           <Image src={Search} style={style.spyglass} ></Image>
@@ -60,7 +37,6 @@ const FunctionalSearch = (props) => {
             name="term"
             value={searchState.term}
             onChange={searchChange}
-            
           />
           </div>
          </form>
@@ -84,4 +60,3 @@ const style = {
 }
 
 export default FunctionalSearch;
-
