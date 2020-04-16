@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Form, Modal } from "semantic-ui-react";
-import SizeForm from "./Product_size_form";
+import SizeForm from "./ProductSizeForm";
 import axios from "axios";
-import MainImageForm from "./Product_main_ImageForm";
-import AltImageForm from "./Product_altImageForm";
-export default class AdminProduct extends Component {
+import MainImageForm from "./ProductMainImageForm";
+import AltImageForm from "./ProductAltImageForm";
+
+class ProductForm extends Component {
   state = {
     title: "",
     description: "",
@@ -180,6 +181,8 @@ export default class AdminProduct extends Component {
     );
   }
 }
+
+export default ProductForm
 
 const styles = {
   imageArea: {

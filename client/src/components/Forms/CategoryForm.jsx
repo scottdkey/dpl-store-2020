@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Form, Modal, Button, Icon } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
-import { Image, CloudinaryContext } from "cloudinary-react";
 
 class CategoryForm extends Component {
   state = {

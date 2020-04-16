@@ -3,7 +3,6 @@ import { Button, Modal} from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderCategories from "./AdminPanelComponents/RenderCategories";
-// import CategoryForm from "./Forms/CategoryForm";
 import CategorySelector from "./Selectors/CategorySelector";
 import CategoryForm from "./Forms/CategoryForm";
 
