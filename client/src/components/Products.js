@@ -35,16 +35,16 @@ export default class Products extends Component {
 
   afterSearch = (results) => {this.setState({ results: results })};
 
+
   renderResults = () => (
     <div>
       <h1>Search Results</h1>
       {this.state.results.map((result) => (
         <div key={result.id}>
-          <Card>
             <Image src={result.main_image} alt={result.title} size="small" />
             <Card.Header>{result.title}</Card.Header>
             <Card.Meta>${result.price}</Card.Meta>
-          </Card><br />
+            <br />
         </div> 
       ))}
     </div> 

@@ -6,10 +6,13 @@ import BlueHeader from '../images/BlueHeader2.svg';
 import Featured from '../images/blank.png'
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
 import FeaturedProducts from './FeaturedProducts'
+import axios from 'axios';
+import CategoriesLinks from './CategoriesLinks';
 
 
 const HomepageLayout = () => {
   const [results, setResults] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   const afterSearch = (results) => setResults(results);
 
@@ -20,6 +23,18 @@ const HomepageLayout = () => {
       <Card.Meta>${result.price}</Card.Meta>
     </div>
   ));
+
+  // useEffect( () => { 
+  //   axios.get('/api/categories')
+  //     .then( res => {
+  //       setCategories(res.data)
+  //       console.log(res.data)
+  //       const categoriesArray = [res.data];
+  //       console.log(categories)
+  //       console.log(categoriesArray)
+  //     })
+  //     .catch(console.log)
+  // }, [])
 
   return (
     <>
@@ -34,41 +49,16 @@ const HomepageLayout = () => {
     
     <div style={style.container}>
       { results.length > 0 && renderResults() }
-      {console.log(results)}
-      <Grid >
-        <Header as='h3' className='heading'>CATEGORIES</Header>
-        <Grid.Row columns={4}>
-          <Grid.Column centered>
-            <Link to="/categories/1/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
-            <h4 align="center">T Shirts</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/categories/2/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
-            <h4 align="center">Jackets & Hoodies </h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/categories/3/products" > <RoundedImage as={Image} size="medium" src={Featured} /></Link>
-            <h4 align="center">Hats</h4>
-          </Grid.Column>
-          <Grid.Column>
-            <Link to="/categories/4/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
-            <h4 align="center">Stickers</h4>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid> 
+      <CategoriesLinks />
       <br/> 
       <br/>
     </div>
-    <div align="center"><FeaturedProducts /></div>
+    <div align="center">
+      <FeaturedProducts />
+    </div>
   </>
   )
 };
-
-const RoundedImage = styled.div`
-  border-radius: 25px;
-  width: 250px;
-  height: 250px;
-`;
 
 const style = {
   button: {
@@ -85,4 +75,5 @@ const style = {
     marginTop: "5%"
   },
 }
+
 export default HomepageLayout;

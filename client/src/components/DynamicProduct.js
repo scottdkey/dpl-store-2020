@@ -10,6 +10,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
   const [size, setSize] = useState('')
   const [showImage, setShowImage] = useState('')
   const [images, setImages] = useState([])
+  const [category, setCategory] = useState('')
   const [items] = useState([
     {
       label: "",
@@ -56,6 +57,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
     .then(res => setImages(res.data))
     .catch(e=> console.log(e))
   },[])
+
     
   
   const handleChange = (e) => {
@@ -93,7 +95,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
   return(
     <>
       <div style={style.headerContainer}>
-          <Link to={`/categories/${match.params.category_id}/products/`}><Button style={style.headerButton}>Back</Button></Link>
+          <Link to={`/categories/${match.params.category_id}/products/`}><Button style={style.headerButton}>Go Back</Button></Link>
         </div>
       <Container>
       <Card key={product.id} style= {style.card}>
