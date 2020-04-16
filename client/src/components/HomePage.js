@@ -34,7 +34,7 @@ const HomepageLayout = () => {
         {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
         <div class="centered"><h1 class="large-header">DevPoint Store</h1>
           <h3 class="small-header">Find something you'll love.</h3>
-          <FunctionalSearch afterSearch={afterSearch}/>
+          <FunctionalSearch afterSearch={afterSearch} />
         </div> 
       </div>
     
