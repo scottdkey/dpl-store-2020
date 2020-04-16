@@ -48,14 +48,17 @@ class PurchaseRecord extends React.Component {
   createPurchaseProducts = (id) => {
     let cart = getAllCartItems()
     cart.forEach(item => {
+      var product = item.object
+      var size = takeOutDash(item.size)
+      var newQuantity = product.sizes[size] - 1
+      var updatedProduct = {...product, sizes:{...product.sizes,[size]:newQuantity}}
       axios.post(`/api/purchase_records/${id}/purchase_products`, { quantity: item.quantity, size_choice: item.size, product_id: item.object.id })
-        
         .catch(e => console.log(e))
+      axios.put(`api/categories/${product.category_id}/products/${product.id}`,updatedProduct )
     })
   }
 
   emailChange = (email) => {
-    //need to work on this part
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email)) { this.setState({ validEmail: true, }) }
   }
@@ -193,3 +196,13 @@ const style = {
 }
 
 export default PurchaseRecord
+
+
+const takeOutDash = (string) => {
+  let splitString = string.split(``)
+  let newString = splitString.filter(letter => {
+    return letter !== '-'
+  })
+  let finalString = newString.join('')
+  return finalString
+}
