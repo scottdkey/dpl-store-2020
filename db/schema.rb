@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 2020_04_14_195047) do
     t.text "sizes"
     t.text "main_image"
     t.text "alt_image"
-    t.boolean "featured"
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
