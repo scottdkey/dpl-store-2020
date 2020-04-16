@@ -10,6 +10,8 @@ import Arrow from '../images/LineArrowDown.svg';
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
   const [size, setSize] = useState('')
+  const [showImage, setShowImage] = useState('')
+  const [images, setImages] = useState([])
   // const options = [
   //   { key: 1, text: 'Extra Small', value: 1 },
   //   { key: 2, text: 'Small', value: 2 },
@@ -57,12 +59,39 @@ const DynamicProduct = ({category_id, product_id, match}) => {
         // console.log(res);
       })
       .catch(console.log);
+    axios.get(`/api/products/${prod_id}/images`).then( res => {
+      
+      setImages(res.data)
+      
+    }
+      ).catch(e=> console.log(e))
   }, []);
     const handleChange = (e) => {
       return(
         setSize(e)
       )
     };
+
+    const imageGroup = () => {
+      images.unshift({ id: null, url: product.main_image });
+      return (
+        <>
+          <Image src={product.main_image} style={style.roundedImage} />
+          <Image.Group>
+            <Image style={style.altImage} src={Featured} />
+            <Image style={style.altImage} src={Featured} />
+            <Image style={style.altImage} src={Featured} />
+            <Image style={style.altImage} src={Featured} />
+          </Image.Group>
+        </>
+      );
+    }
+
+    const pickShowImage = (imageURL) => {
+      setShowImage(imageURL)
+    }
+
+
     return(
       <>
       <div style={style.headerContainer}>
@@ -74,13 +103,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
         <Grid >
         <div align="center">
           <Grid.Column width={8}  kvb>   
-            <Image src={Featured} style= {style.roundedImage} />
-            <Image.Group >
-              <Image style={style.altImage} src={Featured} />
-              <Image style={style.altImage} src={Featured} />
-              <Image style={style.altImage} src={Featured} />
-              <Image style={style.altImage} src={Featured} />
-          </Image.Group>
+            {imageGroup()}
           </Grid.Column>
           </div>
           <Grid.Column width={7}>
