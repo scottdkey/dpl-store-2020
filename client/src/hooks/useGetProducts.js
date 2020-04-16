@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+// import { useState, useEffect } from 'react'
+// import axios from 'axios'
 
-export const useGetProducts = (category_id) => {
-  const [products, setProducts] = useState([])
+// export const useGetProducts = (category_id) => {
+//   const [products, setProducts] = useState([])
 
-  useEffect(() => {
-    const getProducts = async () => {
-      const { data } = await axios.get(`/api/categories/${category_id}/products`)
-      setProducts(data);
-    }
+//   useEffect(() => {
+//     const getProducts = async () => {
+//       const { data } = await axios.get(`/api/categories/${category_id}/products`)
+//       setProducts(data);
+//     }
 
-    getProducts()
-  }, [category_id])
+//     getProducts()
+//   }, [category_id])
 
-  return products;
-}
+//   return products;
+// }
+
+

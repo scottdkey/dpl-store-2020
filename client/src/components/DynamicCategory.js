@@ -5,14 +5,25 @@ import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 import Products from "./Products";
-import { useGetProducts } from '../hooks/useGetProducts'
+// import { useGetProducts } from '../hooks/useGetProducts'
+
+//we could start using a hook folder
+
 
 const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const cat_id = category_id || match.params.category_id;
   const [category, setCategory] = useState(cat_id);
-  const items = useGetProducts(cat_id)
+  useEffect(() => {
+    axios
+      .get(`/api/categories/${cat_id}/products`)
+      .then((res) => {
+        setItems(res.data);
+      })
+      .catch(console.log);
+  }, [category]);
 
-  // const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
+
   const [results, setResults] = useState([]);
   // make another useEffect to get the category
   // /categories/:category_id/
