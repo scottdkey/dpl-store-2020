@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 2020_04_14_195047) do
     t.text "sizes"
     t.text "main_image"
     t.text "alt_image"
-    t.boolean "featured"
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -78,12 +77,12 @@ ActiveRecord::Schema.define(version: 2020_04_14_195047) do
   create_table "purchase_products", force: :cascade do |t|
     t.integer "quantity"
     t.string "size_choice"
-    t.bigint "purchase_record_id", null: false
+    t.bigint "purchase_records_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_purchase_products_on_product_id"
-    t.index ["purchase_record_id"], name: "index_purchase_products_on_purchase_record_id"
+    t.index ["purchase_records_id"], name: "index_purchase_products_on_purchase_records_id"
   end
 
   create_table "purchase_records", force: :cascade do |t|
@@ -104,5 +103,5 @@ ActiveRecord::Schema.define(version: 2020_04_14_195047) do
   add_foreign_key "images", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "purchase_products", "products"
-  add_foreign_key "purchase_products", "purchase_records"
+  add_foreign_key "purchase_products", "purchase_records", column: "purchase_records_id"
 end
