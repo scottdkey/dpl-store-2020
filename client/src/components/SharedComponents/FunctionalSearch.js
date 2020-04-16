@@ -9,6 +9,14 @@ const FunctionalSearch = (props) => {
     category_id: props.category_id || null
   });
 
+  // resets state when category changes
+  useEffect(() => {
+    setSearchState({
+      term: "", 
+      category_id: props.category_id || null
+    })
+  }, [props.category_id])
+
   const searchChange = (event) => {
     setSearchState({ 
       ...searchState, 
