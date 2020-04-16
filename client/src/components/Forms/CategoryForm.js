@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { Form, Modal, Button, Icon, } from "semantic-ui-react";
+import { Form, Modal, Button, Icon } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
-import { Image, CloudinaryContext } from "cloudinary-react";
 
 class CategoryForm extends Component {
   state = {
     name: "",
     image: "",
     id: null,
-    editing: false
+    modalOpen: false
   };
 
   componentDidMount() {
@@ -20,33 +19,15 @@ class CategoryForm extends Component {
     const category = res.data.filter(
       category => category.name === this.props.category
     )[0];
-    if (category=== undefined){
-      console.log('error')
+    if (category === undefined) {
+      //do nothing
     } else {
-          this.setState({
-            name: category.name,
-            image: category.image,
-            id: category.id
-          });
-
+      this.setState({
+        name: category.name,
+        image: category.image,
+        id: category.id
+      });
     }
-
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    axios
-      .put(`/api/categories/${this.state.id}`, {
-        name: this.state.name,
-        image: this.state.image
-      })
-      .then
-      //close form
-      ()
-      .catch();
-  };
-  handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
   };
 
   categoryFormat = () => {
@@ -62,7 +43,11 @@ class CategoryForm extends Component {
               value={name}
               onChange={this.handleChange}
             />
-            <Dropzone onDrop={this.onDrop} multiple={false}>
+            <Dropzone
+              onDrop={this.onDrop}
+              multiple={false}
+              style={`background_image:${image}`}
+            >
               {({ getRootProps, getInputProps, isDragActive }) => {
                 return (
                   <div {...getRootProps()} style={styles.dropzone}>
@@ -76,32 +61,107 @@ class CategoryForm extends Component {
                 );
               }}
             </Dropzone>
-            <Button color="red">Cancel</Button>
-            <Form.Button>Submit</Form.Button>
+
+            <Form.Button positive>Submit</Form.Button>
+            <Form.Button onClick={this.handleClose} negative>
+              Cancel
+            </Form.Button>
           </Form>
         </div>
       </Modal.Content>
     );
   };
-  onDrop = (Files) => {
-    let data = new FormData()
-    data.append("file", Files[0])
-    axios.put(`/api/categories/${this.state.id}`, data).then(res => {
-      this.setState({
-        image: Files[0].url
+  onDrop = Files => {
+    let data = new FormData();
+    data.append("file", Files[0]);
+    axios
+      .put(`/api/categories/${this.state.id}`, data)
+      .then(res => {
+        this.setState({
+          image: Files[0].url
+        });
+        console.log(res);
       })
-      console.log(res)
-    }).catch(e => console.log(e))
+      .catch(e => console.log(e));
+  };
+
+  editCategory = () => (
+    <Modal
+      trigger={
+        <div onClick={this.handleOpen} style={{}} as="td">
+          <h2>
+            <Icon name="edit" />
+          </h2>
+        </div>
+      }
+      open={this.state.modalOpen}
+      onClose={this.handleClose}
+    >
+      {this.categoryFormat()}
+    </Modal>
+  );
+  newCategory = () => (
+    <Modal
+      trigger={
+        <Button onClick={this.handleOpen} style={styles.button}>
+          New Category
+        </Button>
+      }
+      open={this.state.modalOpen}
+      onClose={this.handleClose}
+    >
+      <Modal.Content>
+        <Form onSubmit={this.submitNew}>
+          <Form.Input
+            palceholder="Category Name"
+            name="name"
+            label="Category Name"
+            value={this.state.name}
+            onChange={this.handleChange}
+            required
+          />
+          <h3>Please add images after creation</h3>
+          <Form.Button positive>Submit</Form.Button>
+          <Form.Button negative onClick={this.handleClose}>
+            Cancel
+          </Form.Button>
+        </Form>
+      </Modal.Content>
+    </Modal>
+  );
+
+  submitNew = async () => {
+    const res = await axios.post(`/api/categories`, { name: this.state.name });
+    this.handleClose();
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    axios
+      .put(`/api/categories/${this.state.id}`, {
+        name: this.state.name,
+        image: this.state.image
+      })
+      .then(this.handleClose)
+      //close form
+      .catch();
+  };
+  handleOpen = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  handleClose = () => {
+    this.setState({ modalOpen: false });
+  };
+  handleChange = (e, { name, value }) => {
+    this.setState({ [name]: value });
   };
 
   render() {
-    return (
-      <>
-        <Modal trigger={<div style={{}} as="td"><h2><Icon name='edit' /></h2></div>}>
-          {this.categoryFormat()}
-        </Modal>
-      </>
-    );
+    if (this.props.category === undefined) {
+      return this.newCategory();
+    } else {
+      return this.editCategory();
+    }
   }
 }
 
@@ -122,5 +182,10 @@ const styles = {
     height: "150px",
     width: "150px",
     display: "flex"
+  },
+  button: {
+    borderRadius: "30px",
+    color: "#4901DB",
+    backgroundColor: "rgba(74,1,219, .03)"
   }
 };

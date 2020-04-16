@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import Axios from "axios";
-// import ImageIcon from '../../images/Image_Icon.png'
 
-class ImageForm extends Component {
+class MainImageForm extends Component {
 
   state = {
     image: ''
@@ -74,7 +73,7 @@ class ImageForm extends Component {
   }
 }
 
-export default ImageForm
+export default MainImageForm
 
 const styles = {
   dropzone: {

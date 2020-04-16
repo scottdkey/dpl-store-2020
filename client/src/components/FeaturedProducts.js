@@ -34,17 +34,22 @@ class FeaturedProducts extends React.Component {
 
   handleResize = () => {
     this.setState({
-      pictureHeight: ((window.innerWidth) / 4)
-    })
-  }
+      pictureHeight: window.innerWidth / 4
+    });
+  };
 
   toggleProducts = () => {
-    const { showAllFeatured } = this.state
-    this.setState({ showAllFeatured: !showAllFeatured })
-  }
+    const { showAllFeatured } = this.state;
+    this.setState({ showAllFeatured: !showAllFeatured });
+  };
 
   render() {
-    const { showAllFeatured, featuredProducts, someFeatured, pictureHeight } = this.state
+    const {
+      showAllFeatured,
+      featuredProducts,
+      someFeatured,
+      pictureHeight
+    } = this.state;
     return (
       <div style={style.container}>
         <div style={style.header}>

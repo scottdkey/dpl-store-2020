@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Select, Button } from "semantic-ui-react";
 
-export default class SizeForm extends Component {
+class SizeForm extends Component {
   state = {
     sizes: []
   };
@@ -75,6 +75,8 @@ export default class SizeForm extends Component {
     );
   }
 }
+
+export default SizeForm
 
 const sizeOptions = [
   { key: "noSize", value: "noSize", text: "No Size" },

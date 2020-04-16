@@ -3,7 +3,7 @@ import { Icon, Modal, Image, } from 'semantic-ui-react'
 import ProductForm from '../Forms/ProductForm'
 import axios from 'axios'
 
-export default class AdminCard extends React.Component {
+class RenderProduct extends React.Component {
   state = { pictureHeight: ((window.innerWidth) / 5.5), editing: false, }
 
   toggleEdit = () => { this.setState({ editing: !this.state.editing }); };
@@ -75,6 +75,8 @@ export default class AdminCard extends React.Component {
     )
   }
 }
+export default RenderProduct
+
 const style = {
   photo: {
     display: 'block',
