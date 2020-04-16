@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button } from "semantic-ui-react";
+import { Card, Image, } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
@@ -79,22 +79,18 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   } else {
     return (
       <>
-        <div class="image-container">
+        <div className="image-container">
           <Image src={BlueHeader} style={{ width: "100%" }} />
-          <div class="centered">
-            <h1 class="large-header">{category && category.name}</h1>
-            <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
-            </div>
-            </div>
-            <div style={style.container}>
-            {results.length > 0 && renderResults()}
-            {renderItems()}
-            <br />
-            </div>
-          <div align="center">
-          <button class="ui button" style={style.button}>See More</button>
-      </div>
-      <br />
+          <div className="centered">
+            <h1 className="large-header">{category && category.name}</h1>
+            <FunctionalSearch afterSearch={setResults} category_id={cat_id} />
+          </div>
+        </div>
+        <div style={style.container}>
+        { results.length > 0 && renderResults() }
+        {renderItems()}
+        </div>
+        <br />
       </>
     );
   };
@@ -135,6 +131,10 @@ const style = {
     alignItems: "stretch",
     marginLeft: "100px",
     flexWrap: "wrap",
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%"
   },
   container: {
     margin: "2% 11%",

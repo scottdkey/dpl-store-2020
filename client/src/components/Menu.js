@@ -48,7 +48,6 @@ class DesktopContainer extends Component {
               inverted={!fixed}
               pointing={!fixed}
               secondary={!fixed}
-              inverted 
               size='large'
               style={{margin: 0, border: "none"}}
             >
@@ -57,11 +56,6 @@ class DesktopContainer extends Component {
                 <Menu.Item>
                   <Image src={Beaker} size="tiny" className="filter-white"></Image>
                 </Menu.Item></Link>
-                <Menu.Item position='right'>
-                <Links />
-                {/* <Menu.Item >More<Icon name="dropdown"/></Menu.Item> */}
-                <Link to="/cart"><Menu.Item><Icon name="shopping cart" />Cart </Menu.Item></Link> 
-                </Menu.Item>
               <Menu.Item position='right'>
                 <Links />
                 <Link to="/cart">

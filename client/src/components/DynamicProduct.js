@@ -1,10 +1,8 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
-import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
+import { Card, Grid, Button, Image, Container, } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
-import Featured from '../images/blank.png' 
-import Links from './Links';
 import Arrow from '../images/LineArrowDown.svg';
 
 const DynamicProduct = ({category_id, product_id, match}) => {
@@ -95,7 +93,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
   return(
     <>
       <div style={style.headerContainer}>
-          <Link to='/'><Button style={style.headerButton}>Hats</Button></Link>
+          <Link to={`/categories/${match.params.category_id}/products/`}><Button style={style.headerButton}>Back</Button></Link>
         </div>
       <Container>
       <Card key={product.id} style= {style.card}>

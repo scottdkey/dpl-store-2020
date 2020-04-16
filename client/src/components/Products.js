@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Image, Container, } from "semantic-ui-react";
+import { Card, Image, } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from '../images/BlueHeader2.svg';
 import FunctionalSearch from './SharedComponents/FunctionalSearch';

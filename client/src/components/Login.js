@@ -92,7 +92,7 @@ const style = {
     cursor:'pointer'
   },
   cancelBtn: {
-    color: '#990000',
+    color: '#4901DB',
     backgroundColor:'lightgrey',
     borderRadius: '30px',
     marginTop: '3%',

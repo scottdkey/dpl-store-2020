@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, Header, Image, Card, } from 'semantic-ui-react';
+import { Grid, Header, Image, Card, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
@@ -26,20 +26,20 @@ const HomepageLayout = () => {
       <div className="image-container">
         <Image src={BlueHeader} />
         {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-        <div className="centered"><h1 class="large-header">DevPoint Store</h1>
+        <div className="centered"><h1 className="large-header">DevPoint Store</h1>
           <h3 className="small-header">Find something you'll love.</h3>
           <FunctionalSearch afterSearch={afterSearch}/>
         </div> 
       </div>
     
-    <Container>
+    <div style={style.container}>
       { results.length > 0 && renderResults() }
       {console.log(results)}
       <Grid >
         <Header as='h3' className='heading'>CATEGORIES</Header>
         <Grid.Row columns={4}>
           <Grid.Column centered>
-            <Link to="/categories/1/products" ><RoundedImage as={Image} size="medium" src={Featured} fluid /></Link>
+            <Link to="/categories/1/products" ><RoundedImage as={Image} size="medium" src={Featured} /></Link>
             <h4 align="center">T Shirts</h4>
           </Grid.Column>
           <Grid.Column>
@@ -58,7 +58,7 @@ const HomepageLayout = () => {
       </Grid> 
       <br/> 
       <br/>
-    </Container>
+    </div>
     <div align="center"><FeaturedProducts /></div>
   </>
   )
@@ -79,6 +79,10 @@ const style = {
     align: "center",
     border: "none",
     width: "125px",
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%"
   },
 }
 export default HomepageLayout;
