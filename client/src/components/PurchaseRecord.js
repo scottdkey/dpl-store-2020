@@ -37,7 +37,10 @@ class PurchaseRecord extends React.Component {
       }).catch(err => {
         console.log(err)
       })
+
       axios.get(`/api/contact?name=${name}&email=${email_address}&subject=DevStore Receipt&total=${total}`)
+      .then(res => { this.setState({ showForm: false }) })
+      .catch(e => console.log(e))
     }
     else { alert('invalid email') }
   }
@@ -46,7 +49,7 @@ class PurchaseRecord extends React.Component {
     let cart = getAllCartItems()
     cart.forEach(item => {
       axios.post(`/api/purchase_records/${id}/purchase_products`, { quantity: item.quantity, size_choice: item.size, product_id: item.object.id })
-        .then(res => { this.setState({ showForm: false }) })
+        
         .catch(e => console.log(e))
     })
   }
