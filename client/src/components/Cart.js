@@ -1,5 +1,5 @@
 import React from 'react'
-import { getAllCartItems, deleteItemFromCart, putItemInCart } from '../modules/CartFunctions'
+import { getAllCartItems, deleteItemFromCart, } from '../modules/CartFunctions'
 import { Button, Header, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 

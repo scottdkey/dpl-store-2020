@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Menu';
 import DynamicCategory from './components/DynamicCategory';
 import DynamicProduct from './components/DynamicProduct';
-import Links from './components/SharedComponents/Links';
+import Links from './components/Links';
 import StyledCard from './components/SharedComponents/StyledCard';
 import Cart from './components/Cart';
 
