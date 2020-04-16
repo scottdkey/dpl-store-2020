@@ -16,7 +16,7 @@ import {
 import Featured from "../images/blank.png";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import Links from "../SharedComponents/Links";
+import Links from "./Links";
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";

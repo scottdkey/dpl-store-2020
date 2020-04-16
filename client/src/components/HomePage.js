@@ -1,30 +1,24 @@
-import PropTypes from 'prop-types';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Grid, Header, Image, Card, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
 import Featured from '../images/blank.png'
-import LargeLogo from '../images/logo_black.svg'
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
 import FeaturedProducts from './FeaturedProducts'
-import FeaturedCard from './FeaturedCard';
 
 
 const HomepageLayout = () => {
   const [results, setResults] = useState([]);
 
-  const afterSearch = results => setResults(results);
+  const afterSearch = (results) => setResults(results);
 
   const renderResults = () => results.map((result) => (
     <div key={result.id}>
-      <Card>
-        <Image src={result.main_image} alt={result.title} size="small" />
-        {/* <Image src={result.main_image} as={Link} to={{pathname:`/categories/${category_id}/products/${result.id}`, state:{...result} }} /> */}
-        <Card.Header>{result.title}</Card.Header>
-        <Card.Meta>${result.price}</Card.Meta>
-      </Card><br />
-    </div> 
+      <Image src={result.main_image} alt={result.title} size="small" />
+      <Card.Header>{result.title}</Card.Header>
+      <Card.Meta>${result.price}</Card.Meta>
+    </div>
   ));
 
   return (

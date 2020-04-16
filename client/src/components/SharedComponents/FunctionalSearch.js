@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import React, { useState, useEffect, } from 'react';
-import { Image, Form, Button, } from 'semantic-ui-react';
+import { Image, Grid, } from 'semantic-ui-react';
 import Search from './search.svg'
 
 const FunctionalSearch = (props) => {
@@ -18,7 +17,7 @@ const FunctionalSearch = (props) => {
   const initialState = {isLoading, results, value, products, category_id}
 
   useEffect( () => {
-    axios.get(`/api/categories/${category_id}/products`)
+    axios.get(`/api//categories/${category_id}products`)
       .then( res => {
         setProducts(res.data)
       })
@@ -32,8 +31,8 @@ const FunctionalSearch = (props) => {
     });
   };
 
-  const searchSubmit = (e) => {
-    e.preventDefault()
+  const searchSubmit = () => {
+    console.log('click')
     axios.get(`/api/products/search?term=${searchState.term}&category_id=${searchState.category_id}`)
       .then((res) => {
        if(props.afterSearch) props.afterSearch(res.data);
@@ -41,10 +40,19 @@ const FunctionalSearch = (props) => {
       .catch(console.log);
   };
 
-    return(
-        <>
-        {/* <Button onClick={searchSubmit}>
-        </Button> */}
+
+  return(
+    <>
+      {/* <Grid>
+        <Grid.Column>
+          <input 
+            name="term"
+            value={searchState.term}
+            onChange={searchChange}
+          />
+          <button onClick={searchSubmit} >Submit</button>
+        </Grid.Column>
+      </Grid> */}
         <form onSubmit={searchSubmit} style={{position: 'relative', display: 'inline-block'}}>
           <div class="fitted-icon">
           <Image src={Search} style={style.spyglass} ></Image>
@@ -56,8 +64,8 @@ const FunctionalSearch = (props) => {
           />
           </div>
          </form>
-        </>
-    )
+    </>
+  );
 };
 
 const style = {
@@ -77,16 +85,3 @@ const style = {
 
 export default FunctionalSearch;
 
-// return(
-//   <Grid>
-//     <Grid.Column>
-//       <input 
-//         name="term"
-//         value={searchState.term}
-//         onChange={searchChange}
-//       />
-//       <button onClick={searchSubmit} >Submit</button>
-//     </Grid.Column>
-//   </Grid>
-// )
-// this is the old search bar that was working

@@ -4,7 +4,7 @@ import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import Featured from '../images/blank.png' 
-import Links from './SharedComponents/Links';
+import Links from './Links';
 import Arrow from '../images/LineArrowDown.svg';
 
 const DynamicProduct = ({category_id, product_id, match}) => {
@@ -90,18 +90,10 @@ const DynamicProduct = ({category_id, product_id, match}) => {
             <br/> 
             <Grid.Row><h1>{"$" + product.price}</h1></Grid.Row>
             <br/> 
-            {/* Header
-            meta
-            description
-            price
-            sizeDropdown component
-            button onClick to add to cart */}
-            {/* <Form id="selectedSize">
-            <Form.Dropdown clearable search options={options} selection onChange={e => setSize(e.currentTarget.text)} />
-            </Form> */}
-              <div class="fitted-icon">
-            <p>Size</p>
-            <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
+ 
+            <div class="fitted-icon">
+              <p>Size</p>
+              <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
               {items.map(({ label, value }) => (
                 <option key={value} value={value}>
                 {label}

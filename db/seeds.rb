@@ -8,7 +8,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-  category0 = Category.create(name:'All Categories')
+  # category0 = Category.create(name:'All Categories')
 
   category1 = Category.create(name:'T-Shirts')
   5.times do
