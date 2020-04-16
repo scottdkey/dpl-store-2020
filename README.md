@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To get mailer working 
+- go to application mailer and add your email to default from:
+- put 
+      GMAIL_USERNAME= your gmail email
+      GMAIL_PASSWORD= your gmail password 
 
-Things you may want to cover:
+  into the .env file
 
-* Ruby version
+  you might have to go to your gmail account and turn on the 
+  allow less secure application setting
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

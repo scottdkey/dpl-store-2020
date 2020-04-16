@@ -1,13 +1,12 @@
 import React from 'react';
 import PurchaseRecordForm from './Forms/PurchaseRecordForm';
 import { Button, Header } from 'semantic-ui-react';
-import { getAllCartItems , clearCart} from '../modules/CartFunctions';
+import { getAllCartItems, clearCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 class PurchaseRecord extends React.Component {
   state = {
-    order_total: 0,
     email_address: '',
     first_name: '',
     last_name: '',
@@ -29,13 +28,19 @@ class PurchaseRecord extends React.Component {
     }
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
     if (this.state.validEmail === true) {
+      var name = `${this.state.first_name}${this.state.last_name}`
+      const {email_address, total} = this.state
       axios.post('/api/purchase_records', (this.state)).then(res => {
         this.createPurchaseProducts(res.data.id)
       }).catch(err => {
         console.log(err)
       })
+
+      axios.get(`/api/contact?name=${name}&email=${email_address}&subject=DevStore Receipt&total=${total}`)
+      .then(res => { this.setState({ showForm: false }) })
+      .catch(e => console.log(e))
     }
     else { alert('invalid email') }
   }
@@ -43,9 +48,9 @@ class PurchaseRecord extends React.Component {
   createPurchaseProducts = (id) => {
     let cart = getAllCartItems()
     cart.forEach(item => {
-      axios.post(`/api/purchase_records/${id}/purchase_products`,{quantity:item.quantity, size_choice:item.size, product_id:item.object.id})
-      .then(res=> {this.setState({showForm:false})})
-      .catch(e=> console.log(e))
+      axios.post(`/api/purchase_records/${id}/purchase_products`, { quantity: item.quantity, size_choice: item.size, product_id: item.object.id })
+        
+        .catch(e => console.log(e))
     })
   }
 
@@ -54,14 +59,14 @@ class PurchaseRecord extends React.Component {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email)) { this.setState({ validEmail: true, }) }
   }
-  
+
   addTotal = () => {
     let cart = getAllCartItems()
     let total = 0
     cart.forEach(item => {
       total += item.object.price
     })
-    this.setState({total: total.toFixed(2) })
+    this.setState({ total: total.toFixed(2) })
   }
 
 
@@ -75,7 +80,7 @@ class PurchaseRecord extends React.Component {
             <div key={`product-${product.id}`} style={style.item}>
               <div style={{ margin: '5px' }}>
                 <h4 style={{ margin: '0px' }}>{product.object.title}</h4>
-                <h6 style={{ margin: '0px', color:'#777' }}>{product.size}</h6>
+                <h6 style={{ margin: '0px', color: '#777' }}>{product.size}</h6>
               </div>
               <div style={{ marginTop: '15px' }}>
                 <h3>{`$${product.object.price}`}</h3>
@@ -91,18 +96,18 @@ class PurchaseRecord extends React.Component {
   }
 
   renderCompleted = () => {
-    return(
-      <div style={{...style.itemsContainer, padding:'3%'}}>
+    return (
+      <div style={{ ...style.itemsContainer, padding: '3%' }}>
         <Header as='h3' textAlign='center'>Thank You For Your Purchase</Header>
-        <Link to='/'><div onClick={()=>clearCart()} style={style.doneBtn}>Done</div></Link>
+        <Link to='/'><div onClick={() => clearCart()} style={style.doneBtn}>Done</div></Link>
       </div>
     )
   }
 
   render() {
     const { email_address, first_name, last_name, address_one, address_two, city, state, zip_code, showForm } = this.state
-    if(this.state.total === 0){this.addTotal()}
-    
+    if (this.state.total === 0) { this.addTotal() }
+
     return (
       <>
         <div style={style.headerContainer}>
@@ -111,7 +116,7 @@ class PurchaseRecord extends React.Component {
         </div>
         <div style={style.purchaseContainer}>
           {this.getAllCartItems()}
-          {showForm ? 
+          {showForm ?
             <PurchaseRecordForm
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
@@ -176,14 +181,14 @@ const style = {
   total: {
     textAlign: 'right',
   },
-  doneBtn:{
+  doneBtn: {
     color: 'white',
     backgroundColor: '#4901DB',
     borderRadius: '30px',
-    width:'100%',
-    marginTop:'3%',
-    padding:'2%',
-    textAlign:'center'
+    width: '100%',
+    marginTop: '3%',
+    padding: '2%',
+    textAlign: 'center'
   }
 }
 
