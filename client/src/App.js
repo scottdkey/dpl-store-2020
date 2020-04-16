@@ -16,6 +16,7 @@ import DynamicProduct from './components/DynamicProduct';
 import Links from './components/SharedComponents/Links';
 import StyledCard from './components/SharedComponents/StyledCard';
 import Cart from './components/Cart';
+import NoMatch from './components/NoMatch';
 
  
 const App = () => (
@@ -34,6 +35,7 @@ const App = () => (
           <Route exact path='/styled' component={StyledCard} />
           <Route exact path='/links' component={Links} />
           <Route exact path='/cart' component={Cart} />
+          <Route component={NoMatch} />
         </Switch>
         </Container>
         <Footer />
