@@ -6,7 +6,7 @@ class ContactMailer < ApplicationMailer
    @email = params[:email]
    @subject = params[:subject]
    @total = params[:total]
-   mail(to: 'Bbell9563@gmail.com', subject: @subject)
+   mail(to: @email, subject: @subject)
 
 
  end
