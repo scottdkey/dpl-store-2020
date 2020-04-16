@@ -62,9 +62,9 @@ const HomepageLayout = () => {
         </Grid.Row>
       </Grid> 
       <br/> 
-      <div align="center"><FeaturedProducts /></div>
       <br/>
     </Container>
+    <div align="center"><FeaturedProducts /></div>
   </>
   )
 };
