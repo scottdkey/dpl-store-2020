@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Container, Icon, Image, Menu, Responsive, Sidebar, Visibility,} from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import Beaker from "../images/logo_black.svg";
-import Links from '../components/SharedComponents/Links';
+import Links from './Links';
 
 
 const getWidth = () => {
@@ -53,7 +53,8 @@ class DesktopContainer extends Component {
               style={{margin: 0, border: "none"}}
             >
               <Container fluid >
-              <Link to="/" ><Menu.Item>
+              <Link to="/" >
+                <Menu.Item>
                   <Image src={Beaker} size="tiny" className="filter-white"></Image>
                 </Menu.Item></Link>
                 <Menu.Item position='right'>
@@ -61,6 +62,12 @@ class DesktopContainer extends Component {
                 {/* <Menu.Item >More<Icon name="dropdown"/></Menu.Item> */}
                 <Link to="/cart"><Menu.Item><Icon name="shopping cart" />Cart </Menu.Item></Link> 
                 </Menu.Item>
+              <Menu.Item position='right'>
+                <Links />
+                <Link to="/cart">
+                  <Menu.Item><Icon name="shopping cart" />Cart </Menu.Item>
+                </Link> 
+              </Menu.Item>
               </Container>
             </Menu>
             <HomepageHeading />

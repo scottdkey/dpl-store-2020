@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Header, Grid, Container, Responsive, Icon, Image } from "semantic-ui-react";
+import { Segment, Grid, Icon, Image } from "semantic-ui-react";
 import styled from 'styled-components';
 import Logo from '../images/dpl_logo.svg';
 import Pin from '../images/Pin.svg';

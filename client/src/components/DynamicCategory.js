@@ -5,49 +5,21 @@ import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
 import Products from "./Products";
-// import { useGetProducts } from '../hooks/useGetProducts'
-
 
 
 const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
-  const cat_id = category_id || match.params.category_id;
-  const [category, setCategory] = useState(cat_id);
-  useEffect(() => {
-    axios
-      .get(`/api/categories/${cat_id}/products`)
-      .then((res) => {
-        setItems(res.data);
-      })
-      .catch(console.log);
-  }, [category]);
-
   const [items, setItems] = useState([]);
-
+  const [category, setCategory] = useState(null);
   const [results, setResults] = useState([]);
-  // make another useEffect to get the category
-  // /categories/:category_id/
-  // refactor component to get products by category
-  // when the controller exists (see Brianna)
-  // /categories/:category_id/products/:product_id
-  // call to get both of them
-  const afterSearch = (results) => setResults(results);
-  const renderResults = () => results.map((result) => (
-    <div key={result.id}>
-      {result.title}
-    </div>
-  ));
-
-
+  const cat_id = category_id || match.params.category_id;
+  
+  // gets products on initial render
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}/products`)
-      .then(res => {
-        setItems(res.data);
-      })
+      .then(res => setItems(res.data))
       .catch(console.log);
-  }, [cat_id,results]);
-
+  }, [cat_id]);
 
   // gets category on initial render
   useEffect(() => {
@@ -57,6 +29,19 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .catch(console.log);
   }, [cat_id,results]);
 
+
+  // clears results when category changes
+  useEffect(() => {
+    setResults([]);
+  },[cat_id]);
+
+  const renderResults = () => results.map((result) => (
+    <div key={result.id}>
+      <Image src={result.main_image} alt={result.title} size="small" />
+      <Card.Header>{result.title}</Card.Header>
+      <Card.Meta>${result.price}</Card.Meta>
+    </div>
+  ));
 
   const renderItems = () => (
     <div style={style.productContainer}>
@@ -112,7 +97,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       <br />
       </>
     );
-  }
+  };
 };
 
 const style = {
