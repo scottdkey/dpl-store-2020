@@ -10,18 +10,17 @@ import Products from './Products'
 const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState(null);
-  const cat_id = category_id || match.params.category_id;
   const [results, setResults] = useState([]);
-  // make another useEffect to get the category
-  // /categories/:category_id/
-  // refactor component to get products by category
-  // when the controller exists (see Brianna)
-  // /categories/:category_id/products/:product_id
-  // call to get both of them
+
+  const cat_id = category_id || match.params.category_id;
+
   const afterSearch = (results) => setResults(results);
+
   const renderResults = () => results.map((result) => (
     <div key={result.id}>
-      {result.title}
+      <Image src={result.main_image} alt={result.title} size="small" />
+      <Card.Header>{result.title}</Card.Header>
+      <Card.Meta>${result.price}</Card.Meta>
     </div>
   ));
 
@@ -86,22 +85,19 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   } else {
     return(
       <>
-      <div class="image-container">
+        <div class="image-container">
           <Image src={BlueHeader} style={{ width: "100%" }} />
-          <div class= "centered">
+          <div class="centered">
             <h1 class="large-header">{category && category.name}</h1>
-            <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
-            </div>
-            </div>
-            {results.length > 0 && renderResults()}
-            {renderItems()}
-            <br />
-          <div align="center">
-          <button style={style.button}>See More</button>
-      </div>
-      <br />
+            <FunctionalSearch afterSearch={afterSearch} category_id={cat_id} />
+          </div>
+        </div>
+
+        { results.length > 0 && renderResults() }
+        {renderItems()}
+        <br />
       </>
-    )
+    );
   };
 };
 
