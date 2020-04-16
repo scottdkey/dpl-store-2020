@@ -14,11 +14,13 @@ export default class Products extends Component {
   componentDidMount() {
     this.getCategories();
   }
+
   getCategories = () => {
     axios.get("/api/categories").then((res) => {
       this.setState({ categories: res.data });
     });
   };
+  
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.name;
