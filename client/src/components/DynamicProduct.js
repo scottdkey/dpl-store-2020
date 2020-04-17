@@ -1,10 +1,8 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
-import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
+import { Card, Grid, Button, Image, Container, } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
-import Featured from '../images/blank.png' 
-import Links from './Links';
 import Arrow from '../images/LineArrowDown.svg';
 
 const DynamicProduct = ({category_id, product_id, match}) => {
@@ -119,6 +117,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
           <div class="fitted-icon">
             <p>Size</p>
             <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
+            <option disabled selected value>  -- select a size --  </option>
             {items.map(({ label, value }) => (
               <option key={value} value={value}>
               {label}

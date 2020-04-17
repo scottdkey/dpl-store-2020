@@ -54,6 +54,7 @@ class SizeForm extends Component {
         <Form.Input
           placeholder="how many in stock?"
           value={size.quantity}
+          label="Quantity"
           name="quantity"
           onChange={e => this.sizeChange(e.target.name, e.target.value, index)}
         />
@@ -69,13 +70,23 @@ class SizeForm extends Component {
 
     return (
       <>
-        <Button as='div' onClick={this.addSize}>Add New Size</Button>
+        <Button onClick={this.addSize} style={styles.button}>Add New Size</Button>
+        <br/>
         {this.renderSizes()}
       </>
     );
   }
 }
 
+const styles = {
+  button: {
+    color: '#4901DB',
+    backgroundColor:'lightgrey',
+    width:'150px',
+    padding:'2%',
+    cursor:'pointer'
+  }
+}
 export default SizeForm
 
 const sizeOptions = [

@@ -120,9 +120,9 @@ class CategoryForm extends Component {
             onChange={this.handleChange}
             required
           />
-          <h3>Please add images after creation</h3>
-          <Form.Button positive>Submit</Form.Button>
-          <Form.Button negative onClick={this.handleClose}>
+          <h4>Please add images after creation</h4>
+          <Form.Button positive style={styles.submitBtn}>Submit</Form.Button>
+          <Form.Button negative onClick={this.handleClose} style={styles.cancelBtn}>
             Cancel
           </Form.Button>
         </Form>
@@ -187,5 +187,21 @@ const styles = {
     borderRadius: "30px",
     color: "#4901DB",
     backgroundColor: "rgba(74,1,219, .03)"
-  }
+  },
+  submitBtn: {
+    color: 'white',
+    backgroundColor: '#4901DB',
+    borderRadius: '30px',
+    width:'150px',
+    padding:'2%',
+    cursor:'pointer'
+  },
+  cancelBtn: {
+    color: '#4901DB',
+    backgroundColor:'lightgrey',
+    borderRadius: '30px',
+    width:'150px',
+    padding:'2%',
+    cursor:'pointer'
+  },
 };

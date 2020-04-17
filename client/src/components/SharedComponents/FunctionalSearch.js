@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect, } from 'react';
-import { Image, Grid, } from 'semantic-ui-react';
+import { Image, } from 'semantic-ui-react';
 import Search from './search.svg'
 
 const FunctionalSearch = (props) => {
@@ -39,7 +39,7 @@ const FunctionalSearch = (props) => {
   return(
     <>
         <form onSubmit={searchSubmit} style={{position: 'relative', display: 'inline-block'}}>
-          <div class="fitted-icon">
+          <div className="fitted-icon">
           <Image src={Search} style={style.spyglass} ></Image>
           <input style={{paddingLeft: '40px'}}
             name="term"

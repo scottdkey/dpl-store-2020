@@ -48,7 +48,7 @@ class DesktopContainer extends Component {
               inverted={!fixed}
               pointing={!fixed}
               secondary={!fixed}
-              inverted 
+              inverted
               size='large'
               style={{margin: 0, border: "none"}}
             >
@@ -56,8 +56,7 @@ class DesktopContainer extends Component {
               <Link to="/" >
                 <Menu.Item>
                   <Image src={Beaker} size="tiny" className="filter-white"></Image>
-                </Menu.Item>
-              </Link>
+                </Menu.Item></Link>
               <Menu.Item position='right'>
                 <Links />
                 <Link to="/cart">

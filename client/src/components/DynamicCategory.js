@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button } from "semantic-ui-react";
+import { Card, Image, } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
@@ -29,18 +29,27 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .catch(console.log);
   }, [cat_id]);
 
+
   // clears results when category changes
   useEffect(() => {
     setResults([]);
   },[cat_id]);
 
-  const renderResults = () => results.map((result) => (
-    <div key={result.id}>
-      <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`} />
-      <Card.Header>{result.title}</Card.Header>
-      <Card.Meta>${result.price}</Card.Meta>
-    </div>
-  ));
+  const renderResults = () => (
+    <div style={style.container}>
+    <h2 >Search Results</h2>
+    <div style={style.resultsContainer}>
+    {results.map((result) => (
+      <div key={result.id}>
+          <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
+          <Card.Header>{result.title}</Card.Header>
+          <Card.Meta>${result.price}</Card.Meta>
+          <br />
+      </div> 
+    ))}
+  </div> 
+  </div>
+  );
 
   const renderItems = () => (
     <div style={style.productContainer}>
@@ -78,16 +87,20 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   } else {
     return (
       <>
-        <div class="image-container">
+        <div className="image-container">
           <Image src={BlueHeader} style={{ width: "100%" }} />
-          <div class="centered">
-            <h1 class="large-header">{category && category.name}</h1>
+          <div className="centered">
+            <h1 className="large-header">{category && category.name}</h1>
             <FunctionalSearch afterSearch={setResults} category_id={cat_id} />
           </div>
         </div>
 
+        <div style={style.container}>
+          
         { results.length > 0 && renderResults() }
+        
         {renderItems()}
+        </div>
         <br />
       </>
     );
@@ -120,19 +133,27 @@ const style = {
     margin: "1%",
   },
   button: {
-    backgroundColor: "#F5F5F5",
-    color: "#4901DB",
     borderRadius: "30px",
-    padding: "20px",
-    align: "center",
-    border: "none",
-    width: "125px",
+    color: "#4901DB",
+    backgroundColor: "rgba(74,1,219, .03)",
   },
   productContainer: {
     display: "flex",
     alignItems: "stretch",
     marginLeft: "100px",
     flexWrap: "wrap",
+    marginBottom: "5%",
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%"
+  },
+  resultsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: "2%",
+    margin: "5%",
   },
 };
 
