@@ -29,9 +29,9 @@ const CategoriesLinks = () => {
   return(
     <Grid>
       <Header as="h3" class="heading">CATEGORIES</Header>
-      <Grid.Row columns={4}>
+      <div style={styles.container}>
         {renderLinks()}
-      </Grid.Row>
+      </div>
     </Grid>
   )
 };
@@ -39,9 +39,14 @@ const CategoriesLinks = () => {
 const styles = {
   image: {
   borderRadius: "25px",
-  width: "275px",
-  height: "225px",
+  width: "270px",
+  height: "200px",
   margin: '5px',
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    marginTop: "2%"
   }
 }
 

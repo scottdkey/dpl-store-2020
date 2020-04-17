@@ -87,7 +87,9 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
           </div>
         </div>
         <div style={style.container}>
+          <div style={style.resultsContainer}>
         { results.length > 0 && renderResults() }
+        </div>
         {renderItems()}
         </div>
         <br />
@@ -131,14 +133,18 @@ const style = {
     alignItems: "stretch",
     marginLeft: "100px",
     flexWrap: "wrap",
+    marginBottom: "5%",
   },
   container: {
     margin: "2% 11%",
     marginTop: "5%"
   },
-  container: {
-    margin: "2% 11%",
-    marginTop: "5%"
+  resultsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: "2%",
+    margin: "5%",
   },
 };
 

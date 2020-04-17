@@ -38,8 +38,9 @@ export default class Products extends Component {
 
 
   renderResults = () => (
-    <div>
-      <h1>Search Results</h1>
+    <div style={style.container}>
+      <h2 >Search Results</h2>
+      <div style={style.resultsContainer}>
       {this.state.results.map((result) => (
         <div key={result.id}>
             <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
@@ -49,6 +50,7 @@ export default class Products extends Component {
         </div> 
       ))}
     </div> 
+    </div>
   );
 
 
@@ -86,9 +88,17 @@ const style = {
     borderRadius: "30px",
     color: "#4901DB",
     backgroundColor: "rgba(74,1,219, .03)",
+    marginBottom: "5%",
   },
   container: {
     margin: "2% 11%",
     marginTop: "5%"
+  },
+  resultsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: "2%",
+    margin: "5%",
   },
 }

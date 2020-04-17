@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Grid, Header, Image, Card, } from 'semantic-ui-react';
+import { Image, Card, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
-import Featured from '../images/blank.png'
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
 import FeaturedProducts from './FeaturedProducts'
 import axios from 'axios';
@@ -48,10 +46,14 @@ const HomepageLayout = () => {
       </div>
     
     <div style={style.container}>
+          <div style={style.resultsContainer}>
       { results.length > 0 && renderResults() }
+      </div>
+      <div style={style.productHolder}>
       <CategoriesLinks />
       <br/> 
       <br/>
+    </div>
     </div>
     <div align="center">
       <FeaturedProducts />
@@ -74,6 +76,20 @@ const style = {
     margin: "2% 11%",
     marginTop: "5%",
     align: "center",
+  },
+  productHolder: {
+    display: "flex",
+    flexwrap: "wrap",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    marginTop: "2%"
+  },
+  resultsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: "2%",
+    margin: "5%",
   },
 }
 

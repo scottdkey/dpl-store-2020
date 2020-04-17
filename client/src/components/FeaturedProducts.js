@@ -88,12 +88,12 @@ const style = {
   },
   container: {
     margin: "2% 11%",
-    marginTop: "5%"
   },
   button: {
     borderRadius: "30px",
     color: "#4901DB",
-    backgroundColor: "rgba(74,1,219, .03)"
+    backgroundColor: "rgba(74,1,219, .03)",
+    marginBottom: "5%",
   },
   productHolder: {
     display: "flex",
