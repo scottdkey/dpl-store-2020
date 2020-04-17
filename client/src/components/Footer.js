@@ -16,8 +16,8 @@ const Footer = () => (
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
           <div class = "ui vertical segment" >
-            <Segment floated='right' className= "segment-size" color='white' ><Icon name="mail"/>contact@devpointlabs.com</Segment>
-            <Segment floated='right' className= "segment-size" color='white' style={{display: "flex", alignItems: "center"}} >
+            <Segment floated='right' className= "segment-size" color="white" ><Icon name="mail"/>contact@devpointlabs.com</Segment>
+            <Segment floated='right' className= "segment-size" color="white" style={{display: "flex", alignItems: "center"}} >
               <Image src={Pin} size="mini" inline style={{height: "16px", width: "16px"}}/>
               <div>
                 370 South 300 East<br />
