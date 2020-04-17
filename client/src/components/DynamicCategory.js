@@ -51,6 +51,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
               <Image
                 src={product.main_image}
                 as={Link}
+                width="250px"
                 to={{
                   pathname: `/categories/${cat_id}/products/${product.id}`,
                   state: { ...product },

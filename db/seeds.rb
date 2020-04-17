@@ -19,7 +19,8 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {Xsmall: 5, Small:5,Medium:5,Large:5,XLarge:5, XXL: 5 },
-      main_image: Faker::Avatar.image(set: "set4"),
+      # main_image: Faker::Avatar.image(set: "set4"),
+      main_image: 'https://s7d2.scene7.com/is/image/aeo/2370_7081_300_f?$PDP-1910L$&fmt=webp',
       featured:'true',
     )
   end
@@ -33,7 +34,8 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {Xsmall: 5, Small:5,Medium:5,Large:5,XLarge:5, XXL: 5 },
-      main_image: Faker::Avatar.image(set: "set4"),
+      # main_image: Faker::Avatar.image(set: "set4"),
+      main_image: 'https://s7d2.scene7.com/is/image/aeo/0595_1853_580_f?$PDP-1910L$&fmt=webp',
       featured:'false',
 
     )
@@ -47,12 +49,13 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {Xsmall: 5, Small:5,Medium:5,Large:5,XLarge:5, XXL: 5 },
-      main_image: Faker::Avatar.image(set: "set4"),
+      # main_image: Faker::Avatar.image(set: "set4"),
+      main_image: 'https://s7d2.scene7.com/is/image/aeo/5497_4591_332_f?$PDP-1910L$&fmt=webp',
       featured:'false',
 
     )
   end
-  category4 = Category.create(name:'Stickers')
+  category4 = Category.create(name:'Misc')
   5.times do
     Product.create(
       category_id: category4.id,
@@ -61,7 +64,8 @@
       price: Faker::Number.decimal(l_digits: 2),
       has_size: true,
       sizes: {no_size:3},
-      main_image: Faker::Avatar.image(set: "set4"),
+      # main_image: Faker::Avatar.image(set: "set4"),
+      main_image: 'https://s7d2.scene7.com/is/image/aeo/0506_9514_615_f?$PDP-1910L$&fmt=webp',
       featured:'false',
 
     )

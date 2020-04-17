@@ -14,19 +14,19 @@ const Links = () => {
       setCategories(res.data)
     })
     .catch(console.log);
-  }, []);
+  }, [categories]);
 
   const renderLinks = () =>
     categories.map( (category) => (
       <div key={`${category.id}`}>
         <Menu.Item as={Link} to={{pathname:`/categories/${category.id}/products`,}}>{category.name}</Menu.Item>
       </div>
-    ))
+    ));
 
   return(
     <>
-    <Menu.Item as={Link} to={{pathname:"/allmerchandise"}}>All Products</Menu.Item>
-    {renderLinks()}
+      <Menu.Item as={Link} to={{pathname:"/allmerchandise"}}>All Products</Menu.Item>
+      {renderLinks()}
     </>
   )
 };
