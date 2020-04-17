@@ -4,19 +4,15 @@ import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
 import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import Featured from '../images/blank.png' 
-import Links from './SharedComponents/Links';
+import Links from './Links';
 import Arrow from '../images/LineArrowDown.svg';
 
 const DynamicProduct = ({category_id, product_id, match}) => {
   const [product, setProduct] = useState({})
   const [size, setSize] = useState('')
-  // const options = [
-  //   { key: 1, text: 'Extra Small', value: 1 },
-  //   { key: 2, text: 'Small', value: 2 },
-  //   { key: 3, text: 'Medium', value: 3 },
-  //   { key: 4, text: 'Large', value: 4 },
-  //   { key: 5, text: 'Extra Large', value: 5 },
-  // ]
+  const [showImage, setShowImage] = useState('')
+  const [images, setImages] = useState([])
+  const [category, setCategory] = useState('')
   const [items] = useState([
     {
       label: "",
@@ -42,89 +38,108 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       label: "X-Large",
       value: "X-Large"
     },
-    {
-      label: "XXL",
-      value: "XXL"
-    }
   ])
+
+  // gets product on initial render
   useEffect( () => {
     const cat_id = match.params.category_id
     const prod_id = match.params.id
     axios
       .get(`/api/categories/${cat_id}/products/${prod_id}`)
-      .then( (res) => {
-        setProduct(res.data);
-        // console.log(res);
+      .then(res => {
+        setProduct(res.data)
+        setShowImage(res.data.main_image)
       })
-      .catch(console.log);
+      .catch(e => console.log(e))
   }, []);
-    const handleChange = (e) => {
-      return(
-        setSize(e)
-      )
-    };
+
+  // gets images on initial render
+  useEffect(() => {
+    axios.get(`/api/products/${match.params.id}/images`)
+    .then(res => setImages(res.data))
+    .catch(e=> console.log(e))
+  },[])
+
+    
+  
+  const handleChange = (e) => {
     return(
+      setSize(e)
+    )
+  };
+
+  const imageGroup = () => {
+    return (
       <>
+        <Image src={showImage} style={style.roundedImage} />
+        <Image.Group>
+          <Image src={product.main_image} style={style.altImage} onClick={() => pickShowImage(product.main_image)} />
+          {images.slice(0, 3).map(image => {
+            if(image.url === null){
+              //return nothing
+            }else {
+              return (
+                <>
+                  <Image style={style.altImage} src={image.url} onClick={() => pickShowImage(image.url)}/>
+                </>
+              )
+            }
+          })}
+        </Image.Group>
+      </>
+    );
+  }
+
+  const pickShowImage = (imageURL) => {
+    setShowImage(imageURL)
+  }
+    
+  return(
+    <>
       <div style={style.headerContainer}>
-          <Link to='/'><Button style={style.headerButton}>Hats</Button></Link>
+          <Link to={`/categories/${match.params.category_id}/products/`}><Button style={style.headerButton}>Go Back</Button></Link>
         </div>
       <Container>
       <Card key={product.id} style= {style.card}>
       <Card.Header>
-        <Grid >
+        <Grid>
         <div align="center">
           <Grid.Column width={8}  kvb>   
-            <Image src={Featured} style= {style.roundedImage} />
-            <Image.Group >
-              <Image style={style.altImage} src={Featured} />
-              <Image style={style.altImage} src={Featured} />
-              <Image style={style.altImage} src={Featured} />
-              <Image style={style.altImage} src={Featured} />
-          </Image.Group>
+            {imageGroup()}
           </Grid.Column>
-          </div>
-          <Grid.Column width={7}>
-            <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
-            <br/>
-            <Grid.Row><h4>{product.description}</h4></Grid.Row>
-            <br/> 
-            <Grid.Row><h1>{"$" + product.price}</h1></Grid.Row>
-            <br/> 
-            {/* Header
-            meta
-            description
-            price
-            sizeDropdown component
-            button onClick to add to cart */}
-            {/* <Form id="selectedSize">
-            <Form.Dropdown clearable search options={options} selection onChange={e => setSize(e.currentTarget.text)} />
-            </Form> */}
-              <div class="fitted-icon">
+        </div>
+        <Grid.Column width={7}>
+          <Grid.Row style={{marginTop: '20%'}}><h1>{product.title}</h1></Grid.Row>
+          <br/>
+          <Grid.Row><h4>{product.description}</h4></Grid.Row>
+          <br/> 
+          <Grid.Row><h1>{"$" + product.price}</h1></Grid.Row>
+          <br/> 
+ 
+          <div class="fitted-icon">
             <p>Size</p>
             <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
-              {items.map(({ label, value }) => (
-                <option key={value} value={value}>
-                {label}
-                </option>
-              ))}
+            {items.map(({ label, value }) => (
+              <option key={value} value={value}>
+              {label}
+              </option>
+            ))}
             </select>
             <Image src={Arrow} style={style.arrow}  ></Image>
-            </div>
-            <div>
-                <br/> 
+          </div>
+          <div>
+            <br/> 
             <Grid.Row >
             <Button as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" onClick={() => putItemInCart(product, size, 1)} />
             </Grid.Row>
-            </div>
-          </Grid.Column>
+          </div>
+        </Grid.Column>
         </Grid>
       </Card.Header>
-      <Card.Description>
-      </Card.Description>
       </Card>
       </Container>
-      </>
-    )
+    </>
+  )
 };
 
 const style = {

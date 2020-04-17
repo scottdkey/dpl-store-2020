@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Modal, Button, Icon, Image } from "semantic-ui-react";
+import { Form, Modal, Button, Icon} from "semantic-ui-react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 
