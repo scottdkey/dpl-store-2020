@@ -14,7 +14,7 @@ const Links = () => {
       setCategories(res.data)
     })
     .catch(console.log);
-  }, [categories]);
+  }, []);
 
   const renderLinks = () =>
     categories.map( (category) => (

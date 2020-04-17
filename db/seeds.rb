@@ -24,6 +24,13 @@
       featured:'true',
     )
   end
+
+  3.times do
+    Image.create(
+      url: 'https://s7d2.scene7.com/is/image/aeo/0595_1853_580_f?$PDP-1910L$&fmt=webp',
+      product_id: 1,
+    )
+  end
   
   category2 = Category.create(name:'Hoodies')
   5.times do
