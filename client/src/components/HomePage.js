@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Grid, Header, Image, Card, } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Image, Card, } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
 import BlueHeader from '../images/BlueHeader2.svg';
-import Featured from '../images/blank.png'
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
 import FeaturedProducts from './FeaturedProducts'
 import axios from 'axios';
@@ -16,13 +14,21 @@ const HomepageLayout = () => {
 
   const afterSearch = (results) => setResults(results);
 
-  const renderResults = () => results.map((result) => (
-    <div key={result.id}>
-      <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`} />
-      <Card.Header>{result.title}</Card.Header>
-      <Card.Meta>${result.price}</Card.Meta>
-    </div>
-  ));
+  const renderResults = () => (
+    <div style={style.searchContainer}>
+    <h2 >Search Results</h2>
+    <div style={style.resultsContainer}>
+    {results.map((result) => (
+      <div key={result.id}>
+          <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
+          <Card.Header>{result.title}</Card.Header>
+          <Card.Meta>${result.price}</Card.Meta>
+          <br />
+      </div> 
+    ))}
+  </div> 
+  </div>
+  );
 
   // useEffect( () => { 
   //   axios.get('/api/categories')
@@ -38,21 +44,25 @@ const HomepageLayout = () => {
 
   return (
     <>
-      <div class="image-container">
-        <Image src={BlueHeader} fluid />
+      <div className="image-container">
+        <Image src={BlueHeader} />
         {/* <div style={{backgroundSize: "cover", backgroundPosition: "top", backgroundRepeat: "no-repeat", backgroundImage: `url(${BlueHeader})`}} /> */}
-        <div class="centered"><h1 class="large-header">DevPoint Store</h1>
-          <h3 class="small-header">Find something you'll love.</h3>
-          <FunctionalSearch afterSearch={afterSearch} />
+        <div className="centered"><h1 className="large-header">DevPoint Store</h1>
+          <h3 className="small-header">Find something you'll love.</h3>
+          <FunctionalSearch afterSearch={afterSearch}/>
         </div> 
       </div>
     
-    <Container>
+    <div style={style.container}>
+          <div style={style.resultsContainer}>
       { results.length > 0 && renderResults() }
+      </div>
+      <div style={style.productHolder}>
       <CategoriesLinks />
       <br/> 
       <br/>
-    </Container>
+    </div>
+    </div>
     <div align="center">
       <FeaturedProducts />
     </div>
@@ -69,6 +79,28 @@ const style = {
     align: "center",
     border: "none",
     width: "125px",
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%",
+    align: "center",
+  },
+  productHolder: {
+    display: "flex",
+    flexwrap: "wrap",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    marginTop: "2%"
+  },
+  resultsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: "2%",
+    margin: "5%",
+  },
+  searchContainer: {
+    marginTop: "5%"
   },
 }
 

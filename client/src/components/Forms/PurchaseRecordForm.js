@@ -112,7 +112,6 @@ const style = {
   },
   formHeader: {
     backgroundColor: '#ededed',
-    padding: '0',
     textAlign: 'center',
     padding: '1%',
     borderTopLeftRadius: '10px',
