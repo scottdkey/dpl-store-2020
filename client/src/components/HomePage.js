@@ -14,13 +14,21 @@ const HomepageLayout = () => {
 
   const afterSearch = (results) => setResults(results);
 
-  const renderResults = () => results.map((result) => (
-    <div key={result.id}>
-      <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`} />
-      <Card.Header>{result.title}</Card.Header>
-      <Card.Meta>${result.price}</Card.Meta>
-    </div>
-  ));
+  const renderResults = () => (
+    <div style={style.searchContainer}>
+    <h2 >Search Results</h2>
+    <div style={style.resultsContainer}>
+    {results.map((result) => (
+      <div key={result.id}>
+          <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
+          <Card.Header>{result.title}</Card.Header>
+          <Card.Meta>${result.price}</Card.Meta>
+          <br />
+      </div> 
+    ))}
+  </div> 
+  </div>
+  );
 
   // useEffect( () => { 
   //   axios.get('/api/categories')
@@ -90,6 +98,9 @@ const style = {
     flexWrap: "wrap",
     marginTop: "2%",
     margin: "5%",
+  },
+  searchContainer: {
+    marginTop: "5%"
   },
 }
 

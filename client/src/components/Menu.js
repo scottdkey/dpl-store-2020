@@ -48,6 +48,7 @@ class DesktopContainer extends Component {
               inverted={!fixed}
               pointing={!fixed}
               secondary={!fixed}
+              inverted
               size='large'
               style={{margin: 0, border: "none"}}
             >

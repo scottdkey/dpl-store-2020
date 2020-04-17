@@ -27,7 +27,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
       .get(`/api/categories/${cat_id}`)
       .then((res) => setCategory(res.data))
       .catch(console.log);
-  }, [cat_id,results]);
+  }, [cat_id]);
 
 
   // clears results when category changes
@@ -35,13 +35,21 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
     setResults([]);
   },[cat_id]);
 
-  const renderResults = () => results.map((result) => (
-    <div key={result.id}>
-      <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`} />
-      <Card.Header>{result.title}</Card.Header>
-      <Card.Meta>${result.price}</Card.Meta>
-    </div>
-  ));
+  const renderResults = () => (
+    <div style={style.container}>
+    <h2 >Search Results</h2>
+    <div style={style.resultsContainer}>
+    {results.map((result) => (
+      <div key={result.id}>
+          <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
+          <Card.Header>{result.title}</Card.Header>
+          <Card.Meta>${result.price}</Card.Meta>
+          <br />
+      </div> 
+    ))}
+  </div> 
+  </div>
+  );
 
   const renderItems = () => (
     <div style={style.productContainer}>
@@ -86,10 +94,11 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
             <FunctionalSearch afterSearch={setResults} category_id={cat_id} />
           </div>
         </div>
+
         <div style={style.container}>
-          <div style={style.resultsContainer}>
+          
         { results.length > 0 && renderResults() }
-        </div>
+        
         {renderItems()}
         </div>
         <br />

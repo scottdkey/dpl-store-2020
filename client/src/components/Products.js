@@ -66,6 +66,7 @@ export default class Products extends Component {
             <FunctionalSearch afterSearch={this.afterSearch}  />
           </div>
         </div>
+        
         <div style={style.container}>
         {/* <Container style={{margin: '2%'}}> */}
         { this.state.results.length > 0 && this.renderResults() }
