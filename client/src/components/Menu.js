@@ -51,21 +51,20 @@ class DesktopContainer extends Component {
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
         >
-          <Menu className="dpl-blue"
-            fixed={fixed ? 'top' : null}
-            inverted={!fixed}
-            pointing={!fixed}
-            secondary={!fixed}
-            inverted
-            size='large'
-            style={{ margin: 0, border: "none" }}
-          >
-            <Container fluid >
+            <Menu className="dpl-blue"
+              fixed={fixed ? 'top' : null}
+              inverted={!fixed}
+              pointing={!fixed}
+              secondary={!fixed}
+              inverted
+              size='large'
+              style={{margin: 0, border: "none"}}
+            >
+              <Container fluid >
               <Link to="/" >
                 <Menu.Item>
                   <Image src={Beaker} size="tiny" className="filter-white"></Image>
-                </Menu.Item>
-              </Link>
+                </Menu.Item></Link>
               <Menu.Item position='right'>
                 <Links />
                 <Link to="/cart">

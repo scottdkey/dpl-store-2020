@@ -127,35 +127,39 @@ class ProductForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Group
             width="equal"
-            style={{ display: "flex", flexDirection: "column" }}
+            style={{ display: "flex", flexDirection: "column", }}
           >
             <Form.Input
-              label="title"
+              label="Title"
               name="title"
               placeholder="Product Title"
               value={title}
               onChange={this.handleChange}
               required
             />
+            <br/>
             <Form.TextArea
-              label="description"
+              label="Description"
               name="description"
               placeholder="Product description"
               value={description}
               onChange={this.handleChange}
               required
             />
+            <br/>
             <Form.Input
-              label="price"
+              label="Price"
               name="price"
               placeholder="price"
               value={price}
               onChange={this.handleChange}
               required
             />
+            <br/>
             <SizeForm sizes={this.state.sizes} setSizes={this.setSizes} />
+            <br/>
             <Form.Select
-              label="category"
+              label="Category"
               name="category_id"
               placeholder="Pick a category"
               options={options}
@@ -163,17 +167,19 @@ class ProductForm extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
             <div style={styles.imageArea}>
               <MainImageForm
                 main_image={main_image}
                 {...this.props}
                 setMainImage={this.setMainImage}
               />
+              <br/>
               <AltImageForm {...this.props} />
             </div>
           </Form.Group>
-          <Form.Button type="submit">Submit</Form.Button>
-          <Form.Button color="red" onClick={this.props.toggleForm}>
+          <Form.Button type="submit" style={styles.submitBtn}>Submit</Form.Button>
+          <Form.Button onClick={this.props.toggleForm} style={styles.cancelBtn}>
             Cancel
           </Form.Button>
         </Form>
@@ -190,5 +196,21 @@ const styles = {
     margin: "20px",
     paddingTop: "10px",
     display: "flex"
-  }
+  },
+  submitBtn: {
+    color: 'white',
+    backgroundColor: '#4901DB',
+    borderRadius: '30px',
+    width:'150px',
+    padding:'2%',
+    cursor:'pointer'
+  },
+  cancelBtn: {
+    color: '#4901DB',
+    backgroundColor:'lightgrey',
+    borderRadius: '30px',
+    width:'150px',
+    padding:'2%',
+    cursor:'pointer'
+  },
 };
