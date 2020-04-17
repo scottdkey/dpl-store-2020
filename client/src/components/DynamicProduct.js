@@ -1,13 +1,14 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
 import { Card, Grid, Button, Image, Form, Container, } from 'semantic-ui-react';
-import { putItemInCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import Featured from '../images/blank.png' 
 import Links from './Links';
 import Arrow from '../images/LineArrowDown.svg';
+import { CartConsumer, } from "../providers/CartProvider";
 
-const DynamicProduct = ({category_id, product_id, match}) => {
+
+const DynamicProduct = ({category_id, product_id, match, auth:{addItemToCart}}) => {
   const [product, setProduct] = useState({})
   const [size, setSize] = useState('')
   const [showImage, setShowImage] = useState('')
@@ -38,6 +39,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
       value: "X-Large"
     },
   ])
+
 
   // gets product on initial render
   useEffect( () => {
@@ -128,7 +130,7 @@ const DynamicProduct = ({category_id, product_id, match}) => {
           <div>
             <br/> 
             <Grid.Row >
-            <Button as={Link} to={{pathname:"/cart", state:{...product,...size}}} style={style.button} content="Add to Cart" onClick={() => putItemInCart(product, size, 1)} />
+            <Button as={Link} to="/cart" style={style.button} content="Add to Cart" onClick={() => addItemToCart(product, size)} />
             </Grid.Row>
           </div>
         </Grid.Column>
@@ -139,6 +141,18 @@ const DynamicProduct = ({category_id, product_id, match}) => {
     </>
   )
 };
+
+export class ConnectedDynamicProduct extends React.Component {
+  render() {
+    return (
+      <CartConsumer> 
+        { auth => 
+          <DynamicProduct { ...this.props } auth={auth} />
+        }
+      </CartConsumer>
+    )
+  }
+}
 
 const style = {
   button: {
@@ -206,4 +220,4 @@ const style = {
     },
 };
 
-export default DynamicProduct;
+export default ConnectedDynamicProduct;

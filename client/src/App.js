@@ -17,11 +17,12 @@ import Links from './components/Links';
 import StyledCard from './components/SharedComponents/StyledCard';
 import Cart from './components/Cart';
 
+
  
 const App = () => (
   <Fragment>
     <FetchAdmin>
-    <Navbar/> 
+    <Navbar /> 
      <Container fluid>
         <Switch>
           <Route exact path="/" component={Home} />
