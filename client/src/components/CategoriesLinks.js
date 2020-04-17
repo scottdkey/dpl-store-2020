@@ -20,7 +20,8 @@ const CategoriesLinks = () => {
     categories.map( (category) => (
       <div key={`${category.id}`}>
         <Grid.Column centered>
-          <Link to={`/categories/${category.id}/products`}><Image style={styles.image} src={Featured} /></Link>
+          <Image src={category.image} alt={category.name} style={styles.image} as={Link} to={`/categories/${category.id}/products`}/>
+          {/* <Link to={`/categories/${category.id}/products`}><Image style={styles.image} src={category.image} /></Link */}
           <h4 align="center">{category.name}</h4>
         </Grid.Column>
       </div>
