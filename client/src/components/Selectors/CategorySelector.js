@@ -14,7 +14,8 @@ class CategorySelector extends Component {
       new Set(categories.map(catagory => catagory.name))
     ).map((cat, i) => {
       return { value: cat, key: i, text: cat };
-    });
+    })
+    CategoryOptions.unshift({value: "All Products", key: 100, text: "All Products"})
     this.setState({CategoryOptions})
   }
 
