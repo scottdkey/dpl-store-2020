@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Modal, Button, Icon } from "semantic-ui-react";
-import Dropzone from 'react-dropzone';
+import { Form, Modal, Button, Icon} from "semantic-ui-react";
+import Dropzone from "react-dropzone";
 import axios from "axios";
 
 class CategoryForm extends Component {
@@ -8,60 +8,73 @@ class CategoryForm extends Component {
     name: "",
     image: "",
     id: null,
-    modalOpen: false
+    modalOpen: false,
+    category: {}
   };
 
   componentDidMount() {
-    this.setCategory();
+    if (
+      this.props.category === undefined ||
+      this.props.category === "All Products"
+    ) {
+      //do nothing
+    } else {
+      this.setCategory();
+    }
   }
   setCategory = async () => {
     const res = await axios.get(`/api/categories`);
-    const category = res.data.filter(
-      category => category.name === this.props.category
-    )[0];
-    if (category === undefined) {
-      //do nothing
-    } else {
-      this.setState({
-        name: category.name,
-        image: category.image,
-        id: category.id
-      });
-    }
+    const category = res.data.filter(category => {
+      if (category.name === this.props.category) {
+        return category;
+      }
+    })[0];
+    this.setState({
+      name: category.name,
+      image: category.image,
+      id: category.id
+    });
   };
 
   categoryFormat = () => {
-    const { category } = this.props;
     const { name, image, id } = this.state;
     return (
       <Modal.Content>
-        <div id={`${category}-${id}`}>
+        <div id={`${name}-${id}`}>
           <Form onSubmit={this.handleSubmit}>
             <Form.Input
               palceholder="Category Name"
+              label="Category Name"
+              required
               name="name"
               value={name}
               onChange={this.handleChange}
             />
-            <Dropzone
-              onDrop={this.onDrop}
-              multiple={false}
-              style={`background_image:${image}`}
-            >
-              {({ getRootProps, getInputProps, isDragActive }) => {
-                return (
-                  <div {...getRootProps()} style={styles.dropzone}>
-                    <input {...getInputProps()} />
-                    {isDragActive ? (
-                      <p>drop files here!</p>
-                    ) : (
-                      <p>Click to add a picture or drag here</p>
-                    )}
-                  </div>
-                );
-              }}
-            </Dropzone>
-
+            <div style={{display: "flex", paddingBottom:"10px"}}>
+              <Dropzone
+                onDrop={this.onDrop}
+                multiple={false}
+                style={`background_image:${image}`}
+              >
+                {({ getRootProps, getInputProps, isDragActive }) => {
+                  return (
+                    <div {...getRootProps()} style={styles.dropzone}>
+                      <input {...getInputProps()} />
+                      {isDragActive ? (
+                        <>
+                          <p>drop files here!</p>
+                        </>
+                      ) : (
+                        <>
+                          <p>Click to add a picture or drag here</p>
+                        </>
+                      )}
+                    </div>
+                  );
+                }}
+              </Dropzone>
+              <img src={image} style={styles.image} />
+            </div>
             <Form.Button positive>Submit</Form.Button>
             <Form.Button onClick={this.handleClose} negative>
               Cancel
@@ -77,8 +90,9 @@ class CategoryForm extends Component {
     axios
       .put(`/api/categories/${this.state.id}`, data)
       .then(res => {
+        console.log(res);
         this.setState({
-          image: Files[0].url
+          image: res.data.image
         });
         console.log(res);
       })
@@ -120,9 +134,9 @@ class CategoryForm extends Component {
             onChange={this.handleChange}
             required
           />
-          <h3>Please add images after creation</h3>
-          <Form.Button positive>Submit</Form.Button>
-          <Form.Button negative onClick={this.handleClose}>
+          <h4>Please add images after creation</h4>
+          <Form.Button positive style={styles.submitBtn}>Submit</Form.Button>
+          <Form.Button negative onClick={this.handleClose} style={styles.cancelBtn}>
             Cancel
           </Form.Button>
         </Form>
@@ -159,6 +173,8 @@ class CategoryForm extends Component {
   render() {
     if (this.props.category === undefined) {
       return this.newCategory();
+    } else if (this.props.category === "All Products") {
+      return <></>;
     } else {
       return this.editCategory();
     }
@@ -187,5 +203,21 @@ const styles = {
     borderRadius: "30px",
     color: "#4901DB",
     backgroundColor: "rgba(74,1,219, .03)"
-  }
+  },
+  submitBtn: {
+    color: 'white',
+    backgroundColor: '#4901DB',
+    borderRadius: '30px',
+    width:'150px',
+    padding:'2%',
+    cursor:'pointer'
+  },
+  cancelBtn: {
+    color: '#4901DB',
+    backgroundColor:'lightgrey',
+    borderRadius: '30px',
+    width:'150px',
+    padding:'2%',
+    cursor:'pointer'
+  },
 };

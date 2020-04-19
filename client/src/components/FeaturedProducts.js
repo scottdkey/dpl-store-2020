@@ -53,12 +53,12 @@ class FeaturedProducts extends React.Component {
     return (
       <div style={style.container}>
         <div style={style.header}>
-          <h3>Featured Products</h3>
+          <h3>FEATURED PRODUCTS</h3>
         </div>
         {showAllFeatured ? (
           <div style={style.productHolder}>
             {featuredProducts.map(product => (
-              <div style={style.product}>
+              <div key={`featured-${product.id}`}style={style.product}>
                 <FeaturedCard pictureHeight={pictureHeight} product={product} />
               </div>
             ))}
@@ -74,7 +74,7 @@ class FeaturedProducts extends React.Component {
         )}
         <div>
           <Button onClick={this.toggleProducts} style={style.button}>
-            {showAllFeatured ? "Show Less" : "Show More"}
+            {showAllFeatured ? "See Less" : "See More"}
           </Button>
         </div>
       </div>
@@ -87,13 +87,13 @@ const style = {
     textAlign: "left"
   },
   container: {
-    margin: "2% 10%",
-    marginTop: "5%"
+    margin: "2% 11%",
   },
   button: {
     borderRadius: "30px",
     color: "#4901DB",
-    backgroundColor: "rgba(74,1,219, .03)"
+    backgroundColor: "rgba(74,1,219, .03)",
+    marginBottom: "5%",
   },
   productHolder: {
     display: "flex",
