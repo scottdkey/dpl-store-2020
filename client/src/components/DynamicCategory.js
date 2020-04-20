@@ -11,15 +11,19 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState(null);
   const [results, setResults] = useState([]);
+  const [sortType, setSortType] = useState('')
   const cat_id = category_id || match.params.category_id;
   
   // gets products on initial render
   useEffect(() => {
     axios
       .get(`/api/categories/${cat_id}/products`)
-      .then(res => setItems(res.data))
+      .then(res => {
+        setItems(res.data)
+        sortItems(sortType)
+      })
       .catch(console.log);
-  }, [cat_id]);
+  }, [sortType, cat_id]);
 
   // gets category on initial render
   useEffect(() => {
@@ -60,6 +64,7 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
               <Image
                 src={product.main_image}
                 as={Link}
+                width="250px"
                 to={{
                   pathname: `/categories/${cat_id}/products/${product.id}`,
                   state: { ...product },
@@ -82,6 +87,22 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
     </div>
   );
 
+  const sortItems = type => {
+    if(type == 'highPrice'){
+      const sorted = [...items].sort( (a,b) => a.price > b.price ? -1 : 1);
+      setItems(sorted);
+    } else if (type == 'lowPrice'){
+      const sorted = [...items].sort( (a,b) => a.price > b.price ? 1 : -1);
+      setItems(sorted);
+    } else {
+      const sorted = [...items].sort( (a,b) => {
+        a = new Date(a.created_at);
+        b = new Date(b.created_at);
+        return a > b ? 1 : -1;
+      });
+    };
+  };
+
   if (noHeader) {
     return <>{renderItems()}</>;
   } else {
@@ -92,6 +113,12 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
           <div className="centered">
             <h1 className="large-header">{category && category.name}</h1>
             <FunctionalSearch afterSearch={setResults} category_id={cat_id} />
+            <h4>Sort By</h4>
+            <select onChange={ (e) => setSortType(e.target.value) }>
+              <option value='default' defaultValue> -- Default View -- </option>
+              <option value='highPrice'>Price - Highest to Lowest</option>
+              <option value='lowPrice'>Price - Lowest to Highest</option>
+            </select>
           </div>
         </div>
 

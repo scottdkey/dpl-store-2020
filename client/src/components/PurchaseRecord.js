@@ -4,6 +4,8 @@ import { Button, Header } from 'semantic-ui-react';
 import { getAllCartItems, clearCart } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import { CartConsumer, } from "../providers/CartProvider";
+
 
 class PurchaseRecord extends React.Component {
   state = {
@@ -31,7 +33,7 @@ class PurchaseRecord extends React.Component {
   handleSubmit = (e) => {
     if (this.state.validEmail === true) {
       var name = `${this.state.first_name}${this.state.last_name}`
-      const {email_address, total} = this.state
+      const { email_address, total } = this.state
       axios.post('/api/purchase_records', (this.state)).then(res => {
         this.createPurchaseProducts(res.data.id)
       }).catch(err => {
@@ -39,8 +41,8 @@ class PurchaseRecord extends React.Component {
       })
 
       axios.get(`/api/contact?name=${name}&email=${email_address}&subject=DevStore Receipt&total=${total}`)
-      .then(res => { this.setState({ showForm: false }) })
-      .catch(e => console.log(e))
+        .then(res => { this.setState({ showForm: false }) })
+        .catch(e => console.log(e))
     }
     else { alert('invalid email') }
   }
@@ -48,13 +50,14 @@ class PurchaseRecord extends React.Component {
   createPurchaseProducts = (id) => {
     let cart = getAllCartItems()
     cart.forEach(item => {
+      const { auth: { clearTheCart, } } = this.props
       var product = item.object
       var size = takeOutDash(item.size)
       var newQuantity = product.sizes[size] - 1
-      var updatedProduct = {...product, sizes:{...product.sizes,[size]:newQuantity}}
+      var updatedProduct = { ...product, sizes: { ...product.sizes, [size]: newQuantity } }
       axios.post(`/api/purchase_records/${id}/purchase_products`, { quantity: item.quantity, size_choice: item.size, product_id: item.object.id })
         .catch(e => console.log(e))
-      axios.put(`api/categories/${product.category_id}/products/${product.id}`,updatedProduct )
+      axios.put(`api/categories/${product.category_id}/products/${product.id}`, updatedProduct).then(res => clearTheCart())
     })
   }
 
@@ -99,10 +102,11 @@ class PurchaseRecord extends React.Component {
   }
 
   renderCompleted = () => {
+
     return (
-      <div style={{ ...style.itemsContainer, padding: '3%' }}>
+      <div style={{ ...style.itemsContainer, padding: '3%', margin:'10%' }}>
         <Header as='h3' textAlign='center'>Thank You For Your Purchase</Header>
-        <Link to='/'><div onClick={() => clearCart()} style={style.doneBtn}>Done</div></Link>
+        <Link to='/'><div style={style.doneBtn}>Done</div></Link>
       </div>
     )
   }
@@ -113,30 +117,44 @@ class PurchaseRecord extends React.Component {
 
     return (
       <>
-        <div style={style.headerContainer}>
-          <Link to='/cart'><Button style={style.headerButton}>Back To Cart</Button></Link>
-          <h1 style={style.header}>Checkout</h1>
-        </div>
-        <div style={style.purchaseContainer}>
-          {this.getAllCartItems()}
-          {showForm ?
-            <PurchaseRecordForm
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              email_address={email_address}
-              first_name={first_name}
-              last_name={last_name}
-              address_one={address_one}
-              address_two={address_two}
-              city={city}
-              state={state}
-              zip_code={zip_code}
-            />
-            : this.renderCompleted()}
+        {showForm ?
           <div>
+            <div style={style.headerContainer}>
+              <Link to='/cart'><Button style={style.headerButton}>Back To Cart</Button></Link>
+              <h1 style={style.header}>Checkout</h1>
+            </div>
+            <div style={style.purchaseContainer}>
+              {this.getAllCartItems()}
+              <PurchaseRecordForm
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                email_address={email_address}
+                first_name={first_name}
+                last_name={last_name}
+                address_one={address_one}
+                address_two={address_two}
+                city={city}
+                state={state}
+                zip_code={zip_code}
+              />
+              <div>
+              </div>
+            </div>
           </div>
-        </div>
+          : <div>{this.renderCompleted()}</div>}
       </>
+    )
+  }
+}
+
+export class ConnectedPurchaseRecord extends React.Component {
+  render() {
+    return (
+      <CartConsumer>
+        {auth =>
+          <PurchaseRecord {...this.props} auth={auth} />
+        }
+      </CartConsumer>
     )
   }
 }
@@ -195,7 +213,7 @@ const style = {
   }
 }
 
-export default PurchaseRecord
+export default ConnectedPurchaseRecord
 
 
 const takeOutDash = (string) => {

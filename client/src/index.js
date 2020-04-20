@@ -7,14 +7,17 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider";
 import "semantic-ui-css/semantic.min.css";
 import { initMiddleware } from "devise-axios";
+import { CartProvider } from './providers/CartProvider'
 
 initMiddleware();
 
 ReactDOM.render(
   <AuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CartProvider>
   </AuthProvider>,
   document.getElementById("root")
 );
