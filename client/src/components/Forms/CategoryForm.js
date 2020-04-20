@@ -94,7 +94,7 @@ class CategoryForm extends Component {
         this.setState({
           image: res.data.image
         });
-        console.log(res);
+        
       })
       .catch(e => console.log(e));
   };

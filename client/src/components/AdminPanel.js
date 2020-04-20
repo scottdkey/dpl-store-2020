@@ -49,7 +49,7 @@ export default class AdminPanel extends Component {
   };
 
   deleteProduct = (id, category_id) => {
-    const products = this.state.products.filter(product => {
+    this.state.products.filter(product => {
       if (product.id !== id) {
         return product;
       }

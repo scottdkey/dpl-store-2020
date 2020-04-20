@@ -21,13 +21,13 @@ class Api::CategoriesController < ApplicationController
 
   def update
     file = params[:file]
-
+    
     if file
       ext = File.extname(file.tempfile)
       cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
       @category.image = cloud_image['secure_url']
-    end
-    if @category.update(category_params)
+    end    
+    if @category.save
       render json: @category
     else
       render json: category.errors, status: 422

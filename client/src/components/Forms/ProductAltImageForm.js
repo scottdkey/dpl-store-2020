@@ -65,13 +65,14 @@ class AltImageForm extends Component {
       .delete(`/api/products/${image.product_id}/images/${image.id}`)
       .then(res => {
         const newImages = this.state.images.filter(i => {
-          if (i.url != image.url) {
+          if (i.url !== image.url) {
             return i;
           }
         });
         this.setState({
           images: newImages
         });
+        return res
       })
       .catch(e => console.log(e));
   };
