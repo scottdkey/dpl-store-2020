@@ -65,3 +65,7 @@ category4 = Category.create(name: 'Stickers')
 end
 
 puts 'Products Seeded'
+
+Admin.create(name:"admin", email:"admin@email.com", password:"adminPassword")
+
+puts "admin created with email: admin@email.com, password:adminPassword"
