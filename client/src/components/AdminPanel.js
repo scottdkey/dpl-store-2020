@@ -108,28 +108,17 @@ export default class AdminPanel extends Component {
               categories={categories}
             />
           </div>
-          <div>
-            {category === "All Products" || category === "Featured" ? (
-              <>
-                <div style={{ display: "inline-block" }}>
-                  <h1>{category}</h1>
-                </div>
-              </>
-            ) : (
-              <div
-                style={{
-                  color: "#4575c4",
-                  display: "flex",
-                  cursor: "pointer"
-                }}
-              >
-                <h1>{category}</h1>
-                <div style={{marginLeft: "10px"}}>
-                  <CategoryForm category={category} />
-                </div>
-              </div>
-            )}
-          </div>
+            <div style={{ marginLeft: "10px" }}>
+              {category === "All Products" || category === "Featured" ? (
+                <>
+                  <div style={{ display: "inline-block" }}>
+                    <h1>{this.state.category}</h1>
+                  </div>
+                </>
+              ) : (
+                  <CategoryForm category={this.state.category} />
+              )}
+            </div>
           <div>
             <Button style={style.button} onClick={this.toggleForm}>
               New Product

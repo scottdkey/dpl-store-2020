@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Modal, Button, Icon} from "semantic-ui-react";
+import { Form, Modal, Button, Icon } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 
@@ -50,7 +50,7 @@ class CategoryForm extends Component {
               value={name}
               onChange={this.handleChange}
             />
-            <div style={{display: "flex", paddingBottom:"10px"}}>
+            <div style={{ display: "flex", paddingBottom: "10px" }}>
               <Dropzone
                 onDrop={this.onDrop}
                 multiple={false}
@@ -94,26 +94,39 @@ class CategoryForm extends Component {
         this.setState({
           image: res.data.image
         });
-        
       })
       .catch(e => console.log(e));
   };
 
-  editCategory = () => (
-    <Modal
-      trigger={
-        <div onClick={this.handleOpen} style={{}} as="td">
-          <h2>
-            <Icon name="edit" />
-          </h2>
-        </div>
-      }
-      open={this.state.modalOpen}
-      onClose={this.handleClose}
-    >
-      {this.categoryFormat()}
-    </Modal>
-  );
+  editCategory = () => {
+    this.setCategory()
+  return(
+    <>
+      <div
+        style={{
+          color: "#4575c4",
+          display: "flex",
+          cursor: "pointer"
+        }}
+      >
+        <h1>{this.state.name}</h1>
+        <Modal
+          trigger={
+            <div onClick={this.handleOpen} style={{}} as="td">
+              <h2>
+                <Icon name="edit" />
+              </h2>
+            </div>
+          }
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+        >
+          {this.categoryFormat()}
+        </Modal>
+      </div>
+    </>
+  )
+        }
   newCategory = () => (
     <Modal
       trigger={
@@ -135,8 +148,14 @@ class CategoryForm extends Component {
             required
           />
           <h4>Please add images after creation</h4>
-          <Form.Button positive style={styles.submitBtn}>Submit</Form.Button>
-          <Form.Button negative onClick={this.handleClose} style={styles.cancelBtn}>
+          <Form.Button positive style={styles.submitBtn}>
+            Submit
+          </Form.Button>
+          <Form.Button
+            negative
+            onClick={this.handleClose}
+            style={styles.cancelBtn}
+          >
             Cancel
           </Form.Button>
         </Form>
@@ -205,19 +224,19 @@ const styles = {
     backgroundColor: "rgba(74,1,219, .03)"
   },
   submitBtn: {
-    color: 'white',
-    backgroundColor: '#4901DB',
-    borderRadius: '30px',
-    width:'150px',
-    padding:'2%',
-    cursor:'pointer'
+    color: "white",
+    backgroundColor: "#4901DB",
+    borderRadius: "30px",
+    width: "150px",
+    padding: "2%",
+    cursor: "pointer"
   },
   cancelBtn: {
-    color: '#4901DB',
-    backgroundColor:'lightgrey',
-    borderRadius: '30px',
-    width:'150px',
-    padding:'2%',
-    cursor:'pointer'
-  },
+    color: "#4901DB",
+    backgroundColor: "lightgrey",
+    borderRadius: "30px",
+    width: "150px",
+    padding: "2%",
+    cursor: "pointer"
+  }
 };
