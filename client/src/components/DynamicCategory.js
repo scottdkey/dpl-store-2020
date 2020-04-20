@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, } from "semantic-ui-react";
+import { Card, Image, Grid, } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
@@ -44,12 +44,14 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
     <h2 >Search Results</h2>
     <div style={style.resultsContainer}>
     {results.map((result) => (
-      <div key={result.id}>
-          <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
-          <Card.Header>{result.title}</Card.Header>
-          <Card.Meta>${result.price}</Card.Meta>
+        <div key={result.id}>
+          <Link to={`/categories/${result.category_id}/products/${result.id}`}>
+            <Image src={result.main_image} alt={result.title} size="small"/>
+            <Card.Header >{result.title}</Card.Header>
+            <Card.Meta>${result.price}</Card.Meta>
+          </Link>
           <br />
-      </div> 
+        </div> 
     ))}
   </div> 
   </div>
@@ -74,12 +76,14 @@ const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
           </div>
           <div style={style.informationContainer}>
             <div>
-              <h3 style={{ margin: "5px", display: "inline" }}>
-                {"$" + product.price}
-              </h3>
-              <h5 style={{ margin: "5px", display: "inline" }}>
-                {product.title}
-              </h5>
+              <Link to={`/categories/${cat_id}/products/${product.id}`}>
+                <h3 style={{ margin: "5px", display: "inline" }}>
+                  {"$" + product.price}
+                </h3>
+                <h5 style={{ margin: "5px", display: "inline" }}>
+                  {product.title}
+                </h5>
+              </Link>
             </div>
           </div>
         </div>
