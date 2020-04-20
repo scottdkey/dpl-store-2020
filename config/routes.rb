@@ -34,4 +34,6 @@ Rails.application.routes.draw do
       resources :purchase_products
     end
   end
+
+  get "*other", to: "static#index"
 end

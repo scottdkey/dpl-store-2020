@@ -18,11 +18,12 @@ import StyledCard from './components/SharedComponents/StyledCard';
 import Cart from './components/Cart';
 import NoMatch from './components/NoMatch';
 
+
  
 const App = () => (
   <Fragment>
     <FetchAdmin>
-    <Navbar/> 
+    <Navbar /> 
      <Container fluid>
         <Switch>
           <Route exact path="/" component={Home} />
