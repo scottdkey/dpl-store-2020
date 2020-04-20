@@ -55,6 +55,7 @@ class MainImageForm extends Component {
       this.setState({
         image: res.data.main_image
       })
+      this.props.setMainImage(res.data.main_image)
       this.renderMainImage()
     })
     .catch( e => console.log(e))
@@ -65,9 +66,7 @@ class MainImageForm extends Component {
   render() {
     return (
       <>
-      
-      {this.props.product ? this.renderMainImage() : <p>Please Add images after creating product</p>}
-        
+      {this.props.product ? this.renderMainImage() : <h4>Please add images after creating product</h4>}
       </>
     );
   }

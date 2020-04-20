@@ -1,110 +1,138 @@
-  
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button } from "semantic-ui-react";
+import { Card, Image, } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BlueHeader from "../images/BlueHeader2.svg";
 import FunctionalSearch from "./SharedComponents/FunctionalSearch";
-import Products from './Products'
+import Products from "./Products";
+
 
 const DynamicCategory = ({ category_id, match, category_name, noHeader }) => {
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState(null);
-  const cat_id = category_id || match.params.category_id;
   const [results, setResults] = useState([]);
-  // make another useEffect to get the category
-  // /categories/:category_id/
-  // refactor component to get products by category
-  // when the controller exists (see Brianna)
-  // /categories/:category_id/products/:product_id
-  // call to get both of them
-  const afterSearch = (results) => setResults(results);
-  const renderResults = () => results.map((result) => (
-    <div key={result.id}>
-      {result.title}
-    </div>
-  ));
-
-
+  const [sortType, setSortType] = useState('')
+  const cat_id = category_id || match.params.category_id;
+  
+  // gets products on initial render
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}/products`)
       .then(res => {
-        setItems(res.data);
+        setItems(res.data)
+        sortItems(sortType)
       })
       .catch(console.log);
-  }, []);
-
+  }, [sortType, cat_id]);
 
   // gets category on initial render
   useEffect(() => {
-    const cat_id = category_id || match.params.category_id;
     axios
       .get(`/api/categories/${cat_id}`)
-      .then(res => setCategory(res.data))
+      .then((res) => setCategory(res.data))
       .catch(console.log);
-  }, []);
+  }, [cat_id]);
 
 
-  const renderItems = () =>
-  <div style={style.productContainer}>
-        { items.map((product) => (
-            <div  key={product.id}>
-              <div style={{ ...style.photoHolder }}>
-                <div style={style.crop}>
-                  <Image
-                    src={product.main_image}
-                    as={Link}
-                    to={{
-                      pathname: `/categories/${cat_id}/products/${product.id}`,
-                      state: { ...product },
-                    }}
-                  />
-                </div>
-              </div>
-              <div style={style.informationContainer}>
-                <div>
-                  <h3 style={{ margin: "5px", display: "inline" }}>
-                    {"$" + product.price}
-                  </h3>
-                  <h5 style={{ margin: "5px", display: "inline" }}>
-                    {product.title}
-                  </h5>
-                </div>
-              </div>  
-            </div>
-        ))}
+  // clears results when category changes
+  useEffect(() => {
+    setResults([]);
+  },[cat_id]);
+
+  const renderResults = () => (
+    <div style={style.container}>
+    <h2 >Search Results</h2>
+    <div style={style.resultsContainer}>
+    {results.map((result) => (
+      <div key={result.id}>
+          <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
+          <Card.Header>{result.title}</Card.Header>
+          <Card.Meta>${result.price}</Card.Meta>
+          <br />
+      </div> 
+    ))}
+  </div> 
   </div>
+  );
 
-  if(noHeader){
+  const renderItems = () => (
+    <div style={style.productContainer}>
+      {items.map((product) => (
+        <div key={product.id}>
+          <div style={{ ...style.photoHolder }}>
+            <div style={style.crop}>
+              <Image
+                src={product.main_image}
+                as={Link}
+                width="250px"
+                to={{
+                  pathname: `/categories/${cat_id}/products/${product.id}`,
+                  state: { ...product },
+                }}
+              />
+            </div>
+          </div>
+          <div style={style.informationContainer}>
+            <div>
+              <h3 style={{ margin: "5px", display: "inline" }}>
+                {"$" + product.price}
+              </h3>
+              <h5 style={{ margin: "5px", display: "inline" }}>
+                {product.title}
+              </h5>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const sortItems = type => {
+    if(type == 'highPrice'){
+      const sorted = [...items].sort( (a,b) => a.price > b.price ? -1 : 1);
+      setItems(sorted);
+    } else if (type == 'lowPrice'){
+      const sorted = [...items].sort( (a,b) => a.price > b.price ? 1 : -1);
+      setItems(sorted);
+    } else {
+      const sorted = [...items].sort( (a,b) => {
+        a = new Date(a.created_at);
+        b = new Date(b.created_at);
+        return a > b ? 1 : -1;
+      });
+    };
+  };
+
+  if (noHeader) {
+    return <>{renderItems()}</>;
+  } else {
     return (
       <>
-        {renderItems()}
-      </>
-    )
-  } else {
-    return(
-      <>
-      <div class="image-container">
+        <div className="image-container">
           <Image src={BlueHeader} style={{ width: "100%" }} />
-          <div class= "centered">
-            <h1 class="large-header">{category && category.name}</h1>
-            <FunctionalSearch afterSearch={afterSearch} category_id={cat_id}/>
-            </div>
-            </div>
-            {results.length > 0 && renderResults()}
-            {renderItems()}
-            <br />
-          <div align="center">
-          <button style={style.button}>See More</button>
-      </div>
-      <br />
+          <div className="centered">
+            <h1 className="large-header">{category && category.name}</h1>
+            <FunctionalSearch afterSearch={setResults} category_id={cat_id} />
+            <h4>Sort By</h4>
+            <select onChange={ (e) => setSortType(e.target.value) }>
+              <option value='default' defaultValue> -- Default View -- </option>
+              <option value='highPrice'>Price - Highest to Lowest</option>
+              <option value='lowPrice'>Price - Lowest to Highest</option>
+            </select>
+          </div>
+        </div>
+
+        <div style={style.container}>
+          
+        { results.length > 0 && renderResults() }
+        
+        {renderItems()}
+        </div>
+        <br />
       </>
-    )
+    );
   };
 };
-
 
 const style = {
   crop: {
@@ -132,20 +160,28 @@ const style = {
     margin: "1%",
   },
   button: {
-    backgroundColor: "#F5F5F5",
-    color: "#4901DB",
     borderRadius: "30px",
-    padding: "20px",
-    align: "center",
-    border: "none",
-    width: "125px",
+    color: "#4901DB",
+    backgroundColor: "rgba(74,1,219, .03)",
   },
   productContainer: {
-    display: 'flex',
-    alignItems: 'stretch',
-    marginLeft: '100px',
-    flexWrap: 'wrap',
+    display: "flex",
+    alignItems: "stretch",
+    marginLeft: "100px",
+    flexWrap: "wrap",
+    marginBottom: "5%",
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%"
+  },
+  resultsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: "2%",
+    margin: "5%",
   },
 };
 
-export default DynamicCategory; 
+export default DynamicCategory;

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::CategoriesController < ApplicationController
-  before_action :set_category, only: %i[show update destroy]
+  before_action :set_category, only: [:show, :update, :destroy]
   def index
     render json: Category.all
   end
@@ -21,18 +21,12 @@ class Api::CategoriesController < ApplicationController
 
   def update
     file = params[:file]
-
+    
     if file
-      # begin
-        ext = File.extname(file.tempfile)
-        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
-        @category.image = cloud_image['secure_url']
-      # rescue => e
-        # render json: { errors: e }, status: 433
-        # return
-      # end
-    end
-    # if @category.update(category_params)
+      ext = File.extname(file.tempfile)
+      cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+      @category.image = cloud_image['secure_url']
+    end    
     if @category.save
       render json: @category
     else

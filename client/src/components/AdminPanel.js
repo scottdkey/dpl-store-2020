@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal} from "semantic-ui-react";
+import { Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import ProductForm from "./Forms/ProductForm";
 import RenderCategories from "./AdminPanelComponents/RenderCategories";
@@ -13,7 +13,7 @@ export default class AdminPanel extends Component {
     openForm: false,
     openCategoryForm: false,
     load: true,
-    category: 'All Categories',
+    category: "All Products",
     categoryOptions: []
   };
 
@@ -49,7 +49,7 @@ export default class AdminPanel extends Component {
   };
 
   deleteProduct = (id, category_id) => {
-    const products = this.state.products.filter(product => {
+    this.state.products.filter(product => {
       if (product.id !== id) {
         return product;
       }
@@ -61,17 +61,17 @@ export default class AdminPanel extends Component {
   };
   updateProducts = async () => {
     const res = await axios.get("/api/products");
-    const category_id = this.state.categories.filter(category => {
-      if (category.name === this.state.category) {
+    const category = this.state.categories.filter(category => {
+      if (this.state.category === category.name) {
         return category;
       }
-    })[0].id;
-    if (category_id === 1) {
-      const products = res.data;
+    });
+    const products = res.data;
+    if (this.state.category === "All Products") {
       this.setState({ products });
     } else {
       const products = res.data.filter(product => {
-        return category_id === product.category_id;
+        return category[0].id === product.category_id;
       });
       this.setState({ products });
     }
@@ -84,17 +84,8 @@ export default class AdminPanel extends Component {
     this.setState({ openForm: !this.state.openForm });
   };
 
-
   render() {
-    const {
-      openForm,
-      categories,
-      load,
-      products,
-      category,
-      categoryOptions,
-      openCategoryForm
-    } = this.state;
+    const { openForm, categories, load, products, category } = this.state;
     return (
       <>
         <div style={style.headerContainer}>
@@ -117,24 +108,17 @@ export default class AdminPanel extends Component {
               categories={categories}
             />
           </div>
-          <div>
-            <div style={{ display: "inline-block" }}>
-              <h1>{category}</h1>
+            <div style={{ marginLeft: "10px" }}>
+              {category === "All Products" || category === "Featured" ? (
+                <>
+                  <div style={{ display: "inline-block" }}>
+                    <h1>{this.state.category}</h1>
+                  </div>
+                </>
+              ) : (
+                  <CategoryForm category={this.state.category} />
+              )}
             </div>
-            {category === "All Categories" || category === "Featured" ? (
-              <></>
-            ) : (
-              <div
-                style={{
-                  color: "#4575c4",
-                  display: "inline-block",
-                  cursor: "pointer"
-                }}
-              >
-                <CategoryForm category={category} />
-              </div>
-            )}
-          </div>
           <div>
             <Button style={style.button} onClick={this.toggleForm}>
               New Product
@@ -166,17 +150,17 @@ export default class AdminPanel extends Component {
 
 const style = {
   headerContainer: {
-    backgroundColor: '#4901DB',
-    color: 'white',
-    padding: '20px 50px',
-    textAlign: 'right'
+    backgroundColor: "#4901DB",
+    color: "white",
+    padding: "20px 50px",
+    textAlign: "right"
   },
   header: {
-    margin: '0px'
+    margin: "0px"
   },
   button: {
-    borderRadius: '30px',
-    color: '#4901DB',
-    backgroundColor: 'rgba(74,1,219, .03)'
-  },
-}
+    borderRadius: "30px",
+    color: "#4901DB",
+    backgroundColor: "rgba(74,1,219, .03)"
+  }
+};

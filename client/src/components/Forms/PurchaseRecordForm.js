@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class PurchaseRecordForm extends React.Component {
@@ -112,7 +112,6 @@ const style = {
   },
   formHeader: {
     backgroundColor: '#ededed',
-    padding: '0',
     textAlign: 'center',
     padding: '1%',
     borderTopLeftRadius: '10px',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Header, Grid, Container, Responsive, Icon, Image } from "semantic-ui-react";
+import { Segment, Grid, Icon, Image } from "semantic-ui-react";
 import styled from 'styled-components';
 import Logo from '../images/dpl_logo.svg';
 import Pin from '../images/Pin.svg';
@@ -11,11 +11,11 @@ const Footer = () => (
       <Grid>
         <Grid.Column width={9}>
           <Grid.Row></Grid.Row>
-          <Grid.Row><h4 class="small-header" style={{marginTop: "100px", marginLeft: "300px"}}>Any Questions? </h4></Grid.Row>
-          <Grid.Row><h1 class="large-header-footer" style={{marginLeft: "300px"}}>We're here to help.</h1> </Grid.Row>
+          <Grid.Row><h4 className="small-header" style={{marginTop: "100px", marginLeft: "300px"}}>Any Questions? </h4></Grid.Row>
+          <Grid.Row><h1 className="large-header-footer" style={{marginLeft: "300px"}}>We're here to help.</h1> </Grid.Row>
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
-          <div class = "ui vertical segment" >
+          <div className = "ui vertical segment" >
             <Segment floated='right' className= "segment-size" color='white' ><Icon name="mail"/>contact@devpointlabs.com</Segment>
             <Segment floated='right' className= "segment-size" color='white' style={{display: "flex", alignItems: "center"}} >
               <Image src={Pin} size="mini" inline style={{height: "16px", width: "16px"}}/>

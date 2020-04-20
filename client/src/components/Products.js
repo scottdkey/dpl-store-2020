@@ -4,6 +4,7 @@ import { Card, Image, } from "semantic-ui-react";
 import DynamicCategory from "./DynamicCategory";
 import BlueHeader from '../images/BlueHeader2.svg';
 import FunctionalSearch from './SharedComponents/FunctionalSearch';
+import { Link, } from 'react-router-dom';
 
 
 
@@ -14,17 +15,20 @@ export default class Products extends Component {
   componentDidMount() {
     this.getCategories();
   }
+
   getCategories = () => {
     axios.get("/api/categories").then((res) => {
       this.setState({ categories: res.data });
     });
   };
+
   renderCategories = () =>
     this.state.categories.map((c) => {
       const category = c.name;
       return (
         <Card.Group key={c.id}>
-          <h4>{category}</h4>
+          <h2 style={{marginLeft:"100px"}}>{category}</h2>
+          <br/>
           <DynamicCategory category_id={c.id} category_name={c.name} noHeader />
         </Card.Group>
       );
@@ -32,19 +36,21 @@ export default class Products extends Component {
 
   afterSearch = (results) => {this.setState({ results: results })};
 
+
   renderResults = () => (
-    <div>
-      <h1>Search Results</h1>
+    <div style={style.container}>
+      <h2 >Search Results</h2>
+      <div style={style.resultsContainer}>
       {this.state.results.map((result) => (
         <div key={result.id}>
-          <Card>
-            <Image src={result.main_image} alt={result.title} size="small" />
+            <Image src={result.main_image} alt={result.title} size="small" as={Link} to={`/categories/${result.category_id}/products/${result.id}`}/>
             <Card.Header>{result.title}</Card.Header>
             <Card.Meta>${result.price}</Card.Meta>
-          </Card><br />
+            <br />
         </div> 
       ))}
     </div> 
+    </div>
   );
 
 
@@ -52,26 +58,48 @@ export default class Products extends Component {
   render() {
     return (
       <>
-        <div class="image-container">
+        <div className="image-container">
           <Image src={BlueHeader} fluid />
-          <div class="centered">
-            <h1 class="large-header">All Merchandise</h1>
-            <h3 class="small-header">Find something you'll love.</h3>
-            <FunctionalSearch afterSearch={this.afterSearch} />
+          <div className="centered">
+            <h1 className="large-header">All Merchandise</h1>
+            <h3 className="small-header">Find something you'll love.</h3>
+            <FunctionalSearch afterSearch={this.afterSearch}  />
           </div>
         </div>
-
+        
+        <div style={style.container}>
+        {/* <Container style={{margin: '2%'}}> */}
         { this.state.results.length > 0 && this.renderResults() }
         {this.state.categories.length === 0
           ? "No Products"
           : this.renderCategories()}
+          </div>
+          <br/>
         <div align="center">
-          <button class="ui button" style={{ align: "center" }}>
-            See More
-          </button>
+          <button class="ui button" style={style.button}>See More</button>
         </div>
         <br />
       </>
     );
   }
+}
+
+const style = {
+  button: {
+    borderRadius: "30px",
+    color: "#4901DB",
+    backgroundColor: "rgba(74,1,219, .03)",
+    marginBottom: "5%",
+  },
+  container: {
+    margin: "2% 11%",
+    marginTop: "5%"
+  },
+  resultsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: "2%",
+    margin: "5%",
+  },
 }

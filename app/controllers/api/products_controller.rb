@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::ProductsController < ApplicationController
-  before_action :set_category, except: [:all_products, :featured_products]
+  before_action :set_category, except: [:all_products, :featured_products, :search]
   before_action :set_product, only: %i[show update destroy update_image]
 
   def index
@@ -72,7 +72,7 @@ class Api::ProductsController < ApplicationController
       :category_id,
       :main_image,
       :featured,
-      sizes: %i[Small Medium Large noSize X-Small X-Large],
+      sizes: %i[Small Medium Large noSize Xsmall Xlarge XXL],
     )
   end
 

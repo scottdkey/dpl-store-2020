@@ -1,8 +1,8 @@
 import React from 'react'
-import { getAllCartItems, deleteItemFromCart, putItemInCart } from '../modules/CartFunctions'
+import { getAllCartItems, deleteItemFromCart, } from '../modules/CartFunctions'
 import { Button, Header, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-
+import { CartConsumer, } from "../providers/CartProvider";
 // var product1 = { title: 'Hat', price:20 , id:13, main_image:'https://i.pinimg.com/originals/33/cd/6b/33cd6bc701673e86aadc54e47d2d65ea.jpg'}
 // var product2 = { title: 'Shirt' , price:10, id:4, main_image:'https://ae01.alicdn.com/kf/HTB1ClpxqkKWBuNjy1zjq6AOypXa5/Liseaven-T-Shirt-Men-Cotton-T-Shirt-Full-Sleeve-tshirt-Men-Solid-Color-T-shirts-tops.jpg_640x640.jpg'}
 // var product3 = { title: 'Hoodie' , price:30, id:10, main_image:'https://shopproclub.com/media/catalog/product/cache/9537d43b9bc5b6785a205b28a3ee3fc1/1/4/143.NAVY.PT04.jpg'}
@@ -24,6 +24,7 @@ class Cart extends React.Component {
   }
 
   deleteCartItem = (id) => {
+    const {auth:{deleteItemFromCart,}} = this.props
     deleteItemFromCart(id)
     this.putItemsInCart()
   }
@@ -39,7 +40,8 @@ class Cart extends React.Component {
   }
 
   putItemsInCart() {
-    let cart = getAllCartItems()
+    const {auth:{getCart}} = this.props
+    let cart = getCart()
     this.setState({ cart: cart })
     if (cart.length > 0) {
       this.addTotal(cart)
@@ -82,7 +84,7 @@ class Cart extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</Button>
+                    <div style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</div>
                   </div>
                 </div>
               )
@@ -117,6 +119,18 @@ class Cart extends React.Component {
         </div>
         {this.renderCartItems()}
       </div>
+    )
+  }
+}
+
+export class ConnectedCart extends React.Component {
+  render() {
+    return (
+      <CartConsumer> 
+        { auth => 
+          <Cart { ...this.props } auth={auth} />
+        }
+      </CartConsumer>
     )
   }
 }
@@ -201,7 +215,11 @@ const style = {
     width: '100%',
     backgroundColor: 'whitesmoke',
     color: '#990000',
-    marginTop: '2%'
+    marginTop: '2%',
+    padding:'2%',
+    textAlign:'center',
+    borderRadius:'5px ',
+    cursor:'pointer'
   },
   item: {
     width: '30%',
@@ -210,4 +228,4 @@ const style = {
 }
 
 
-export default Cart
+export default ConnectedCart

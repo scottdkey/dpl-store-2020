@@ -59,6 +59,6 @@ const style = {
   infoHolder: {
     display: "inline-block",
     marginRight: ".5%",
-    marginTop: "2%"
+    marginTop: "2%",
   }
 };
