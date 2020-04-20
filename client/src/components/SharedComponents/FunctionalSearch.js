@@ -40,12 +40,12 @@ const FunctionalSearch = (props) => {
     <>
         <form onSubmit={searchSubmit} style={{position: 'relative', display: 'inline-block'}}>
           <div className="fitted-icon">
-          <Image src={Search} style={style.spyglass} ></Image>
-          <input style={{paddingLeft: '40px'}}
-            name="term"
-            value={searchState.term}
-            onChange={searchChange}
-          />
+            <Image src={Search} style={style.spyglass} onClick={searchSubmit}></Image>
+            <input style={{paddingLeft: '40px'}}
+              name="term"
+              value={searchState.term}
+              onChange={searchChange}
+            />
           </div>
          </form>
     </>
@@ -60,6 +60,7 @@ const style = {
     display: 'inline-block',
     left: '20px',
     top: '6px',
+    cursor: 'pointer',
   },
   button: {
     border: 'none',
