@@ -32,7 +32,10 @@ class PurchaseRecord extends React.Component {
 
   handleSubmit = (e) => {
     if (this.state.validEmail === true) {
+      let cart = getAllCartItems()
       var name = `${this.state.first_name}${this.state.last_name}`
+      var products = []
+      cart.forEach(product=> products.push({title:'Shirt', size:'Small'}))
       const { email_address, total } = this.state
       axios.post('/api/purchase_records', (this.state)).then(res => {
         this.createPurchaseProducts(res.data.id)
@@ -40,7 +43,7 @@ class PurchaseRecord extends React.Component {
         console.log(err)
       })
 
-      axios.get(`/api/contact?name=${name}&email=${email_address}&subject=DevStore Receipt&total=${total}`)
+      axios.get(`/api/contact?name=${name}&email=${email_address}&subject=DevStore Receipt&total=${total}&products=${JSON.stringify(products)}`)
         .then(res => { this.setState({ showForm: false }) })
         .catch(e => console.log(e))
     }
