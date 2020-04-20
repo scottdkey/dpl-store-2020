@@ -1,5 +1,4 @@
 import React from 'react'
-import { getAllCartItems, deleteItemFromCart, } from '../modules/CartFunctions'
 import { Button, Header, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { CartConsumer, } from "../providers/CartProvider";
@@ -25,6 +24,11 @@ class Cart extends React.Component {
     this.setState({isMobile: window.innerWidth < 950})
     window.addEventListener('resize', this.handleResize)
   }
+
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.handleResize)
+  }
+
   handleResize=() =>{
     this.setState({
       pictureHeight: ((window.innerWidth)/5.5),
@@ -61,10 +65,7 @@ class Cart extends React.Component {
               let sizeColor = ''
               if (item.size === 'No Size') { sizeColor = 'white' } else { sizeColor = '#777'}
               return (
-                <>
                 <div style={isMobile ? mobile.item : style.item} key={`cartItem-${item.id}`}>
-                  
-
                   <div style={isMobile ? {...style.photoHolder, height: mobileHeight}: {...style.photoHolder, height: pictureHeight}} >
                     <div style={style.crop}>
                       <Image style={style.photo} src={`${item.object.main_image}`} />
@@ -84,7 +85,6 @@ class Cart extends React.Component {
                     <div style={style.removeButton} onClick={() => this.deleteCartItem(item.id)}>Remove</div>
                   </div>
                 </div>
-                </>
               )
             })}
           </div>

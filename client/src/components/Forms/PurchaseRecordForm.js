@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, } from 'semantic-ui-react'
+import { Form, Button, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class PurchaseRecordForm extends React.Component {
@@ -62,7 +62,7 @@ class PurchaseRecordForm extends React.Component {
                 onChange={this.props.handleChange}
               />
             </Form.Group>
-            <Form.Group widths='equal'>
+            <Form.Group widths='equal' required>
               <Form.Input
                 label="City"
                 name="city"
@@ -88,15 +88,16 @@ class PurchaseRecordForm extends React.Component {
                 onChange={this.props.handleChange}
               />
             </Form.Group>
+            <div style={style.buttonHolder}>
+              <div>
+                <Link to='/'><Button fluid style={style.cancelBtn}>Cancel</Button></Link>
+              </div>
+              <div>
+                <Form.Button style={style.submitBtn} type='submit'>Place My Order</Form.Button>
+              </div>
+            </div>
           </Form>
-          <div style={style.buttonHolder}>
-            <div style={{width:"45%"}}>
-            <Link to='/'><div style={style.cancelBtn}>Cancel</div></Link>
-            </div>
-            <div style={{width:"45%"}}>
-            <div style={style.submitBtn} onClick={this.props.handleSubmit}>Place My Order</div>
-            </div>
-          </div>
+
         </div>
       </div >
     )
@@ -125,22 +126,19 @@ const style = {
     backgroundColor: '#4901DB',
     borderRadius: '30px',
     marginTop: '3%',
-    width:'100%',
-    padding:'2%',
-    cursor:'pointer'
+    width: '100%',
+    cursor: 'pointer'
   },
   cancelBtn: {
     color: '#990000',
-    backgroundColor:'lightgrey',
+    backgroundColor: 'lightgrey',
     borderRadius: '30px',
     marginTop: '3%',
-    width:'100%',
-    padding:'2%',
+    width: '100%',
   },
   buttonHolder: {
     display: 'flex',
     justifyContent: 'space-between',
-    textAlign:'center'
   }
 }
 

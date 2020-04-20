@@ -19,7 +19,7 @@ const CategoriesLinks = () => {
   const renderLinks = () =>
     categories.map( (category) => (
       <div key={`${category.id}`}>
-        <Grid.Column centered>
+        <Grid.Column>
           <Link to={`/categories/${category.id}/products`}><Image style={styles.image} src={Featured} /></Link>
           <h4 align="center">{category.name}</h4>
         </Grid.Column>
@@ -28,7 +28,7 @@ const CategoriesLinks = () => {
 
   return(
     <Grid>
-      <Header as="h3" class="heading">CATEGORIES</Header>
+      <Header as="h3" className="heading">CATEGORIES</Header>
       <div style={styles.container}>
         {renderLinks()}
       </div>

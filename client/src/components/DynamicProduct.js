@@ -104,7 +104,7 @@ const DynamicProduct = ({category_id, product_id, match, auth:{addItemToCart}}) 
       <Card.Header>
         <Grid>
         <div align="center">
-          <Grid.Column width={8}  kvb>   
+          <Grid.Column width={8}>   
             {imageGroup()}
           </Grid.Column>
         </div>
@@ -116,7 +116,7 @@ const DynamicProduct = ({category_id, product_id, match, auth:{addItemToCart}}) 
           <Grid.Row><h1>{"$" + product.price}</h1></Grid.Row>
           <br/> 
  
-          <div class="fitted-icon">
+          <div className="fitted-icon">
             <p>Size</p>
             <select style={style.dropdown} onChange={e => setSize(e.currentTarget.value)}>
             <option disabled selected value>  -- select a size --  </option>
