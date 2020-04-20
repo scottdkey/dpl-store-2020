@@ -70,7 +70,7 @@ class SizeForm extends Component {
 
     return (
       <>
-        <Button onClick={this.addSize} style={styles.button}>Add New Size</Button>
+        <Form.Button as="div" onClick={this.addSize} style={styles.button}>Add New Size</Form.Button>
         <br/>
         {this.renderSizes()}
       </>
