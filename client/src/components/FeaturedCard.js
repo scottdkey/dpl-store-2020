@@ -13,6 +13,7 @@ const FeaturedCard = ({ product, pictureHeight }) => {
           </div>
         </div>
       </Link>
+      <Link to={`/categories/${cat_id}/products/${product.id}`}>
       <div style={{ textAlign: "left" }}>
         <div style={style.infoHolder}>
           <h4>${product.price}</h4>
@@ -21,6 +22,7 @@ const FeaturedCard = ({ product, pictureHeight }) => {
           <p>{product.title}</p>
         </div>
       </div>
+      </Link>
     </div>
   );
 };

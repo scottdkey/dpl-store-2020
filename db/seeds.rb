@@ -10,7 +10,7 @@
 
 # category0 = Category.create(name:'All Categories')
 
-category1 = Category.create(name: 'T-Shirts')
+category1 = Category.create(name: 'T-Shirts', image: Faker::Avatar.image(set: "set4"))
 5.times do
   Product.create(
     category_id: category1.id,
@@ -24,7 +24,7 @@ category1 = Category.create(name: 'T-Shirts')
   )
 end
 
-category2 = Category.create(name: 'Hoodies')
+category2 = Category.create(name: 'Hoodies', image: Faker::Avatar.image(set: "set4"))
 5.times do
   Product.create(
     category_id: category2.id,
@@ -37,7 +37,7 @@ category2 = Category.create(name: 'Hoodies')
     featured: 'false'
   )
 end
-category3 = Category.create(name: 'Hats')
+category3 = Category.create(name: 'Hats', image: Faker::Avatar.image(set: "set4"))
 5.times do
   Product.create(
     category_id: category3.id,
@@ -50,7 +50,7 @@ category3 = Category.create(name: 'Hats')
     featured: 'false'
   )
 end
-category4 = Category.create(name: 'Stickers')
+category4 = Category.create(name: 'Stickers', image: Faker::Avatar.image(set: "set4"))
 5.times do
   Product.create(
     category_id: category4.id,
