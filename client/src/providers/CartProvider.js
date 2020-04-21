@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { putItemInCart, deleteItemFromCart, getAllCartItems, clearCart } from '../modules/CartFunctions'
 
 const CartContext = React.createContext();

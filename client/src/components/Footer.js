@@ -6,8 +6,8 @@ import Pin from '../images/Pin.svg';
 
 const Footer = () => (
   
-  <>
-    <StyledFooter as={Segment} inverted className="dpl-blue" >
+  <div>
+    <StyledFooter as={Segment} inverted className="dpl-blue" style={{marginBottom:'.2%'}}>
       <Grid>
         <Grid.Column width={9}>
           <Grid.Row></Grid.Row>
@@ -16,8 +16,8 @@ const Footer = () => (
         </Grid.Column>
         <Grid.Column floated='right' width={5}>
           <div className = "ui vertical segment" >
-            <Segment floated='right' className= "segment-size" color='white' ><Icon name="mail"/>contact@devpointlabs.com</Segment>
-            <Segment floated='right' className= "segment-size" color='white' style={{display: "flex", alignItems: "center"}} >
+            <Segment floated='right' className= "segment-size" ><Icon name="mail"/>contact@devpointlabs.com</Segment>
+            <Segment floated='right' className= "segment-size" style={{display: "flex", alignItems: "center"}} >
               <Image src={Pin} size="mini" inline style={{height: "16px", width: "16px"}}/>
               <div>
                 370 South 300 East<br />
@@ -25,15 +25,15 @@ const Footer = () => (
                 84111
               </div>
             </Segment>
-            <Segment floated='right' className= "segment-size" color='white'><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
+            <Segment floated='right' className= "segment-size"><Icon flipped='horizontally' name="phone" />801-448-7240</Segment>
             </div>
         </Grid.Column>
       </Grid>  
     </StyledFooter>
-    <Segment inverted className="dpl-blue" align="right">
+    <div className="dpl-blue" align="right" style={{padding:'.5%', color:'white'}}>
     <p><Image align="left" size="small" src={Logo} className="filter-white"></Image>2020 DevPoint Labs Terms Policy</p>
-    </Segment>
-    </>
+    </div>
+    </div>
 );
 
 

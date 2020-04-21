@@ -55,6 +55,7 @@ class MainImageForm extends Component {
       this.setState({
         image: res.data.main_image
       })
+      this.props.setMainImage(res.data.main_image)
       this.renderMainImage()
     })
     .catch( e => console.log(e))
