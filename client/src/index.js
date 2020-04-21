@@ -8,6 +8,7 @@ import { AuthProvider } from "./providers/AuthProvider";
 import "semantic-ui-css/semantic.min.css";
 import { initMiddleware } from "devise-axios";
 import { CartProvider } from './providers/CartProvider'
+import ScrollToTop from "./components/ScrollToTop"
 
 initMiddleware();
 
@@ -15,6 +16,7 @@ ReactDOM.render(
   <AuthProvider>
     <CartProvider>
       <BrowserRouter>
+      <ScrollToTop/>
         <App />
       </BrowserRouter>
     </CartProvider>
