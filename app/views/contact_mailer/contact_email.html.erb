@@ -13,5 +13,8 @@
    <span>Thank you for your purchase <%= @name %>!</span>
 
    <p>Your total was <%= @total %></p>
+   <% @products.each do |product| %>
+    <p> <%= product['size'] %> </p>
+   <% end %>
  </body>
 </html>

@@ -32,6 +32,10 @@ class FeaturedProducts extends React.Component {
     window.addEventListener("resize", this.handleResize);
   }
 
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.handleResize)
+  }
+
   handleResize = () => {
     this.setState({
       pictureHeight: window.innerWidth / 4
@@ -66,7 +70,7 @@ class FeaturedProducts extends React.Component {
         ) : (
           <div style={style.productHolder}>
             {someFeatured.map(product => (
-              <div style={style.product}>
+              <div key={`featured-${product.id}`} style={style.product}>
                 <FeaturedCard pictureHeight={pictureHeight} product={product} />
               </div>
             ))}

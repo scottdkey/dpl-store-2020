@@ -57,7 +57,7 @@ config.action_mailer.smtp_settings = {
 }
 
 
-config.action_mailer.perform_deliveries = true
+config.action_mailer.perform_deliveries = :letter_opener
 config.action_mailer.raise_delivery_errors = true
 
 

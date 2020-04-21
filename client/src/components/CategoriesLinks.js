@@ -28,7 +28,7 @@ const CategoriesLinks = () => {
 
   return(
     <Grid>
-      <Header as="h3" class="heading">CATEGORIES</Header>
+      <Header as="h3" className="heading">CATEGORIES</Header>
       <div style={styles.container}>
         {renderLinks()}
       </div>

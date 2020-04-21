@@ -19,29 +19,50 @@ import Cart from './components/Cart';
 import NoMatch from './components/NoMatch';
 
 
- 
-const App = () => (
-  <Fragment>
-    <FetchAdmin>
-    <Navbar /> 
-     <Container fluid>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path='/purchase-record' component={PurchaseRecord} />
-          <Route exact path="/allmerchandise" component={Products} />
-          <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
-          <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
-          <Route exact path='/styled' component={StyledCard} />
-          <Route exact path='/links' component={Links} />
-          <Route exact path='/cart' component={Cart} />
-          <Route component={NoMatch} />
-        </Switch>
-        </Container>
-        <Footer />
-    </FetchAdmin>
-  </Fragment>
-);
+class App extends React.Component {
+  state = { windowHeight: window.innerHeight }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  handleResize = () => {
+    this.setState({
+      windowHeight: window.innerHeight
+    })
+  }
+
+
+  render() {
+    const { windowHeight } = this.state
+    return (
+      <Fragment>
+        <FetchAdmin>
+          <div style={{minHeight: windowHeight, display:'flex', justifyContent:'space-between', flexDirection:'column'}}>
+            <div>
+              <Navbar />
+              <Container fluid>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <ProtectedRoute exact path="/adminpanel" component={AdminPanel} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path='/purchase-record' component={PurchaseRecord} />
+                  <Route exact path="/allmerchandise" component={Products} />
+                  <Route exact path="/categories/:category_id/products" component={DynamicCategory} />
+                  <Route exact path='/categories/:category_id/products/:id' component={DynamicProduct} />
+                  <Route exact path='/styled' component={StyledCard} />
+                  <Route exact path='/links' component={Links} />
+                  <Route exact path='/cart' component={Cart} />
+                  <Route component={NoMatch} />
+                </Switch>
+              </Container>
+            </div>
+            <Footer />
+          </div>
+        </FetchAdmin>
+      </Fragment>
+    )
+  }
+};
 
 export default App;

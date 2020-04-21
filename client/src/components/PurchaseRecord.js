@@ -1,7 +1,7 @@
 import React from 'react';
 import PurchaseRecordForm from './Forms/PurchaseRecordForm';
 import { Button, Header } from 'semantic-ui-react';
-import { getAllCartItems, clearCart } from '../modules/CartFunctions';
+import { getAllCartItems } from '../modules/CartFunctions';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { CartConsumer, } from "../providers/CartProvider";
@@ -30,9 +30,13 @@ class PurchaseRecord extends React.Component {
     }
   };
 
+
   handleSubmit = (e) => {
     if (this.state.validEmail === true) {
+      let cart = getAllCartItems()
       var name = `${this.state.first_name}${this.state.last_name}`
+      var products = []
+      cart.forEach(product => products.push({ title: 'Shirt', size: 'Small' }))
       const { email_address, total } = this.state
       axios.post('/api/purchase_records', (this.state)).then(res => {
         this.createPurchaseProducts(res.data.id)
@@ -40,9 +44,10 @@ class PurchaseRecord extends React.Component {
         console.log(err)
       })
 
-      axios.get(`/api/contact?name=${name}&email=${email_address}&subject=DevStore Receipt&total=${total}`)
+      axios.get(`/api/contact?name=${name}&email=${email_address}&subject=DevStore Receipt&total=${total}&products=${JSON.stringify(products)}`)
         .then(res => { this.setState({ showForm: false }) })
         .catch(e => console.log(e))
+
     }
     else { alert('invalid email') }
   }
@@ -63,7 +68,10 @@ class PurchaseRecord extends React.Component {
 
   emailChange = (email) => {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(email)) { this.setState({ validEmail: true, }) }
+    if (re.test(email)) {
+      this.setState({ validEmail: true, })
+    }
+    else { this.setState({ validEmail: false }) }
   }
 
   addTotal = () => {
@@ -104,7 +112,7 @@ class PurchaseRecord extends React.Component {
   renderCompleted = () => {
 
     return (
-      <div style={{ ...style.itemsContainer, padding: '3%', margin:'10%' }}>
+      <div style={{ ...style.itemsContainer, padding: '3%', margin: '10%' }}>
         <Header as='h3' textAlign='center'>Thank You For Your Purchase</Header>
         <Link to='/'><div style={style.doneBtn}>Done</div></Link>
       </div>
@@ -140,6 +148,7 @@ class PurchaseRecord extends React.Component {
               <div>
               </div>
             </div>
+            <div id='alert' style={{ display: 'none' }}>{this.state.alertMessage} </div>
           </div>
           : <div>{this.renderCompleted()}</div>}
       </>
@@ -224,3 +233,4 @@ const takeOutDash = (string) => {
   let finalString = newString.join('')
   return finalString
 }
+
